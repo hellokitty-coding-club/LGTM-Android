@@ -1,0 +1,64 @@
+# This is a basic workflow to help you get started with Actions
+
+name: LGTM PR Builder
+
+on:
+  pull_request:
+    branches: [ develop, master ]
+
+defaults:
+  run:
+    shell: bash
+    working-directory: .
+
+jobs:
+  build:
+    name: PR Checker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Gradle cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Change gradlew permissions
+        run: chmod +x ./gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: On Success!! Congratulations
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: '#53A551'
+          SLACK_ICON: https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/603efae5-02ba-4065-ba7b-ea36bc88acb6
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: '[LGTM] PR Check SUCCESS ✅'
+          MSG_MINIMAL: true
+          SLACK_USERNAME: LGTM-Android
+          SLACK_MESSAGE: 'PR이 완료되었습니다!!! 🎉🎉🎉'
+
+      - name: On Failed, Notify in Slack
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_COLOR: '#ff0000'
+          SLACK_ICON: https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/603efae5-02ba-4065-ba7b-ea36bc88acb6
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: '[LGTM] Android Build Fail❌'
+          MSG_MINIMAL: true
+          SLACK_USERNAME: LGTM-Android
+          SLACK_MESSAGE: '에러를 확인해주세요'
