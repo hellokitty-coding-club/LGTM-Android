@@ -16,3 +16,4 @@ rootProject.name = "LGTM-Android"
 include ':app'
 include ':domain'
 include ':data'
+include ':feature:auth'
