@@ -1,4 +1,4 @@
-package com.lgtm.data
+package com.lgtm.android.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

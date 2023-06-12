@@ -1,4 +1,4 @@
-package com.lgtm.auth
+package com.lgtm.android.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

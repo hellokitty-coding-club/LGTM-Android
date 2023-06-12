@@ -1,4 +1,4 @@
-package com.lgtm.data
+package com.lgtm.android.data
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

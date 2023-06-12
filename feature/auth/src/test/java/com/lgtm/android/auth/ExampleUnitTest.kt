@@ -1,4 +1,4 @@
-package com.lgtm.auth
+package com.lgtm.android.auth
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

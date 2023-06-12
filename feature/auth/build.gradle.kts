@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.lgtm.auth"
+    namespace = "com.lgtm.android.auth"
     compileSdk = 33
 
     defaultConfig {
