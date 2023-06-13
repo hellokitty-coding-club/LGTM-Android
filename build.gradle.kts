@@ -5,3 +5,9 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.7.20" apply false
     id("org.jetbrains.kotlin.jvm") version "1.8.21" apply false
 }
+
+subprojects {
+    afterEvaluate {
+        project.apply("$rootDir/gradle/common.gradle")
+    }
+}
