@@ -54,6 +54,10 @@ jobs:
       - name: On Failed, Notify in Slack
         if: ${{ failure() }}
         uses: rtCamp/action-slack-notify@v2
+        with:
+          status: ${{ job.status }}
+          author_name: Github Action Test
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
         env:
           SLACK_COLOR: '#ff0000'
           SLACK_ICON: https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/603efae5-02ba-4065-ba7b-ea36bc88acb6
