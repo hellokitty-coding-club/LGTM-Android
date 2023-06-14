@@ -59,6 +59,7 @@ jobs:
           SLACK_ICON: https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/603efae5-02ba-4065-ba7b-ea36bc88acb6
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_TITLE: '[LGTM] Android Build Fail❌'
-          MSG_MINIMAL: true
+          MSG_MINIMAL: false
           SLACK_USERNAME: LGTM-Android
           SLACK_MESSAGE: '에러를 확인해주세요'
+          SLACK_FIELDS: '[{"title": "PR Link", "value": "${{ github.event.pull_request.html_url }}", "short": false}]'
