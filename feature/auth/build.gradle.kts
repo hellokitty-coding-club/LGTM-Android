@@ -1,6 +1,7 @@
 plugins {
+    kotlin("android")
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -18,11 +19,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+//    implementation(project(":domain"))
     implementation(project(":common-ui"))
 
-    implementation(libs.bundles.androidx.ui.foundatation)
+    implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
-    implementation(libs.bundles.hilt)
+    implementation(libs.hilt)
+    kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
 }

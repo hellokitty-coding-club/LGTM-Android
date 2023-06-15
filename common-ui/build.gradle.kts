@@ -10,7 +10,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -24,9 +24,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    api(project(":domain"))
 
-    implementation(libs.bundles.androidx.ui.foundatation)
+    implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
     implementation(libs.material)
     implementation(libs.bundles.basic.test)

@@ -82,6 +82,7 @@ androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", vers
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
 
+okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
 okhttp = { module = "com.squareup.okhttp3:okhttp" }
 okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
 
@@ -104,14 +105,13 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 
 [bundles]
 
-androidx-ui-foundatation = ["core-ktx", "appcompat", "lifecycle-viewmodel"]
-okhttp = ["okhttp", "okhttp-logging-interceptor"]
+androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel"]
+okhttp = ["okhttp", "okhttp-logging-interceptor", "okhttp-bom"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 gson = ["gson", "gson-converter"]
 firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-messaging"]
 accompanist = ["accompanist-systemuicontroller"]
 androidx-android-test = ["androidx-test-runner", "androidx-test-rules"]
-hilt = ["hilt", "hilt-kapt"]
 basic-test = ["junit", "androidx-test-junit", "androidx-test-espresso"]
 
 
