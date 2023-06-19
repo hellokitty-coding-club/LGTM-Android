@@ -20,6 +20,7 @@ activity = "1.7.2"
 lifecycle = "2.6.1"
 navigation = "2.6.0"
 constraintlayout = "2.1.4"
+fragment = "1.5.7"
 
 # Google Libraries
 material = "1.9.0"
@@ -69,6 +70,7 @@ core-ktx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 inappupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "in-app-update" }
@@ -105,7 +107,7 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 
 [bundles]
 
-androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel"]
+androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "constraintlayout", "fragment"]
 okhttp = ["okhttp", "okhttp-logging-interceptor", "okhttp-bom"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 gson = ["gson", "gson-converter"]
