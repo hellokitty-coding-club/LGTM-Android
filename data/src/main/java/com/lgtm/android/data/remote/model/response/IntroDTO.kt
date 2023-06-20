@@ -1,6 +1,7 @@
 package com.lgtm.android.data.remote.model.response
 
 import com.google.gson.annotations.SerializedName
+import com.lgtm.domain.constants.VERSION_UNKNOWN
 import com.lgtm.domain.entity.response.IntroVO
 
 data class IntroDTO(
@@ -10,7 +11,7 @@ data class IntroDTO(
     val latestVersion: Int?
 ) {
     fun toVO() = IntroVO(
-        minVersion = minVersion ?: 0,
-        latestVersion = latestVersion ?: 0
+        minVersion = minVersion ?: VERSION_UNKNOWN,
+        latestVersion = latestVersion ?: VERSION_UNKNOWN
     )
 }
