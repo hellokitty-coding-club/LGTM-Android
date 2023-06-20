@@ -19,7 +19,7 @@ class SplashViewModel @Inject constructor(
     private val _latestVersion = MutableLiveData<Int>()
     val latestVersion: LiveData<Int> = _latestVersion
 
-    fun getIntro() {
+    fun getAppVersionInfo() {
         viewModelScope.launch {
             introRepository.getIntro()
                 .onSuccess {
