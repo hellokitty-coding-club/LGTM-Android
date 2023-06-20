@@ -1,3 +1,9 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
+val lgtmPropertiesFile = rootProject.file("lgtm.properties")
+val lgtmProperties = Properties()
+lgtmProperties.load(lgtmPropertiesFile.inputStream())
+
 plugins {
     kotlin("android")
     id("com.android.application")
@@ -13,6 +19,17 @@ android {
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.appVersion.get()
         vectorDrawables.useSupportLibrary = true
+
+        buildConfigField(
+            "String",
+            "LGTM_BASE_URL_DEBUG",
+            lgtmProperties.getProperty("LGTM_BASE_URL_DEBUG")
+        )
+        buildConfigField(
+            "String",
+            "LGTM_BASE_URL_RELEASE",
+            lgtmProperties.getProperty("LGTM_BASE_URL_RELEASE")
+        )
     }
     buildTypes {
         release {
@@ -26,6 +43,7 @@ android {
 
     buildFeatures {
         dataBinding = true
+        buildConfig = true
     }
 
 }
@@ -48,4 +66,5 @@ dependencies {
     implementation(libs.hilt)
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
+
 }

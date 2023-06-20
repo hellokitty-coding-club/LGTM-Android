@@ -36,6 +36,19 @@ jobs:
       - name: Change gradlew permissions
         run: chmod +x ./gradlew
 
+      - name: Touch lgtm properties
+        run: touch lgtm.properties
+
+      - name: Access LGTM_BASE_URL_DEBUG
+        env:
+          LGTM_BASE_URL_DEBUG: ${{ secrets.LGTM_BASE_URL_DEBUG }}
+        run: echo "LGTM_BASE_URL_DEBUG=\"$LGTM_BASE_URL_DEBUG\"" >> lgtm.properties
+
+      - name: Access LGTM_BASE_URL_RELEASE
+        env:
+          LGTM_BASE_URL_RELEASE: ${{ secrets.LGTM_BASE_URL_RELEASE }}
+        run: echo "LGTM_BASE_URL_RELEASE=\"$LGTM_BASE_URL_RELEASE\"" >> lgtm.properties
+
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
 
