@@ -5,7 +5,7 @@ import com.lgtm.android.data.remote.model.response.IntroDTO
 import com.lgtm.android.data.remote.service.IntroService
 import javax.inject.Inject
 
-class IntroDataSourceImpl @Inject constructor(
+class IntroDataSource @Inject constructor(
     private val introService: IntroService
 ) : BaseNetworkDataSource() {
 

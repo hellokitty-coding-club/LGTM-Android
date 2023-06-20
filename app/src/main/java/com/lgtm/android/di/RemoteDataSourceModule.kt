@@ -1,6 +1,6 @@
 package com.lgtm.android.di
 
-import com.lgtm.android.data.remote.datasource.IntroDataSourceImpl
+import com.lgtm.android.data.remote.datasource.IntroDataSource
 import com.lgtm.android.data.remote.service.IntroService
 import dagger.Module
 import dagger.Provides
@@ -15,7 +15,7 @@ object RemoteDataSourceModule {
 
     @Provides
     @Singleton
-    fun provideIntroDataSource(introService: IntroService): IntroDataSourceImpl {
-        return IntroDataSourceImpl(introService)
+    fun provideIntroDataSource(introService: IntroService): IntroDataSource {
+        return IntroDataSource(introService)
     }
 }
