@@ -22,7 +22,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesReadMeInterceptor(): Interceptor =
+    fun providesLGTMInterceptor(): Interceptor =
         Interceptor { chain ->
             with(chain) {
                 proceed(
@@ -35,7 +35,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesReadMeOkHttpClient(
+    fun providesLGTMOkHttpClient(
         interceptor: Interceptor,
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
@@ -49,7 +49,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesReadMeRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun providesLGTMRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(if (DEBUG) LGTM_BASE_URL_DEBUG else LGTM_BASE_URL_RELEASE)
             .client(okHttpClient)
