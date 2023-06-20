@@ -67,7 +67,4 @@ dependencies {
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
 
-    implementation(libs.bundles.retrofit)
-    implementation(libs.bundles.okhttp)
-    implementation(libs.bundles.gson)
 }
