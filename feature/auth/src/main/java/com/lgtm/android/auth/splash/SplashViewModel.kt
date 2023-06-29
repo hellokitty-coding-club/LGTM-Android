@@ -32,4 +32,9 @@ class SplashViewModel @Inject constructor(
                 }
         }
     }
+
+    fun isAutoLoginAvailable(): Boolean {
+        // TODO 로그인 로직 완성할때, sharedPreference 활용해서 세부 로직 작성 예정
+        return false
+    }
 }
