@@ -1,5 +1,7 @@
-package com.lgtm.android.splash.ui
+package com.lgtm.android.auth.splash
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +28,7 @@ class SplashViewModel @Inject constructor(
                     _minVersion.value = it.minVersion
                     _latestVersion.value = it.latestVersion
                 }.onFailure {
-
+                    Log.d(TAG, "getAppVersionInfo: $it")
                 }
         }
     }

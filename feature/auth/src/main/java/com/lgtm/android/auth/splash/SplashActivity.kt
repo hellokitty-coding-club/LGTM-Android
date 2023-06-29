@@ -1,11 +1,11 @@
-package com.lgtm.android.splash.ui
+package com.lgtm.android.auth.splash
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.lgtm.android.auth.R
+import com.lgtm.android.auth.databinding.ActivitySplashBinding
 import com.lgtm.android.common_ui.base.BaseActivity
-import com.lgtm.android.splash.R
-import com.lgtm.android.splash.databinding.ActivitySplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

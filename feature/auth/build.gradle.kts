@@ -1,6 +1,7 @@
 plugins {
     kotlin("android")
     id("com.android.library")
+    id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
@@ -16,12 +17,17 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
-//    implementation(project(":domain"))
     implementation(project(":common-ui"))
 
+    implementation(libs.kotlin.coroutines)
+    implementation(libs.material)
     implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
     implementation(libs.hilt)
