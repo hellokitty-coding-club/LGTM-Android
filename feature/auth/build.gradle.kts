@@ -1,3 +1,9 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
+val lgtmPropertiesFile = rootProject.file("lgtm.properties")
+val lgtmProperties = Properties()
+lgtmProperties.load(lgtmPropertiesFile.inputStream())
+
 plugins {
     kotlin("android")
     id("com.android.library")
@@ -17,8 +23,16 @@ android {
             )
         }
     }
+    defaultConfig {
+        buildConfigField(
+            "String",
+            "GITHUB_LOGIN_URL",
+            lgtmProperties.getProperty("GITHUB_LOGIN_URL")
+        )
+    }
 
     buildFeatures {
+        buildConfig = true
         dataBinding = true
     }
 }
@@ -31,6 +45,7 @@ dependencies {
     implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
     implementation(libs.hilt)
+    implementation("androidx.appcompat:appcompat:1.6.1")
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
 }

@@ -65,10 +65,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         startActivity(Intent(this, AuthActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         })
+        overridePendingTransition(0, 0)
+        finish()
     }
 
     companion object {
-        private const val SPLASH_DELAY: Long = 3000
+        private const val SPLASH_DELAY: Long = 1000
     }
 
 
