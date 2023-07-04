@@ -49,6 +49,11 @@ jobs:
           LGTM_BASE_URL_RELEASE: ${{ secrets.LGTM_BASE_URL_RELEASE }}
         run: echo "LGTM_BASE_URL_RELEASE=\"$LGTM_BASE_URL_RELEASE\"" >> lgtm.properties
 
+      - name: Access LGTM_GITHUB_LOGIN_URL
+        env:
+          LGTM_BASE_URL_RELEASE: ${{ secrets.LGTM_GITHUB_LOGIN_URL }}
+        run: echo "LGTM_GITHUB_LOGIN_URL=\"LGTM_GITHUB_LOGIN_URL\"" >> lgtm.properties
+
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
 
