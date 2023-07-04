@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.lgtm.android.auth.BuildConfig.GITHUB_LOGIN_URL
+import com.lgtm.android.auth.BuildConfig.LGTM_GITHUB_LOGIN_URL
 import com.lgtm.android.auth.databinding.BottomSheetFragmentGithubLoginBinding
 
 class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuccess) :
@@ -47,7 +47,7 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
             settings.javaScriptEnabled = true
             webViewClient =
                 GithubWebViewClient(this@GithubBottomSheet, loginSuccessListener)
-            loadUrl(GITHUB_LOGIN_URL)
+            loadUrl(LGTM_GITHUB_LOGIN_URL)
         }
     }
 }

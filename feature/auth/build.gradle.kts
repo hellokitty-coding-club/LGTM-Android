@@ -26,8 +26,8 @@ android {
     defaultConfig {
         buildConfigField(
             "String",
-            "GITHUB_LOGIN_URL",
-            lgtmProperties.getProperty("GITHUB_LOGIN_URL")
+            "LGTM_GITHUB_LOGIN_URL",
+            lgtmProperties.getProperty("LGTM_GITHUB_LOGIN_URL")
         )
     }
 
