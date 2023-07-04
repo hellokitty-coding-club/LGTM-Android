@@ -45,7 +45,7 @@ dependencies {
     implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
     implementation(libs.hilt)
-    implementation("androidx.appcompat:appcompat:1.6.1")
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
+    api(libs.bundles.gson)
 }
