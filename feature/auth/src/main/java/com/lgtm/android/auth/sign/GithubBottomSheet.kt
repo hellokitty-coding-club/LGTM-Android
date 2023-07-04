@@ -1,23 +1,18 @@
 package com.lgtm.android.auth.sign
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebResourceRequest
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lgtm.android.auth.BuildConfig.GITHUB_LOGIN_URL
 import com.lgtm.android.auth.databinding.BottomSheetFragmentGithubLoginBinding
 
-
-class GithubLoginBottomSheet : BottomSheetDialogFragment() {
+class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuccess) :
+    BottomSheetDialogFragment() {
     private var _binding: BottomSheetFragmentGithubLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -43,42 +38,16 @@ class GithubLoginBottomSheet : BottomSheetDialogFragment() {
         }
 
         binding.bottomSheet.layoutParams.height =
-            (resources.displayMetrics.heightPixels * 0.80).toInt()
+            (resources.displayMetrics.heightPixels * 0.94).toInt()
     }
-
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadGithubLoginUsingWebView() {
-        val webView = binding.webView
-        webView.settings.apply {
-            javaScriptEnabled = true
-            domStorageEnabled = true
-            setSupportMultipleWindows(true)
+        binding.webView.apply {
+            settings.javaScriptEnabled = true
+            webViewClient =
+                GithubWebViewClient(this@GithubBottomSheet, loginSuccessListener)
+            loadUrl(GITHUB_LOGIN_URL)
         }
-
-        webView.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(
-                view: WebView?,
-                request: WebResourceRequest?
-            ): Boolean {
-                Log.d(TAG, "shouldOverrideUrlLoading: ${request?.url.toString()}")
-                return false
-            }
-        }
-
-        webView.apply {
-            webView.loadUrl(GITHUB_LOGIN_URL)
-        }
-
-//        webView.addJavascriptInterface(WebAppInterface(requireContext()), "Android")
     }
 }
-
-///** Instantiate the interface and set the context  */
-//class WebAppInterface(private val mContext: Context) {
-//
-//    @JavascriptInterface
-//    fun showToast(toast: String) {
-//        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show()
-//    }
-//}
