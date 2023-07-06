@@ -16,7 +16,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".splash.ui.SplashActivity"
+            android:name=".auth.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.LGTMAndroid">
             <intent-filter>
@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".auth.sign.AuthActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

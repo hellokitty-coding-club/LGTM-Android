@@ -55,7 +55,6 @@ kapt {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
-    implementation(project(":feature:splash"))
     implementation(project(":feature:auth"))
     implementation(project(":common-ui"))
 

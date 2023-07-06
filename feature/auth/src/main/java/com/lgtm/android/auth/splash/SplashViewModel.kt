@@ -1,5 +1,7 @@
-package com.lgtm.android.splash.ui
+package com.lgtm.android.auth.splash
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,8 +28,13 @@ class SplashViewModel @Inject constructor(
                     _minVersion.value = it.minVersion
                     _latestVersion.value = it.latestVersion
                 }.onFailure {
-
+                    Log.d(TAG, "getAppVersionInfo: $it")
                 }
         }
+    }
+
+    fun isAutoLoginAvailable(): Boolean {
+        // TODO 로그인 로직 완성할때, sharedPreference 활용해서 세부 로직 작성 예정
+        return false
     }
 }

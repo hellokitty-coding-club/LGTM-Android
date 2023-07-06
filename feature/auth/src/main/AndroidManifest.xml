@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".AuthActivity"
+            android:name=".sign.GithubActivity"
             android:exported="false" />
     </application>
 
