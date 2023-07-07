@@ -94,6 +94,7 @@
             app:layout_constraintTop_toBottomOf="@id/cb_terms_service" />
 
         <TextView
+            android:id="@+id/tv_terms_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"

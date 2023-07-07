@@ -55,8 +55,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
             )
         } else {
             // TODO: 메인 화면으로 이동
+            finish()
         }
-        finish()
     }
 
     companion object {
