@@ -69,6 +69,8 @@ kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", 
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
@@ -116,6 +118,7 @@ firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-messaging"]
 accompanist = ["accompanist-systemuicontroller"]
 androidx-android-test = ["androidx-test-runner", "androidx-test-rules"]
 basic-test = ["junit", "androidx-test-junit", "androidx-test-espresso"]
+navigation = ["navigation-fragment", "navigation-ui"]
 
 
 [plugins]
