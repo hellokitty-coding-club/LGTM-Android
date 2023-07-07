@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1090377873764",
+    "project_id": "lgtm-aeb7a",
+    "storage_bucket": "lgtm-aeb7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090377873764:android:828cd0a400b0f62594e271",
+        "android_client_info": {
+          "package_name": "com.lgtm.android.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090377873764-b6gm8buak4slf1vf8a4osmjfm1ktokle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsd0MS5XNM3GoQlHKw09z9X9pK3R2EC3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090377873764-b6gm8buak4slf1vf8a4osmjfm1ktokle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
