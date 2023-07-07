@@ -70,6 +70,7 @@ core-ktx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -107,7 +108,7 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 
 [bundles]
 
-androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "constraintlayout", "fragment"]
+androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "constraintlayout", "activity", "fragment"]
 okhttp = ["okhttp", "okhttp-logging-interceptor", "okhttp-bom"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 gson = ["gson", "gson-converter"]
