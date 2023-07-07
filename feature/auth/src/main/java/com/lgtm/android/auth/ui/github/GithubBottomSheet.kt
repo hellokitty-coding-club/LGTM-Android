@@ -1,4 +1,4 @@
-package com.lgtm.android.auth.sign
+package com.lgtm.android.auth.ui.github
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lgtm.android.auth.BuildConfig.LGTM_GITHUB_LOGIN_URL
 import com.lgtm.android.auth.databinding.BottomSheetFragmentGithubLoginBinding
+import com.lgtm.android.auth.ui.OnLoginSuccess
 
 class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuccess) :
     BottomSheetDialogFragment() {

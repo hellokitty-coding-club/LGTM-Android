@@ -1,4 +1,4 @@
-package com.lgtm.android.auth.sign
+package com.lgtm.android.auth.ui
 
 import android.content.ContentValues.TAG
 import android.os.Bundle

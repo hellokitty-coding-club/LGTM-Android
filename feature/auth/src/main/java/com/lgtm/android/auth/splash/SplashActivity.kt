@@ -9,7 +9,7 @@ import androidx.activity.viewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.constant.AutoLoginState
 import com.lgtm.android.auth.databinding.ActivitySplashBinding
-import com.lgtm.android.auth.sign.AuthActivity
+import com.lgtm.android.auth.ui.AuthActivity
 import com.lgtm.android.common_ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 

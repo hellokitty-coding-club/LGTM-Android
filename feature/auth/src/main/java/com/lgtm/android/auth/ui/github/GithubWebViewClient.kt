@@ -1,8 +1,9 @@
-package com.lgtm.android.auth.sign
+package com.lgtm.android.auth.ui.github
 
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import com.lgtm.android.auth.ui.OnLoginSuccess
 import java.lang.ref.WeakReference
 
 
