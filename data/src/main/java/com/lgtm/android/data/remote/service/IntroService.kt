@@ -7,6 +7,6 @@ import retrofit2.http.GET
 
 interface IntroService {
 
-    @GET("api/v1/intro")
+    @GET("v1/intro")
     suspend fun getIntro(): Response<BaseResponse<IntroDTO>>
 }
