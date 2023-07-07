@@ -5,17 +5,16 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.lgtm.android.auth.R
-import com.lgtm.android.auth.databinding.ActivityAuthBinding
+import com.lgtm.android.auth.databinding.ActivitySignInBinding
 import com.lgtm.android.auth.ui.github.GithubBottomSheet
 import com.lgtm.android.auth.ui.signup.SignUpActivity
 import com.lgtm.android.common_ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AuthActivity : BaseActivity<ActivityAuthBinding>(R.layout.activity_auth) {
+class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
 
-
-    private val authViewModel by viewModels<AuthViewModel>()
+    private val signInViewModel by viewModels<SignInViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +26,14 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(R.layout.activity_auth) {
         binding.clGithub.setOnClickListener {
             GithubBottomSheet(object : OnLoginSuccess {
                 override fun onLoginSuccess(loginResponse: String) {
-                    authViewModel.parseAndSetGithubLoginResponse(loginResponse)
+                    signInViewModel.parseAndSetGithubLoginResponse(loginResponse)
                 }
             }).show(supportFragmentManager, "GithubLoginBottomSheet")
         }
     }
 
     private fun observeGithubLoginResponse() {
-        authViewModel.githubLoginResponse.observe(this) {
+        signInViewModel.githubLoginResponse.observe(this) {
             when (it.success) {
                 true -> moveToNextScreen(it.memberData!!.registered)
                 false -> makeToast(it.message)
@@ -48,7 +47,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>(R.layout.activity_auth) {
 
     private fun moveToNextScreen(isRegistered: Boolean) {
         if (!isRegistered) {
-            val githubId = authViewModel.githubLoginResponse.value?.memberData?.githubId ?: return
+            val githubId = signInViewModel.githubLoginResponse.value?.memberData?.githubId ?: return
             startActivity(
                 Intent(this, SignUpActivity::class.java).putExtra(
                     GITHUB_ID, githubId

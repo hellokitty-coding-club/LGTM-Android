@@ -34,7 +34,7 @@
         </activity>
 
         <activity
-            android:name=".auth.ui.AuthActivity"
+            android:name=".auth.ui.SignInActivity"
             android:exported="false" />
 
         <activity
