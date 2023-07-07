@@ -15,6 +15,13 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _githubId.value = memberData
     }
 
+    private val _isAgreeWithTerms = MutableLiveData<Boolean>()
+    val isAgreeWithTerms: LiveData<Boolean> = _isAgreeWithTerms
+
+    fun setIsAgreeWithTerms(isAgree: Boolean) {
+        _isAgreeWithTerms.value = isAgree
+    }
+
     // 이벤트, 광고성 정보 안내
     private val _isAgreeWithEventInfo = MutableLiveData<Boolean>()
     val isAgreeWithEventInfo: LiveData<Boolean> = _isAgreeWithEventInfo

@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.auth.ui.signup.SignUpViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,6 +129,8 @@
             android:layout_height="wrap_content"
             android:background="@color/black"
             android:paddingVertical="20dp"
+            android:enabled="@{viewModel.isAgreeWithTerms}"
+            app:btnBackground="@{viewModel.isAgreeWithTerms}"
             android:text="@string/next"
             android:textAlignment="center"
             android:textColor="@color/white"
