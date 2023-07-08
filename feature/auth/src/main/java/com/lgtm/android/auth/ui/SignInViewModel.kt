@@ -13,6 +13,10 @@ class SignInViewModel @Inject constructor() : ViewModel() {
     private val _githubLoginResponse = MutableLiveData<GithubLoginResponse>()
     val githubLoginResponse: LiveData<GithubLoginResponse> = _githubLoginResponse
 
+    fun getGithubId(): String {
+        return githubLoginResponse.value?.memberData?.githubId ?: ""
+    }
+
     fun parseAndSetGithubLoginResponse(loginResponse: String) {
         val jsonData = extractJson(loginResponse)
         val response = parseJsonToGithubLoginResponse(jsonData)

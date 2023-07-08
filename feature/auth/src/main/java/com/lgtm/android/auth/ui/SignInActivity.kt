@@ -35,7 +35,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun observeGithubLoginResponse() {
         signInViewModel.githubLoginResponse.observe(this) {
             when (it.success) {
-                true -> moveToNextScreen(it.memberData!!.registered)
+                true -> it.memberData?.let { data -> moveToNextScreen(data.registered) }
                 false -> makeToast(it.message)
             }
         }
@@ -47,7 +47,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun moveToNextScreen(isRegistered: Boolean) {
         if (!isRegistered) {
-            val githubId = signInViewModel.githubLoginResponse.value?.memberData?.githubId ?: return
+            val githubId = signInViewModel.getGithubId()
             startActivity(
                 Intent(this, SignUpActivity::class.java).putExtra(
                     GITHUB_ID, githubId
