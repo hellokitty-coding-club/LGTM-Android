@@ -1,4 +1,4 @@
-package com.lgtm.android.auth.model
+package com.lgtm.domain.entity.response
 
 import com.google.gson.annotations.SerializedName
 
