@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
     implementation(libs.hilt)
+    implementation(libs.bundles.navigation)
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
     api(libs.bundles.gson)

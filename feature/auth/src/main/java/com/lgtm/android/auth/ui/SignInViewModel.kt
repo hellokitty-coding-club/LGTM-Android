@@ -1,14 +1,21 @@
-package com.lgtm.android.auth.sign
+package com.lgtm.android.auth.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.lgtm.android.auth.model.GithubLoginResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class AuthViewModel : ViewModel() {
+@HiltViewModel
+class SignInViewModel @Inject constructor() : ViewModel() {
     private val _githubLoginResponse = MutableLiveData<GithubLoginResponse>()
     val githubLoginResponse: LiveData<GithubLoginResponse> = _githubLoginResponse
+
+    fun getGithubId(): String {
+        return githubLoginResponse.value?.memberData?.githubId ?: ""
+    }
 
     fun parseAndSetGithubLoginResponse(loginResponse: String) {
         val jsonData = extractJson(loginResponse)
