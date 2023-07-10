@@ -24,7 +24,7 @@
         </service>
 
         <activity
-            android:name=".auth.splash.SplashActivity"
+            android:name=".auth.ui.splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.LGTMAndroid">
             <intent-filter>
