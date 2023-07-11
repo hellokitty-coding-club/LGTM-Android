@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             style="@style/LGTMButton"
             android:paddingVertical="20dp"
-            android:enabled="@{viewModel.isAgreeWithTerms}"
+            android:enabled="@{viewModel.isAgreeWithTerms, default=false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
 
