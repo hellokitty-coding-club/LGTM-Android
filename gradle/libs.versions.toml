@@ -56,6 +56,9 @@ google-services = "4.3.15"
 crashlytics = "2.9.5"
 firebase = "32.1.0"
 
+#sonarqube
+sonarqube = "4.0.0.2929"
+
 
 [libraries]
 agp = { module = "com.android.tools.build:gradle", version.ref = "gradleplugin" }
@@ -107,7 +110,6 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 
-
 [bundles]
 
 androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "constraintlayout", "activity", "fragment"]
@@ -133,3 +135,4 @@ google-services = { id = "com.google.gms.google-services", version.ref = "google
 crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytics" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspplugin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sonarqube = { id = "org.sonarqube", version.ref = "sonarqube" }
