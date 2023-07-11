@@ -9,12 +9,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lgtm.android.auth.BuildConfig.LGTM_GITHUB_LOGIN_URL
-import com.lgtm.android.auth.databinding.BottomSheetFragmentGithubLoginBinding
+import com.lgtm.android.auth.databinding.BottomSheetGithubBinding
 import com.lgtm.android.auth.ui.OnLoginSuccess
+
 
 class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuccess) :
     BottomSheetDialogFragment() {
-    private var _binding: BottomSheetFragmentGithubLoginBinding? = null
+    private var _binding: BottomSheetGithubBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,7 +23,7 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = BottomSheetFragmentGithubLoginBinding.inflate(layoutInflater, container, false)
+        _binding = BottomSheetGithubBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -39,7 +40,7 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
         }
 
         binding.bottomSheet.layoutParams.height =
-            (resources.displayMetrics.heightPixels * 0.94).toInt()
+            (resources.displayMetrics.heightPixels * 0.93).toInt()
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -50,5 +51,10 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
                 GithubWebViewClient(this@GithubBottomSheet, loginSuccessListener)
             loadUrl(LGTM_GITHUB_LOGIN_URL)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

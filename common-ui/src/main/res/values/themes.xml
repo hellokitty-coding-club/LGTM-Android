@@ -3,6 +3,15 @@
 
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
+        <item name="bottomSheetDialogTheme">@style/LgtmBottomSheetStyle</item>
+    </style>
+
+    <style name="LgtmBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/LGTMModalStyle</item>
+    </style>
+
+    <style name="LGTMModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rectangle_bottom_sheet</item>
     </style>
 
 </resources>
