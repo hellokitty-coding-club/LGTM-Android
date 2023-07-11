@@ -23,11 +23,17 @@ android {
             )
         }
     }
+
     defaultConfig {
         buildConfigField(
             "String",
-            "LGTM_GITHUB_LOGIN_URL",
-            lgtmProperties.getProperty("LGTM_GITHUB_LOGIN_URL")
+            "LGTM_BASE_URL_DEBUG",
+            lgtmProperties.getProperty("LGTM_BASE_URL_DEBUG")
+        )
+        buildConfigField(
+            "String",
+            "LGTM_BASE_URL_RELEASE",
+            lgtmProperties.getProperty("LGTM_BASE_URL_RELEASE")
         )
     }
 
