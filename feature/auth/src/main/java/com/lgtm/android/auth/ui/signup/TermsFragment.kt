@@ -24,8 +24,17 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
 
     private fun setupNextButtonListener() {
         binding.btnNext.setOnClickListener {
-            findNavController().navigate(R.id.action_termsFragment_to_nicknameFragment)
+            setEventInfoAgreeState()
+            navigateToNicknameFragment()
         }
+    }
+
+    private fun setEventInfoAgreeState() {
+        signUpViewModel.setIsAgreeWithEventInfo(binding.cbTermsMarketing.isChecked)
+    }
+
+    private fun navigateToNicknameFragment() {
+        findNavController().navigate(R.id.action_termsFragment_to_nicknameFragment)
     }
 
 

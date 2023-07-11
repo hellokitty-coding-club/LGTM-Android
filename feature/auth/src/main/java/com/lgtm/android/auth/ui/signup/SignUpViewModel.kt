@@ -26,6 +26,10 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     private val _isAgreeWithEventInfo = MutableLiveData<Boolean>()
     val isAgreeWithEventInfo: LiveData<Boolean> = _isAgreeWithEventInfo
 
+    fun setIsAgreeWithEventInfo(isAgree: Boolean) {
+        _isAgreeWithEventInfo.value = isAgree
+    }
+
     // 실명
     private val _fullName = MutableLiveData<String>()
     val fullName: LiveData<String> = _fullName
