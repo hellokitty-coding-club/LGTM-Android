@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentNicknameBinding
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.KeyboardUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -16,7 +17,9 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         setupViewModel()
+        setSoftKeyboard()
         signUpViewModel.isAgreeWithEventInfo.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: $it")
         }
@@ -24,6 +27,10 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
 
     private fun setupViewModel() {
         binding.viewModel = signUpViewModel
+    }
+
+    private fun setSoftKeyboard() {
+        KeyboardUtil().setUpAsSoftKeyboard(binding.root)
     }
 
 
