@@ -20,15 +20,12 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
+            style="@style/LGTMButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
             android:enabled="@{viewModel.isAgreeWithTerms}"
             android:paddingVertical="20dp"
             android:text="@string/next"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            app:btnBackground="@{viewModel.isAgreeWithTerms}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
