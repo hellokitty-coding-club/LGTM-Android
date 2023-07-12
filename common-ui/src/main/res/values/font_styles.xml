@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="KrHeading1B">
+        <item name="android:fontFamily">@font/noto_sans_kr</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingExtra">12.8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading1B">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingExtra">12.8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrHeading1M">
+        <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingExtra">12.8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading1M">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:lineSpacingExtra">12.8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrHeading2B">
+        <item name="android:fontFamily">@font/noto_sans_kr</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingExtra">11.2sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading2B">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingExtra">11.2sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrHeading2M">
+        <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingExtra">11.2sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading2M">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:lineSpacingExtra">11.2sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrHeading3B">
+        <item name="android:fontFamily">@font/noto_sans_kr</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">9.6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading3B">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">9.6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrHeading3M">
+        <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">9.6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading3M">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">9.6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrHeading4B">
+        <item name="android:fontFamily">@font/noto_sans_kr</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading4B">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrHeading4M">
+        <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumHeading4M">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrBody1B">
+        <item name="android:fontFamily">@font/noto_sans_kr</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">6.4sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumBody1B">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">6.4sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrBody1M">
+        <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">6.4sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumBody1M">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">6.4sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrBody2">
+        <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumBody2">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">7sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrBody3M">
+        <item name="android:fontFamily">@font/noto_sans_kr_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumBody3M">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrBody3R">
+        <item name="android:fontFamily">@font/noto_sans_kr</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumBody3R">
+        <item name="android:fontFamily">@font/pretendard</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="KrDescription">
+        <item name="android:fontFamily">@font/noto_sans_kr_light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+
+    <style name="EngNumDescription">
+        <item name="android:fontFamily">@font/pretendard_light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/midnight</item>
+    </style>
+</resources>

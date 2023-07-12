@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:textAppearance="@style/KrBody1B"
             android:layout_marginTop="100dp"
             android:text="사용하실 닉네임을 입력하세요."
             app:layout_constraintStart_toStartOf="parent"
