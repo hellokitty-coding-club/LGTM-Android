@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/lgtm_green</item>
+        <item name="colorPrimary">@color/green</item>
         <item name="colorSecondary">@color/gray_2</item>
         <item name="android:statusBarColor">@color/black</item>
         <item name="android:includeFontPadding">false</item>
@@ -22,9 +22,16 @@
 
     <style name="LGTMButton" parent="Theme.AppCompat">
         <item name="android:background">@drawable/selector_lgtm_button_background</item>
-        <item name="android:paddingVertical">20dp</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">14dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:layout_marginBottom">28dp</item>
+        <item name="android:textAppearance">@style/KrBody1M</item>
         <item name="android:textColor">@color/selector_lgtm_button_text</item>
+        <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
     <style name="LGTMEditTextStyle" parent="@style/Widget.AppCompat.EditText">

@@ -11,8 +11,8 @@
     <color name="gray_2">#e7ecf2</color>
     <color name="gray_1">#f4f5f9</color>
     <color name="white">#ffffff</color>
-    <color name="lgtm_green">#56ee9b</color>
-    <color name="lgtm_red">#fe504f</color>
-    <color name="lgtm_blue">#1d74f5</color>
-    <color name="lgtm_yellow">#fac53d</color>
+    <color name="green">#56ee9b</color>
+    <color name="red">#fe504f</color>
+    <color name="blue">#1d74f5</color>
+    <color name="yellow">#fac53d</color>
 </resources>
