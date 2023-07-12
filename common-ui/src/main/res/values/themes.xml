@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorSecondary">@color/gray</item>
+        <item name="android:statusBarColor">@color/black</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="bottomSheetDialogTheme">@style/LgtmBottomSheetStyle</item>
+        <item name="editTextStyle">@style/LGTMEditTextStyle</item>
+    </style>
+
+    <style name="LgtmBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/LGTMModalStyle</item>
+    </style>
+
+    <style name="LGTMModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rectangle_bottom_sheet</item>
+    </style>
+
+    <style name="LGTMButton" parent="Theme.AppCompat">
+        <item name="android:background">@drawable/selector_lgtm_button_background</item>
+        <item name="android:paddingVertical">20dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/selector_lgtm_button_text</item>
+    </style>
+
+    <style name="LGTMEditTextStyle" parent="@style/Widget.AppCompat.EditText">
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="colorControlNormal">?attr/colorPrimary</item>
+        <item name="colorControlHighlight">?attr/colorPrimary</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:background">@drawable/rectangle_primary_stroke_1_radius_10</item>
+        <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
     </style>
 
 </resources>

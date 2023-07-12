@@ -1,4 +1,4 @@
-package com.lgtm.android.auth.splash
+package com.lgtm.android.auth.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -46,7 +46,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     private fun startNextActivityAfterDelay() {
         Handler(Looper.getMainLooper()).postDelayed({
             startNextActivity()
-        }, Companion.SPLASH_DELAY)
+        }, SPLASH_DELAY)
     }
 
     private fun startNextActivity() {

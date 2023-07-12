@@ -9,5 +9,18 @@
         android:id="@+id/fragment_terms"
         android:name="com.lgtm.android.auth.ui.signup.TermsFragment"
         android:label="fragment_terms"
-        tools:layout="@layout/fragment_terms" />
+        tools:layout="@layout/fragment_terms">
+        <action
+            android:id="@+id/action_termsFragment_to_nicknameFragment"
+            app:destination="@id/fragment_nickname"
+            app:popUpTo="@id/fragment_terms"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_nickname"
+        android:name="com.lgtm.android.auth.ui.signup.NicknameFragment"
+        android:label="fragment_nickname"
+        tools:layout="@layout/fragment_nickname" />
 </navigation>

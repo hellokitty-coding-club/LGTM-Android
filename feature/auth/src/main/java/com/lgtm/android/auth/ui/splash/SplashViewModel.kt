@@ -1,4 +1,4 @@
-package com.lgtm.android.auth.splash
+package com.lgtm.android.auth.ui.splash
 
 import android.content.ContentValues.TAG
 import android.util.Log

@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="com.lgtm.android.auth.splash.SplashActivity">
+        tools:context="com.lgtm.android.auth.ui.splash.SplashActivity">
 
         <!-- todo : Change When Logo is Ready -->
         <androidx.appcompat.widget.AppCompatImageView

@@ -5,11 +5,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentTermsBinding
 import com.lgtm.android.common_ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
@@ -17,8 +19,24 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
         setupViewModel()
         setUpCheckBoxListeners()
         setUpTextViewListener()
-        setNextButtonInitState()
+        setupNextButtonListener()
     }
+
+    private fun setupNextButtonListener() {
+        binding.btnNext.setOnClickListener {
+            setEventInfoAgreeState()
+            navigateToNicknameFragment()
+        }
+    }
+
+    private fun setEventInfoAgreeState() {
+        signUpViewModel.setIsAgreeWithEventInfo(binding.cbTermsMarketing.isChecked)
+    }
+
+    private fun navigateToNicknameFragment() {
+        findNavController().navigate(R.id.action_termsFragment_to_nicknameFragment)
+    }
+
 
     private fun setUpTextViewListener() {
         binding.tvTermsService.setOnClickListener {
@@ -65,12 +83,6 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
             updateTermsAllState()
             updateNextButtonState()
         }
-    }
-
-    private fun setNextButtonInitState() {
-        val isAgreeWithTerms =
-            binding.cbTermsPrivacy.isChecked && binding.cbTermsService.isChecked
-        signUpViewModel.setIsAgreeWithTerms(isAgreeWithTerms)
     }
 
     private fun updateTermsAllState() {
