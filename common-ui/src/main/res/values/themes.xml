@@ -2,8 +2,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorSecondary">@color/gray</item>
+        <item name="colorPrimary">@color/lgtm_green</item>
+        <item name="colorSecondary">@color/gray_2</item>
         <item name="android:statusBarColor">@color/black</item>
         <item name="android:includeFontPadding">false</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
@@ -32,7 +32,7 @@
         <item name="colorControlNormal">?attr/colorPrimary</item>
         <item name="colorControlHighlight">?attr/colorPrimary</item>
         <item name="colorAccent">?attr/colorPrimary</item>
-        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:textColorHint">@color/gray_2</item>
         <item name="android:padding">20dp</item>
         <item name="android:background">@drawable/rectangle_primary_stroke_1_radius_10</item>
         <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
