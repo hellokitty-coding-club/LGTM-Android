@@ -48,7 +48,6 @@
             android:layout_marginStart="10dp"
             android:text="@string/agree_all"
             android:textAppearance="@style/KrHeading4M"
-            android:textColor="@color/midnight"
             app:layout_constraintBottom_toBottomOf="@id/cb_terms_all"
             app:layout_constraintStart_toEndOf="@id/cb_terms_all"
             app:layout_constraintTop_toTopOf="@id/cb_terms_all" />
