@@ -4,7 +4,10 @@
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/green</item>
         <item name="colorSecondary">@color/gray_2</item>
+
         <item name="android:statusBarColor">@color/black</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <item name="android:includeFontPadding">false</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:windowIsTranslucent">true</item>

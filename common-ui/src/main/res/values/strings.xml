@@ -6,5 +6,6 @@
     <string name="next">다음</string>
     <string name="agree_all">전체 동의</string>
     <string name="need_service_terms_agree">서비스 이용을 위해\n이용약관 동의가 필요합니다.</string>
+    <string name="login_by_github">Github로 로그인</string>
 
 </resources>
