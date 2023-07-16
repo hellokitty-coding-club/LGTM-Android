@@ -10,5 +10,6 @@
     <string name="nickname_description_main">사용하실 닉네임을\n입력하세요.</string>
     <string name="nickname_description_sub">닉네임은 나중에 다시 수정할 수 있습니다.</string>
     <string name="enter_nickname">닉네임을 입력하세요.</string>
+    <string name="dash">/</string>
 
 </resources>
