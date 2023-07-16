@@ -35,13 +35,12 @@
             android:name=".auth.ui.SignInActivity"
             android:exported="false" />
 
+        <!-- todo EditConfiguration 활용하기 위함
+         회원가입 로직 끝나고 나면 exported 속성 false로 변경하기 -->
         <activity
             android:name=".auth.ui.signup.SignUpActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".MainActivity"
             android:exported="true" />
+
     </application>
 
 
