@@ -3,6 +3,8 @@ package com.lgtm.android.auth.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lgtm.android.common_ui.model.EditTextData
+import com.lgtm.android.common_ui.model.InfoType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -30,13 +32,22 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isAgreeWithEventInfo.value = isAgree
     }
 
-    // 실명
-    private val _fullName = MutableLiveData<String>()
-    val fullName: LiveData<String> = _fullName
-
     // 닉네임
     private val _nickname = MutableLiveData<String>()
     val nickname: LiveData<String> = _nickname
+
+    fun setNickname(nickname: String) {
+        _nickname.value = nickname
+    }
+
+    private val _nicknameEditTextData = MutableLiveData(
+        EditTextData(
+            infoStatus = InfoType.DUPLICATE_NICKNAME,
+            maxLength = 10,
+            hint = "닉네임을 입력해주세요."
+        )
+    )
+    val nicknameEditTextData: LiveData<EditTextData> = _nicknameEditTextData
 
     // 이메일
     private val _email = MutableLiveData<String>()
@@ -50,5 +61,9 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     private val _intro = MutableLiveData<String>()
     val intro: LiveData<String> = _intro
 
-
+    // 실명
+    private val _fullName = MutableLiveData<String>()
+    val fullName: LiveData<String> = _fullName
 }
+
+

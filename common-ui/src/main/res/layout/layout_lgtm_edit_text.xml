@@ -6,12 +6,8 @@
     <data>
 
         <variable
-            name="maxLength"
-            type="Integer" />
-
-        <variable
-            name="infoStatus"
-            type="com.lgtm.android.common_ui.ui.InfoType" />
+            name="editTextData"
+            type="com.lgtm.android.common_ui.model.EditTextData" />
 
         <import type="android.view.View" />
 
@@ -27,7 +23,8 @@
             style="@style/LGTMEditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="@{maxLength}"
+            android:hint="@{editTextData.hint}"
+            android:maxLength="@{editTextData.maxLength}"
             android:paddingEnd="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
-            android:text="@{String.valueOf(maxLength)}"
+            android:text="@{String.valueOf(editTextData.maxLength)}"
             android:textAppearance="@style/EngNumBody3R"
             android:textColor="@color/gray_3"
             app:layout_constraintBottom_toBottomOf="@id/edit_text"
@@ -84,7 +81,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{infoStatus.isVisible ? View.VISIBLE : View.GONE}"
+            android:visibility="@{editTextData.infoStatus.isVisible ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_text">
 
@@ -93,23 +90,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:tint="@{infoStatus.color}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_info" />
+                infoStatusIcon="@{editTextData.infoStatus.icon}" />
 
             <TextView
+                android:id="@+id/tv_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{infoStatus.message}"
+                infoStatusColor="@{editTextData.infoStatus.color}"
                 android:textAppearance="@style/KrBody3M"
-                android:textColor="@{infoStatus.color}"
+                android:text="@{editTextData.infoStatus.message}"
                 app:layout_constraintBottom_toBottomOf="@id/ic_info"
                 app:layout_constraintStart_toEndOf="@id/ic_info"
                 app:layout_constraintTop_toTopOf="@id/ic_info"
                 tools:text="띄어쓰기 노노" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
