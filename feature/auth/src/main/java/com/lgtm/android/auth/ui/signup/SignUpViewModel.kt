@@ -36,23 +36,20 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     val nicknameEditTextData = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
-            infoStatus = MutableLiveData(InfoType.NONE),
+            infoStatus = InfoType.NONE,
             maxLength = 10,
             hint = "닉네임을 입력해주세요."
         )
     )
-//    val nicknameEditTextData: LiveData<EditTextData> = _nicknameEditTextData
-
     // 닉네임
     val nickname: MutableLiveData<String>? = nicknameEditTextData.value?.text
 
     fun fetchInfoStatus() {
-        // 공백을 포함하는지 정규표현식으로 검사
         val regex = Regex("\\s")
         if (regex.containsMatchIn(nickname?.value ?: "")) {
-            nicknameEditTextData.value?.infoStatus?.value = InfoType.NO_SPACE
+            nicknameEditTextData.value?.infoStatus = InfoType.NO_SPACE
         } else {
-            nicknameEditTextData.value?.infoStatus?.value = InfoType.NONE
+            nicknameEditTextData.value?.infoStatus = InfoType.NONE
         }
     }
 

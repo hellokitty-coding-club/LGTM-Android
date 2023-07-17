@@ -55,7 +55,7 @@ class LGTMEditText @JvmOverloads constructor(
     private fun observeEditText() {
         if (::editTextData.isInitialized) return
         binding.editText.addTextChangedListener {
-            val infoStatus = editTextData.value?.infoStatus?.value
+            val infoStatus = editTextData.value?.infoStatus
             updateCurrentLength(it?.length ?: 0)
             updateInfoVisibility(infoStatus)
             updateInfoIcon(infoStatus)
