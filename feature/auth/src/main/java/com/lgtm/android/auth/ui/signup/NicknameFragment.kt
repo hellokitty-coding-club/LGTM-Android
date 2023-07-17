@@ -15,16 +15,26 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
-
-        binding.etNickname.apply {
-            setEditTextData(
-                signUpViewModel.nicknameEditTextData
-            )
-        }
+        setupEditText()
+        observeNickname()
     }
 
     private fun setupViewModel() {
         binding.viewModel = signUpViewModel
+    }
+
+    private fun setupEditText() {
+        binding.etNickname.apply {
+            signUpViewModel.nicknameEditTextData.value?.let {
+                setEditTextData(it)
+            }
+        }
+    }
+
+    private fun observeNickname() {
+        signUpViewModel.nickname?.observe(viewLifecycleOwner) {
+            signUpViewModel.fetchInfoStatus()
+        }
     }
 
 }

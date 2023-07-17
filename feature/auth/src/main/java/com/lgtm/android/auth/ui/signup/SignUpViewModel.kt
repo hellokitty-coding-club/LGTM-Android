@@ -32,22 +32,29 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isAgreeWithEventInfo.value = isAgree
     }
 
-    // 닉네임
-    private val _nickname = MutableLiveData<String>()
-    val nickname: LiveData<String> = _nickname
 
-    fun setNickname(nickname: String) {
-        _nickname.value = nickname
-    }
-
-    private val _nicknameEditTextData = MutableLiveData(
+    val nicknameEditTextData = MutableLiveData(
         EditTextData(
-            infoStatus = InfoType.DUPLICATE_NICKNAME,
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
             maxLength = 10,
             hint = "닉네임을 입력해주세요."
         )
     )
-    val nicknameEditTextData: LiveData<EditTextData> = _nicknameEditTextData
+//    val nicknameEditTextData: LiveData<EditTextData> = _nicknameEditTextData
+
+    // 닉네임
+    val nickname: MutableLiveData<String>? = nicknameEditTextData.value?.text
+
+    fun fetchInfoStatus() {
+        // 공백을 포함하는지 정규표현식으로 검사
+        val regex = Regex("\\s")
+        if (regex.containsMatchIn(nickname?.value ?: "")) {
+            nicknameEditTextData.value?.infoStatus?.value = InfoType.NO_SPACE
+        } else {
+            nicknameEditTextData.value?.infoStatus?.value = InfoType.NONE
+        }
+    }
 
     // 이메일
     private val _email = MutableLiveData<String>()

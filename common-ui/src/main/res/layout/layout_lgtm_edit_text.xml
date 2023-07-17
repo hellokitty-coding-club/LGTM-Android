@@ -26,7 +26,7 @@
             android:hint="@{editTextData.hint}"
             android:maxLength="@{editTextData.maxLength}"
             android:paddingEnd="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@={editTextData.text}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +59,7 @@
             android:id="@+id/tv_current_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(editText.text.length())}"
+            android:text="@{String.valueOf(editTextData.text.length)}"
             android:textAppearance="@style/EngNumBody3R"
             android:textColor="@color/gray_3"
             app:layout_constraintBottom_toBottomOf="@id/tv_slash"
@@ -79,33 +79,39 @@
             app:layout_constraintTop_toTopOf="@id/edit_text" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/cl_info"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="@{editTextData.infoStatus.isVisible ? View.VISIBLE : View.GONE}"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_text">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_info"
+                infoStatusIcon="@{editTextData.infoStatus.icon}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                infoStatusIcon="@{editTextData.infoStatus.icon}" />
+                tools:src="@drawable/ic_info_red" />
 
             <TextView
                 android:id="@+id/tv_info"
+                infoStatusColor="@{editTextData.infoStatus.color}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                infoStatusColor="@{editTextData.infoStatus.color}"
-                android:textAppearance="@style/KrBody3M"
                 android:text="@{editTextData.infoStatus.message}"
+                android:textAppearance="@style/KrBody3M"
                 app:layout_constraintBottom_toBottomOf="@id/ic_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/ic_info"
                 app:layout_constraintTop_toTopOf="@id/ic_info"
-                tools:text="띄어쓰기 노노" />
+                tools:text="띄어쓰기 노노"
+                tools:textColor="@color/red" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
