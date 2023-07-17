@@ -6,13 +6,11 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lgtm.android.common_ui.databinding.LayoutLgtmEditTextBinding
 import com.lgtm.android.common_ui.model.EditTextData
-import com.lgtm.android.common_ui.model.InfoType
 
 @SuppressLint("ViewConstructor")
 class LGTMEditText @JvmOverloads constructor(
@@ -30,12 +28,11 @@ class LGTMEditText @JvmOverloads constructor(
     init {
         initializeView()
         setListeners()
-        observeEditText()
     }
 
     fun setEditTextData(editTextData: EditTextData) {
         this.editTextData = MutableLiveData(editTextData)
-        binding.editTextData = editTextData
+        binding.editTextData = this.editTextData.value
     }
 
     private fun initializeView() {
@@ -50,39 +47,5 @@ class LGTMEditText @JvmOverloads constructor(
     private fun showClearButton() {
         binding.ivClear.visibility =
             if (binding.editText.text.isNotEmpty()) View.VISIBLE else View.GONE
-    }
-
-    private fun observeEditText() {
-        if (::editTextData.isInitialized) return
-        binding.editText.addTextChangedListener {
-            val infoStatus = editTextData.value?.infoStatus
-            updateCurrentLength(it?.length ?: 0)
-            updateInfoVisibility(infoStatus)
-            updateInfoIcon(infoStatus)
-            updateInfoMessage(infoStatus)
-            updateInfoTextColor(infoStatus)
-        }
-    }
-
-    private fun updateCurrentLength(length: Int) {
-        binding.tvCurrentLength.text = "$length"
-    }
-
-    private fun updateInfoVisibility(infoStatus: InfoType?) {
-        binding.clInfo.visibility = if (infoStatus?.isVisible == true) View.VISIBLE else View.GONE
-    }
-
-    private fun updateInfoIcon(infoStatus: InfoType?) {
-        infoStatus?.icon?.let { icon -> binding.icInfo.setImageResource(icon) }
-    }
-
-    private fun updateInfoMessage(infoStatus: InfoType?) {
-        infoStatus?.message?.let { text -> binding.tvInfo.text = text }
-    }
-
-    private fun updateInfoTextColor(infoStatus: InfoType?) {
-        infoStatus?.color?.let { color ->
-            binding.tvInfo.setTextColor(ContextCompat.getColor(context, color))
-        }
     }
 }

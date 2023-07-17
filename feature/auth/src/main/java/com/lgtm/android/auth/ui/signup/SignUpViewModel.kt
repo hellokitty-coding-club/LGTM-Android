@@ -47,9 +47,11 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     fun fetchInfoStatus() {
         val regex = Regex("\\s")
         if (regex.containsMatchIn(nickname?.value ?: "")) {
-            nicknameEditTextData.value?.infoStatus = InfoType.NO_SPACE
+            nicknameEditTextData.value =
+                nicknameEditTextData.value?.copy(infoStatus = InfoType.NO_SPACE)
         } else {
-            nicknameEditTextData.value?.infoStatus = InfoType.NONE
+            nicknameEditTextData.value =
+                nicknameEditTextData.value?.copy(infoStatus = InfoType.NONE)
         }
     }
 
