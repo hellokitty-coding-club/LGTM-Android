@@ -33,11 +33,10 @@ abstract class BaseBottomSheetFragment<T : ViewDataBinding>(
         setBottomSheetBehavior()
     }
 
-    private fun setBottomSheetBehavior() {
+    open fun setBottomSheetBehavior() {
         (dialog as BottomSheetDialog).behavior.apply {
             state = BottomSheetBehavior.STATE_EXPANDED
             skipCollapsed = true
-            isDraggable = false
         }
     }
 

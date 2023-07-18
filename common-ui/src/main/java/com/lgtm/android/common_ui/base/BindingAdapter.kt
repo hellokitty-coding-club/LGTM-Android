@@ -1,17 +1,16 @@
 package com.lgtm.android.common_ui.base
 
-import androidx.appcompat.widget.AppCompatButton
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
-import com.lgtm.android.common_ui.R
 
-@BindingAdapter("app:btnBackground")
-fun AppCompatButton.setBtnBackground(isEnabled: Boolean) {
-    this.setBackgroundResource(
-        if (isEnabled) R.drawable.rectangle_lgtm_black else R.drawable.rectangle_lgtm_gray
-    )
+@BindingAdapter("infoStatusColor")
+fun TextView.setInfoStatusColor(color: Int) {
+    setTextColor(ContextCompat.getColor(this.context, color))
 }
 
-@BindingAdapter("app:btnEnabled")
-fun AppCompatButton.setBtnEnable(isEnabled: Boolean) {
-    this.isEnabled = isEnabled
+@BindingAdapter("infoStatusIcon")
+fun AppCompatImageView.setInfoStatusIcon(icon: Int) {
+    setImageResource(icon)
 }

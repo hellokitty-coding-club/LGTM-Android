@@ -2,10 +2,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorSecondary">@color/gray</item>
-        <item name="android:statusBarColor">@color/black</item>
+        <!--color-->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorSecondary">@color/gray_2</item>
+        <!--status bar-->
+        <item name="android:statusBarColor">@color/gray_3</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!--font-->
         <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/midnight</item>
+        <!--etc-->
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="bottomSheetDialogTheme">@style/LgtmBottomSheetStyle</item>
@@ -22,19 +28,27 @@
 
     <style name="LGTMButton" parent="Theme.AppCompat">
         <item name="android:background">@drawable/selector_lgtm_button_background</item>
-        <item name="android:paddingVertical">20dp</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">14dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:layout_marginBottom">28dp</item>
+        <item name="android:textAppearance">@style/KrBody1M</item>
         <item name="android:textColor">@color/selector_lgtm_button_text</item>
+        <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
     <style name="LGTMEditTextStyle" parent="@style/Widget.AppCompat.EditText">
         <item name="colorControlActivated">?attr/colorPrimary</item>
         <item name="colorControlNormal">?attr/colorPrimary</item>
         <item name="colorControlHighlight">?attr/colorPrimary</item>
+        <item name="android:textAppearance">@style/KrBody1B</item>
+        <item name="android:textColor">@color/midnight</item>
         <item name="colorAccent">?attr/colorPrimary</item>
-        <item name="android:textColorHint">@color/gray</item>
-        <item name="android:padding">20dp</item>
-        <item name="android:background">@drawable/rectangle_primary_stroke_1_radius_10</item>
+        <item name="android:textColorHint">@color/gray_3</item>
+        <item name="android:paddingVertical">16dp</item>
         <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
     </style>
 

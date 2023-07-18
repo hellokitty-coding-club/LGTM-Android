@@ -19,9 +19,10 @@
             android:id="@+id/tv_nickname_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="100dp"
-            android:text="사용하실 닉네임을 입력하세요."
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="107dp"
+            android:text="@string/nickname_description_main"
+            android:textAppearance="@style/KrHeading4B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,26 +30,25 @@
             android:id="@+id/tv_nickname_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="닉네임은 나중에 다시 수정가능해요"
+            android:layout_marginTop="10dp"
+            android:text="@string/nickname_description_sub"
+            android:textAppearance="@style/KrBody2"
             app:layout_constraintStart_toStartOf="@id/tv_nickname_title"
             app:layout_constraintTop_toBottomOf="@id/tv_nickname_title" />
 
-        <EditText
+        <com.lgtm.android.common_ui.ui.LGTMEditText
+            android:id="@+id/et_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="36dp"
             app:layout_constraintTop_toBottomOf="@id/tv_nickname_description" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             style="@style/LGTMButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="@{viewModel.isAgreeWithTerms}"
-            android:paddingVertical="20dp"
+            android:enabled="@{viewModel.isNicknameValid, default=false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
 

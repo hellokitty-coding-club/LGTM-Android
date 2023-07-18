@@ -3,6 +3,8 @@ package com.lgtm.android.auth.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lgtm.android.common_ui.model.EditTextData
+import com.lgtm.android.common_ui.model.InfoType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -30,13 +32,36 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isAgreeWithEventInfo.value = isAgree
     }
 
-    // 실명
-    private val _fullName = MutableLiveData<String>()
-    val fullName: LiveData<String> = _fullName
+    val nicknameEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = InfoType.NONE,
+            maxLength = 10,
+            hint = "닉네임을 입력해주세요."
+        )
+    )
 
     // 닉네임
-    private val _nickname = MutableLiveData<String>()
-    val nickname: LiveData<String> = _nickname
+    val nickname: MutableLiveData<String>? = nicknameEditTextData.value?.text
+
+    fun fetchInfoStatus() {
+        val regex = Regex("\\s")
+        if (regex.containsMatchIn(nickname?.value ?: "")) {
+            nicknameEditTextData.value =
+                nicknameEditTextData.value?.copy(infoStatus = InfoType.NO_SPACE)
+        } else {
+            nicknameEditTextData.value =
+                nicknameEditTextData.value?.copy(infoStatus = InfoType.NONE)
+        }
+    }
+
+    private val _isNicknameValid = MutableLiveData<Boolean>()
+    val isNicknameValid: LiveData<Boolean> = _isNicknameValid
+
+    fun setIsNicknameValid() {
+        _isNicknameValid.value = (nicknameEditTextData.value?.infoStatus == InfoType.NONE)
+                && (nickname?.value?.isNotBlank() == true)
+    }
 
     // 이메일
     private val _email = MutableLiveData<String>()
@@ -50,5 +75,9 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     private val _intro = MutableLiveData<String>()
     val intro: LiveData<String> = _intro
 
-
+    // 실명
+    private val _fullName = MutableLiveData<String>()
+    val fullName: LiveData<String> = _fullName
 }
+
+

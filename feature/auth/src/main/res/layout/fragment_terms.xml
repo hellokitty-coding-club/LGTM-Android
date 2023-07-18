@@ -21,31 +21,33 @@
             android:id="@+id/tv_terms_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="130dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="107dp"
             android:text="@string/need_service_terms_agree"
+            android:textAppearance="@style/KrHeading4B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
         <CheckBox
             android:id="@+id/cb_terms_all"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginTop="80dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="91dp"
             android:background="@drawable/selector_lgtm_checkbox_icon"
             android:button="@null"
             android:padding="5dp"
             app:layout_constraintStart_toStartOf="@id/tv_terms_description"
             app:layout_constraintTop_toBottomOf="@id/tv_terms_description"
-            tools:background="@drawable/btn_inactive_check" />
+            tools:background="@drawable/ic_checkbox_disable" />
 
         <TextView
             android:id="@+id/tv_terms_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:text="@string/agree_all"
+            android:textAppearance="@style/KrHeading4M"
             app:layout_constraintBottom_toBottomOf="@id/cb_terms_all"
             app:layout_constraintStart_toEndOf="@id/cb_terms_all"
             app:layout_constraintTop_toTopOf="@id/cb_terms_all" />
@@ -56,14 +58,14 @@
             android:layout_height="1dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="15dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/gray_3"
             app:layout_constraintTop_toBottomOf="@id/cb_terms_all" />
 
         <!--약관 및 정책-->
         <CheckBox
             android:id="@+id/cb_terms_service"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="23dp"
             android:background="@drawable/selector_lgtm_checkbox_icon"
             android:button="@null"
@@ -75,8 +77,9 @@
             android:id="@+id/tv_terms_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:text="@string/terms_service"
+            android:textColor="@color/gray_5"
             app:layout_constraintBottom_toBottomOf="@id/cb_terms_service"
             app:layout_constraintStart_toEndOf="@id/cb_terms_service"
             app:layout_constraintTop_toTopOf="@id/cb_terms_service" />
@@ -84,8 +87,8 @@
         <!--개인정보 처리방침 -->
         <CheckBox
             android:id="@+id/cb_terms_privacy"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/selector_lgtm_checkbox_icon"
             android:button="@null"
@@ -97,8 +100,9 @@
             android:id="@+id/tv_terms_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:text="@string/terms_privacy"
+            android:textColor="@color/gray_5"
             app:layout_constraintBottom_toBottomOf="@id/cb_terms_privacy"
             app:layout_constraintStart_toEndOf="@id/cb_terms_privacy"
             app:layout_constraintTop_toTopOf="@id/cb_terms_privacy" />
@@ -106,8 +110,8 @@
         <!-- 이벤트, 광고성 정보 안내(선택)-->
         <CheckBox
             android:id="@+id/cb_terms_marketing"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/selector_lgtm_checkbox_icon"
             android:button="@null"
@@ -118,18 +122,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:text="@string/terms_marketing"
+            android:textColor="@color/gray_5"
             app:layout_constraintBottom_toBottomOf="@id/cb_terms_marketing"
             app:layout_constraintStart_toEndOf="@id/cb_terms_marketing"
             app:layout_constraintTop_toTopOf="@id/cb_terms_marketing" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             style="@style/LGTMButton"
-            android:paddingVertical="20dp"
+            android:layout_width="match_parent"
             android:enabled="@{viewModel.isAgreeWithTerms, default=false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />

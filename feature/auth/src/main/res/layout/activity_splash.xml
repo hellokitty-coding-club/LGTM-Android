@@ -6,19 +6,29 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/midnight"
         tools:context="com.lgtm.android.auth.ui.splash.SplashActivity">
 
-        <!-- todo : Change When Logo is Ready -->
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:background="@color/black"
-            android:src="@drawable/ic_launcher_foreground"
+            android:layout_marginTop="148dp"
+            android:src="@drawable/img_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_text_logo"
+            android:layout_width="110dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="23dp"
+            android:src="@drawable/img_textlogo_lgtm"
+            app:layout_constraintEnd_toEndOf="@id/iv_logo"
+            app:layout_constraintStart_toStartOf="@id/iv_logo"
+            app:layout_constraintBottom_toBottomOf="@id/iv_logo"
+            app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
