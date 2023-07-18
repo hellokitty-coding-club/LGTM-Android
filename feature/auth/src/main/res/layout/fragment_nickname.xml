@@ -48,7 +48,7 @@
             android:id="@+id/btn_next"
             style="@style/LGTMButton"
             android:layout_width="match_parent"
-            android:enabled="@{viewModel.isAgreeWithTerms, default=false}"
+            android:enabled="@{viewModel.isNicknameValid, default=false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
 

@@ -32,7 +32,6 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isAgreeWithEventInfo.value = isAgree
     }
 
-
     val nicknameEditTextData = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
@@ -41,6 +40,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
             hint = "닉네임을 입력해주세요."
         )
     )
+
     // 닉네임
     val nickname: MutableLiveData<String>? = nicknameEditTextData.value?.text
 
@@ -53,6 +53,14 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
             nicknameEditTextData.value =
                 nicknameEditTextData.value?.copy(infoStatus = InfoType.NONE)
         }
+    }
+
+    private val _isNicknameValid = MutableLiveData<Boolean>()
+    val isNicknameValid: LiveData<Boolean> = _isNicknameValid
+
+    fun setIsNicknameValid() {
+        _isNicknameValid.value = (nicknameEditTextData.value?.infoStatus == InfoType.NONE)
+                && (nickname?.value?.isNotBlank() == true)
     }
 
     // 이메일
