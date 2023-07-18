@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui.signup
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentNicknameBinding
 import com.lgtm.android.common_ui.base.BaseFragment
@@ -17,6 +18,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
         setupViewModel()
         setupEditText()
         onNicknameChanged()
+        setupNextButtonListener()
     }
 
     private fun setupViewModel() {
@@ -37,6 +39,16 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
                 setEditTextData(it)
             }
         }
+    }
+
+    private fun setupNextButtonListener() {
+        binding.btnNext.setOnClickListener {
+            navigateToTechTagFragment()
+        }
+    }
+
+    private fun navigateToTechTagFragment() {
+        findNavController().navigate(R.id.action_nicknameFragment_to_techTagFragment)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.lgtm.android.common_ui.model
+package com.lgtm.android.common_ui.constant
 
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes

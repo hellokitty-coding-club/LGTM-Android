@@ -22,5 +22,18 @@
         android:id="@+id/fragment_nickname"
         android:name="com.lgtm.android.auth.ui.signup.NicknameFragment"
         android:label="fragment_nickname"
-        tools:layout="@layout/fragment_nickname" />
+        tools:layout="@layout/fragment_nickname">
+        <action
+            android:id="@+id/action_nicknameFragment_to_techTagFragment"
+            app:destination="@id/fragment_tech_tag"
+            app:popUpTo="@id/fragment_nickname"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_tech_tag"
+        android:name="com.lgtm.android.auth.ui.signup.TechTagFragment"
+        android:label="fragment_tech_tag"
+        tools:layout="@layout/fragment_tech_tag" />
 </navigation>
