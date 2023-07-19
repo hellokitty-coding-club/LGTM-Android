@@ -75,10 +75,9 @@
             style="@style/LGTMButtonDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isTechTagValid, default=false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
-
-        <!-- android:enabled="@{viewModel.isNicknameValid, default=false}" -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

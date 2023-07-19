@@ -1,8 +1,6 @@
 package com.lgtm.android.auth.ui.signup
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
@@ -33,7 +31,7 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
 
     private fun observeTechTagList() {
         signUpViewModel.techTagList.observe(viewLifecycleOwner) {
-            Log.d(TAG, "observeTechTagList: $it")
+            signUpViewModel.setIsTechTagValid()
         }
     }
 }

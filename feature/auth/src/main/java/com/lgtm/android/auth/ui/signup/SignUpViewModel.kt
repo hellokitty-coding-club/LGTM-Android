@@ -69,6 +69,13 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     /** 기술 태그 목록 */
     val techTagList = MutableLiveData<MutableList<String>>(mutableListOf())
 
+    private val _isTechTagValid = MutableLiveData<Boolean>()
+    val isTechTagValid: LiveData<Boolean> = _isTechTagValid
+
+    fun setIsTechTagValid() {
+        _isTechTagValid.value = (techTagList.value?.size ?: 0) > 0
+    }
+
 
     // 이메일
     private val _email = MutableLiveData<String>()
