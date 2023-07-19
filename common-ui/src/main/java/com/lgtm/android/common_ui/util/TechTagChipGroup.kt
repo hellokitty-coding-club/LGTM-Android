@@ -31,9 +31,8 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
 
 
     private fun createChip(techTag: TechTag): Chip {
-
         return Chip(chipGroup.context).apply {
-            text = techTag.tag
+            text = techTag.techTagVO.stack
             this.chipStartPadding = 35F
             this.chipEndPadding = 35F
             this.chipStrokeColor = strokeStateList
