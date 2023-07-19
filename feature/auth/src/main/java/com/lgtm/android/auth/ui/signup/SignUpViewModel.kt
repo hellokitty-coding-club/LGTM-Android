@@ -3,13 +3,14 @@ package com.lgtm.android.auth.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
-import com.lgtm.android.common_ui.model.InfoType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor() : ViewModel() {
+    /** Github Id */
     private val _githubId = MutableLiveData<String>()
     val githubId: LiveData<String> = _githubId
 
@@ -17,6 +18,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _githubId.value = memberData
     }
 
+    /** 약관 동의 */
     private val _isAgreeWithTerms = MutableLiveData<Boolean>()
     val isAgreeWithTerms: LiveData<Boolean> = _isAgreeWithTerms
 
@@ -32,6 +34,8 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isAgreeWithEventInfo.value = isAgree
     }
 
+
+    /** 닉네임 */
     val nicknameEditTextData = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
@@ -41,7 +45,6 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         )
     )
 
-    // 닉네임
     val nickname: MutableLiveData<String>? = nicknameEditTextData.value?.text
 
     fun fetchInfoStatus() {
@@ -62,6 +65,17 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isNicknameValid.value = (nicknameEditTextData.value?.infoStatus == InfoType.NONE)
                 && (nickname?.value?.isNotBlank() == true)
     }
+
+    /** 기술 태그 목록 */
+    val techTagList = MutableLiveData<MutableList<String>>(mutableListOf())
+
+    private val _isTechTagValid = MutableLiveData<Boolean>()
+    val isTechTagValid: LiveData<Boolean> = _isTechTagValid
+
+    fun setIsTechTagValid() {
+        _isTechTagValid.value = (techTagList.value?.size ?: 0) > 0
+    }
+
 
     // 이메일
     private val _email = MutableLiveData<String>()
