@@ -1,4 +1,4 @@
-package com.lgtm.android.auth.ui.signup
+package com.lgtm.android.auth.ui.signup.common
 
 import android.content.Intent
 import android.net.Uri
@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentTermsBinding
+import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 

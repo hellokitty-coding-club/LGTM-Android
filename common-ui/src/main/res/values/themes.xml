@@ -40,12 +40,12 @@
 
     <style name="LGTMButtonLight" parent="LGTMButton">
         <item name="android:background">@drawable/selector_lgtm_button_light_background</item>
-        <item name="android:textColor">@color/selector_lgtm_button_light_text</item>
+        <item name="android:textColor">@color/selector_if_enabled_black_gray_4</item>
     </style>
 
     <style name="LGTMButtonDark" parent="LGTMButton">
         <item name="android:background">@drawable/selector_lgtm_button_dark_background</item>
-        <item name="android:textColor">@color/selector_lgtm_button_dark_text</item>
+        <item name="android:textColor">@color/selector_if_enabled_gray_6_gray_4</item>
     </style>
 
 

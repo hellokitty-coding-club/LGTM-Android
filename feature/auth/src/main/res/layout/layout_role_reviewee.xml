@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="role"
+            type="com.lgtm.domain.constants.Role" />
+
+        <import type="com.lgtm.domain.constants.Role" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_role_reviewee"
+        setRoleBackground="@{role == Role.REVIEWEE}"
+        tools:background="@drawable/rectangle_border_gray2_radius_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_icon"
+            setRevieweeRoleImage="@{role == Role.REVIEWEE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="18dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/ic_reviewee_green" />
+
+        <TextView
+            android:id="@+id/tv_role"
+            android:textColor="@{role == Role.REVIEWEE ? @color/green : @color/black}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/reviewee"
+            android:textAppearance="@style/KrBody1B"
+            app:layout_constraintStart_toEndOf="@id/iv_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:includeFontPadding="false" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            setRoleTextColor="@{role == Role.REVIEWEE}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/want_to_learn_develop"
+            android:textAppearance="@style/KrBody3R"
+            app:layout_constraintStart_toStartOf="@id/tv_role"
+            app:layout_constraintTop_toBottomOf="@id/tv_role"
+            tools:includeFontPadding="false" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

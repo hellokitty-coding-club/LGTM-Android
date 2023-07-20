@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
+import com.lgtm.domain.constants.Role
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -103,6 +104,24 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
             introEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
+    /** Role 선택 */
+    private val _selectedRole = MutableLiveData<Role>()
+    val selectedRole: LiveData<Role> = _selectedRole
+
+    private val _isRoleValid = MutableLiveData<Boolean>()
+    val isRoleValid: LiveData<Boolean> = _isRoleValid
+
+    fun setIsRoleValid() {
+        _isRoleValid.value = selectedRole.value != null
+    }
+
+    fun onClickReviewee() {
+        _selectedRole.value = Role.REVIEWEE
+    }
+
+    fun onClickReviewer() {
+        _selectedRole.value = Role.REVIEWER
+    }
 
     // 이메일
     private val _email = MutableLiveData<String>()
