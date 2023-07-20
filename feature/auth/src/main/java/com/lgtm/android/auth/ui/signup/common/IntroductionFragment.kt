@@ -1,10 +1,11 @@
-package com.lgtm.android.auth.ui.signup
+package com.lgtm.android.auth.ui.signup.common
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentIntroductionBinding
+import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
