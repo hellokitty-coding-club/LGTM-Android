@@ -29,6 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_choose_role"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -37,12 +38,24 @@
             app:layout_constraintStart_toStartOf="@id/tv_select_role"
             app:layout_constraintTop_toBottomOf="@id/tv_select_role" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="70dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_choose_role">
+
+            <include
+                android:id="@+id/layout_reviewee"
+                layout="@layout/layout_role_reviewee" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
 
