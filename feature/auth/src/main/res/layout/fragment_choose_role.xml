@@ -40,16 +40,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_role_reviewee"
-            android:onClick="@{() -> viewModel.onClickReviewee()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="70dp"
+            android:onClick="@{() -> viewModel.onClickReviewee()}"
             app:layout_constraintTop_toBottomOf="@id/tv_choose_role">
 
             <include
                 android:id="@+id/layout_reviewee"
-                layout="@layout/layout_role_reviewee" />
+                layout="@layout/layout_role_reviewee"
+                app:role="@{viewModel.selectedRole}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,7 +64,9 @@
 
             <include
                 android:id="@+id/layout_reviewer"
-                layout="@layout/layout_role_reviewer" />
+                layout="@layout/layout_role_reviewer"
+                app:role="@{viewModel.selectedRole}" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -71,7 +74,7 @@
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
+            android:enabled="@{viewModel.isRoleValid, default = false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
 
