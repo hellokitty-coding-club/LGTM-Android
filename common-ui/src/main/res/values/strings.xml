@@ -14,4 +14,6 @@
     <string name="dash">/</string>
     <string name="welcome">님, 환영합니다!</string>
     <string name="select_tech_stack">사용하고 있는 기술 스택을\n선택하세요.</string>
+    <string name="which_role_to_signup">어떤 회원으로 가입하나요?</string>
+    <string name="choose_role">역할을 골라주세요</string>
 </resources>
