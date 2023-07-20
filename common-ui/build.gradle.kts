@@ -31,5 +31,4 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.material)
     implementation(libs.bundles.basic.test)
-    implementation(libs.lottie)
 }

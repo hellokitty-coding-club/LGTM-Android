@@ -62,16 +62,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun moveToAuthActivity() {
-        startActivity(Intent(this, SignInActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-        })
+        startActivity(Intent(this, SignInActivity::class.java))
         overridePendingTransition(0, 0)
         finish()
     }
 
     companion object {
-        private const val SPLASH_DELAY: Long = 1000
+        private const val SPLASH_DELAY: Long = 3000
     }
-
-
 }
