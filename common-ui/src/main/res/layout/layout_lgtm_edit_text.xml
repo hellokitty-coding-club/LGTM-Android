@@ -25,9 +25,10 @@
             android:layout_height="wrap_content"
             android:hint="@{editTextData.hint}"
             android:maxLength="@{editTextData.maxLength}"
-            android:paddingEnd="30dp"
+            android:paddingEnd="81dp"
             android:text="@={editTextData.text}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:style="@style/LGTMEditTextStyle" />
@@ -37,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
+            android:maxLength="@{editTextData.maxLength}"
             android:text="@{String.valueOf(editTextData.maxLength)}"
             android:textAppearance="@style/EngNumBody3R"
             android:textColor="@color/gray_3"
@@ -70,13 +72,15 @@
             android:id="@+id/iv_clear"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:layout_marginEnd="34dp"
+            android:layout_marginEnd="47dp"
             android:onClick="@{() -> editText.setText(``)}"
             android:padding="2dp"
             android:src="@drawable/ic_close"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/edit_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/edit_text" />
+            app:layout_constraintTop_toTopOf="@id/edit_text"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_info"

@@ -8,5 +8,5 @@ data class EditTextData(
     val text: MutableLiveData<String>,
     val maxLength: Int,
     val hint: String,
-    var infoStatus: InfoType
+    var infoStatus: MutableLiveData<InfoType>
 )

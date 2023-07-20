@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.auth.ui.signup.SignUpViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_introduction_one_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="107dp"
+            android:text='@{viewModel.nickname + "님을\n한줄로 소개해주세요"}'
+            android:textAppearance="@style/KrHeading4B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="한둘셋넨다여일여아열님을\n한줄로 소개해주세요." />
+
+
+        <com.lgtm.android.common_ui.ui.LGTMEditText
+            android:id="@+id/et_introduction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_introduction_one_line" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/LGTMButtonLight"
+            android:layout_width="match_parent"
+            android:text="@string/next"
+            android:enabled="@{viewModel.isIntroductionValid, default=false}"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

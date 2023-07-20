@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui.signup
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentTechTagBinding
 import com.lgtm.android.common_ui.base.BaseFragment
@@ -17,6 +18,7 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
         setupViewModel()
         setChips()
         observeTechTagList()
+        setupNextButtonListener()
     }
 
     private fun setupViewModel() {
@@ -33,5 +35,16 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
         signUpViewModel.techTagList.observe(viewLifecycleOwner) {
             signUpViewModel.setIsTechTagValid()
         }
+    }
+
+
+    private fun setupNextButtonListener() {
+        binding.btnNext.setOnClickListener {
+            navigateToIntroductionFragment()
+        }
+    }
+
+    private fun navigateToIntroductionFragment() {
+        findNavController().navigate(R.id.action_techTagFragment_to_introductionFragment)
     }
 }
