@@ -103,6 +103,15 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
             introEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
+    /** Role 선택 */
+    fun onClickReviewee() {
+
+    }
+
+    fun onClickReviewer() {
+
+    }
+
 
     // 이메일
     private val _email = MutableLiveData<String>()

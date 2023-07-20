@@ -17,12 +17,21 @@ fun AppCompatImageView.setInfoStatusIcon(icon: Int) {
     setImageResource(icon)
 }
 
-@BindingAdapter("setRoleImage")
+@BindingAdapter("setRevieweeRoleImage")
 fun AppCompatImageView.setImageBySelector(isSelected: Boolean) {
     if (isSelected) {
         setImageResource(R.drawable.ic_reviewee_white)
     } else {
         setImageResource(R.drawable.ic_reviewee_green)
+    }
+}
+
+@BindingAdapter("setReviewerRoleImage")
+fun AppCompatImageView.setImageBySelector2(isSelected: Boolean) {
+    if (isSelected) {
+        setImageResource(R.drawable.ic_reviewer_white)
+    } else {
+        setImageResource(R.drawable.ic_reviewer_green)
     }
 }
 

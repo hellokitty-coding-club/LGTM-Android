@@ -39,6 +39,8 @@
             app:layout_constraintTop_toBottomOf="@id/tv_select_role" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_role_reviewee"
+            android:onClick="@{() -> viewModel.onClickReviewee()}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
@@ -48,6 +50,20 @@
             <include
                 android:id="@+id/layout_reviewee"
                 layout="@layout/layout_role_reviewee" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_role_reviewer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="25dp"
+            android:onClick="@{() -> viewModel.onClickReviewer()}"
+            app:layout_constraintTop_toBottomOf="@id/cl_role_reviewee">
+
+            <include
+                android:id="@+id/layout_reviewer"
+                layout="@layout/layout_role_reviewer" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
