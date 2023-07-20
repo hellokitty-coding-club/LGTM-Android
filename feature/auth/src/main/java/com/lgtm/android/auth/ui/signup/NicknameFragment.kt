@@ -25,19 +25,17 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
         binding.viewModel = signUpViewModel
     }
 
-    private fun onNicknameChanged() {
-        signUpViewModel.nickname?.observe(viewLifecycleOwner) {
-            signUpViewModel.fetchInfoStatus()
-            signUpViewModel.setIsNicknameValid()
-            setupEditText()
+    private fun setupEditText() {
+        binding.etNickname.apply {
+            setLifecycleOwner(viewLifecycleOwner)
+            bindEditTextData(signUpViewModel.nicknameEditTextData)
         }
     }
 
-    private fun setupEditText() {
-        binding.etNickname.apply {
-            signUpViewModel.nicknameEditTextData.value?.let {
-                setEditTextData(it)
-            }
+    private fun onNicknameChanged() {
+        signUpViewModel.nickname.observe(viewLifecycleOwner) {
+            signUpViewModel.fetchNicknameInfoStatus()
+            signUpViewModel.setIsNicknameValid()
         }
     }
 
@@ -50,6 +48,5 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
     private fun navigateToTechTagFragment() {
         findNavController().navigate(R.id.action_nicknameFragment_to_techTagFragment)
     }
-
 }
 

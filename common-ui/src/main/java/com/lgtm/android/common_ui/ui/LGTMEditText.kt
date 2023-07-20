@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.lgtm.android.common_ui.databinding.LayoutLgtmEditTextBinding
 import com.lgtm.android.common_ui.model.EditTextData
@@ -19,7 +19,11 @@ class LGTMEditText @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private lateinit var editTextData: LiveData<EditTextData>
+    private var lifecycleOwner: LifecycleOwner? = null
+
+    fun setLifecycleOwner(owner: LifecycleOwner) {
+        lifecycleOwner = owner
+    }
 
     private val binding: LayoutLgtmEditTextBinding by lazy {
         LayoutLgtmEditTextBinding.inflate(LayoutInflater.from(context), this, false)
@@ -27,12 +31,11 @@ class LGTMEditText @JvmOverloads constructor(
 
     init {
         initializeView()
-        setListeners()
     }
 
-    fun setEditTextData(editTextData: EditTextData) {
-        this.editTextData = MutableLiveData(editTextData)
-        binding.editTextData = this.editTextData.value
+    fun bindEditTextData(editTextData: MutableLiveData<EditTextData>) {
+        binding.editTextData = editTextData.value
+        binding.lifecycleOwner = lifecycleOwner
     }
 
     private fun initializeView() {
@@ -40,12 +43,12 @@ class LGTMEditText @JvmOverloads constructor(
         showClearButton()
     }
 
-    private fun setListeners() {
-        binding.editText.addTextChangedListener { showClearButton() }
-    }
 
     private fun showClearButton() {
-        binding.ivClear.visibility =
-            if (binding.editText.text.isNotEmpty()) View.VISIBLE else View.GONE
+        binding.apply {
+            editText.addTextChangedListener {
+                ivClear.visibility = if (editText.text.isNotEmpty()) View.VISIBLE else View.GONE
+            }
+        }
     }
 }
