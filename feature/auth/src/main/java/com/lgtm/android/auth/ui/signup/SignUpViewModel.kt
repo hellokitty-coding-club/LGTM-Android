@@ -1,7 +1,5 @@
 package com.lgtm.android.auth.ui.signup
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,7 +45,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         )
     )
 
-    val nickname: MutableLiveData<String> = nicknameEditTextData.value?.text
+    val nickname: LiveData<String> = nicknameEditTextData.value?.text
         ?: throw IllegalArgumentException("nickname cannot be null")
 
     fun fetchNicknameInfoStatus() {
@@ -87,6 +85,9 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         )
     )
 
+    val introduction: LiveData<String> = introEditTextData.value?.text
+        ?: throw IllegalArgumentException("introduction cannot be null")
+
     private val _isIntroductionValid = MutableLiveData<Boolean>()
     val isIntroductionValid: LiveData<Boolean> = _isIntroductionValid
 
@@ -96,19 +97,10 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     }
 
     fun fetchIntroInfoStatus() {
-        // 수정해야함
-        val regex = Regex("\\s")
-        val currentInfoTypeState = introEditTextData.value?.infoStatus
-        if (regex.containsMatchIn(introEditTextData.value?.text?.value ?: "")) {
-            introEditTextData.value =
-                introEditTextData.value?.copy(infoStatus = MutableLiveData(InfoType.SPACE_ONLY_NOT_ALLOWED))
-        } else {
-            if (currentInfoTypeState?.value != InfoType.NONE) {
-                introEditTextData.value =
-                    introEditTextData.value?.copy(infoStatus = MutableLiveData(InfoType.NONE))
-            }
-        }
-        Log.d(TAG, "fetchIntroInfoStatus: ${introEditTextData.value?.infoStatus}")
+        if (introduction.value?.isBlank() == true && introduction.value?.isNotEmpty() == true)
+            introEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
+        else
+            introEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
 
