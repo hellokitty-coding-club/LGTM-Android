@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.signup.common.SelectRoleFragment">
+        tools:context=".ui.signup.common.ChooseRoleFragment">
 
         <TextView
             android:id="@+id/tv_select_role"
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_select_role" />
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"

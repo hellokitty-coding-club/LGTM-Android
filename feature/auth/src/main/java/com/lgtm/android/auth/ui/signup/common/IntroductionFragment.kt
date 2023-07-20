@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui.signup.common
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentIntroductionBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
@@ -48,6 +49,6 @@ class IntroductionFragment :
 
 
     private fun navigateToSelectRoleFragment() {
-        // todo 다음 화면 생성하고 하단 코드 작성
+        findNavController().navigate(R.id.action_introductionFragment_to_chooseRoleFragment)
     }
 }
