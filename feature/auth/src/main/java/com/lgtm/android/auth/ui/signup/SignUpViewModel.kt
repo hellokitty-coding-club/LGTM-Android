@@ -1,5 +1,7 @@
 package com.lgtm.android.auth.ui.signup
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,22 +41,21 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     val nicknameEditTextData = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
-            infoStatus = InfoType.NONE,
+            infoStatus = MutableLiveData(InfoType.NONE),
             maxLength = 10,
             hint = "닉네임을 입력해주세요."
         )
     )
 
-    val nickname: MutableLiveData<String>? = nicknameEditTextData.value?.text
+    val nickname: MutableLiveData<String> = nicknameEditTextData.value?.text
+        ?: throw IllegalArgumentException("nickname cannot be null")
 
-    fun fetchInfoStatus() {
+    fun fetchNicknameInfoStatus() {
         val regex = Regex("\\s")
-        if (regex.containsMatchIn(nickname?.value ?: "")) {
-            nicknameEditTextData.value =
-                nicknameEditTextData.value?.copy(infoStatus = InfoType.NO_SPACE)
+        if (regex.containsMatchIn(nickname.value ?: "")) {
+            nicknameEditTextData.value?.infoStatus?.value = InfoType.NO_SPACE
         } else {
-            nicknameEditTextData.value =
-                nicknameEditTextData.value?.copy(infoStatus = InfoType.NONE)
+            nicknameEditTextData.value?.infoStatus?.value = InfoType.NONE
         }
     }
 
@@ -62,8 +63,8 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     val isNicknameValid: LiveData<Boolean> = _isNicknameValid
 
     fun setIsNicknameValid() {
-        _isNicknameValid.value = (nicknameEditTextData.value?.infoStatus == InfoType.NONE)
-                && (nickname?.value?.isNotBlank() == true)
+        _isNicknameValid.value =
+            (nicknameEditTextData.value?.infoStatus?.value == InfoType.NONE) && (nickname.value?.isNotBlank() == true)
     }
 
     /** 기술 태그 목록 */
@@ -76,14 +77,44 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isTechTagValid.value = (techTagList.value?.size ?: 0) > 0
     }
 
+    /** 한줄 소개 */
+    val introEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 40,
+            hint = "내용을 입력하세요"
+        )
+    )
+
+    private val _isIntroductionValid = MutableLiveData<Boolean>()
+    val isIntroductionValid: LiveData<Boolean> = _isIntroductionValid
+
+    fun setIsIntroductionValid() {
+        _isIntroductionValid.value =
+            (introEditTextData.value?.infoStatus?.value == InfoType.NONE) && (introEditTextData.value?.text?.value?.isNotBlank() == true)
+    }
+
+    fun fetchIntroInfoStatus() {
+        // 수정해야함
+        val regex = Regex("\\s")
+        val currentInfoTypeState = introEditTextData.value?.infoStatus
+        if (regex.containsMatchIn(introEditTextData.value?.text?.value ?: "")) {
+            introEditTextData.value =
+                introEditTextData.value?.copy(infoStatus = MutableLiveData(InfoType.SPACE_ONLY_NOT_ALLOWED))
+        } else {
+            if (currentInfoTypeState?.value != InfoType.NONE) {
+                introEditTextData.value =
+                    introEditTextData.value?.copy(infoStatus = MutableLiveData(InfoType.NONE))
+            }
+        }
+        Log.d(TAG, "fetchIntroInfoStatus: ${introEditTextData.value?.infoStatus}")
+    }
+
 
     // 이메일
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
-
-    // 기술태그
-    private val _techTags = MutableLiveData<List<String>>()
-    val techTags: LiveData<List<String>> = _techTags
 
     // 나의 한 줄 소개
     private val _intro = MutableLiveData<String>()
