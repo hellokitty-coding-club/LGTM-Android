@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_terms"
-        android:name="com.lgtm.android.auth.ui.signup.TermsFragment"
+        android:name="com.lgtm.android.auth.ui.signup.common.TermsFragment"
         android:label="fragment_terms"
         tools:layout="@layout/fragment_terms">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/fragment_nickname"
-        android:name="com.lgtm.android.auth.ui.signup.NicknameFragment"
+        android:name="com.lgtm.android.auth.ui.signup.common.NicknameFragment"
         android:label="fragment_nickname"
         tools:layout="@layout/fragment_nickname">
         <action
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/fragment_tech_tag"
-        android:name="com.lgtm.android.auth.ui.signup.TechTagFragment"
+        android:name="com.lgtm.android.auth.ui.signup.common.TechTagFragment"
         android:label="fragment_tech_tag"
         tools:layout="@layout/fragment_tech_tag">
         <action
@@ -46,7 +46,21 @@
 
     <fragment
         android:id="@+id/fragment_introduction"
-        android:name="com.lgtm.android.auth.ui.signup.IntroductionFragment"
+        android:name="com.lgtm.android.auth.ui.signup.common.IntroductionFragment"
         android:label="fragment_introduction"
-        tools:layout="@layout/fragment_introduction" />
+        tools:layout="@layout/fragment_introduction">
+        <action
+            android:id="@+id/action_introductionFragment_to_chooseRoleFragment"
+            app:destination="@id/fragment_choose_role"
+            app:popUpTo="@id/fragment_introduction"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_choose_role"
+        android:name="com.lgtm.android.auth.ui.signup.common.ChooseRoleFragment"
+        android:label="fragment_choose_role"
+        tools:layout="@layout/fragment_choose_role" />
+
 </navigation>

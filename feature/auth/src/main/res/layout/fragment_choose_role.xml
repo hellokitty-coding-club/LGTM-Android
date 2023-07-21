@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.auth.ui.signup.SignUpViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.signup.common.ChooseRoleFragment">
+
+        <TextView
+            android:id="@+id/tv_select_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="121dp"
+            android:text="@string/which_role_to_signup"
+            android:textAppearance="@style/KrHeading4B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_choose_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/choose_role"
+            android:textAppearance="@style/KrBody2"
+            app:layout_constraintStart_toStartOf="@id/tv_select_role"
+            app:layout_constraintTop_toBottomOf="@id/tv_select_role" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_role_reviewee"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="70dp"
+            android:onClick="@{() -> viewModel.onClickReviewee()}"
+            app:layout_constraintTop_toBottomOf="@id/tv_choose_role">
+
+            <include
+                android:id="@+id/layout_reviewee"
+                layout="@layout/layout_role_reviewee"
+                app:role="@{viewModel.selectedRole}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_role_reviewer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="25dp"
+            android:onClick="@{() -> viewModel.onClickReviewer()}"
+            app:layout_constraintTop_toBottomOf="@id/cl_role_reviewee">
+
+            <include
+                android:id="@+id/layout_reviewer"
+                layout="@layout/layout_role_reviewer"
+                app:role="@{viewModel.selectedRole}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/LGTMButtonLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isRoleValid, default = false}"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
