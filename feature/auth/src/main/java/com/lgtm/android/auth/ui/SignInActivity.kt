@@ -2,6 +2,7 @@ package com.lgtm.android.auth.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.lgtm.android.auth.R
@@ -18,8 +19,15 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setAnimationOnGithubButton()
         initClickListener()
         observeGithubLoginResponse()
+    }
+
+    private fun setAnimationOnGithubButton() {
+        binding.clGithub.startAnimation(
+            AnimationUtils.loadAnimation(this, com.lgtm.android.common_ui.R.anim.fade_in_anim)
+        )
     }
 
     private fun initClickListener() {
