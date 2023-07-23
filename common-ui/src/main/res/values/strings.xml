@@ -20,4 +20,5 @@
     <string name="want_to_learn_develop">개발을 배우고 싶어요.</string>
     <string name="reviewer">리뷰어</string>
     <string name="want_to_teach_develop">개발을 알려주고 싶어요.</string>
+    <string name="select_edu_status">학력 정보를\n선택해주세요.</string>
 </resources>
