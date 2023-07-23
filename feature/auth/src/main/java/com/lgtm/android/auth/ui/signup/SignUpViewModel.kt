@@ -106,13 +106,13 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     /** Role 선택 */
     private val _selectedRole = MutableLiveData<Role>()
-    val selectedRole: LiveData<Role> = _selectedRole
+    val chooseRole: LiveData<Role> = _selectedRole
 
     private val _isRoleValid = MutableLiveData<Boolean>()
     val isRoleValid: LiveData<Boolean> = _isRoleValid
 
     fun setIsRoleValid() {
-        _isRoleValid.value = selectedRole.value != null
+        _isRoleValid.value = chooseRole.value != null
     }
 
     fun onClickReviewee() {

@@ -19,7 +19,7 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
     }
 
     private fun observeSelectedRole() {
-        signUpViewModel.selectedRole.observe(viewLifecycleOwner) {
+        signUpViewModel.chooseRole.observe(viewLifecycleOwner) {
             signUpViewModel.setIsRoleValid()
         }
     }
