@@ -15,6 +15,21 @@ class EducationStatusFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
+        setOnRadioButtonClickListener()
+    }
+
+    private fun setOnRadioButtonClickListener() {
+        binding.rgEduStatus.setOnCheckedChangeListener { _, id ->
+            val idx = when (id) {
+                R.id.rb_high_school_student -> 0
+                R.id.rb_undergraduate -> 1
+                R.id.rb_graduate -> 2
+                R.id.rb_office_workers -> 3
+                else -> return@setOnCheckedChangeListener
+            }
+            signUpViewModel.setEducationStatus(idx)
+            signUpViewModel.setIsEducationStatusValid()
+        }
     }
 
     private fun setupViewModel() {

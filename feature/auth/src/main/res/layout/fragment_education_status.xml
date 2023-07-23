@@ -37,6 +37,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_select_edu_status">
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_high_school_student"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_rect_midnight_white"
@@ -50,6 +51,7 @@
                 app:buttonCompat="@null" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_undergraduate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -64,6 +66,7 @@
                 app:buttonCompat="@null" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_graduate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -78,6 +81,7 @@
                 app:buttonCompat="@null" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
+                android:id="@+id/rb_office_workers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -98,7 +102,7 @@
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:enabled="false"
+            android:enabled="@{viewModel.isEducationStatusValid, default=false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
 
