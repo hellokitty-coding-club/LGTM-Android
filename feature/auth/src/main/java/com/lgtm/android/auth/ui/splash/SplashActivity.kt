@@ -68,6 +68,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     companion object {
-        private const val SPLASH_DELAY: Long = 3000
+        private const val SPLASH_DELAY: Long = 1000
     }
 }

@@ -9,64 +9,15 @@
         android:background="@color/midnight"
         tools:context="com.lgtm.android.auth.ui.splash.SplashActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/img_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lottie_splash"
-                android:layout_width="93dp"
-                android:layout_height="wrap_content"
-                android:elevation="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_imageAssetsFolder="images"
-                app:lottie_loop="false"
-                app:lottie_rawRes="@raw/splash_lottie" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_logo_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="58dp"
-                android:alpha="0.8"
-                android:elevation="20dp"
-                android:src="@drawable/logo_splash_left"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_logo_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:alpha="0.8"
-                android:elevation="10dp"
-                android:src="@drawable/logo_splash_right"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/iv_logo_left" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="37dp"
-                android:src="@drawable/img_textlogo_lgtm"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_logo_left" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
