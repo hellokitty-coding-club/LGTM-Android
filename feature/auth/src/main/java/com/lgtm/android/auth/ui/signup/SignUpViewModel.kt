@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
+import com.lgtm.domain.constants.EducationStatus
+import com.lgtm.domain.constants.EducationStatus.Companion.getEducationStatus
 import com.lgtm.domain.constants.Role
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -106,13 +108,13 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     /** Role 선택 */
     private val _selectedRole = MutableLiveData<Role>()
-    val selectedRole: LiveData<Role> = _selectedRole
+    val chooseRole: LiveData<Role> = _selectedRole
 
     private val _isRoleValid = MutableLiveData<Boolean>()
     val isRoleValid: LiveData<Boolean> = _isRoleValid
 
     fun setIsRoleValid() {
-        _isRoleValid.value = selectedRole.value != null
+        _isRoleValid.value = chooseRole.value != null
     }
 
     fun onClickReviewee() {
@@ -121,6 +123,21 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     fun onClickReviewer() {
         _selectedRole.value = Role.REVIEWER
+    }
+
+    /** 학력 정보 */
+    private val _educationStatus = MutableLiveData<EducationStatus>()
+    val educationStatus: LiveData<EducationStatus> = _educationStatus
+
+    fun setEducationStatus(index: Int) {
+        _educationStatus.value = getEducationStatus(index)
+    }
+
+    private val _isEducationStatusValid = MutableLiveData<Boolean>()
+    val isEducationStatusValid: LiveData<Boolean> = _isEducationStatusValid
+
+    fun setIsEducationStatusValid() {
+        _isEducationStatusValid.value = educationStatus.value != null
     }
 
     // 이메일

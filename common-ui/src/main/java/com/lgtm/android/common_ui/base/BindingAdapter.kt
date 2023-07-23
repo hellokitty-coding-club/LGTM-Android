@@ -47,7 +47,7 @@ fun TextView.setTextColor(isSelected: Boolean) {
 @BindingAdapter("setRoleBackground")
 fun View.setBackgroundColor(isSelected: Boolean) {
     if (isSelected) {
-        setBackgroundResource(R.drawable.rectangle_midnight_radius_10)
+        setBackgroundResource(R.drawable.rectangle_gray_8_radius_10)
     } else {
         setBackgroundResource(R.drawable.rectangle_border_gray2_radius_10)
     }

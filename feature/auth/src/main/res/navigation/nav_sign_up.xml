@@ -61,6 +61,19 @@
         android:id="@+id/fragment_choose_role"
         android:name="com.lgtm.android.auth.ui.signup.common.ChooseRoleFragment"
         android:label="fragment_choose_role"
-        tools:layout="@layout/fragment_choose_role" />
+        tools:layout="@layout/fragment_choose_role">
+        <action
+            android:id="@+id/action_chooseRoleFragment_to_educationStatusFragment"
+            app:destination="@id/fragment_education_status"
+            app:popUpTo="@id/fragment_choose_role"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_education_status"
+        android:name="com.lgtm.android.auth.ui.signup.reviewee.EducationStatusFragment"
+        android:label="fragment_education_status"
+        tools:layout="@layout/fragment_education_status" />
 
 </navigation>
