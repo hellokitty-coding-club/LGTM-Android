@@ -21,4 +21,8 @@
     <string name="reviewer">리뷰어</string>
     <string name="want_to_teach_develop">개발을 알려주고 싶어요.</string>
     <string name="select_edu_status">학력 정보를\n선택해주세요.</string>
+    <string name="high_school_student">고등학생</string>
+    <string name="undergraduate">대학생</string>
+    <string name="graduate">대학교 졸업</string>
+    <string name="office_workers">직장인</string>
 </resources>
