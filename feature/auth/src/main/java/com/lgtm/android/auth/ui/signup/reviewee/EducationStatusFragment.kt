@@ -1,12 +1,20 @@
 package com.lgtm.android.auth.ui.signup.reviewee
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentEducationStatusBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
+import com.lgtm.android.common_ui.R.color
+import com.lgtm.android.common_ui.R.dimen
+import com.lgtm.android.common_ui.R.drawable
+import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.domain.constants.EducationStatus
 
 
 class EducationStatusFragment :
@@ -14,20 +22,51 @@ class EducationStatusFragment :
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupRadioButtons()
         setupViewModel()
-        setOnRadioButtonClickListener()
+        fetchEducationStatus()
     }
 
-    private fun setOnRadioButtonClickListener() {
-        binding.rgEduStatus.setOnCheckedChangeListener { _, id ->
-            val idx = when (id) {
-                R.id.rb_high_school_student -> 0
-                R.id.rb_undergraduate -> 1
-                R.id.rb_graduate -> 2
-                R.id.rb_office_workers -> 3
-                else -> return@setOnCheckedChangeListener
+    private fun setupRadioButtons() {
+        val radioGroup = binding.rgEduStatus
+
+        EducationStatus.values().forEach { educationStatus ->
+            val radioButton = RadioButton(requireContext()).apply {
+                id = educationStatus.ordinal
+                text = educationStatus.krString
+                setTextAppearance(style.KrBody1B)
+                textSize =
+                    resources.getDimension(dimen.kr_body1_b_text_size) / resources.displayMetrics.density
+                setTextColor(
+                    resources.getColorStateList(
+                        color.selector_if_checked_green_black,
+                        null
+                    )
+                )
+                setBackgroundResource(drawable.selector_rect_gray_8_white)
+                buttonDrawable = null
+                gravity = Gravity.CENTER
+                includeFontPadding = false
+                setPadding(
+                    0, resources.getDimensionPixelSize(dimen.radio_button_padding_vertical),
+                    0, resources.getDimensionPixelSize(dimen.radio_button_padding_vertical)
+                )
+                val layoutParams = RadioGroup.LayoutParams(
+                    RadioGroup.LayoutParams.MATCH_PARENT, RadioGroup.LayoutParams.WRAP_CONTENT
+                )
+                if (educationStatus.ordinal > 0)
+                    layoutParams.topMargin =
+                        resources.getDimensionPixelSize(dimen.radio_button_margin_top)
+
+                this.layoutParams = layoutParams
+                this.setOnClickListener { signUpViewModel.setEducationStatus(educationStatus.ordinal) }
             }
-            signUpViewModel.setEducationStatus(idx)
+            radioGroup.addView(radioButton)
+        }
+    }
+
+    private fun fetchEducationStatus() {
+        signUpViewModel.educationStatus.observe(viewLifecycleOwner) {
             signUpViewModel.setIsEducationStatusValid()
         }
     }
