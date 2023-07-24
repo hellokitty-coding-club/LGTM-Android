@@ -100,6 +100,21 @@
         android:id="@+id/fragment_company_name"
         android:name="com.lgtm.android.auth.ui.signup.reviewer.CompanyNameFragment"
         android:label="fragment_company_name"
-        tools:layout="@layout/fragment_company_name" />
+        tools:layout="@layout/fragment_company_name">
+
+        <action
+            android:id="@+id/action_companyNameFragment_to_positionFragment"
+            app:destination="@id/fragment_position"
+            app:popUpTo="@id/fragment_company_name"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_position"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.PositionFragment"
+        android:label="fragment_position"
+        tools:layout="@layout/fragment_position" />
 
 </navigation>

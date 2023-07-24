@@ -201,6 +201,36 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
                     && companyName.value?.isNotBlank() == true
     }
 
+    /** 직책 */
+    val positionEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 30,
+            hint = "직책을 입력하세요."
+        )
+    )
+
+    val position: LiveData<String> = positionEditTextData.value?.text
+        ?: throw IllegalArgumentException("position cannot be null")
+
+
+    fun fetchPositionInfoStatus() {
+        if (position.value?.isBlank() == true && position.value?.isNotEmpty() == true)
+            positionEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
+        else
+            positionEditTextData.value?.infoStatus?.value = InfoType.NONE
+    }
+
+    private val _isPositionValid = MutableLiveData<Boolean>()
+    val isPositionValid: LiveData<Boolean> = _isPositionValid
+
+    fun setIsPositionValid() {
+        _isPositionValid.value =
+            positionEditTextData.value?.infoStatus?.value == InfoType.NONE
+                    && position.value?.isNotBlank() == true
+    }
+
     // 이메일
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email

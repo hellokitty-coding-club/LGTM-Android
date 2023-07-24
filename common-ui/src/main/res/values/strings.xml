@@ -29,4 +29,6 @@
     <string name="later_used_by_name_verification">추후에 입금자명 확인에 사용됩니다.</string>
     <string name="signup_complete">회원가입 완료</string>
     <string name="enter_company_name">재직중인 회사명을\n입력해주세요.</string>
+    <string name="enter_position">직책을 입력해주세요.</string>
+    <string name="position_example">예시) 백엔드 개발자, 안드로이드 개발자</string>
 </resources>

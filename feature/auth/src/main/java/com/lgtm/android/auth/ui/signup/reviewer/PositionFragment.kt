@@ -3,20 +3,19 @@ package com.lgtm.android.auth.ui.signup.reviewer
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
-import com.lgtm.android.auth.databinding.FragmentCompanyNameBinding
+import com.lgtm.android.auth.databinding.FragmentPositionBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 
-class CompanyNameFragment :
-    BaseFragment<FragmentCompanyNameBinding>(R.layout.fragment_company_name) {
+class PositionFragment :
+    BaseFragment<FragmentPositionBinding>(R.layout.fragment_position) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
         setupEditText()
-        onCompanyNameChanged()
+        onPositionNameChanged()
         setupNextButtonListener()
     }
 
@@ -25,16 +24,16 @@ class CompanyNameFragment :
     }
 
     private fun setupEditText() {
-        binding.etCompany.apply {
+        binding.etPosition.apply {
             setLifecycleOwner(viewLifecycleOwner)
-            bindEditTextData(signUpViewModel.companyNameEditTextData)
+            bindEditTextData(signUpViewModel.positionEditTextData)
         }
     }
 
-    private fun onCompanyNameChanged() {
-        signUpViewModel.companyName.observe(viewLifecycleOwner) {
-            signUpViewModel.fetchCompanyNameInfoStatus()
-            signUpViewModel.setIsCompanyNameValid()
+    private fun onPositionNameChanged() {
+        signUpViewModel.position.observe(viewLifecycleOwner) {
+            signUpViewModel.fetchPositionInfoStatus()
+            signUpViewModel.setIsPositionValid()
         }
     }
 
@@ -46,6 +45,6 @@ class CompanyNameFragment :
     }
 
     private fun navigateToPositionFragment() {
-        findNavController().navigate(R.id.action_companyNameFragment_to_positionFragment)
+        // 직책 입력 화면으로 이동
     }
 }
