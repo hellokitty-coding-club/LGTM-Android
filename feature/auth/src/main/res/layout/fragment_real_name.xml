@@ -52,7 +52,7 @@
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:enabled="@{viewModel.isRealNameValid, default=false}"
-            android:text="@string/next"
+            android:text="@string/signup_complete"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

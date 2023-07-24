@@ -27,4 +27,5 @@
     <string name="office_workers">직장인</string>
     <string name="enter_real_name">실명을 입력하세요.</string>
     <string name="later_used_by_name_verification">추후에 입금자명 확인에 사용됩니다.</string>
+    <string name="signup_complete">회원가입 완료</string>
 </resources>
