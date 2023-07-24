@@ -68,6 +68,13 @@
             app:popUpTo="@id/fragment_choose_role"
             app:popUpToSaveState="true"
             app:restoreState="true" />
+
+        <action
+            android:id="@+id/action_chooseRoleFragment_to_companyNameFragment"
+            app:destination="@id/fragment_company_name"
+            app:popUpTo="@id/fragment_choose_role"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
     </fragment>
 
     <fragment
@@ -88,5 +95,11 @@
         android:name="com.lgtm.android.auth.ui.signup.reviewee.RealNameFragment"
         android:label="fragment_real_name"
         tools:layout="@layout/fragment_real_name" />
+
+    <fragment
+        android:id="@+id/fragment_company_name"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.CompanyNameFragment"
+        android:label="fragment_company_name"
+        tools:layout="@layout/fragment_company_name" />
 
 </navigation>
