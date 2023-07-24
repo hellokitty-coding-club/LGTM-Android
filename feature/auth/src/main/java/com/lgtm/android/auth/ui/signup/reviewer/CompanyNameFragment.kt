@@ -14,12 +14,29 @@ class CompanyNameFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
+        setupEditText()
+        onCompanyNameChanged()
         setupNextButtonListener()
     }
 
     private fun setupViewModel() {
         binding.viewModel = signUpViewModel
     }
+
+    private fun setupEditText() {
+        binding.etCompany.apply {
+            setLifecycleOwner(viewLifecycleOwner)
+            bindEditTextData(signUpViewModel.companyNameEditTextData)
+        }
+    }
+
+    private fun onCompanyNameChanged() {
+        signUpViewModel.companyName.observe(viewLifecycleOwner) {
+            signUpViewModel.fetchCompanyNameInfoStatus()
+            signUpViewModel.setIsCompanyNameValid()
+        }
+    }
+
 
     private fun setupNextButtonListener() {
         binding.btnNext.setOnClickListener {

@@ -171,6 +171,36 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
                 && realName.value?.isNotBlank() == true
     }
 
+    /** 회사명 */
+    val companyNameEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 30,
+            hint = "회사명을 입력하세요."
+        )
+    )
+
+    val companyName: LiveData<String> = companyNameEditTextData.value?.text
+        ?: throw IllegalArgumentException("companyName cannot be null")
+
+
+    fun fetchCompanyNameInfoStatus() {
+        if (companyName.value?.isBlank() == true && companyName.value?.isNotEmpty() == true)
+            companyNameEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
+        else
+            companyNameEditTextData.value?.infoStatus?.value = InfoType.NONE
+    }
+
+    private val _isCompanyNameValid = MutableLiveData<Boolean>()
+    val isCompanyNameValid: LiveData<Boolean> = _isCompanyNameValid
+
+    fun setIsCompanyNameValid() {
+        _isCompanyNameValid.value =
+            companyNameEditTextData.value?.infoStatus?.value == InfoType.NONE
+                    && companyName.value?.isNotBlank() == true
+    }
+
     // 이메일
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
