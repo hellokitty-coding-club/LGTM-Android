@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bottoms_sheet_radius">25dp</dimen>
-    <dimen name="kr_body1_b_text_size">16sp</dimen>
+    <dimen name="body1_b_text_size">16sp</dimen>
     <dimen name="radio_button_padding_vertical">24dp</dimen>
     <dimen name="radio_button_margin_top">20dp</dimen>
 </resources>

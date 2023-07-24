@@ -53,7 +53,7 @@
                 android:layout_marginVertical="14dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/login_by_github"
-                android:textAppearance="@style/KrBody1M"
+                android:textAppearance="@style/Body1M"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_github"

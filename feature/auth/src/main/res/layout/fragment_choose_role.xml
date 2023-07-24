@@ -24,7 +24,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="121dp"
             android:text="@string/which_role_to_signup"
-            android:textAppearance="@style/KrHeading4B"
+            android:textAppearance="@style/Heading4B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/choose_role"
-            android:textAppearance="@style/KrBody2"
+            android:textAppearance="@style/Body2"
             app:layout_constraintStart_toStartOf="@id/tv_select_role"
             app:layout_constraintTop_toBottomOf="@id/tv_select_role" />
 

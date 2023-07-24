@@ -33,7 +33,7 @@
         <item name="android:paddingVertical">14dp</item>
         <item name="android:layout_marginHorizontal">20dp</item>
         <item name="android:layout_marginBottom">28dp</item>
-        <item name="android:textAppearance">@style/KrBody1M</item>
+        <item name="android:textAppearance">@style/Body1M</item>
         <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
@@ -53,7 +53,7 @@
         <item name="colorControlActivated">?attr/colorPrimary</item>
         <item name="colorControlNormal">?attr/colorPrimary</item>
         <item name="colorControlHighlight">?attr/colorPrimary</item>
-        <item name="android:textAppearance">@style/KrBody1B</item>
+        <item name="android:textAppearance">@style/Body1B</item>
         <item name="android:textColor">@color/midnight</item>
         <item name="colorAccent">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/gray_3</item>
