@@ -23,7 +23,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="107dp"
             android:text='@{viewModel.nickname + "님을\n한줄로 소개해주세요"}'
-            android:textAppearance="@style/KrHeading4B"
+            android:textAppearance="@style/Heading4B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="한둘셋넨다여일여아열님을\n한줄로 소개해주세요." />

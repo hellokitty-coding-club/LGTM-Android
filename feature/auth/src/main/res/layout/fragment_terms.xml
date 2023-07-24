@@ -24,7 +24,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="107dp"
             android:text="@string/need_service_terms_agree"
-            android:textAppearance="@style/KrHeading4B"
+            android:textAppearance="@style/Heading4B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@string/agree_all"
-            android:textAppearance="@style/KrHeading4M"
+            android:textAppearance="@style/Heading4M"
             app:layout_constraintBottom_toBottomOf="@id/cb_terms_all"
             app:layout_constraintStart_toEndOf="@id/cb_terms_all"
             app:layout_constraintTop_toTopOf="@id/cb_terms_all" />

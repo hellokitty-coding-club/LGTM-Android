@@ -40,7 +40,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
             android:text="@string/reviewer"
-            android:textAppearance="@style/KrBody1B"
+            android:textAppearance="@style/Body1B"
             app:layout_constraintStart_toEndOf="@id/iv_icon"
             app:layout_constraintTop_toTopOf="parent"
             tools:includeFontPadding="false" />
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/want_to_teach_develop"
-            android:textAppearance="@style/KrBody3R"
+            android:textAppearance="@style/Body3R"
             app:layout_constraintStart_toStartOf="@id/tv_role"
             app:layout_constraintTop_toBottomOf="@id/tv_role"
             tools:includeFontPadding="false" />

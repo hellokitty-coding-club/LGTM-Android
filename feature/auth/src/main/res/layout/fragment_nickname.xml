@@ -22,7 +22,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="107dp"
             android:text="@string/nickname_description_main"
-            android:textAppearance="@style/KrHeading4B"
+            android:textAppearance="@style/Heading4B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/nickname_description_sub"
-            android:textAppearance="@style/KrBody2"
+            android:textAppearance="@style/Body2"
             app:layout_constraintStart_toStartOf="@id/tv_nickname_title"
             app:layout_constraintTop_toBottomOf="@id/tv_nickname_title" />
 

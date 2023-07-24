@@ -34,9 +34,9 @@ class EducationStatusFragment :
             val radioButton = RadioButton(requireContext()).apply {
                 id = educationStatus.ordinal
                 text = educationStatus.krString
-                setTextAppearance(style.KrBody1B)
+                setTextAppearance(style.Body1B)
                 textSize =
-                    resources.getDimension(dimen.kr_body1_b_text_size) / resources.displayMetrics.density
+                    resources.getDimension(dimen.body1_b_text_size) / resources.displayMetrics.density
                 setTextColor(
                     resources.getColorStateList(
                         color.selector_if_checked_green_black,
