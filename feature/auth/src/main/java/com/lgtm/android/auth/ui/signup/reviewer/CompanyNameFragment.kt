@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui.signup.reviewer
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentCompanyNameBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
@@ -45,6 +46,6 @@ class CompanyNameFragment :
     }
 
     private fun navigateToPositionFragment() {
-        // 직책 입력 화면으로 이동
+        findNavController().navigate(R.id.action_companyNameFragment_to_positionFragment)
     }
 }
