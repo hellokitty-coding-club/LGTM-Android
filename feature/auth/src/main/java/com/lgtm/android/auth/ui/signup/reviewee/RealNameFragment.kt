@@ -25,17 +25,17 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
     }
 
     private fun setupEditText() {
-//        binding.etNickname.apply {
-//            setLifecycleOwner(viewLifecycleOwner)
-//            bindEditTextData(signUpViewModel.nicknameEditTextData)
-//        }
+        binding.etRealname.apply {
+            setLifecycleOwner(viewLifecycleOwner)
+            bindEditTextData(signUpViewModel.realNameEditTextData)
+        }
     }
 
     private fun onRealNameChanged() {
-//        signUpViewModel.nickname.observe(viewLifecycleOwner) {
-//            signUpViewModel.fetchNicknameInfoStatus()
-//            signUpViewModel.setIsNicknameValid()
-//        }
+        signUpViewModel.realName.observe(viewLifecycleOwner) {
+            signUpViewModel.fetchRealNameInfoStatus()
+            signUpViewModel.setIsRealNameValid()
+        }
     }
 
     private fun setupNextButtonListener() {

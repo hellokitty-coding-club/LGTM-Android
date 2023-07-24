@@ -140,6 +140,37 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _isEducationStatusValid.value = educationStatus.value != null
     }
 
+    /** 실명 */
+    val realNameEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 20,
+            hint = "실명을 입력하세요."
+        )
+    )
+
+    val realName: LiveData<String> = realNameEditTextData.value?.text
+        ?: throw IllegalArgumentException("realName cannot be null")
+
+
+    fun fetchRealNameInfoStatus() {
+        val regex = Regex("[^a-zA-Z가-힣]")
+        if (regex.containsMatchIn(realName.value ?: "")) {
+            realNameEditTextData.value?.infoStatus?.value = InfoType.VALID_REAL_NAME
+        } else {
+            realNameEditTextData.value?.infoStatus?.value = InfoType.NONE
+        }
+    }
+
+    private val _isRealNameValid = MutableLiveData<Boolean>()
+    val isRealNameValid: LiveData<Boolean> = _isRealNameValid
+
+    fun setIsRealNameValid() {
+        _isRealNameValid.value = realNameEditTextData.value?.infoStatus?.value == InfoType.NONE
+                && realName.value?.isNotBlank() == true
+    }
+
     // 이메일
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
