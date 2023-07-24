@@ -74,6 +74,19 @@
         android:id="@+id/fragment_education_status"
         android:name="com.lgtm.android.auth.ui.signup.reviewee.EducationStatusFragment"
         android:label="fragment_education_status"
-        tools:layout="@layout/fragment_education_status" />
+        tools:layout="@layout/fragment_education_status">
+        <action
+            android:id="@+id/action_educationStatusFragment_to_realNameFragment"
+            app:destination="@id/fragment_real_name"
+            app:popUpTo="@id/fragment_education_status"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_real_name"
+        android:name="com.lgtm.android.auth.ui.signup.reviewee.RealNameFragment"
+        android:label="fragment_real_name"
+        tools:layout="@layout/fragment_real_name" />
 
 </navigation>
