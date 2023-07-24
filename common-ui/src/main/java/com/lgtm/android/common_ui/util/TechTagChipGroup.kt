@@ -39,7 +39,7 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
             this.chipStrokeWidth = 10F
             this.chipBackgroundColor = backgroundStateList
             this.setChipIconResource(techTag.imageIcon)
-            this.setTextAppearance(R.style.EngNumBody2)
+            this.setTextAppearance(R.style.KrBody2)
             this.setTextColor(textStateList) // (순서 중요) textAppearance 후에 배치
             this.setOnClickListener {
                 it.isSelected = !it.isSelected
