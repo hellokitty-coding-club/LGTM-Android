@@ -36,13 +36,17 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
             if (signUpViewModel.chooseRole.value == Role.REVIEWEE) {
                 navigateToEducationStatusFragment()
             } else {
-                // 회사 정보 입력 화면으로 이동
+                navigateToCompanyNameFragment()
             }
         }
     }
 
     private fun navigateToEducationStatusFragment() {
         findNavController().navigate(R.id.action_chooseRoleFragment_to_educationStatusFragment)
+    }
+
+    private fun navigateToCompanyNameFragment() {
+        findNavController().navigate(R.id.action_chooseRoleFragment_to_companyNameFragment)
     }
 
 }
