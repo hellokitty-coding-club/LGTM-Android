@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentEducationStatusBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
@@ -25,6 +26,7 @@ class EducationStatusFragment :
         setupRadioButtons()
         setupViewModel()
         fetchEducationStatus()
+        setupNextButtonListener()
     }
 
     private fun setupRadioButtons() {
@@ -75,4 +77,13 @@ class EducationStatusFragment :
         binding.viewModel = signUpViewModel
     }
 
+    private fun setupNextButtonListener() {
+        binding.btnNext.setOnClickListener {
+            navigateToRealNameActivity()
+        }
+    }
+
+    private fun navigateToRealNameActivity() {
+        findNavController().navigate(R.id.action_educationStatusFragment_to_realNameFragment)
+    }
 }
