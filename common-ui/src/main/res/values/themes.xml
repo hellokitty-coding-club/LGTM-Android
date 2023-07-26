@@ -57,6 +57,7 @@
         <item name="android:textColor">@color/midnight</item>
         <item name="colorAccent">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/gray_3</item>
+        <item name="android:backgroundTint">@color/gray_3</item>
         <item name="android:paddingVertical">16dp</item>
         <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
     </style>
