@@ -31,4 +31,7 @@
     <string name="enter_company_name">재직중인 회사명을\n입력해주세요.</string>
     <string name="enter_position">직책을 입력해주세요.</string>
     <string name="position_example">예시) 백엔드 개발자, 안드로이드 개발자</string>
+    <string name="enter_career_period">경력 기간을 입력해주세요.</string>
+    <string name="only_number_allowed">숫자만 사용할 수 있습니다.</string>
+    <string name="month">개월</string>
 </resources>
