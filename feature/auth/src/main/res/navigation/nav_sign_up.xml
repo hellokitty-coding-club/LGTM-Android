@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_sign_up"
-    app:startDestination="@id/fragment_terms">
+    app:startDestination="@id/fragment_career_period">
 
     <fragment
         android:id="@+id/fragment_terms"
@@ -115,6 +115,20 @@
         android:id="@+id/fragment_position"
         android:name="com.lgtm.android.auth.ui.signup.reviewer.PositionFragment"
         android:label="fragment_position"
-        tools:layout="@layout/fragment_position" />
+        tools:layout="@layout/fragment_position">
+
+        <action
+            android:id="@+id/action_positionFragment_to_careerPeriodFragment"
+            app:destination="@id/fragment_career_period"
+            app:popUpTo="@id/fragment_position"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_career_period"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.CareerPeriodFragment"
+        android:label="fragment_career_period"
+        tools:layout="@layout/fragment_career_period" />
 
 </navigation>
