@@ -232,14 +232,13 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     }
 
     /** 경력 기간 */
-
     val careerPeriodInfoStatus = MutableLiveData(InfoType.NONE)
     fun fetchCareerPeriodInfoStatus() {
-        val careerPeriod: Int = careerPeriod.value ?: return
-        if (careerPeriod < 12) {
-            careerPeriodInfoStatus.value = InfoType.OVER_12_MONTHS_EXPERIENCE_REQUIRED
-        } else {
-            careerPeriodInfoStatus.value = InfoType.NONE
+        val careerPeriod = careerPeriod.value
+        careerPeriodInfoStatus.value = when {
+            careerPeriod == null -> InfoType.NONE
+            careerPeriod < 12 -> InfoType.OVER_12_MONTHS_EXPERIENCE_REQUIRED
+            else -> InfoType.NONE
         }
     }
 
@@ -247,7 +246,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     private val careerPeriod: LiveData<Int> = _careerPeriod
 
     fun setCareerPeriod(month: String) {
-        _careerPeriod.value = Integer.parseInt(month)
+        _careerPeriod.value = if (month.isEmpty()) null else Integer.parseInt(month)
     }
 
     private val _isCareerPeriodValid = MutableLiveData<Boolean>()
@@ -257,18 +256,6 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         val careerPeriod = careerPeriod.value ?: return
         _isCareerPeriodValid.value = careerPeriod >= 12
     }
-
-    // 이메일
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String> = _email
-
-    // 나의 한 줄 소개
-    private val _intro = MutableLiveData<String>()
-    val intro: LiveData<String> = _intro
-
-    // 실명
-    private val _fullName = MutableLiveData<String>()
-    val fullName: LiveData<String> = _fullName
 }
 
 
