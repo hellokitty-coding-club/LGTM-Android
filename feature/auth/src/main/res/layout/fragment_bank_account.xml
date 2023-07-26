@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -19,6 +20,37 @@
         android:background="@color/white"
         tools:context=".ui.signup.reviewer.BankAccountFragment">
 
+        <TextView
+            android:id="@+id/tv_bank_account_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="121dp"
+            android:text="@string/enter_bank_account_num_title"
+            android:textAppearance="@style/Heading4B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_bank_account_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_bank_account_num_description"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintStart_toStartOf="@id/tv_bank_account_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_bank_account_title" />
+
+
+        <EditText
+            style="@style/LGTMEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="57dp"
+            android:hint="@string/enter_bank_account"
+            android:inputType="number"
+            app:layout_constraintTop_toBottomOf="@id/tv_bank_account_description" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
