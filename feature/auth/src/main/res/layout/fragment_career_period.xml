@@ -47,7 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="57dp"
             android:autofillHints="no"
+            android:gravity="center"
             android:inputType="number"
+            android:maxLength="8"
             app:layout_constraintStart_toStartOf="@id/tv_career_period_description"
             app:layout_constraintTop_toBottomOf="@id/tv_career_period_description" />
 
