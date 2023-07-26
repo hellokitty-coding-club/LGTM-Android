@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentCareerPeriodBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
@@ -41,8 +42,7 @@ class CareerPeriodFragment :
     }
 
     private fun navigateToBankAccountFragment() {
-        // 계좌정보 화면으로 이동
-//        findNavController().navigate(R.id.action_careerPeriodFragment_to_bankAccountFragment)
+        findNavController().navigate(R.id.action_careerPeriodFragment_to_bankAccountFragment)
     }
 
 }

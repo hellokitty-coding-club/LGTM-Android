@@ -129,6 +129,20 @@
         android:id="@+id/fragment_career_period"
         android:name="com.lgtm.android.auth.ui.signup.reviewer.CareerPeriodFragment"
         android:label="fragment_career_period"
-        tools:layout="@layout/fragment_career_period" />
+        tools:layout="@layout/fragment_career_period">
+
+        <action
+            android:id="@+id/action_careerPeriodFragment_to_bankAccountFragment"
+            app:destination="@id/fragment_bank_account"
+            app:popUpTo="@id/fragment_career_period"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_bank_account"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.BankAccountFragment"
+        android:label="fragment_bank_account"
+        tools:layout="@layout/fragment_bank_account" />
 
 </navigation>
