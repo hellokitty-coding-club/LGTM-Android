@@ -28,6 +28,7 @@ class CareerPeriodFragment :
     private fun onCareerPeriodChanged() {
         binding.etCareerPeriod.addTextChangedListener {
             signUpViewModel.setCareerPeriod(it.toString())
+            signUpViewModel.fetchCareerPeriodInfoStatus()
             signUpViewModel.setIsCareerPeriodValid()
         }
     }

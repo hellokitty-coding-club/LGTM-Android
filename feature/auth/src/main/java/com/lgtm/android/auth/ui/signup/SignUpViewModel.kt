@@ -232,6 +232,17 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     }
 
     /** 경력 기간 */
+
+    val careerPeriodInfoStatus = MutableLiveData(InfoType.NONE)
+    fun fetchCareerPeriodInfoStatus() {
+        val careerPeriod: Int = careerPeriod.value ?: return
+        if (careerPeriod < 12) {
+            careerPeriodInfoStatus.value = InfoType.OVER_12_MONTHS_EXPERIENCE_REQUIRED
+        } else {
+            careerPeriodInfoStatus.value = InfoType.NONE
+        }
+    }
+
     private val _careerPeriod = MutableLiveData<Int>()
     private val careerPeriod: LiveData<Int> = _careerPeriod
 
@@ -243,7 +254,8 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     val isCareerPeriodValid: LiveData<Boolean> = _isCareerPeriodValid
 
     fun setIsCareerPeriodValid() {
-        _isCareerPeriodValid.value = careerPeriod.value != null
+        val careerPeriod = careerPeriod.value ?: return
+        _isCareerPeriodValid.value = careerPeriod >= 12
     }
 
     // 이메일

@@ -9,6 +9,8 @@
             name="viewModel"
             type="com.lgtm.android.auth.ui.signup.SignUpViewModel" />
 
+        <import type="android.view.View" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,6 +61,43 @@
             app:layout_constraintBottom_toBottomOf="@id/et_career_period"
             app:layout_constraintStart_toEndOf="@id/et_career_period"
             app:layout_constraintTop_toTopOf="@id/et_career_period" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.careerPeriodInfoStatus.isVisible ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@id/et_career_period"
+            app:layout_constraintTop_toBottomOf="@id/et_career_period">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_info"
+                infoStatusIcon="@{viewModel.careerPeriodInfoStatus.icon}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_info_red" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                infoStatusColor="@{viewModel.careerPeriodInfoStatus.color}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.careerPeriodInfoStatus.message}"
+                android:textAppearance="@style/Body3M"
+                app:layout_constraintBottom_toBottomOf="@id/ic_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/ic_info"
+                app:layout_constraintTop_toTopOf="@id/ic_info"
+                tools:text="12개월 이상만 가입 가능함요"
+                tools:textColor="@color/red" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
