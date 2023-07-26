@@ -231,6 +231,21 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
                     && position.value?.isNotBlank() == true
     }
 
+    /** 경력 기간 */
+    private val _careerPeriod = MutableLiveData<Int>()
+    private val careerPeriod: LiveData<Int> = _careerPeriod
+
+    fun setCareerPeriod(month: String) {
+        _careerPeriod.value = Integer.parseInt(month)
+    }
+
+    private val _isCareerPeriodValid = MutableLiveData<Boolean>()
+    val isCareerPeriodValid: LiveData<Boolean> = _isCareerPeriodValid
+
+    fun setIsCareerPeriodValid() {
+        _isCareerPeriodValid.value = careerPeriod.value != null
+    }
+
     // 이메일
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
