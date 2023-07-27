@@ -27,7 +27,7 @@ enum class Bank(val bankVO: BankVO, val icon: Int? = null) : BankList {
     SC(BankVO.SC, R.drawable.ic_btn_sc),
     KYUNGNAM(BankVO.KYUNGNAM, R.drawable.ic_btn_bs),
     GWANGJU(BankVO.GWANGJU, R.drawable.ic_btn_gj),
-    SUHYUP(BankVO.SUHYUP, R.drawable.ic_tech_android /* todo 아이콘 아직 없음 */),
+    SUHYUP(BankVO.SUHYUP, R.drawable.ic_bank_suhyup),
     JEONBUK(BankVO.JEONBUK, R.drawable.ic_btn_gj),
     FSB(BankVO.FSB, R.drawable.ic_btn_jc),
     JEJU(BankVO.JEJU, R.drawable.ic_btn_sinhan),
