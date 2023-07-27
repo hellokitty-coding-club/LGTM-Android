@@ -1,8 +1,6 @@
 package com.lgtm.android.auth.ui.signup.reviewer
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import androidx.fragment.app.activityViewModels
@@ -12,6 +10,7 @@ import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.R.layout
 import com.lgtm.android.common_ui.adapter.BankSpinnerAdapter
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.constant.Bank
 
 class BankAccountFragment :
     BaseFragment<FragmentBankAccountBinding>(R.layout.fragment_bank_account) {
@@ -36,20 +35,13 @@ class BankAccountFragment :
     private fun onBankSelectedListener() {
         binding.spBank.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
-                signUpViewModel.setSelectedBank(signUpViewModel.bankList[position])
+                if (position == 0) return // Pos 0 Indicate Hint
+                signUpViewModel.setSelectedBank(signUpViewModel.bankList[position] as Bank)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Log.d(TAG, "onNothingSelected: ")
-//                signUpViewModel.setSelectedBank(signUpViewModel.bankList[0])
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
-
-
 }

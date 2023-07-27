@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lgtm.android.common_ui.constant.Bank
+import com.lgtm.android.common_ui.constant.BankHint
+import com.lgtm.android.common_ui.constant.BankList
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.domain.constants.EducationStatus
@@ -260,7 +262,10 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
 
     /** 계좌 정보 */
-    val bankList = Bank.getBankList()
+    val bankList: List<BankList> = mutableListOf<BankList>().apply {
+        this.add(BankHint("은행을 선택하세요."))
+        this.addAll(Bank.getBankList())
+    }
 
     private val _selectedBank = MutableLiveData<Bank>()
     val selectedBank: LiveData<Bank> = _selectedBank
@@ -276,5 +281,3 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
         _accountNumber.value = number
     }
 }
-
-

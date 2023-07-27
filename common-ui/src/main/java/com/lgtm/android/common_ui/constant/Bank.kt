@@ -3,7 +3,13 @@ package com.lgtm.android.common_ui.constant
 import com.lgtm.android.common_ui.R
 import com.lgtm.domain.constants.BankVO
 
-enum class Bank(val bankVO: BankVO, val icon: Int) {
+interface BankList
+
+data class BankHint(
+    val hint: String
+) : BankList
+
+enum class Bank(val bankVO: BankVO, val icon: Int? = null) : BankList {
     NH(BankVO.NH, R.drawable.ic_btn_nh),
     KAKAO(BankVO.KAKAO, R.drawable.ic_btn_kakao),
     KB(BankVO.KB, R.drawable.ic_btn_kb),
@@ -41,6 +47,5 @@ enum class Bank(val bankVO: BankVO, val icon: Int) {
     companion object {
         fun getBankList() = values().toList()
     }
-
 
 }

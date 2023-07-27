@@ -6,38 +6,29 @@
     <data>
 
         <variable
-            name="bank"
-            type="com.lgtm.android.common_ui.constant.Bank" />
+            name="bankHint"
+            type="com.lgtm.android.common_ui.constant.BankHint" />
+
+        <import type="android.view.View" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="11dp"
         android:background="@color/white">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_bank_logo"
-            setIcon="@{bank.icon}"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_btn_nh" />
 
         <TextView
             android:id="@+id/tv_bank_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="@{bank.bankVO.bank}"
+            android:layout_marginVertical="6dp"
+            android:text="@{bankHint.hint}"
             android:textAppearance="@style/Body2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_bank_logo"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="NH농협" />
+            tools:text="은행을 선택하세요." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
