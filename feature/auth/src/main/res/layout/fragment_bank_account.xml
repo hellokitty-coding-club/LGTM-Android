@@ -55,12 +55,13 @@
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/sp_bank"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/selector_bank_spinner_background"
-            android:backgroundTint="@null"
+            android:backgroundTint="@color/gray_2"
+            android:overlapAnchor="false"
             android:text="@string/select_bank"
             app:layout_constraintTop_toBottomOf="@id/et_bank_account"
             tools:listitem="@layout/item_bank_spinner" />
