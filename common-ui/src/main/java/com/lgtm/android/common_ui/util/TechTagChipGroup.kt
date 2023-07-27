@@ -16,7 +16,7 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
         intArrayOf(-android.R.attr.state_selected)
     )
 
-    private val backgroundStateList = getColorStateList(R.color.midnight, R.color.white)
+    private val backgroundStateList = getColorStateList(R.color.black, R.color.white)
     private val textStateList = getColorStateList(R.color.green, R.color.black)
     private val strokeStateList = getColorStateList(R.color.green, R.color.white)
 
