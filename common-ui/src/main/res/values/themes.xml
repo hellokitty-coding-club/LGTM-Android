@@ -16,6 +16,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="bottomSheetDialogTheme">@style/LgtmBottomSheetStyle</item>
         <item name="editTextStyle">@style/LGTMEditTextStyle</item>
+        <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
     </style>
 
     <style name="LgtmBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
@@ -60,6 +61,11 @@
         <item name="android:backgroundTint">@color/gray_3</item>
         <item name="android:paddingVertical">16dp</item>
         <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
+    </style>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/gray_2</item>
+        <item name="android:dividerHeight">1dp</item>
     </style>
 
 </resources>
