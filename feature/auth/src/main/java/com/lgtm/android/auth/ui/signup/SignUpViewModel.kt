@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lgtm.android.common_ui.constant.Bank
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.domain.constants.EducationStatus
@@ -255,6 +256,24 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     fun setIsCareerPeriodValid() {
         val careerPeriod = careerPeriod.value ?: return
         _isCareerPeriodValid.value = careerPeriod >= 12
+    }
+
+
+    /** 계좌 정보 */
+    val bankList = Bank.getBankList()
+
+    private val _selectedBank = MutableLiveData<Bank>()
+    val selectedBank: LiveData<Bank> = _selectedBank
+
+    fun setSelectedBank(bank: Bank) {
+        _selectedBank.value = bank
+    }
+
+    private val _accountNumber = MutableLiveData<String>()
+    val accountNumber: LiveData<String> = _accountNumber
+
+    fun setAccountNumber(number: String) {
+        _accountNumber.value = number
     }
 }
 

@@ -21,7 +21,7 @@ enum class Bank(val bankVO: BankVO, val icon: Int) {
     SC(BankVO.SC, R.drawable.ic_btn_sc),
     KYUNGNAM(BankVO.KYUNGNAM, R.drawable.ic_btn_bs),
     GWANGJU(BankVO.GWANGJU, R.drawable.ic_btn_gj),
-    SUHYUP(BankVO.SUHYUP, -1 /* todo 아이콘 아직 없음 */),
+    SUHYUP(BankVO.SUHYUP, R.drawable.ic_tech_android /* todo 아이콘 아직 없음 */),
     JEONBUK(BankVO.JEONBUK, R.drawable.ic_btn_gj),
     FSB(BankVO.FSB, R.drawable.ic_btn_jc),
     JEJU(BankVO.JEJU, R.drawable.ic_btn_sinhan),
@@ -36,5 +36,11 @@ enum class Bank(val bankVO: BankVO, val icon: Int) {
     DEUTSCHE(BankVO.DEUTSCHE, R.drawable.ic_btn_doichi),
     JP_MORGAN(BankVO.JP_MORGAN, R.drawable.ic_btn_jp),
     BNP(BankVO.BNP, R.drawable.ic_btn_bnp),
-    CHINA_CONSTRUCTION(BankVO.CHINA_CONSTRUCTION, R.drawable.ic_btn_china_construction)
+    CHINA_CONSTRUCTION(BankVO.CHINA_CONSTRUCTION, R.drawable.ic_btn_china_construction);
+
+    companion object {
+        fun getBankList() = values().toList()
+    }
+
+
 }

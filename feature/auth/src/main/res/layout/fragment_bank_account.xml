@@ -43,6 +43,7 @@
 
 
         <EditText
+            android:id="@+id/et_bank_account"
             style="@style/LGTMEditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,6 +52,18 @@
             android:hint="@string/enter_bank_account"
             android:inputType="number"
             app:layout_constraintTop_toBottomOf="@id/tv_bank_account_description" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sp_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/selector_bank_spinner_background"
+            android:backgroundTint="@null"
+            android:text="@string/select_bank"
+            app:layout_constraintTop_toBottomOf="@id/et_bank_account"
+            tools:listitem="@layout/item_bank_spinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
