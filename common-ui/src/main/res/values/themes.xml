@@ -4,7 +4,6 @@
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!--color-->
         <item name="colorPrimary">@color/green</item>
-        <item name="colorSecondary">@color/gray_2</item>
         <!--status bar-->
         <item name="android:statusBarColor">@color/gray_3</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -35,8 +34,6 @@
         <item name="android:layout_marginHorizontal">20dp</item>
         <item name="android:layout_marginBottom">28dp</item>
         <item name="android:textAppearance">@style/Body1M</item>
-        <item name="android:buttonStyle">?android:attr/borderlessButtonStyle</item>
-        <item name="android:stateListAnimator">@null</item>
     </style>
 
     <style name="LGTMButtonLight" parent="LGTMButton">

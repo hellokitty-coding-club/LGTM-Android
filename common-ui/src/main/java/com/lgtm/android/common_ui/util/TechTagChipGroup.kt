@@ -36,7 +36,7 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
             this.chipStartPadding = 35F
             this.chipEndPadding = 35F
             this.chipStrokeColor = strokeStateList
-            this.chipStrokeWidth = 10F
+            this.chipStrokeWidth = 5F
             this.chipBackgroundColor = backgroundStateList
             this.setChipIconResource(techTag.imageIcon)
             this.setTextAppearance(R.style.Body2)
