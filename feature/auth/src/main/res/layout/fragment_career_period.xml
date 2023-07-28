@@ -57,7 +57,7 @@
             android:id="@+id/tv_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="5dp"
             android:text="@string/month"
             android:textAppearance="@style/Body1B"
             app:layout_constraintBottom_toBottomOf="@id/et_career_period"
