@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui.signup.reviewer
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentBankAccountBinding
@@ -18,12 +19,20 @@ class BankAccountFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
+        onAccountNumberChanged()
         setupBankSpinner()
         onBankSelectedListener()
     }
 
     private fun setupViewModel() {
         binding.viewModel = signUpViewModel
+    }
+
+    private fun onAccountNumberChanged() {
+        binding.etBankAccount.addTextChangedListener {
+            signUpViewModel.setAccountNumber(it.toString())
+            signUpViewModel.setIsAccountInfoValid()
+        }
     }
 
     private fun setupBankSpinner() {
@@ -39,6 +48,7 @@ class BankAccountFragment :
             ) {
                 if (position == 0) return // Pos 0 Indicate Hint
                 signUpViewModel.setSelectedBank(signUpViewModel.bankList[position] as Bank)
+                signUpViewModel.setIsAccountInfoValid()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}

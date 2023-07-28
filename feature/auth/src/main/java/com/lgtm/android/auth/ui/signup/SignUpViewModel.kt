@@ -280,4 +280,12 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     fun setAccountNumber(number: String) {
         _accountNumber.value = number
     }
+
+    private val _isValidAccountInfo = MutableLiveData<Boolean>()
+    val isValidAccountInfo: LiveData<Boolean> = _isValidAccountInfo
+
+    fun setIsAccountInfoValid() {
+        _isValidAccountInfo.value = selectedBank.value != null
+                && accountNumber.value?.isNotBlank() == true
+    }
 }
