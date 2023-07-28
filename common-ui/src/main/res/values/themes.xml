@@ -9,12 +9,13 @@
         <item name="android:windowLightStatusBar">true</item>
         <!--font-->
         <item name="android:includeFontPadding">false</item>
-        <item name="android:textColor">@color/midnight</item>
+        <item name="android:textColor">@color/black</item>
         <!--etc-->
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="bottomSheetDialogTheme">@style/LgtmBottomSheetStyle</item>
         <item name="editTextStyle">@style/LGTMEditTextStyle</item>
+        <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
     </style>
 
     <style name="LgtmBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
@@ -51,12 +52,17 @@
         <item name="colorControlNormal">?attr/colorPrimary</item>
         <item name="colorControlHighlight">?attr/colorPrimary</item>
         <item name="android:textAppearance">@style/Body1B</item>
-        <item name="android:textColor">@color/midnight</item>
-        <item name="colorAccent">@color/green</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/gray_3</item>
         <item name="android:backgroundTint">@color/gray_3</item>
         <item name="android:paddingVertical">16dp</item>
         <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
+    </style>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/gray_2</item>
+        <item name="android:dividerHeight">1dp</item>
     </style>
 
 </resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.auth.ui.signup.SignUpViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.signup.reviewer.BankAccountFragment">
+
+        <TextView
+            android:id="@+id/tv_bank_account_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="121dp"
+            android:text="@string/enter_bank_account_num_title"
+            android:textAppearance="@style/Heading4B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_bank_account_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/enter_bank_account_num_description"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintStart_toStartOf="@id/tv_bank_account_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_bank_account_title" />
+
+
+        <EditText
+            android:id="@+id/et_bank_account"
+            style="@style/LGTMEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="57dp"
+            android:digits="0123456789-"
+            android:hint="@string/enter_bank_account"
+            android:maxLength="20"
+            android:maxLines="1"
+            app:layout_constraintTop_toBottomOf="@id/tv_bank_account_description" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/sp_bank"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/gray_3"
+            android:dropDownVerticalOffset="15dp"
+            android:overlapAnchor="false"
+            android:text="@string/select_bank"
+            app:layout_constraintTop_toBottomOf="@id/et_bank_account"
+            tools:listitem="@layout/item_bank_spinner" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_complete"
+            style="@style/LGTMButtonLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isValidAccountInfo(), default=false}"
+            android:text="@string/signup_complete"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

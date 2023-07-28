@@ -91,7 +91,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_info"
-                infoStatusIcon="@{editTextData.infoStatus.icon}"
+                setIcon="@{editTextData.infoStatus.icon}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"

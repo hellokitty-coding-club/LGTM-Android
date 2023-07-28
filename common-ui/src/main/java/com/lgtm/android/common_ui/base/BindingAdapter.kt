@@ -12,7 +12,7 @@ fun TextView.setInfoStatusColor(color: Int) {
     setTextColor(ContextCompat.getColor(this.context, color))
 }
 
-@BindingAdapter("infoStatusIcon")
+@BindingAdapter("setIcon")
 fun AppCompatImageView.setInfoStatusIcon(icon: Int) {
     setImageResource(icon)
 }
