@@ -18,8 +18,8 @@ class SignInViewModel @Inject constructor() : ViewModel() {
     }
 
     fun parseAndSetGithubLoginResponse(loginResponse: String) {
-        val jsonData = extractJson(loginResponse)
-        val response = parseJsonToGithubLoginResponse(jsonData)
+        val jsonData: String = extractJson(loginResponse)
+        val response: GithubLoginResponse = parseJsonToGithubLoginResponse(jsonData)
         _githubLoginResponse.postValue(response)
     }
 

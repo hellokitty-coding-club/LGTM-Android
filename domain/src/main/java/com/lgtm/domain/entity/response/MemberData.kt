@@ -1,9 +1,12 @@
 package com.lgtm.domain.entity.response
 
 data class MemberData(
-    val memberId: Int,
-    val githubId: String,
-    val accessToken: String,
-    val refreshToken: String,
-    val registered: Boolean
+    val memberId: Int?,
+    val githubId: String?,
+    val githubOauthId: Int?,
+    val accessToken: String?,
+    val refreshToken: String?,
+    val profileImageUrl: String?,
+    val memberType: String?,
+    val registered: Boolean?
 )

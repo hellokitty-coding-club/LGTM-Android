@@ -43,7 +43,13 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun observeGithubLoginResponse() {
         signInViewModel.githubLoginResponse.observe(this) {
             when (it.success) {
-                true -> it.memberData?.let { data -> moveToNextScreen(data.registered) }
+                true -> it.memberData?.let { data ->
+                    if (data.registered == null) {
+                        makeToast("로그인 실패. 다시 시도해주세요.")
+                    } else
+                        moveToNextScreen(data.registered ?: return@observe)
+                }
+
                 false -> makeToast(it.message)
             }
         }
