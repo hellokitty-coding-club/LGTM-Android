@@ -4,7 +4,6 @@
     <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!--color-->
         <item name="colorPrimary">@color/green</item>
-        <item name="colorSecondary">@color/gray_2</item>
         <!--status bar-->
         <item name="android:statusBarColor">@color/gray_3</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -53,7 +52,7 @@
         <item name="colorControlHighlight">?attr/colorPrimary</item>
         <item name="android:textAppearance">@style/Body1B</item>
         <item name="android:textColor">@color/midnight</item>
-        <item name="colorAccent">?attr/colorPrimary</item>
+        <item name="colorAccent">@color/green</item>
         <item name="android:textColorHint">@color/gray_3</item>
         <item name="android:backgroundTint">@color/gray_3</item>
         <item name="android:paddingVertical">16dp</item>
