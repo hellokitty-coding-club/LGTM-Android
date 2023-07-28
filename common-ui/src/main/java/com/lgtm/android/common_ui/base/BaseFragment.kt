@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.lgtm.android.common_ui.util.KeyboardUtil
 
 abstract class BaseFragment<T : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int
@@ -23,7 +24,12 @@ abstract class BaseFragment<T : ViewDataBinding>(
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        setSoftKeyboard()
         return binding.root
+    }
+
+    private fun setSoftKeyboard() {
+        KeyboardUtil().setUpAsSoftKeyboard(binding.root)
     }
 
     override fun onDestroyView() {

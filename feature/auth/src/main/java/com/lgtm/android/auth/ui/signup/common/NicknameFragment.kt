@@ -8,7 +8,6 @@ import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentNicknameBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
-import com.lgtm.android.common_ui.util.KeyboardUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -21,11 +20,6 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
         setupEditText()
         onNicknameChanged()
         setupNextButtonListener()
-        setSoftKeyboard()
-    }
-
-    private fun setSoftKeyboard() {
-        KeyboardUtil().setUpAsSoftKeyboard(binding.root)
     }
 
     private fun setupViewModel() {
