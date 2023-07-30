@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
 import com.lgtm.android.common_ui.constant.Bank
 import com.lgtm.android.common_ui.constant.BankHint
 import com.lgtm.android.common_ui.constant.BankList
@@ -11,17 +12,18 @@ import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.domain.constants.EducationStatus
 import com.lgtm.domain.constants.EducationStatus.Companion.getEducationStatus
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.response.MemberData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor() : ViewModel() {
-    /** Github Id */
-    private val _githubId = MutableLiveData<String>()
-    val githubId: LiveData<String> = _githubId
+    /** Member Data */
+    private val _memberData = MutableLiveData<MemberData>()
+    val memberData: LiveData<MemberData> = _memberData
 
-    fun setGithubId(memberData: String) {
-        _githubId.value = memberData
+    fun parseAndSetMemberDataJson(memberDataJson: String) {
+        _memberData.value = Gson().fromJson(memberDataJson, MemberData::class.java)
     }
 
     /** 약관 동의 */

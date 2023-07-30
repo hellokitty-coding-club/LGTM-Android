@@ -11,28 +11,25 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor() : ViewModel() {
 
-    private val _githubLoginJsonResponse = MutableLiveData<String>()
-    val githubLoginJsonResponse: LiveData<String> = _githubLoginJsonResponse
-
     private val _githubLoginResponse = MutableLiveData<GithubLoginResponse>()
     val githubLoginResponse: LiveData<GithubLoginResponse> = _githubLoginResponse
 
-    fun setGithubLoginJsonResponse(json: String) {
-        _githubLoginJsonResponse.value = json
-    }
-
-    fun parseGithubLoginJsonResponse() {
-        val json = githubLoginJsonResponse.value ?: return
+    fun parseGithubLoginJsonResponse(json: String) {
         val jsonData: String = extractJson(json)
         val response: GithubLoginResponse = parseJsonToGithubLoginResponse(jsonData)
         _githubLoginResponse.postValue(response)
+    }
+
+    fun getMemberDataJson(): String {
+        val memberData = githubLoginResponse.value?.memberData
+        return Gson().toJson(memberData)
     }
 
     fun isRegisteredUser(): Boolean {
         return githubLoginResponse.value?.memberData?.registered ?: false
     }
 
-    fun saveMemberDataOnSharedPreference() {
+    fun saveMemberDataFromLoginResponse() {
         // todo 이미 LGTM 유저라면 AccessToken, RefreshToken, MemberType을 SharedPreference에 저장
     }
 

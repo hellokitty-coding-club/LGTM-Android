@@ -39,8 +39,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun showGithubLoginBottomSheet() {
         GithubBottomSheet(object : OnLoginSuccess {
             override fun onLoginSuccess(loginResponse: String) {
-                signInViewModel.setGithubLoginJsonResponse(loginResponse)
-                signInViewModel.parseGithubLoginJsonResponse()
+                signInViewModel.parseGithubLoginJsonResponse(loginResponse)
             }
         }).show(supportFragmentManager, "GithubLoginBottomSheet")
     }
@@ -71,14 +70,14 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     }
 
     private fun moveToSignUpActivity() {
-        val githubLoginResponseJson = signInViewModel.githubLoginJsonResponse.value ?: return
+        val memberDataJson = signInViewModel.getMemberDataJson()
         startActivity(Intent(this, SignUpActivity::class.java).apply {
-            putExtra(GITHUB_ID, githubLoginResponseJson)
+            putExtra(MEMBER_DATA, memberDataJson)
         })
     }
 
     private fun saveMemberData() {
-        signInViewModel.saveMemberDataOnSharedPreference()
+        signInViewModel.saveMemberDataFromLoginResponse()
     }
 
     private fun makeToast(message: String) {
@@ -86,7 +85,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     }
 
     companion object {
-        const val GITHUB_ID = "githubId"
+        const val MEMBER_DATA = "memberData"
     }
 }
 
