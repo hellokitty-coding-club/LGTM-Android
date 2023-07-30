@@ -32,45 +32,57 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun initClickListener() {
         binding.clGithub.setOnClickListener {
-            GithubBottomSheet(object : OnLoginSuccess {
-                override fun onLoginSuccess(loginResponse: String) {
-                    signInViewModel.parseAndSetGithubLoginResponse(loginResponse)
-                }
-            }).show(supportFragmentManager, "GithubLoginBottomSheet")
+            showGithubLoginBottomSheet()
         }
+    }
+
+    private fun showGithubLoginBottomSheet() {
+        GithubBottomSheet(object : OnLoginSuccess {
+            override fun onLoginSuccess(loginResponse: String) {
+                signInViewModel.setGithubLoginJsonResponse(loginResponse)
+                signInViewModel.parseGithubLoginJsonResponse()
+            }
+        }).show(supportFragmentManager, "GithubLoginBottomSheet")
     }
 
     private fun observeGithubLoginResponse() {
         signInViewModel.githubLoginResponse.observe(this) {
             when (it.success) {
-                true -> it.memberData?.let { data ->
-                    if (data.registered == null) {
-                        makeToast("로그인 실패. 다시 시도해주세요.")
-                    } else
-                        moveToNextScreen(data.registered ?: return@observe)
-                }
-
-                false -> makeToast(it.message)
+                true -> onGithubLoginSuccess()
+                false -> makeToast("로그인 실패. 다시 시도해주세요.")
             }
         }
     }
 
-    private fun makeToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun onGithubLoginSuccess() {
+        when (signInViewModel.isRegisteredUser()) {
+            true -> {
+                moveToMainActivity()
+                saveMemberData()
+            }
+
+            false -> moveToSignUpActivity()
+        }
+        finish()
     }
 
-    private fun moveToNextScreen(isRegistered: Boolean) {
-        if (!isRegistered) {
-            val githubId = signInViewModel.getGithubId()
-            startActivity(
-                Intent(this, SignUpActivity::class.java).putExtra(
-                    GITHUB_ID, githubId
-                )
-            )
-        } else {
-            // TODO: 메인 화면으로 이동
-            finish()
-        }
+    private fun moveToMainActivity() {
+        // todo move to mainActivity
+    }
+
+    private fun moveToSignUpActivity() {
+        val githubLoginResponseJson = signInViewModel.githubLoginJsonResponse.value ?: return
+        startActivity(Intent(this, SignUpActivity::class.java).apply {
+            putExtra(GITHUB_ID, githubLoginResponseJson)
+        })
+    }
+
+    private fun saveMemberData() {
+        signInViewModel.saveMemberDataOnSharedPreference()
+    }
+
+    private fun makeToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     companion object {
