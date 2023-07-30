@@ -1,7 +1,7 @@
 package com.lgtm.android.di
 
-import com.lgtm.android.data.remote.datasource.IntroDataSource
-import com.lgtm.android.data.remote.service.IntroService
+import com.lgtm.android.data.datasource.IntroDataSource
+import com.lgtm.android.data.service.IntroService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

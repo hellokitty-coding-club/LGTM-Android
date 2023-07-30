@@ -1,8 +1,8 @@
-package com.lgtm.android.data.remote.model.response
+package com.lgtm.android.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class BaseResponse<T>(
+data class BaseDTO<T>(
     @SerializedName("success")
     val success: Boolean,
     @SerializedName("errorCode")

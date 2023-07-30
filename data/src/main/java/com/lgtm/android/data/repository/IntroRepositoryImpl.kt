@@ -1,6 +1,6 @@
 package com.lgtm.android.data.repository
 
-import com.lgtm.android.data.remote.datasource.IntroDataSource
+import com.lgtm.android.data.datasource.IntroDataSource
 import com.lgtm.domain.entity.response.IntroVO
 import com.lgtm.domain.repository.IntroRepository
 import javax.inject.Inject
