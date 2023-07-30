@@ -60,14 +60,11 @@ dependencies {
     implementation(project(":feature:auth"))
     implementation(project(":common-ui"))
 
-    // todo) MainActivity Feature 모듈로 옮기고 나면 삭제
-    implementation(libs.bundles.androidx.ui.foundation)
-    implementation(libs.constraintlayout)
-
     implementation(libs.hilt)
     implementation(platform(libs.firebase))
     implementation(libs.bundles.firebase)
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
+    implementation(libs.security.cripto)
 
 }
