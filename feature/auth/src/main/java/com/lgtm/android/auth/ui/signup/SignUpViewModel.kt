@@ -12,18 +12,18 @@ import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.domain.constants.EducationStatus
 import com.lgtm.domain.constants.EducationStatus.Companion.getEducationStatus
 import com.lgtm.domain.constants.Role
-import com.lgtm.domain.entity.response.MemberData
+import com.lgtm.domain.entity.response.MemberDataDTO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor() : ViewModel() {
     /** Member Data */
-    private val _memberData = MutableLiveData<MemberData>()
-    val memberData: LiveData<MemberData> = _memberData
+    private val _memberData = MutableLiveData<MemberDataDTO>()
+    val memberData: LiveData<MemberDataDTO> = _memberData
 
     fun parseAndSetMemberDataJson(memberDataJson: String) {
-        _memberData.value = Gson().fromJson(memberDataJson, MemberData::class.java)
+        _memberData.value = Gson().fromJson(memberDataJson, MemberDataDTO::class.java)
     }
 
     /** 약관 동의 */

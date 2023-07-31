@@ -1,6 +1,6 @@
 package com.lgtm.domain.entity.response
 
-data class MemberData(
+data class MemberDataDTO(
     val memberId: Int?,
     val githubId: String?,
     val githubOauthId: Int?,

@@ -7,6 +7,6 @@ data class GithubLoginResponse(
     val responseCode: Int,
     val message: String,
     @SerializedName("data")
-    val memberData: MemberData?
+    val memberData: MemberDataDTO?
 )
 

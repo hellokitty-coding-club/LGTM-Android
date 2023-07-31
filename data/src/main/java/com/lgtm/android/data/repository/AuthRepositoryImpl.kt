@@ -2,7 +2,7 @@ package com.lgtm.android.data.repository
 
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
 import com.lgtm.domain.constants.Role
-import com.lgtm.domain.entity.response.MemberData
+import com.lgtm.domain.entity.response.MemberDataDTO
 import com.lgtm.domain.repository.AuthRepository
 import javax.inject.Inject
 
@@ -10,7 +10,7 @@ class AuthRepositoryImpl @Inject constructor(
     private val lgtmPreferenceDataSource: LgtmPreferenceDataSource
 ) : AuthRepository {
 
-    override fun saveUserData(memberData: MemberData) {
+    override fun saveUserData(memberData: MemberDataDTO) {
         saveAccessToken(requireNotNull(memberData.accessToken))
         saveRefreshToken(requireNotNull(memberData.refreshToken))
         saveMemberType(requireNotNull(memberData.memberType))
