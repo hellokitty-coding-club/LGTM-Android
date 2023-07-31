@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.lgtm.domain.entity.response.GithubLoginResponse
+import com.lgtm.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor() : ViewModel() {
+class SignInViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
 
     private val _githubLoginResponse = MutableLiveData<GithubLoginResponse>()
     val githubLoginResponse: LiveData<GithubLoginResponse> = _githubLoginResponse
@@ -30,7 +33,7 @@ class SignInViewModel @Inject constructor() : ViewModel() {
     }
 
     fun saveMemberDataFromLoginResponse() {
-        // todo 이미 LGTM 유저라면 AccessToken, RefreshToken, MemberType을 SharedPreference에 저장
+        authRepository.saveUserData(githubLoginResponse.value?.memberData ?: return)
     }
 
     private fun extractJson(htmlString: String): String {
