@@ -1,6 +1,8 @@
 package com.lgtm.android.di
 
+import com.lgtm.android.data.repository.AuthRepositoryImpl
 import com.lgtm.android.data.repository.IntroRepositoryImpl
+import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.IntroRepository
 import dagger.Binds
 import dagger.Module
@@ -15,5 +17,10 @@ interface RepositoryModule {
     fun bindsIntroRepository(
         introRepositoryImpl: IntroRepositoryImpl
     ): IntroRepository
+
+    @Binds
+    fun bindsAuthRepository(
+        authRepositoryImpl: AuthRepositoryImpl
+    ): AuthRepository
 
 }
