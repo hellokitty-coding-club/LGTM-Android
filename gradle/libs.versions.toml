@@ -21,6 +21,7 @@ lifecycle = "2.6.1"
 navigation = "2.6.0"
 constraintlayout = "2.1.4"
 fragment = "1.5.7"
+security-cripto = "1.0.0"
 
 # Google Libraries
 material = "1.9.0"
@@ -77,6 +78,7 @@ navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref 
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
 fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+security-cripto = { module = "androidx.security:security-crypto", version.ref = "security-cripto" }
 
 material = { module = "com.google.android.material:material", version.ref = "material" }
 inappupdate = { module = "com.google.android.play:app-update-ktx", version.ref = "in-app-update" }

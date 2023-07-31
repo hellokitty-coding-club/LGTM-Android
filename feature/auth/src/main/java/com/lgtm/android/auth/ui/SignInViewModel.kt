@@ -5,22 +5,35 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.lgtm.domain.entity.response.GithubLoginResponse
+import com.lgtm.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor() : ViewModel() {
+class SignInViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
+
     private val _githubLoginResponse = MutableLiveData<GithubLoginResponse>()
     val githubLoginResponse: LiveData<GithubLoginResponse> = _githubLoginResponse
 
-    fun getGithubId(): String {
-        return githubLoginResponse.value?.memberData?.githubId ?: ""
+    fun parseGithubLoginJsonResponse(json: String) {
+        val jsonData: String = extractJson(json)
+        val response: GithubLoginResponse = parseJsonToGithubLoginResponse(jsonData)
+        _githubLoginResponse.postValue(response)
     }
 
-    fun parseAndSetGithubLoginResponse(loginResponse: String) {
-        val jsonData = extractJson(loginResponse)
-        val response = parseJsonToGithubLoginResponse(jsonData)
-        _githubLoginResponse.postValue(response)
+    fun getMemberDataJson(): String {
+        val memberData = githubLoginResponse.value?.memberData
+        return Gson().toJson(memberData)
+    }
+
+    fun isRegisteredUser(): Boolean {
+        return githubLoginResponse.value?.memberData?.registered ?: false
+    }
+
+    fun saveMemberDataFromLoginResponse() {
+        authRepository.saveUserData(githubLoginResponse.value?.memberData ?: return)
     }
 
     private fun extractJson(htmlString: String): String {

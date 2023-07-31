@@ -1,4 +1,4 @@
-package com.lgtm.android.data.remote
+package com.lgtm.android.data.model
 
 // 클라이언트에서 관리해줘야하는 Http 응답이 어떤게 있는지 관리하기위해 직접만든 HttpResponseStatus enum
 enum class HttpResponseStatus {

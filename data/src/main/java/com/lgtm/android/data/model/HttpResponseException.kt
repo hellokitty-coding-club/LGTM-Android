@@ -1,4 +1,4 @@
-package com.lgtm.android.data.remote
+package com.lgtm.android.data.model
 
 // java.lang.Exception을 상속해서 내가 직접 만들어줘야하는 Exception 클래스
 class HttpResponseException(

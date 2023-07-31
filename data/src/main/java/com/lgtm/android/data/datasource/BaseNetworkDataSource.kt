@@ -1,7 +1,7 @@
-package com.lgtm.android.data.remote.datasource
+package com.lgtm.android.data.datasource
 
-import com.lgtm.android.data.remote.HttpResponseException
-import com.lgtm.android.data.remote.HttpResponseStatus
+import com.lgtm.android.data.model.HttpResponseException
+import com.lgtm.android.data.model.HttpResponseStatus
 import retrofit2.Response
 
 abstract class BaseNetworkDataSource {
