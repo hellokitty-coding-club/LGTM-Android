@@ -31,12 +31,14 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
 
 
     private fun createChip(techTag: TechTag): Chip {
+
         return Chip(chipGroup.context).apply {
+            val screenWidth = resources.displayMetrics.widthPixels
             text = techTag.techTagVO.stack
-            this.chipStartPadding = 35F
-            this.chipEndPadding = 35F
+            this.chipStartPadding = screenWidth * 0.035F
+            this.chipEndPadding = screenWidth * 0.035F
             this.chipStrokeColor = strokeStateList
-            this.chipStrokeWidth = 5F
+            this.chipStrokeWidth = screenWidth * 0.005F
             this.chipBackgroundColor = backgroundStateList
             this.setChipIconResource(techTag.imageIcon)
             this.setTextAppearance(R.style.Body2)
