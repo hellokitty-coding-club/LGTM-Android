@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="role"
-            type="com.lgtm.domain.constants.Role" />
+            name="isRoleReviewer"
+            type="boolean" />
 
         <import type="com.lgtm.domain.constants.Role" />
 
@@ -15,14 +15,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_role_reviewer"
-        setRoleBackground="@{role == Role.REVIEWER}"
+        setRoleBackground="@{isRoleReviewer}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:background="@drawable/rectangle_border_gray2_radius_10">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_icon"
-            setReviewerRoleImage="@{role == Role.REVIEWER}"
+            setReviewerRoleImage="@{isRoleReviewer}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="18dp"
@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/tv_role"
-            setRoleTextColor="@{role == Role.REVIEWER}"
+            setRoleTextColor="@{isRoleReviewer}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -47,7 +47,7 @@
 
         <TextView
             android:id="@+id/tv_description"
-            setRoleTextColor="@{role == Role.REVIEWER}"
+            setRoleTextColor="@{isRoleReviewer}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"

@@ -22,7 +22,7 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
     }
 
     private fun observeSelectedRole() {
-        signUpViewModel.chooseRole.observe(viewLifecycleOwner) {
+        signUpViewModel.selectedRole.observe(viewLifecycleOwner) {
             signUpViewModel.setIsRoleValid()
         }
     }
@@ -33,7 +33,7 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
 
     private fun setupNextButtonListener() {
         binding.btnNext.setOnClickListener {
-            if (signUpViewModel.chooseRole.value == Role.REVIEWEE) {
+            if (signUpViewModel.selectedRole.value == Role.REVIEWEE) {
                 navigateToEducationStatusFragment()
             } else {
                 navigateToCompanyNameFragment()
