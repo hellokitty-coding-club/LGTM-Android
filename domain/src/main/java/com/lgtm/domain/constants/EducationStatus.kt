@@ -1,6 +1,6 @@
 package com.lgtm.domain.constants
 
-enum class EducationStatus(val krString: String) {
+enum class EducationStatus(val status: String) {
     HIGH_SCHOOL_STUDENT("고등학생"),
     UNDERGRADUATE("대학생"),
     GRADUATED("대학교 졸업"),

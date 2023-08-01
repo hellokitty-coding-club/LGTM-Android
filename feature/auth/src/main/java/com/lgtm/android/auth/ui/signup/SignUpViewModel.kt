@@ -113,21 +113,31 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     /** Role 선택 */
     private val _selectedRole = MutableLiveData<Role>()
-    val chooseRole: LiveData<Role> = _selectedRole
+    val selectedRole: LiveData<Role> = _selectedRole
 
     private val _isRoleValid = MutableLiveData<Boolean>()
     val isRoleValid: LiveData<Boolean> = _isRoleValid
 
+    private val _isRoleReviewee = MutableLiveData(selectedRole.value == Role.REVIEWEE)
+    val isRoleReviewee: LiveData<Boolean> = _isRoleReviewee
+
+    private val _isRoleReviewer = MutableLiveData(selectedRole.value == Role.REVIEWER)
+    val isRoleReviewer: LiveData<Boolean> = _isRoleReviewer
+
     fun setIsRoleValid() {
-        _isRoleValid.value = chooseRole.value != null
+        _isRoleValid.value = selectedRole.value != null
     }
 
     fun onClickReviewee() {
         _selectedRole.value = Role.REVIEWEE
+        _isRoleReviewee.value = true
+        _isRoleReviewer.value = false
     }
 
     fun onClickReviewer() {
         _selectedRole.value = Role.REVIEWER
+        _isRoleReviewee.value = false
+        _isRoleReviewer.value = true
     }
 
     /** 학력 정보 */
@@ -259,7 +269,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     fun setIsCareerPeriodValid() {
         val careerPeriod = careerPeriod.value ?: return
-        _isCareerPeriodValid.value = careerPeriod >= 12
+        _isCareerPeriodValid.value = careerPeriod >= ONE_YEAR
     }
 
 
@@ -289,5 +299,9 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     fun setIsAccountInfoValid() {
         _isValidAccountInfo.value = selectedBank.value != null
                 && accountNumber.value?.isNotBlank() == true
+    }
+
+    companion object {
+        private const val ONE_YEAR = 12
     }
 }

@@ -50,7 +50,7 @@
             <include
                 android:id="@+id/layout_reviewee"
                 layout="@layout/layout_role_reviewee"
-                app:role="@{viewModel.chooseRole}" />
+                app:isRoleReviewee="@{viewModel.isRoleReviewee}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,7 +65,7 @@
             <include
                 android:id="@+id/layout_reviewer"
                 layout="@layout/layout_role_reviewer"
-                app:role="@{viewModel.chooseRole}" />
+                app:isRoleReviewer="@{viewModel.isRoleReviewer}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
