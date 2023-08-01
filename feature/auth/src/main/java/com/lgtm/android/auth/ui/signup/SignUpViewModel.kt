@@ -269,7 +269,7 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
 
     fun setIsCareerPeriodValid() {
         val careerPeriod = careerPeriod.value ?: return
-        _isCareerPeriodValid.value = careerPeriod >= 12
+        _isCareerPeriodValid.value = careerPeriod >= ONE_YEAR
     }
 
 
@@ -299,5 +299,9 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     fun setIsAccountInfoValid() {
         _isValidAccountInfo.value = selectedBank.value != null
                 && accountNumber.value?.isNotBlank() == true
+    }
+
+    companion object {
+        private const val ONE_YEAR = 12
     }
 }
