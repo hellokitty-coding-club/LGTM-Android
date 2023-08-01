@@ -35,7 +35,7 @@ class EducationStatusFragment :
         EducationStatus.values().forEach { educationStatus ->
             val radioButton = RadioButton(requireContext()).apply {
                 id = educationStatus.ordinal
-                text = educationStatus.krString
+                text = educationStatus.status
                 setTextAppearance(style.Body1B)
                 textSize =
                     resources.getDimension(dimen.body1_b_text_size) / resources.displayMetrics.density
