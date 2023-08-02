@@ -15,6 +15,7 @@ import com.lgtm.domain.constants.EducationStatus
 import com.lgtm.domain.constants.EducationStatus.Companion.getEducationStatus
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
+import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
 import com.lgtm.domain.entity.response.SignUpResponseVO
 import com.lgtm.domain.repository.AuthRepository
@@ -330,11 +331,52 @@ class SignUpViewModel @Inject constructor(
         )
     }
 
+    private fun createSignUpSeniorRequestVO(): SignUpSeniorRequestVO {
+        val githubId = memberData.value?.githubId ?: throw SignUpFailedException("githubId is null")
+        val githubOauthId =
+            memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
+        val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
+        val deviceToken = "" // todo
+        val profileImageUrl = memberData.value?.profileImageUrl
+            ?: throw SignUpFailedException("profileImageUrl is null")
+        val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
+        val isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false
+        val tagList = techTagList.value ?: throw SignUpFailedException("tagList is null")
+        val companyName = companyName.value ?: throw SignUpFailedException("companyName is null")
+        val careerPeriod = careerPeriod.value ?: throw SignUpFailedException("careerPeriod is null")
+        val position = position.value ?: throw SignUpFailedException("position is null")
+        val accountNumber =
+            accountNumber.value ?: throw SignUpFailedException("accountnumber is null")
+        val bank = selectedBank.value?.bankVO?.bank ?: throw SignUpFailedException("bank is null")
+
+        return SignUpSeniorRequestVO(
+            githubId, githubOauthId, nickName, deviceToken, profileImageUrl, introduction,
+            isAgreeWithEventInfo, tagList, companyName, careerPeriod, position, accountNumber, bank
+        )
+    }
+
     fun signUpJunior() {
         viewModelScope.launch {
             val response: Result<SignUpResponseVO> = try {
                 val signUpJuniorRequestVO = createSignUpJuniorRequestVO()
                 authRepository.signUpJunior(signUpJuniorRequestVO)
+            } catch (e: SignUpFailedException) {
+                // todo 에러처리
+                return@launch
+            }
+            response.onSuccess {
+                // todo 회원가입 성공 -> 메인화면으로 이동
+            }.onFailure {
+                // todo 에러처리
+            }
+        }
+    }
+
+    fun signUpSenior() {
+        viewModelScope.launch {
+            val response: Result<SignUpResponseVO> = try {
+                val signUpSeniorRequestVO = createSignUpSeniorRequestVO()
+                authRepository.signUpSenior(signUpSeniorRequestVO)
             } catch (e: SignUpFailedException) {
                 // todo 에러처리
                 return@launch

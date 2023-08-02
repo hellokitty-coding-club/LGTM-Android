@@ -45,7 +45,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
     }
 
     private fun navigateToHomeActivity() {
-//        findNavController().navigate(R.id.action_nicknameFragment_to_techTagFragment)
+        // todo : navigate to home activity
     }
 
 

@@ -22,6 +22,7 @@ class BankAccountFragment :
         onAccountNumberChanged()
         setupBankSpinner()
         onBankSelectedListener()
+        setupCompleteButtonListener()
     }
 
     private fun setupViewModel() {
@@ -54,4 +55,16 @@ class BankAccountFragment :
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
+
+    private fun setupCompleteButtonListener() {
+        binding.btnComplete.setOnClickListener {
+            signUpViewModel.signUpSenior()
+            navigateToHomeActivity()
+        }
+    }
+
+    private fun navigateToHomeActivity() {
+        // todo : navigate to home activity
+    }
+
 }
