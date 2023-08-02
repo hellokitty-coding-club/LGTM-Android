@@ -43,45 +43,49 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun signUpJunior(signUpJuniorVO: SignUpJuniorRequestVO): Result<SignUpResponseVO> {
-        val response = authDataSource.signUpJunior(
-            SignUpJuniorRequestDTO(
-                githubId = signUpJuniorVO.githubId,
-                githubOauthId = signUpJuniorVO.githubOauthId,
-                nickName = signUpJuniorVO.nickName,
-                deviceToken = signUpJuniorVO.deviceToken,
-                profileImageUrl = signUpJuniorVO.profileImageUrl,
-                introduction = signUpJuniorVO.introduction,
-                tagList = signUpJuniorVO.tagList,
-                educationalHistory = signUpJuniorVO.educationalHistory,
-                realName = signUpJuniorVO.realName,
-                isAgreeWithEventInfo = signUpJuniorVO.isAgreeWithEventInfo
+        try {
+            val response = authDataSource.signUpJunior(
+                SignUpJuniorRequestDTO(
+                    githubId = signUpJuniorVO.githubId,
+                    githubOauthId = signUpJuniorVO.githubOauthId,
+                    nickName = signUpJuniorVO.nickName,
+                    deviceToken = signUpJuniorVO.deviceToken,
+                    profileImageUrl = signUpJuniorVO.profileImageUrl,
+                    introduction = signUpJuniorVO.introduction,
+                    tagList = signUpJuniorVO.tagList,
+                    educationalHistory = signUpJuniorVO.educationalHistory,
+                    realName = signUpJuniorVO.realName,
+                    isAgreeWithEventInfo = signUpJuniorVO.isAgreeWithEventInfo
+                )
             )
-        )
-        if (response.success)
             return Result.success(response.data.toVO())
-        return Result.failure(Exception(response.message))
+        } catch (e: Exception) {
+            return Result.failure(e)
+        }
     }
 
     override suspend fun signUpSenior(signUpSeniorVO: SignUpSeniorRequestVO): Result<SignUpResponseVO> {
-        val response = authDataSource.signUpSenior(
-            SignUpSeniorRequestDTO(
-                githubId = signUpSeniorVO.githubId,
-                githubOauthId = signUpSeniorVO.githubOauthId,
-                nickName = signUpSeniorVO.nickName,
-                deviceToken = signUpSeniorVO.deviceToken,
-                profileImageUrl = signUpSeniorVO.profileImageUrl,
-                introduction = signUpSeniorVO.introduction,
-                tagList = signUpSeniorVO.tagList,
-                accountNumber = signUpSeniorVO.accountNumber,
-                bankName = signUpSeniorVO.bankName,
-                careerPeriod = signUpSeniorVO.careerPeriod,
-                companyInfo = signUpSeniorVO.companyInfo,
-                position = signUpSeniorVO.position,
-                isAgreeWithEventInfo = signUpSeniorVO.isAgreeWithEventInfo
+        try {
+            val response = authDataSource.signUpSenior(
+                SignUpSeniorRequestDTO(
+                    githubId = signUpSeniorVO.githubId,
+                    githubOauthId = signUpSeniorVO.githubOauthId,
+                    nickName = signUpSeniorVO.nickName,
+                    deviceToken = signUpSeniorVO.deviceToken,
+                    profileImageUrl = signUpSeniorVO.profileImageUrl,
+                    introduction = signUpSeniorVO.introduction,
+                    tagList = signUpSeniorVO.tagList,
+                    accountNumber = signUpSeniorVO.accountNumber,
+                    bankName = signUpSeniorVO.bankName,
+                    careerPeriod = signUpSeniorVO.careerPeriod,
+                    companyInfo = signUpSeniorVO.companyInfo,
+                    position = signUpSeniorVO.position,
+                    isAgreeWithEventInfo = signUpSeniorVO.isAgreeWithEventInfo
+                )
             )
-        )
-        if (response.success)
             return Result.success(response.data.toVO())
-        return Result.failure(Exception(response.message))
+        } catch (e: Exception) {
+            return Result.failure(e)
+        }
     }
 }

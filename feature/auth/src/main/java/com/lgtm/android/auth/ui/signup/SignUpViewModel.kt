@@ -11,9 +11,11 @@ import com.lgtm.android.common_ui.constant.BankHint
 import com.lgtm.android.common_ui.constant.BankList
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
+import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.constants.EducationStatus
 import com.lgtm.domain.constants.EducationStatus.Companion.getEducationStatus
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.LgtmResponseException
 import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
 import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
@@ -355,36 +357,40 @@ class SignUpViewModel @Inject constructor(
         )
     }
 
+    private val _signUpState: MutableLiveData<NetworkState<SignUpResponseVO>> =
+        MutableLiveData(NetworkState.Init)
+    val signUpState: LiveData<NetworkState<SignUpResponseVO>> = _signUpState
+
     fun signUpJunior() {
         viewModelScope.launch {
-            val response: Result<SignUpResponseVO> = try {
+            try {
                 val signUpJuniorRequestVO = createSignUpJuniorRequestVO()
                 authRepository.signUpJunior(signUpJuniorRequestVO)
             } catch (e: SignUpFailedException) {
-                // todo 에러처리
+                _signUpState.value = NetworkState.Failure(e.toString())
                 return@launch
-            }
-            response.onSuccess {
-                // todo 회원가입 성공 -> 메인화면으로 이동
+            }.onSuccess {
+                _signUpState.value = NetworkState.Success(it)
             }.onFailure {
-                // todo 에러처리
+                val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
+                _signUpState.value = NetworkState.Failure(errorMessage)
             }
         }
     }
 
     fun signUpSenior() {
         viewModelScope.launch {
-            val response: Result<SignUpResponseVO> = try {
+            try {
                 val signUpSeniorRequestVO = createSignUpSeniorRequestVO()
                 authRepository.signUpSenior(signUpSeniorRequestVO)
             } catch (e: SignUpFailedException) {
-                // todo 에러처리
+                _signUpState.value = NetworkState.Failure(e.toString())
                 return@launch
-            }
-            response.onSuccess {
-                // todo 회원가입 성공 -> 메인화면으로 이동
+            }.onSuccess {
+                _signUpState.value = NetworkState.Success(it)
             }.onFailure {
-                // todo 에러처리
+                val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
+                _signUpState.value = NetworkState.Failure(errorMessage)
             }
         }
     }

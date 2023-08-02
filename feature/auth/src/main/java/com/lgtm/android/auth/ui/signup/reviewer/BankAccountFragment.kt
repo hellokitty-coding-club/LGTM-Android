@@ -1,17 +1,21 @@
 package com.lgtm.android.auth.ui.signup.reviewer
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentBankAccountBinding
+import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.R.layout
 import com.lgtm.android.common_ui.adapter.BankSpinnerAdapter
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.constant.Bank
+import com.lgtm.android.common_ui.util.NetworkState
 
 class BankAccountFragment :
     BaseFragment<FragmentBankAccountBinding>(R.layout.fragment_bank_account) {
@@ -23,6 +27,7 @@ class BankAccountFragment :
         setupBankSpinner()
         onBankSelectedListener()
         setupCompleteButtonListener()
+        observeSignUpStatus()
     }
 
     private fun setupViewModel() {
@@ -59,12 +64,35 @@ class BankAccountFragment :
     private fun setupCompleteButtonListener() {
         binding.btnComplete.setOnClickListener {
             signUpViewModel.signUpSenior()
-            navigateToHomeActivity()
+        }
+    }
+
+    private fun observeSignUpStatus() {
+        signUpViewModel.signUpState.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkState.Init -> {
+                    /* no-op */
+                }
+
+                is NetworkState.Success -> {
+                    navigateToHomeActivity()
+                }
+
+                is NetworkState.Failure -> {
+                    navigateToSignInActivity()
+                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
     private fun navigateToHomeActivity() {
         // todo : navigate to home activity
+    }
+
+    private fun navigateToSignInActivity() {
+        startActivity(Intent(requireContext(), SignInActivity::class.java))
+        requireActivity().finish()
     }
 
 }

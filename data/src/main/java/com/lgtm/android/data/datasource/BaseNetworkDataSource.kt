@@ -1,7 +1,9 @@
 package com.lgtm.android.data.datasource
 
-import com.lgtm.android.data.model.HttpResponseException
-import com.lgtm.android.data.model.HttpResponseStatus
+import com.google.gson.Gson
+import com.lgtm.android.data.model.response.BaseDTO
+import com.lgtm.domain.entity.LgtmResponseException
+import com.lgtm.domain.entity.ResponseCode
 import retrofit2.Response
 
 abstract class BaseNetworkDataSource {
@@ -10,11 +12,11 @@ abstract class BaseNetworkDataSource {
             return response.body()!!
         } else {
             val errorBody = response.errorBody()?.string()
-            throw HttpResponseException(
-                status = HttpResponseStatus.create(response.code()),
+            val errorResponse: BaseDTO<*> = Gson().fromJson(errorBody, BaseDTO::class.java)
+            throw LgtmResponseException(
+                responseCode = ResponseCode.create(errorResponse.responseCode),
                 httpCode = response.code(),
-                errorRequestUrl = "errorBody 형식 맞추면 변경", //todo
-                msg = "Http Request Failed (${response.code()}) ${response.message()}, $errorBody",
+                message = errorResponse.message,
                 cause = Throwable(errorBody),
             )
         }
