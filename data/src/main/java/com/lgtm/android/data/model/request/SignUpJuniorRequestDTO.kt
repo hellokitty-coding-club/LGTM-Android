@@ -12,6 +12,6 @@ data class SignUpJuniorRequestDTO(
     val tagList: List<String>,
     val educationalHistory: String,
     val realName: String,
-    @SerializedName("isAgreeWithEventInfo")
-    val agreeWithEventInfo: Boolean
+    @SerializedName("agreeWithEventInfo")
+    val isAgreeWithEventInfo: Boolean
 )

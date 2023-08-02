@@ -3,7 +3,9 @@ package com.lgtm.android.auth.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.lgtm.android.auth.exception.SignUpFailedException
 import com.lgtm.android.common_ui.constant.Bank
 import com.lgtm.android.common_ui.constant.BankHint
 import com.lgtm.android.common_ui.constant.BankList
@@ -12,12 +14,18 @@ import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.domain.constants.EducationStatus
 import com.lgtm.domain.constants.EducationStatus.Companion.getEducationStatus
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
+import com.lgtm.domain.entity.response.SignUpResponseVO
+import com.lgtm.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor() : ViewModel() {
+class SignUpViewModel @Inject constructor(
+    private val authRepository: AuthRepository
+) : ViewModel() {
     /** Member Data */
     private val _memberData = MutableLiveData<MemberDataDTO>()
     val memberData: LiveData<MemberDataDTO> = _memberData
@@ -299,6 +307,44 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
     fun setIsAccountInfoValid() {
         _isValidAccountInfo.value = selectedBank.value != null
                 && accountNumber.value?.isNotBlank() == true
+    }
+
+    private fun createSignUpJuniorRequestVO(): SignUpJuniorRequestVO {
+        val githubId = memberData.value?.githubId ?: throw SignUpFailedException("githubId is null")
+        val githubOauthId =
+            memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
+        val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
+        val deviceToken = "" // todo
+        val profileImageUrl = memberData.value?.profileImageUrl
+            ?: throw SignUpFailedException("profileImageUrl is null")
+        val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
+        val tagList = techTagList.value ?: throw SignUpFailedException("tagList is null")
+        val educationalHistory = educationStatus.value?.status
+            ?: throw SignUpFailedException("educationalHistory is null")
+        val realName = realName.value ?: throw SignUpFailedException("realName is null")
+        val agreeWithEventInfo = isAgreeWithEventInfo.value ?: false
+
+        return SignUpJuniorRequestVO(
+            githubId, githubOauthId, nickName, deviceToken, profileImageUrl, introduction,
+            tagList, educationalHistory, realName, agreeWithEventInfo
+        )
+    }
+
+    fun signUpJunior() {
+        viewModelScope.launch {
+            val response: Result<SignUpResponseVO> = try {
+                val signUpJuniorRequestVO = createSignUpJuniorRequestVO()
+                authRepository.signUpJunior(signUpJuniorRequestVO)
+            } catch (e: SignUpFailedException) {
+                // todo 에러처리
+                return@launch
+            }
+            response.onSuccess {
+                // todo 회원가입 성공 -> 메인화면으로 이동
+            }.onFailure {
+                // todo 에러처리
+            }
+        }
     }
 
     companion object {
