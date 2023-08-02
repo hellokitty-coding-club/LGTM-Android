@@ -7,7 +7,7 @@ data class SignUpJuniorRequestVO(
     val githubId: String,
     val githubOauthId: Int,
     val nickName: String,
-    val deviceToken: String?,
+    val deviceToken: String? = null,
     val profileImageUrl: String,
     val introduction: String,
     val tagList: List<String>,

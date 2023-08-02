@@ -315,7 +315,7 @@ class SignUpViewModel @Inject constructor(
         val githubOauthId =
             memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
         val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
-        val deviceToken = "" // todo
+        val deviceToken = null // todo get device token
         val profileImageUrl = memberData.value?.profileImageUrl
             ?: throw SignUpFailedException("profileImageUrl is null")
         val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
@@ -336,7 +336,7 @@ class SignUpViewModel @Inject constructor(
         val githubOauthId =
             memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
         val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
-        val deviceToken = "" // todo
+        val deviceToken = null // todo get device token
         val profileImageUrl = memberData.value?.profileImageUrl
             ?: throw SignUpFailedException("profileImageUrl is null")
         val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
