@@ -48,7 +48,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_next"
+            android:id="@+id/btn_complete"
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:enabled="@{viewModel.isRealNameValid, default=false}"

@@ -16,8 +16,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
         setupViewModel()
         setupEditText()
         onRealNameChanged()
-        setupNextButtonListener()
-
+        setupCompleteButtonListener()
     }
 
     private fun setupViewModel() {
@@ -38,8 +37,9 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
         }
     }
 
-    private fun setupNextButtonListener() {
-        binding.btnNext.setOnClickListener {
+    private fun setupCompleteButtonListener() {
+        binding.btnComplete.setOnClickListener {
+            signUpViewModel.signUpJunior()
             navigateToHomeActivity()
         }
     }
