@@ -3,6 +3,7 @@ package com.lgtm.android.data.repository
 import com.lgtm.android.data.datasource.AuthDataSource
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
 import com.lgtm.android.data.model.request.SignUpJuniorRequestDTO
+import com.lgtm.android.data.model.request.SignUpSeniorRequestDTO
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
 import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
@@ -47,13 +48,13 @@ class AuthRepositoryImpl @Inject constructor(
                 githubId = signUpJuniorVO.githubId,
                 githubOauthId = signUpJuniorVO.githubOauthId,
                 nickName = signUpJuniorVO.nickName,
-                deviceToken = signUpJuniorVO.deviceToken ?: null,
+                deviceToken = signUpJuniorVO.deviceToken,
                 profileImageUrl = signUpJuniorVO.profileImageUrl,
                 introduction = signUpJuniorVO.introduction,
                 tagList = signUpJuniorVO.tagList,
                 educationalHistory = signUpJuniorVO.educationalHistory,
                 realName = signUpJuniorVO.realName,
-                agreeWithEventInfo = signUpJuniorVO.isAgreeWithEventInfo
+                isAgreeWithEventInfo = signUpJuniorVO.isAgreeWithEventInfo
             )
         )
         if (response.success)
@@ -62,8 +63,25 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun signUpSenior(signUpSeniorVO: SignUpSeniorRequestVO): Result<SignUpResponseVO> {
-        TODO("Not yet implemented")
+        val response = authDataSource.signUpSenior(
+            SignUpSeniorRequestDTO(
+                githubId = signUpSeniorVO.githubId,
+                githubOauthId = signUpSeniorVO.githubOauthId,
+                nickName = signUpSeniorVO.nickName,
+                deviceToken = signUpSeniorVO.deviceToken,
+                profileImageUrl = signUpSeniorVO.profileImageUrl,
+                introduction = signUpSeniorVO.introduction,
+                tagList = signUpSeniorVO.tagList,
+                accountNumber = signUpSeniorVO.accountNumber,
+                bankName = signUpSeniorVO.bankName,
+                careerPeriod = signUpSeniorVO.careerPeriod,
+                companyInfo = signUpSeniorVO.companyInfo,
+                position = signUpSeniorVO.position,
+                isAgreeWithEventInfo = signUpSeniorVO.isAgreeWithEventInfo
+            )
+        )
+        if (response.success)
+            return Result.success(response.data.toVO())
+        return Result.failure(Exception(response.message))
     }
-
-
 }

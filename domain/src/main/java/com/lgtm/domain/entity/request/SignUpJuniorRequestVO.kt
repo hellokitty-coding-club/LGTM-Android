@@ -1,5 +1,7 @@
 package com.lgtm.domain.entity.request
 
+import com.google.gson.annotations.SerializedName
+
 
 data class SignUpJuniorRequestVO(
     val githubId: String,
@@ -11,5 +13,6 @@ data class SignUpJuniorRequestVO(
     val tagList: List<String>,
     val educationalHistory: String,
     val realName: String,
+    @SerializedName("agreeWithEventInfo")
     val isAgreeWithEventInfo: Boolean
 )

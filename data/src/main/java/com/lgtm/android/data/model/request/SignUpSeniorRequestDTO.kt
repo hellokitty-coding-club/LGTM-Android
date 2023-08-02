@@ -1,12 +1,15 @@
 package com.lgtm.android.data.model.request
 
+import com.google.gson.annotations.SerializedName
+
 data class SignUpSeniorRequestDTO(
     val accountNumber: String,
-    val agreeWithEventInfo: Boolean,
+    @SerializedName("agreeWithEventInfo")
+    val isAgreeWithEventInfo: Boolean,
     val bankName: String,
     val careerPeriod: Int,
     val companyInfo: String,
-    val deviceToken: String,
+    val deviceToken: String?,
     val githubId: String,
     val githubOauthId: Int,
     val introduction: String,
