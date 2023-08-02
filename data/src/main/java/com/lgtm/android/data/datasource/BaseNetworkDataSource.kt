@@ -13,7 +13,7 @@ abstract class BaseNetworkDataSource {
             throw HttpResponseException(
                 status = HttpResponseStatus.create(response.code()),
                 httpCode = response.code(),
-                errorRequestUrl = response.raw().request.url.toString(),
+                errorRequestUrl = "errorBody 형식 맞추면 변경", //todo
                 msg = "Http Request Failed (${response.code()}) ${response.message()}, $errorBody",
                 cause = Throwable(errorBody),
             )

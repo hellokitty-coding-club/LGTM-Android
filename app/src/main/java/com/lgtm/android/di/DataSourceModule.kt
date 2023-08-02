@@ -1,8 +1,10 @@
 package com.lgtm.android.di
 
 import android.content.SharedPreferences
+import com.lgtm.android.data.datasource.AuthDataSource
 import com.lgtm.android.data.datasource.IntroDataSource
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
+import com.lgtm.android.data.service.AuthService
 import com.lgtm.android.data.service.IntroService
 import dagger.Module
 import dagger.Provides
@@ -28,6 +30,14 @@ object DataSourceModule {
         @EncryptedPreference encryptedSharedPreferences: SharedPreferences
     ): LgtmPreferenceDataSource {
         return LgtmPreferenceDataSource(sharedPreferences, encryptedSharedPreferences)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthDataSource(
+        authService: AuthService,
+    ): AuthDataSource {
+        return AuthDataSource(authService)
     }
 
 }
