@@ -26,6 +26,13 @@ class AuthRepositoryImpl @Inject constructor(
         saveMemberType(requireNotNull(memberData.memberType))
     }
 
+    override fun saveUserData(signUpResponseVO: SignUpResponseVO, memberType: String?) {
+        saveAccessToken(requireNotNull(signUpResponseVO.accessToken))
+        saveRefreshToken(requireNotNull(signUpResponseVO.refreshToken))
+        saveMemberType(requireNotNull(memberType))  // todo 추후에 SignUpResponseVO에 memberType이 추가되면 변경
+    }
+
+
     override fun saveAccessToken(accessToken: String) {
         lgtmPreferenceDataSource.setValue(
             preferenceKey = PreferenceKey.ACCESS_TOKEN,

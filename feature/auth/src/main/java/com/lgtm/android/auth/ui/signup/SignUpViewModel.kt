@@ -371,6 +371,7 @@ class SignUpViewModel @Inject constructor(
                 _signUpState.value = NetworkState.Failure(e.toString())
                 return@launch
             }.onSuccess {
+                authRepository.saveUserData(it, selectedRole.value?.role)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
@@ -388,6 +389,7 @@ class SignUpViewModel @Inject constructor(
                 _signUpState.value = NetworkState.Failure(e.toString())
                 return@launch
             }.onSuccess {
+                authRepository.saveUserData(it, selectedRole.value?.role)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
