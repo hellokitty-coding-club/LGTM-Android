@@ -2,6 +2,7 @@ package com.lgtm.android.data.repository
 
 import com.lgtm.android.data.datasource.AuthDataSource
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
+import com.lgtm.android.data.datasource.LgtmPreferenceDataSource.Companion.PreferenceKey
 import com.lgtm.android.data.model.request.DeviceTokenRequest
 import com.lgtm.android.data.model.request.SignUpJuniorRequestDTO
 import com.lgtm.android.data.model.request.SignUpSeniorRequestDTO
@@ -26,22 +27,37 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override fun saveAccessToken(accessToken: String) {
-        lgtmPreferenceDataSource.setAccessToken(accessToken)
+        lgtmPreferenceDataSource.setValue(
+            preferenceKey = PreferenceKey.ACCESS_TOKEN,
+            value = "Bearer $accessToken",
+            isEncrypted = true
+        )
     }
 
     override fun saveRefreshToken(refreshToken: String) {
-        lgtmPreferenceDataSource.setRefreshToken(refreshToken)
+        lgtmPreferenceDataSource.setValue(
+            preferenceKey = PreferenceKey.REFRESH_TOKEN,
+            value = "Bearer $refreshToken",
+            isEncrypted = true
+        )
     }
 
     override fun saveMemberType(memberType: String) {
         check(Role.isProperRole(memberType)) {
             "memberType must be SENIOR or JUNIOR"
         }
-        lgtmPreferenceDataSource.setMemberType(memberType)
+        lgtmPreferenceDataSource.setValue(
+            preferenceKey = PreferenceKey.MEMBER_TYPE,
+            value = memberType,
+            isEncrypted = false
+        )
     }
 
     override fun isAutoLoginAvailable(): Boolean {
-        return lgtmPreferenceDataSource.isAutoLogin()
+        return lgtmPreferenceDataSource.getValue(
+            preferenceKey = PreferenceKey.IS_AUTO_LOGIN,
+            defaultValue = false,
+        )
     }
 
     override suspend fun signUpJunior(signUpJuniorVO: SignUpJuniorRequestVO): Result<SignUpResponseVO> {

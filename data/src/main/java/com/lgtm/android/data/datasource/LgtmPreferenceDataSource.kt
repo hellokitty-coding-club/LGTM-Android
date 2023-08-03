@@ -8,45 +8,38 @@ class LgtmPreferenceDataSource @Inject constructor(
     private val lgtmEncryptedPreferences: SharedPreferences
 ) {
 
-    fun getMemberType(): String {
-        return lgtmPreference.getString(MEMBER_TYPE, UNKNOWN_MEMBER_TYPE) ?: UNKNOWN_MEMBER_TYPE
+    fun <T> getValue(
+        preferenceKey: PreferenceKey,
+        defaultValue: T,
+        isEncrypted: Boolean = false
+    ): T {
+        val preference = if (isEncrypted) lgtmEncryptedPreferences else lgtmPreference
+        val key = preferenceKey.name
+        return when (defaultValue) {
+            is String -> preference.getString(key, defaultValue) as T
+            is Boolean -> preference.getBoolean(key, defaultValue) as T
+            else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}}")
+        }
     }
 
-    fun setMemberType(value: String) {
-        lgtmPreference.edit { putString(MEMBER_TYPE, value) }
-    }
-
-    fun isAutoLogin(): Boolean {
-        return lgtmPreference.getBoolean(IS_AUTO_LOGIN, false)
-    }
-
-    fun setAutoLogin(value: Boolean) {
-        lgtmPreference.edit { putBoolean(IS_AUTO_LOGIN, value) }
-    }
-
-    fun getAccessToken(): String {
-        val token = lgtmEncryptedPreferences.getString(ACCESS_TOKEN, "") ?: ""
-        return if (token.isEmpty()) "" else "Bearer $token"
-    }
-
-    fun setAccessToken(value: String) {
-        lgtmEncryptedPreferences.edit { putString(ACCESS_TOKEN, value) }
-    }
-
-    fun getRefreshToken(): String {
-        return lgtmEncryptedPreferences.getString(REFRESH_TOKEN, "") ?: ""
-    }
-
-    fun setRefreshToken(value: String) {
-        lgtmEncryptedPreferences.edit { putString(REFRESH_TOKEN, value) }
+    fun <T> setValue(preferenceKey: PreferenceKey, value: T, isEncrypted: Boolean = false) {
+        val preference = if (isEncrypted) lgtmEncryptedPreferences else lgtmPreference
+        val key = preferenceKey.name
+        when (value) {
+            is String -> preference.edit { putString(key, value) }
+            is Boolean -> preference.edit { putBoolean(key, value) }
+            else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}}")
+        }
     }
 
     companion object {
-        private const val MEMBER_TYPE = "member_type"
-        private const val UNKNOWN_MEMBER_TYPE = "unknown_member_type"
-        private const val IS_AUTO_LOGIN = "isAutoLogin"
-        private const val ACCESS_TOKEN = "access_token"
-        private const val REFRESH_TOKEN = "refresh_token"
+        enum class PreferenceKey {
+            MEMBER_TYPE,
+            UNKNOWN_MEMBER_TYPE,
+            IS_AUTO_LOGIN,
+            ACCESS_TOKEN,
+            REFRESH_TOKEN;
+        }
     }
 
     private inline fun SharedPreferences.edit(operation: SharedPreferences.Editor.() -> Unit) {

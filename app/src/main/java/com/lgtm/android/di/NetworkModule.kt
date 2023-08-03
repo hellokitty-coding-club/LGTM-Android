@@ -4,6 +4,7 @@ import com.lgtm.android.BuildConfig.DEBUG
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_DEBUG
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_RELEASE
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
+import com.lgtm.android.data.datasource.LgtmPreferenceDataSource.Companion.PreferenceKey
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,11 +30,14 @@ object NetworkModule {
         lgtmPreferenceDataSource: LgtmPreferenceDataSource
     ): Interceptor =
         Interceptor { chain ->
+            val accessToken = lgtmPreferenceDataSource.getValue(
+                preferenceKey = PreferenceKey.ACCESS_TOKEN, defaultValue = "", isEncrypted = true
+            )
             with(chain) {
                 proceed(
                     request()
                         .newBuilder()
-                        .addHeader(AUTHORIZATION, lgtmPreferenceDataSource.getAccessToken())
+                        .addHeader(AUTHORIZATION, accessToken)
                         .build()
                 )
             }
