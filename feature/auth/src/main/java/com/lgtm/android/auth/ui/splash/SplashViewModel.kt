@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.IntroRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val introRepository: IntroRepository
+    private val introRepository: IntroRepository,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _minVersion = MutableLiveData<Int>()
     val minVersion: LiveData<Int> = _minVersion
@@ -34,7 +36,6 @@ class SplashViewModel @Inject constructor(
     }
 
     fun isAutoLoginAvailable(): Boolean {
-        // TODO 로그인 로직 완성할때, sharedPreference 활용해서 세부 로직 작성 예정
-        return false
+        return authRepository.isAutoLoginAvailable()
     }
 }

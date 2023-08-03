@@ -36,7 +36,6 @@ class LgtmPreferenceDataSource @Inject constructor(
         enum class PreferenceKey {
             MEMBER_TYPE,
             UNKNOWN_MEMBER_TYPE,
-            IS_AUTO_LOGIN,
             ACCESS_TOKEN,
             REFRESH_TOKEN;
         }

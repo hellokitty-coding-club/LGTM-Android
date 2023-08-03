@@ -61,10 +61,12 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override fun isAutoLoginAvailable(): Boolean {
-        return lgtmPreferenceDataSource.getValue(
-            preferenceKey = PreferenceKey.IS_AUTO_LOGIN,
-            defaultValue = false,
+        val token = lgtmPreferenceDataSource.getValue(
+            preferenceKey = PreferenceKey.ACCESS_TOKEN,
+            defaultValue = "",
+            isEncrypted = true
         )
+        return token != ""
     }
 
     override suspend fun signUpJunior(signUpJuniorVO: SignUpJuniorRequestVO): Result<SignUpResponseVO> {
