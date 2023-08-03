@@ -1,5 +1,7 @@
 package com.lgtm.android.auth.ui
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +22,7 @@ class SignInViewModel @Inject constructor(
     fun parseGithubLoginJsonResponse(json: String) {
         val jsonData: String = extractJson(json)
         val response: GithubLoginResponse = parseJsonToGithubLoginResponse(jsonData)
+        Log.d(TAG, "GithubLoginJsonResponse: $response")
         _githubLoginResponse.postValue(response)
     }
 

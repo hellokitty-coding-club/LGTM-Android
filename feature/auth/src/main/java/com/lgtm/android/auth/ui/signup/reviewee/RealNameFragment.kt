@@ -1,12 +1,16 @@
 package com.lgtm.android.auth.ui.signup.reviewee
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentRealNameBinding
+import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.NetworkState
 
 
 class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment_real_name) {
@@ -16,8 +20,8 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
         setupViewModel()
         setupEditText()
         onRealNameChanged()
-        setupNextButtonListener()
-
+        setupCompleteButtonListener()
+        observeSignUpStatus()
     }
 
     private fun setupViewModel() {
@@ -38,14 +42,38 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
         }
     }
 
-    private fun setupNextButtonListener() {
-        binding.btnNext.setOnClickListener {
-            navigateToHomeActivity()
+    private fun setupCompleteButtonListener() {
+        binding.btnComplete.setOnClickListener {
+            signUpViewModel.signUpJunior()
+        }
+    }
+
+    private fun observeSignUpStatus() {
+        signUpViewModel.signUpState.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkState.Init -> {
+                    /* no-op */
+                }
+
+                is NetworkState.Success -> {
+                    navigateToHomeActivity()
+                }
+
+                is NetworkState.Failure -> {
+                    navigateToSignInActivity()
+                    Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
     private fun navigateToHomeActivity() {
-//        findNavController().navigate(R.id.action_nicknameFragment_to_techTagFragment)
+        // todo : navigate to home activity
+    }
+
+    private fun navigateToSignInActivity() {
+        startActivity(Intent(requireContext(), SignInActivity::class.java))
+        requireActivity().finish()
     }
 
 
