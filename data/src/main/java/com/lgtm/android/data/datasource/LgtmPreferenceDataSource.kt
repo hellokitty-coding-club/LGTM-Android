@@ -25,7 +25,8 @@ class LgtmPreferenceDataSource @Inject constructor(
     }
 
     fun getAccessToken(): String {
-        return lgtmEncryptedPreferences.getString(ACCESS_TOKEN, "") ?: ""
+        val token = lgtmEncryptedPreferences.getString(ACCESS_TOKEN, "") ?: ""
+        return if (token.isEmpty()) "" else "Bearer $token"
     }
 
     fun setAccessToken(value: String) {
