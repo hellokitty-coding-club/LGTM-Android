@@ -1,5 +1,6 @@
 package com.lgtm.domain.repository
 
+import com.lgtm.domain.entity.request.DeviceTokenRequestVO
 import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
 import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
@@ -13,5 +14,6 @@ interface AuthRepository {
     fun isAutoLoginAvailable(): Boolean
     suspend fun signUpJunior(signUpJuniorVO: SignUpJuniorRequestVO): Result<SignUpResponseVO>
     suspend fun signUpSenior(signUpSeniorVO: SignUpSeniorRequestVO): Result<SignUpResponseVO>
+    suspend fun patchDeviceToken(deviceTokenRequestVO: DeviceTokenRequestVO): Result<Boolean>
 
 }

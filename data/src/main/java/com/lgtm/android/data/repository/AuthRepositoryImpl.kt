@@ -2,9 +2,11 @@ package com.lgtm.android.data.repository
 
 import com.lgtm.android.data.datasource.AuthDataSource
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
+import com.lgtm.android.data.model.request.DeviceTokenRequest
 import com.lgtm.android.data.model.request.SignUpJuniorRequestDTO
 import com.lgtm.android.data.model.request.SignUpSeniorRequestDTO
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.request.DeviceTokenRequestVO
 import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
 import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
@@ -86,6 +88,17 @@ class AuthRepositoryImpl @Inject constructor(
             return Result.success(response.data.toVO())
         } catch (e: Exception) {
             return Result.failure(e)
+        }
+    }
+
+    override suspend fun patchDeviceToken(deviceTokenRequestVO: DeviceTokenRequestVO): Result<Boolean> {
+        return try {
+            val response = authDataSource.patchDeviceToken(
+                DeviceTokenRequest(deviceToken = deviceTokenRequestVO.deviceToken)
+            )
+            Result.success(response.data)
+        } catch (e: Exception) {
+            Result.failure(e)
         }
     }
 }
