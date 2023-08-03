@@ -10,6 +10,7 @@ import com.lgtm.android.auth.databinding.ActivitySignInBinding
 import com.lgtm.android.auth.ui.github.GithubBottomSheet
 import com.lgtm.android.auth.ui.signup.SignUpActivity
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.NetworkState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         setAnimationOnGithubButton()
         initClickListener()
         observeGithubLoginResponse()
+        observePatchDeviceTokenStatus()
     }
 
     private fun setAnimationOnGithubButton() {
@@ -55,14 +57,26 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun onGithubLoginSuccess() {
         when (signInViewModel.isRegisteredUser()) {
-            true -> {
-                moveToMainActivity()
-                saveMemberData()
-            }
-
+            true -> signInViewModel.patchDeviceToken()
             false -> moveToSignUpActivity()
         }
         finish()
+    }
+
+    private fun observePatchDeviceTokenStatus() {
+        signInViewModel.patchDeviceTokenState.observe(this) {
+            when (it) {
+                is NetworkState.Init -> {}/* no-op */
+                is NetworkState.Success -> {
+                    moveToMainActivity()
+                    saveMemberData()
+                }
+
+                is NetworkState.Failure -> Toast.makeText(
+                    this, it.msg, Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     private fun moveToMainActivity() {

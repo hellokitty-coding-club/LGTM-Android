@@ -317,7 +317,7 @@ class SignUpViewModel @Inject constructor(
         val githubOauthId =
             memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
         val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
-        val deviceToken = null // todo get device token
+        val deviceToken = getDeviceToken()
         val profileImageUrl = memberData.value?.profileImageUrl
             ?: throw SignUpFailedException("profileImageUrl is null")
         val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
@@ -333,12 +333,13 @@ class SignUpViewModel @Inject constructor(
         )
     }
 
+    // todo trim 적용
     private fun createSignUpSeniorRequestVO(): SignUpSeniorRequestVO {
         val githubId = memberData.value?.githubId ?: throw SignUpFailedException("githubId is null")
         val githubOauthId =
             memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
         val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
-        val deviceToken = null // todo get device token
+        val deviceToken = getDeviceToken()
         val profileImageUrl = memberData.value?.profileImageUrl
             ?: throw SignUpFailedException("profileImageUrl is null")
         val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
@@ -393,6 +394,10 @@ class SignUpViewModel @Inject constructor(
                 _signUpState.value = NetworkState.Failure(errorMessage)
             }
         }
+    }
+
+    private fun getDeviceToken(): String {
+        return "device_token_temp" // todo
     }
 
     companion object {
