@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.entity.LgtmResponseException
-import com.lgtm.domain.entity.request.DeviceTokenRequestVO
 import com.lgtm.domain.entity.response.GithubLoginResponse
 import com.lgtm.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +17,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
+
+    private val deviceToken = MutableLiveData<String?>()
+
+    private fun getDeviceToken() {
+        authRepository.getDeviceToken { deviceToken.value = it }
+    }
+
+    init {
+        getDeviceToken()
+    }
 
     private val _githubLoginResponse = MutableLiveData<GithubLoginResponse>()
     val githubLoginResponse: LiveData<GithubLoginResponse> = _githubLoginResponse
@@ -63,9 +72,8 @@ class SignInViewModel @Inject constructor(
 
     fun patchDeviceToken() {
         viewModelScope.launch {
-            val deviceToken: String? = getDeviceToken()
-            val deviceTokenRequestVO = DeviceTokenRequestVO(deviceToken)
-            authRepository.patchDeviceToken(deviceTokenRequestVO)
+            val deviceToken: String? = deviceToken.value
+            authRepository.patchDeviceToken(deviceToken)
                 .onSuccess {
                     _patchDeviceTokenState.value = NetworkState.Success(it)
                 }.onFailure {
@@ -74,9 +82,5 @@ class SignInViewModel @Inject constructor(
                     _patchDeviceTokenState.value = NetworkState.Failure(errorMessage)
                 }
         }
-    }
-
-    private fun getDeviceToken(): String {
-        return "device_token_temp" // todo
     }
 }
