@@ -338,8 +338,8 @@ class SignUpViewModel @Inject constructor(
                 realName = requireNotNull(realName.value),
                 isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false
             )
-        } catch (e: NullPointerException) {
-            throw SignUpFailedException("SignUpJuniorRequestVO's Field is null")
+        } catch (e: IllegalArgumentException) {
+            throw SignUpFailedException("입력되지 않은 항목이 있습니다")
         }
     }
 
@@ -361,8 +361,8 @@ class SignUpViewModel @Inject constructor(
                 bankName = requireNotNull(selectedBank.value?.bankVO?.bank),
                 accountNumber = requireNotNull(accountNumber.value)
             )
-        } catch (e: NullPointerException) {
-            throw SignUpFailedException("SignUpSeniorRequestVO's Field is null")
+        } catch (e: IllegalArgumentException) {
+            throw SignUpFailedException("입력되지 않은 항목이 있습니다")
         }
     }
 
@@ -376,7 +376,7 @@ class SignUpViewModel @Inject constructor(
                 val signUpJuniorRequestVO = createSignUpJuniorRequestVO()
                 authRepository.signUpJunior(signUpJuniorRequestVO)
             } catch (e: SignUpFailedException) {
-                _signUpState.value = NetworkState.Failure(e.toString())
+                _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
                 authRepository.saveUserData(it, selectedRole.value?.role)
@@ -394,7 +394,7 @@ class SignUpViewModel @Inject constructor(
                 val signUpSeniorRequestVO = createSignUpSeniorRequestVO()
                 authRepository.signUpSenior(signUpSeniorRequestVO)
             } catch (e: SignUpFailedException) {
-                _signUpState.value = NetworkState.Failure(e.toString())
+                _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
                 authRepository.saveUserData(it, selectedRole.value?.role)
