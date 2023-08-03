@@ -3,6 +3,7 @@ package com.lgtm.android.di
 import com.lgtm.android.BuildConfig.DEBUG
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_DEBUG
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_RELEASE
+import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,14 +21,19 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
+    private const val AUTHORIZATION = "Authorization"
+
     @Provides
     @Singleton
-    fun providesLGTMInterceptor(): Interceptor =
+    fun providesLGTMInterceptor(
+        lgtmPreferenceDataSource: LgtmPreferenceDataSource
+    ): Interceptor =
         Interceptor { chain ->
             with(chain) {
                 proceed(
                     request()
-                        .newBuilder() // add header (jwt) 생략
+                        .newBuilder()
+                        .addHeader(AUTHORIZATION, lgtmPreferenceDataSource.getAccessToken())
                         .build()
                 )
             }
