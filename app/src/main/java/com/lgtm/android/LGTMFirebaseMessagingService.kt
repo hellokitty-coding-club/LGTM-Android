@@ -6,23 +6,23 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.lgtm.android.common_ui.R
+import com.lgtm.domain.firebase.LgtmMessagingService
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class LGTMFirebaseMessagingService : FirebaseMessagingService() {
+class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingService {
     @Inject
     lateinit var firebaseTokenManager: FirebaseTokenManager
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        firebaseTokenManager.fetchFcmToken(token)
+        firebaseTokenManager.patchFcmToken(token)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -62,25 +62,21 @@ class LGTMFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(requestCode, builder.build())
     }
 
-    companion object {
+    override fun getDeviceToken(tokenCallBack: (String?) -> Unit) {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.e("TokenTest", "Fetching FCM registration token failed", task.exception)
+                tokenCallBack(null)
+            } else {
+                val token = task.result
+                tokenCallBack(token)
+            }
+        }
+    }
 
+    companion object {
         const val channelID = "LGTM Notice"
         const val channelNotice = "공지사항"
         const val channelUserNotice = "사용자 알림"
-
-        fun getDeviceToken() {
-            FirebaseMessaging.getInstance().token.addOnCompleteListener(
-                OnCompleteListener { task ->
-                    if (!task.isSuccessful) {
-                        Log.d("TokenTest", "Fetching FCM registration token failed", task.exception)
-                        return@OnCompleteListener
-                    }
-
-                    // Get new FCM registration token
-                    val token = task.result
-                    Log.d("TokenTest", token)
-                }
-            )
-        }
     }
 }

@@ -7,17 +7,18 @@ import com.lgtm.android.data.model.request.DeviceTokenRequest
 import com.lgtm.android.data.model.request.SignUpJuniorRequestDTO
 import com.lgtm.android.data.model.request.SignUpSeniorRequestDTO
 import com.lgtm.domain.constants.Role
-import com.lgtm.domain.entity.request.DeviceTokenRequestVO
 import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
 import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
 import com.lgtm.domain.entity.response.SignUpResponseVO
+import com.lgtm.domain.firebase.LgtmMessagingService
 import com.lgtm.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val lgtmPreferenceDataSource: LgtmPreferenceDataSource,
-    private val authDataSource: AuthDataSource
+    private val authDataSource: AuthDataSource,
+    private val lgtmFirebaseMessagingService: LgtmMessagingService
 ) : AuthRepository {
 
     override fun saveUserData(memberData: MemberDataDTO) {
@@ -116,11 +117,13 @@ class AuthRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun patchDeviceToken(deviceTokenRequestVO: DeviceTokenRequestVO): Result<Boolean> {
+    override fun getDeviceToken(tokenCallBack: (String?) -> Unit) {
+        lgtmFirebaseMessagingService.getDeviceToken(tokenCallBack)
+    }
+
+    override suspend fun patchDeviceToken(token: String?): Result<Boolean> {
         return try {
-            val response = authDataSource.patchDeviceToken(
-                DeviceTokenRequest(deviceToken = deviceTokenRequestVO.deviceToken)
-            )
+            val response = authDataSource.patchDeviceToken(DeviceTokenRequest(deviceToken = token))
             Result.success(response.data)
         } catch (e: Exception) {
             Result.failure(e)
