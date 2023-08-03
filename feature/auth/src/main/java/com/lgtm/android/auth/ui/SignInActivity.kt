@@ -57,10 +57,16 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private fun onGithubLoginSuccess() {
         when (signInViewModel.isRegisteredUser()) {
-            true -> signInViewModel.patchDeviceToken()
-            false -> moveToSignUpActivity()
+            true -> { // 순서 보장 중요
+                saveMemberData()
+                signInViewModel.patchDeviceToken()
+            }
+
+            false -> {
+                moveToSignUpActivity()
+                finish()
+            }
         }
-        finish()
     }
 
     private fun observePatchDeviceTokenStatus() {
@@ -69,12 +75,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                 is NetworkState.Init -> {}/* no-op */
                 is NetworkState.Success -> {
                     moveToMainActivity()
-                    saveMemberData()
+                    finish()
                 }
 
-                is NetworkState.Failure -> Toast.makeText(
-                    this, it.msg, Toast.LENGTH_SHORT
-                ).show()
+                is NetworkState.Failure -> Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
             }
         }
     }
