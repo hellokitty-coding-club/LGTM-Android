@@ -29,9 +29,21 @@ import javax.inject.Inject
 class SignUpViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ) : ViewModel() {
+
+    /** Device Token */
+    private val deviceToken = MutableLiveData<String?>()
+
+    private fun getDeviceToken() {
+        authRepository.getDeviceToken { deviceToken.value = it }
+    }
+
+    init {
+        getDeviceToken()
+    }
+
     /** Member Data */
     private val _memberData = MutableLiveData<MemberDataDTO>()
-    val memberData: LiveData<MemberDataDTO> = _memberData
+    private val memberData: LiveData<MemberDataDTO> = _memberData
 
     fun parseAndSetMemberDataJson(memberDataJson: String) {
         _memberData.value = Gson().fromJson(memberDataJson, MemberDataDTO::class.java)
@@ -313,48 +325,45 @@ class SignUpViewModel @Inject constructor(
     }
 
     private fun createSignUpJuniorRequestVO(): SignUpJuniorRequestVO {
-        val githubId = memberData.value?.githubId ?: throw SignUpFailedException("githubId is null")
-        val githubOauthId =
-            memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
-        val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
-        val deviceToken = null // todo get device token
-        val profileImageUrl = memberData.value?.profileImageUrl
-            ?: throw SignUpFailedException("profileImageUrl is null")
-        val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
-        val tagList = techTagList.value ?: throw SignUpFailedException("tagList is null")
-        val educationalHistory = educationStatus.value?.status
-            ?: throw SignUpFailedException("educationalHistory is null")
-        val realName = realName.value ?: throw SignUpFailedException("realName is null")
-        val agreeWithEventInfo = isAgreeWithEventInfo.value ?: false
-
-        return SignUpJuniorRequestVO(
-            githubId, githubOauthId, nickName, deviceToken, profileImageUrl, introduction,
-            tagList, educationalHistory, realName, agreeWithEventInfo
-        )
+        return try {
+            SignUpJuniorRequestVO(
+                githubId = requireNotNull(memberData.value?.githubId),
+                githubOauthId = requireNotNull(memberData.value?.githubOauthId),
+                nickName = requireNotNull(nickname.value),
+                deviceToken = deviceToken.value,
+                profileImageUrl = requireNotNull(memberData.value?.profileImageUrl),
+                introduction = requireNotNull(introduction.value),
+                tagList = requireNotNull(techTagList.value),
+                educationalHistory = requireNotNull(educationStatus.value?.status),
+                realName = requireNotNull(realName.value),
+                isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false
+            )
+        } catch (e: IllegalArgumentException) {
+            throw SignUpFailedException("입력되지 않은 항목이 있습니다")
+        }
     }
 
+    // todo usecase 에서 create & trim
     private fun createSignUpSeniorRequestVO(): SignUpSeniorRequestVO {
-        val githubId = memberData.value?.githubId ?: throw SignUpFailedException("githubId is null")
-        val githubOauthId =
-            memberData.value?.githubOauthId ?: throw SignUpFailedException("githubOauthId is null")
-        val nickName = nickname.value ?: throw SignUpFailedException("nickname is null")
-        val deviceToken = null // todo get device token
-        val profileImageUrl = memberData.value?.profileImageUrl
-            ?: throw SignUpFailedException("profileImageUrl is null")
-        val introduction = introduction.value ?: throw SignUpFailedException("introduction is null")
-        val isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false
-        val tagList = techTagList.value ?: throw SignUpFailedException("tagList is null")
-        val companyName = companyName.value ?: throw SignUpFailedException("companyName is null")
-        val careerPeriod = careerPeriod.value ?: throw SignUpFailedException("careerPeriod is null")
-        val position = position.value ?: throw SignUpFailedException("position is null")
-        val accountNumber =
-            accountNumber.value ?: throw SignUpFailedException("accountnumber is null")
-        val bank = selectedBank.value?.bankVO?.bank ?: throw SignUpFailedException("bank is null")
-
-        return SignUpSeniorRequestVO(
-            githubId, githubOauthId, nickName, deviceToken, profileImageUrl, introduction,
-            isAgreeWithEventInfo, tagList, companyName, careerPeriod, position, accountNumber, bank
-        )
+        return try {
+            SignUpSeniorRequestVO(
+                githubId = requireNotNull(memberData.value?.githubId),
+                githubOauthId = requireNotNull(memberData.value?.githubOauthId),
+                nickName = requireNotNull(nickname.value),
+                deviceToken = deviceToken.value,
+                profileImageUrl = requireNotNull(memberData.value?.profileImageUrl),
+                introduction = requireNotNull(introduction.value),
+                tagList = requireNotNull(techTagList.value),
+                companyInfo = requireNotNull(companyName.value),
+                position = requireNotNull(position.value),
+                careerPeriod = requireNotNull(careerPeriod.value),
+                isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false,
+                bankName = requireNotNull(selectedBank.value?.bankVO?.bank),
+                accountNumber = requireNotNull(accountNumber.value)
+            )
+        } catch (e: IllegalArgumentException) {
+            throw SignUpFailedException("입력되지 않은 항목이 있습니다")
+        }
     }
 
     private val _signUpState: MutableLiveData<NetworkState<SignUpResponseVO>> =
@@ -367,9 +376,10 @@ class SignUpViewModel @Inject constructor(
                 val signUpJuniorRequestVO = createSignUpJuniorRequestVO()
                 authRepository.signUpJunior(signUpJuniorRequestVO)
             } catch (e: SignUpFailedException) {
-                _signUpState.value = NetworkState.Failure(e.toString())
+                _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
+                authRepository.saveUserData(it, selectedRole.value?.role)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
@@ -384,9 +394,10 @@ class SignUpViewModel @Inject constructor(
                 val signUpSeniorRequestVO = createSignUpSeniorRequestVO()
                 authRepository.signUpSenior(signUpSeniorRequestVO)
             } catch (e: SignUpFailedException) {
-                _signUpState.value = NetworkState.Failure(e.toString())
+                _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
+                authRepository.saveUserData(it, selectedRole.value?.role)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"

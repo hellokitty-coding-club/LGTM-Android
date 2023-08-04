@@ -1,7 +1,9 @@
 package com.lgtm.android.auth.ui
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -10,6 +12,7 @@ import com.lgtm.android.auth.databinding.ActivitySignInBinding
 import com.lgtm.android.auth.ui.github.GithubBottomSheet
 import com.lgtm.android.auth.ui.signup.SignUpActivity
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.NetworkState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +25,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         setAnimationOnGithubButton()
         initClickListener()
         observeGithubLoginResponse()
+        observePatchDeviceTokenStatus()
     }
 
     private fun setAnimationOnGithubButton() {
@@ -48,21 +52,41 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         signInViewModel.githubLoginResponse.observe(this) {
             when (it.success) {
                 true -> onGithubLoginSuccess()
-                false -> makeToast("로그인 실패. 다시 시도해주세요.")
+                false -> {
+                    if (it.responseCode == 20000)
+                        Log.e(TAG, "GithubLogin: ${it.message}")
+                    makeToast("로그인 실패. 다시 시도해주세요.")
+                }
             }
         }
     }
 
     private fun onGithubLoginSuccess() {
         when (signInViewModel.isRegisteredUser()) {
-            true -> {
-                moveToMainActivity()
+            true -> { // 순서 보장 중요
                 saveMemberData()
+                signInViewModel.patchDeviceToken()
             }
 
-            false -> moveToSignUpActivity()
+            false -> {
+                moveToSignUpActivity()
+                finish()
+            }
         }
-        finish()
+    }
+
+    private fun observePatchDeviceTokenStatus() {
+        signInViewModel.patchDeviceTokenState.observe(this) {
+            when (it) {
+                is NetworkState.Init -> {}/* no-op */
+                is NetworkState.Success -> {
+                    moveToMainActivity()
+                    finish()
+                }
+
+                is NetworkState.Failure -> Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun moveToMainActivity() {

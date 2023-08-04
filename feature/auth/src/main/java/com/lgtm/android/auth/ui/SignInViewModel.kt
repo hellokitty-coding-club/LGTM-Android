@@ -5,16 +5,30 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.domain.entity.LgtmResponseException
 import com.lgtm.domain.entity.response.GithubLoginResponse
 import com.lgtm.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
+
+    private val deviceToken = MutableLiveData<String?>()
+
+    private fun getDeviceToken() {
+        authRepository.getDeviceToken { deviceToken.value = it }
+    }
+
+    init {
+        getDeviceToken()
+    }
 
     private val _githubLoginResponse = MutableLiveData<GithubLoginResponse>()
     val githubLoginResponse: LiveData<GithubLoginResponse> = _githubLoginResponse
@@ -49,5 +63,24 @@ class SignInViewModel @Inject constructor(
 
     private fun parseJsonToGithubLoginResponse(jsonData: String): GithubLoginResponse {
         return Gson().fromJson(jsonData, GithubLoginResponse::class.java)
+    }
+
+    private val _patchDeviceTokenState: MutableLiveData<NetworkState<Boolean>> = MutableLiveData(
+        NetworkState.Init
+    )
+    val patchDeviceTokenState: LiveData<NetworkState<Boolean>> = _patchDeviceTokenState
+
+    fun patchDeviceToken() {
+        viewModelScope.launch {
+            val deviceToken: String? = deviceToken.value
+            authRepository.patchDeviceToken(deviceToken)
+                .onSuccess {
+                    _patchDeviceTokenState.value = NetworkState.Success(it)
+                }.onFailure {
+                    val errorMessage =
+                        if (it is LgtmResponseException) it.message else "푸시 알림 설정 실패"
+                    _patchDeviceTokenState.value = NetworkState.Failure(errorMessage)
+                }
+        }
     }
 }

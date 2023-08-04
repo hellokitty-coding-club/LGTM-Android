@@ -57,10 +57,12 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
 
                 is NetworkState.Success -> {
                     navigateToHomeActivity()
+                    requireActivity().finish()
                 }
 
                 is NetworkState.Failure -> {
                     navigateToSignInActivity()
+                    requireActivity().finish()
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -73,7 +75,6 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
 
     private fun navigateToSignInActivity() {
         startActivity(Intent(requireContext(), SignInActivity::class.java))
-        requireActivity().finish()
     }
 
 

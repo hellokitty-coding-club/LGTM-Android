@@ -1,6 +1,6 @@
 package com.lgtm.domain.constants
 
-enum class Role(private val role: String) {
+enum class Role(val role: String) {
     REVIEWEE("JUNIOR"), REVIEWER("SENIOR");
 
     companion object {
