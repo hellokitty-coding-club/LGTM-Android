@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: LGTM PR Builder
+name: LGTM PR Builder & App Distribution
 
 on:
   pull_request:
@@ -51,6 +51,18 @@ jobs:
 
       - name: Build debug APK
         run: ./gradlew assembleDebug --stacktrace
+
+      - name: Upload apk to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          groups: hello-kitty-coding-club
+          file: app/build/outputs/apk/debug/app-debug.apk
+          releaseNotes: |
+            ${{ github.event.pull_request.title }}
+            ${{ github.event.pull_request.html_url }}
+            ${{ github.event.pull_request.body }}
 
       - name: On Success!! Congratulations
         if: ${{ success() }}
