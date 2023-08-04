@@ -1,7 +1,9 @@
 package com.lgtm.android.auth.ui
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -50,7 +52,11 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         signInViewModel.githubLoginResponse.observe(this) {
             when (it.success) {
                 true -> onGithubLoginSuccess()
-                false -> makeToast("로그인 실패. 다시 시도해주세요.")
+                false -> {
+                    if (it.responseCode == 20000)
+                        Log.e(TAG, "GithubLogin: ${it.message}")
+                    makeToast("로그인 실패. 다시 시도해주세요.")
+                }
             }
         }
     }
