@@ -59,6 +59,7 @@ jobs:
           token: ${{ secrets.FIREBASE_TOKEN }}
           groups: Hello-Kitty Coding-Club
           file: app/build/outputs/apk/debug/app-debug.apk
+          debug: true
           releaseNotes: |
             ${{ github.event.pull_request.title }}
             ${{ github.event.pull_request.html_url }}
