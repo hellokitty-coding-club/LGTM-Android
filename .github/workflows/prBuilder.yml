@@ -57,7 +57,7 @@ jobs:
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
           token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: Hello-Kitty Coding-Club
+          groups: trusted-testers
           file: app/build/outputs/apk/debug/app-debug.apk
           debug: true
           releaseNotes: |
