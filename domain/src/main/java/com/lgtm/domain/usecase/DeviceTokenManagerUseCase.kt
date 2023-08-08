@@ -1,7 +1,5 @@
-package com.lgtm.android
+package com.lgtm.domain.usecase
 
-import android.content.ContentValues
-import android.util.Log
 import com.lgtm.domain.firebase.FakeFirebaseTokenManager
 import com.lgtm.domain.repository.AuthRepository
 import kotlinx.coroutines.CoroutineScope
@@ -9,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FirebaseTokenManager @Inject constructor(
+class DeviceTokenManagerUseCase @Inject constructor(
     private val authRepository: AuthRepository,
 ) : FakeFirebaseTokenManager {
 
@@ -18,9 +16,9 @@ class FirebaseTokenManager @Inject constructor(
             kotlin.runCatching {
                 authRepository.patchDeviceToken(fcmToken)
             }.onSuccess {
-                Log.d(ContentValues.TAG, "onNewToken: success")
+                println("success")
             }.onFailure {
-                Log.e(ContentValues.TAG, "onNewToken: failure ${it.message}")
+                println("fail")
             }
         }
     }
