@@ -13,6 +13,9 @@ kotlinx-serialization-converter = "1.0.0"
 kotlinx-coroutines = "1.7.1"
 kotlinx-datetime = "0.4.0"
 
+# Java
+javax-inject = "1"
+
 # AndroidX Libraries
 corektx = "1.8.0"
 appcompat = "1.6.1"
@@ -70,6 +73,8 @@ kotlin-coroutines-google-play = { group = "org.jetbrains.kotlinx", name = "kotli
 kotlin-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlin-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
+javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inject" }
+
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
@@ -113,6 +118,7 @@ firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebas
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin-bom" }
 
 [bundles]
 
