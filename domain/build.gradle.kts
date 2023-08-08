@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     kotlin("jvm")
+    kotlin("kapt")
 }
 
 java {
@@ -10,4 +11,6 @@ java {
 
 dependencies {
     api(libs.bundles.gson)
+    implementation(libs.javax.inject)
+    implementation(libs.kotlin.coroutines)
 }
