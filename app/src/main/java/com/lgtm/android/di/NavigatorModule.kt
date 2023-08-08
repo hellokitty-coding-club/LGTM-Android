@@ -15,4 +15,5 @@ interface NavigatorModule {
     fun bindsSignInNavigator(
         signInNavigator: SignInNavigator
     ): FakeSignInNavigator
+
 }
