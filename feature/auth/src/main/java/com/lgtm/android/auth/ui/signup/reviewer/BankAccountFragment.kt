@@ -20,6 +20,9 @@ import com.lgtm.android.common_ui.util.NetworkState
 class BankAccountFragment :
     BaseFragment<FragmentBankAccountBinding>(R.layout.fragment_bank_account) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()

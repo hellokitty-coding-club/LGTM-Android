@@ -12,6 +12,9 @@ import com.lgtm.android.common_ui.base.BaseFragment
 class PositionFragment :
     BaseFragment<FragmentPositionBinding>(R.layout.fragment_position) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()

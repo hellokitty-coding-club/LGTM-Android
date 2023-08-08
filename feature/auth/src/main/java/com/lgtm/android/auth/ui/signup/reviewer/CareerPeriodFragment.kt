@@ -14,6 +14,9 @@ import com.lgtm.android.common_ui.base.BaseFragment
 class CareerPeriodFragment :
     BaseFragment<FragmentCareerPeriodBinding>(R.layout.fragment_career_period) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
