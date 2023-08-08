@@ -20,6 +20,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     private val signInViewModel by viewModels<SignInViewModel>()
 
+    override fun initializeViewModel() {
+        viewModel = signInViewModel
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setAnimationOnGithubButton()

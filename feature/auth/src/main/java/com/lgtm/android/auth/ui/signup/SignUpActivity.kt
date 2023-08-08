@@ -11,10 +11,13 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign_up) {
     private val signUpViewModel by viewModels<SignUpViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getExtraData()
+    }
+
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
     }
 
     private fun getExtraData() {

@@ -4,9 +4,9 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.entity.LgtmResponseException
 import com.lgtm.domain.entity.response.GithubLoginResponse
@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val deviceToken = MutableLiveData<String?>()
 
@@ -71,7 +71,7 @@ class SignInViewModel @Inject constructor(
     val patchDeviceTokenState: LiveData<NetworkState<Boolean>> = _patchDeviceTokenState
 
     fun patchDeviceToken() {
-        viewModelScope.launch {
+        viewModelScope.launch(lgtmErrorHandler) {
             val deviceToken: String? = deviceToken.value
             authRepository.patchDeviceToken(deviceToken)
                 .onSuccess {
