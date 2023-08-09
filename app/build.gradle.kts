@@ -58,6 +58,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":feature:auth"))
+    implementation(project(":feature:main"))
     implementation(project(":common-ui"))
 
     implementation(libs.hilt)
