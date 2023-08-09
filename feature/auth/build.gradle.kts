@@ -55,5 +55,4 @@ dependencies {
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
     api(libs.bundles.gson)
-    implementation(libs.lottie)
 }

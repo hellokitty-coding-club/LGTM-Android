@@ -12,6 +12,7 @@ kotlinx-serialization-json = "1.5.1"
 kotlinx-serialization-converter = "1.0.0"
 kotlinx-coroutines = "1.7.1"
 kotlinx-datetime = "0.4.0"
+kotlin-bom = "1.7.0"
 
 # Java
 javax-inject = "1"
