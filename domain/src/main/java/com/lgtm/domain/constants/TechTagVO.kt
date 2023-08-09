@@ -4,15 +4,15 @@ enum class TechTagVO(val stack: String) {
     JAVA("Java"),
     PYTHON("Python"),
     JAVASCRIPT("JavaScript"),
-    TENSORFLOW("TensorFlow"),
-    SPRING("Spring"),
-    REACT("React"),
     ANDROID("Android"),
-    NODEJS("NodeJs"),
-    DJANGO("Django"),
-    SWIFT("Swift"),
-    HTML("HTML"),
     KOTLIN("Kotlin"),
     IOS("iOS"),
-    GO("Go")
+    SWIFT("Swift"),
+    GO("Go"),
+    TYPESCRIPT("TypeScript"),
+    C_CPP("C/C++"),
+    AI("AI"),
+    GIT_GITHUB("Git/Github"),
+    FRONTEND("Frontend"),
+    BACKEND("Backend");
 }
