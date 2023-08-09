@@ -4,7 +4,7 @@ import com.lgtm.android.common_ui.R
 import com.lgtm.domain.constants.TechTagVO
 
 
-enum class TechTag(val techTagVO: TechTagVO, val imageIcon: Int) {
+enum class TechTag(val techTagVO: TechTagVO, val defaultIcon: Int, val selectedIcon: Int? = null) {
     JAVA(TechTagVO.JAVA, R.drawable.ic_tech_java),
     PYTHON(TechTagVO.PYTHON, R.drawable.ic_tech_python),
     JAVASCRIPT(TechTagVO.JAVASCRIPT, R.drawable.ic_tech_javascript),
@@ -15,8 +15,8 @@ enum class TechTag(val techTagVO: TechTagVO, val imageIcon: Int) {
     GO(TechTagVO.GO, R.drawable.ic_tech_go),
     TYPESCRIPT(TechTagVO.TYPESCRIPT, R.drawable.ic_tech_ts),
     C_CPP(TechTagVO.C_CPP, R.drawable.ic_tech_c),
-    AI(TechTagVO.AI, R.drawable.ic_tech_ai),
+    AI(TechTagVO.AI, R.drawable.ic_tech_ai, R.drawable.ic_tech_ai_selected),
     GIT_GITHUB(TechTagVO.GIT_GITHUB, R.drawable.ic_tech_github),
-    FRONTEND(TechTagVO.FRONTEND, R.drawable.ic_tech_frontend),
-    BACKEND(TechTagVO.BACKEND, R.drawable.ic_tech_backend);
+    FRONTEND(TechTagVO.FRONTEND, R.drawable.ic_tech_frontend, R.drawable.ic_tech_frontend_selected),
+    BACKEND(TechTagVO.BACKEND, R.drawable.ic_tech_backend, R.drawable.ic_tech_backend_selected);
 }

@@ -40,15 +40,22 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
             this.chipStrokeColor = strokeStateList
             this.chipStrokeWidth = screenWidth * 0.005F
             this.chipBackgroundColor = backgroundStateList
-            this.setChipIconResource(techTag.imageIcon)
+            this.setChipIconResource(techTag.defaultIcon)
             this.setTextAppearance(R.style.Body2)
             this.setTextColor(textStateList) // (순서 중요) textAppearance 후에 배치
             this.setOnClickListener {
                 it.isSelected = !it.isSelected
-                if (it.isSelected)
+                if (it.isSelected) {
                     this@TechTagChipGroup.selectedTagList.value?.add(this.text.toString())
-                else
+                    techTag.selectedIcon?.let { selectedIcon ->
+                        this.setChipIconResource(
+                            selectedIcon
+                        )
+                    }
+                } else {
                     this@TechTagChipGroup.selectedTagList.value?.remove(this.text.toString())
+                    this.setChipIconResource(techTag.defaultIcon)
+                }
                 this@TechTagChipGroup.selectedTagList.value =
                     this@TechTagChipGroup.selectedTagList.value?.toMutableList()
             }
