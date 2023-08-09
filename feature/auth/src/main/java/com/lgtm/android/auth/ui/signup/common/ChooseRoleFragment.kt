@@ -14,6 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.fragment_choose_role) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()

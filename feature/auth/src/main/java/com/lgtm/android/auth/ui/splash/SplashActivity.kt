@@ -17,6 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
     private val splashViewModel by viewModels<SplashViewModel>()
     private lateinit var autoLoginState: AutoLoginState
+    override fun initializeViewModel() {
+        viewModel = splashViewModel
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

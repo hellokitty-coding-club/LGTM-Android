@@ -12,6 +12,9 @@ import com.lgtm.android.common_ui.base.BaseFragment
 class CompanyNameFragment :
     BaseFragment<FragmentCompanyNameBinding>(R.layout.fragment_company_name) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
