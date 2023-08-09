@@ -2,10 +2,10 @@ package com.lgtm.android.auth.ui.signup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.lgtm.android.auth.exception.SignUpFailedException
+import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.constant.Bank
 import com.lgtm.android.common_ui.constant.BankHint
 import com.lgtm.android.common_ui.constant.BankList
@@ -28,7 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val authRepository: AuthRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     /** Device Token */
     private val deviceToken = MutableLiveData<String?>()
@@ -371,7 +371,7 @@ class SignUpViewModel @Inject constructor(
     val signUpState: LiveData<NetworkState<SignUpResponseVO>> = _signUpState
 
     fun signUpJunior() {
-        viewModelScope.launch {
+        viewModelScope.launch(lgtmErrorHandler) {
             try {
                 val signUpJuniorRequestVO = createSignUpJuniorRequestVO()
                 authRepository.signUpJunior(signUpJuniorRequestVO)
@@ -389,7 +389,7 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun signUpSenior() {
-        viewModelScope.launch {
+        viewModelScope.launch(lgtmErrorHandler) {
             try {
                 val signUpSeniorRequestVO = createSignUpSeniorRequestVO()
                 authRepository.signUpSenior(signUpSeniorRequestVO)

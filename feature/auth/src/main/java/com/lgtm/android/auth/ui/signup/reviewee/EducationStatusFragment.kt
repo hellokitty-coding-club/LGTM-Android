@@ -21,6 +21,9 @@ import com.lgtm.domain.constants.EducationStatus
 class EducationStatusFragment :
     BaseFragment<FragmentEducationStatusBinding>(R.layout.fragment_education_status) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRadioButtons()

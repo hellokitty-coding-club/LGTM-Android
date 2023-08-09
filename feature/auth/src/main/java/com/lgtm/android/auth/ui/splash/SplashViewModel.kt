@@ -4,8 +4,8 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.IntroRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val introRepository: IntroRepository,
     private val authRepository: AuthRepository
-) : ViewModel() {
+) : BaseViewModel() {
     private val _minVersion = MutableLiveData<Int>()
     val minVersion: LiveData<Int> = _minVersion
 
@@ -24,7 +24,7 @@ class SplashViewModel @Inject constructor(
     val latestVersion: LiveData<Int> = _latestVersion
 
     fun getAppVersionInfo() {
-        viewModelScope.launch {
+        viewModelScope.launch(lgtmErrorHandler) {
             introRepository.getIntro()
                 .onSuccess {
                     _minVersion.value = it.minVersion

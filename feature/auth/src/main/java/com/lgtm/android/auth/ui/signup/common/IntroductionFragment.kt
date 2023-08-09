@@ -14,6 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class IntroductionFragment :
     BaseFragment<FragmentIntroductionBinding>(R.layout.fragment_introduction) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()

@@ -15,6 +15,9 @@ import com.lgtm.android.common_ui.util.NetworkState
 
 class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment_real_name) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    override fun initializeViewModel() {
+        viewModel = signUpViewModel
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
