@@ -9,9 +9,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.lgtm.android.common_ui.navigator.FakeSignInNavigator
+import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
+import com.lgtm.android.common_ui.navigator.LgtmInjector
 import com.lgtm.android.common_ui.util.KeyboardUtil
-import javax.inject.Inject
+import dagger.hilt.android.EntryPointAccessors
 
 abstract class BaseFragment<T : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int
@@ -22,8 +23,11 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     lateinit var viewModel: BaseViewModel
 
-    @Inject
-    lateinit var signInNavigator: FakeSignInNavigator
+    val lgtmNavigator: FakeLgtmNavigator by lazy {
+        EntryPointAccessors.fromActivity(
+            requireActivity(), LgtmInjector.LgtmNavigatorInjector::class.java
+        ).lgtmNavigator()
+    }
 
     abstract fun initializeViewModel()
 
@@ -41,7 +45,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     fun moveToSignInActivity() {
         viewModel.moveToSignIn.observe(this) {
-            signInNavigator.navigateToSignIn()
+            lgtmNavigator.navigateToSignIn(requireContext())
             requireActivity().finishAffinity()
         }
     }
