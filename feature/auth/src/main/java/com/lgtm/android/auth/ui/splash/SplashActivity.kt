@@ -61,7 +61,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun moveToMainActivity() {
-        // MainActivity로 이동
+        lgtmNavigator.navigateToMain(this)
         finish()
     }
 

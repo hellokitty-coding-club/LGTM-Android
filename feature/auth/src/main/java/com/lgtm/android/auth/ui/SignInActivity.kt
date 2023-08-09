@@ -94,7 +94,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     }
 
     private fun moveToMainActivity() {
-        // todo move to mainActivity
+        lgtmNavigator.navigateToMain(this)
     }
 
     private fun moveToSignUpActivity() {

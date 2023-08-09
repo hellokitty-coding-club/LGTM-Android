@@ -92,7 +92,7 @@ class BankAccountFragment :
     }
 
     private fun navigateToHomeActivity() {
-        // todo : navigate to home activity
+        lgtmNavigator.navigateToMain(requireContext())
     }
 
     private fun navigateToSignInActivity() {
