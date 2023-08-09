@@ -6,8 +6,9 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.lgtm.android.common_ui.navigator.FakeSignInNavigator
-import javax.inject.Inject
+import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
+import com.lgtm.android.common_ui.navigator.LgtmInjector
+import dagger.hilt.android.EntryPointAccessors
 
 abstract class BaseActivity<T : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int
@@ -15,8 +16,12 @@ abstract class BaseActivity<T : ViewDataBinding>(
     protected lateinit var binding: T
     lateinit var viewModel: BaseViewModel
 
-    @Inject
-    lateinit var signInNavigator: FakeSignInNavigator
+    val lgtmNavigator: FakeLgtmNavigator by lazy {
+        EntryPointAccessors.fromActivity(
+            this, LgtmInjector.LgtmNavigatorInjector::class.java
+        ).lgtmNavigator()
+    }
+
     abstract fun initializeViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +32,7 @@ abstract class BaseActivity<T : ViewDataBinding>(
 
     fun moveToSignInActivity() {
         viewModel.moveToSignIn.observe(this) {
-            signInNavigator.navigateToSignIn()
+            lgtmNavigator.navigateToSignIn(this)
             finishAffinity()
         }
     }

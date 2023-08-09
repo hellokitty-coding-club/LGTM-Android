@@ -38,7 +38,8 @@ class AuthRepositoryImpl @Inject constructor(
         lgtmPreferenceDataSource.setValue(
             preferenceKey = PreferenceKey.ACCESS_TOKEN,
             value = "Bearer $accessToken",
-            isEncrypted = true
+            isEncrypted = true,
+            byAsync = false
         )
     }
 
@@ -46,7 +47,8 @@ class AuthRepositoryImpl @Inject constructor(
         lgtmPreferenceDataSource.setValue(
             preferenceKey = PreferenceKey.REFRESH_TOKEN,
             value = "Bearer $refreshToken",
-            isEncrypted = true
+            isEncrypted = true,
+            byAsync = false
         )
     }
 
@@ -57,7 +59,8 @@ class AuthRepositoryImpl @Inject constructor(
         lgtmPreferenceDataSource.setValue(
             preferenceKey = PreferenceKey.MEMBER_TYPE,
             value = memberType,
-            isEncrypted = false
+            isEncrypted = false,
+            byAsync = true
         )
     }
 

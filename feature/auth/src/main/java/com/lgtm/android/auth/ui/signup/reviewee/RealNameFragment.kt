@@ -73,7 +73,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
     }
 
     private fun navigateToHomeActivity() {
-        // todo : navigate to home activity
+        lgtmNavigator.navigateToMain(requireContext())
     }
 
     private fun navigateToSignInActivity() {

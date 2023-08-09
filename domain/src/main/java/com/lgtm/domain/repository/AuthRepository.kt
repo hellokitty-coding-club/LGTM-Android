@@ -15,6 +15,6 @@ interface AuthRepository {
     suspend fun signUpJunior(signUpJuniorVO: SignUpJuniorRequestVO): Result<SignUpResponseVO>
     suspend fun signUpSenior(signUpSeniorVO: SignUpSeniorRequestVO): Result<SignUpResponseVO>
     fun getDeviceToken(tokenCallBack: (String?) -> Unit)
-    suspend fun patchDeviceToken(string: String?): Result<Boolean>
+    suspend fun patchDeviceToken(token: String?): Result<Boolean>
 
 }

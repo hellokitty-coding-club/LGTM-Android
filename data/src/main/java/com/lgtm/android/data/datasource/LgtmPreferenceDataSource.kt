@@ -11,25 +11,34 @@ class LgtmPreferenceDataSource @Inject constructor(
     fun <T> getValue(
         preferenceKey: PreferenceKey,
         defaultValue: T,
-        isEncrypted: Boolean = false
+        isEncrypted: Boolean,
     ): T {
-        val preference = if (isEncrypted) lgtmEncryptedPreferences else lgtmPreference
+        val preference = getPreference(isEncrypted)
         val key = preferenceKey.name
         return when (defaultValue) {
             is String -> preference.getString(key, defaultValue) as T
             is Boolean -> preference.getBoolean(key, defaultValue) as T
-            else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}}")
+            else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}")
         }
     }
 
-    fun <T> setValue(preferenceKey: PreferenceKey, value: T, isEncrypted: Boolean = false) {
-        val preference = if (isEncrypted) lgtmEncryptedPreferences else lgtmPreference
+    fun <T> setValue(
+        preferenceKey: PreferenceKey,
+        value: T,
+        isEncrypted: Boolean,
+        byAsync: Boolean
+    ) {
+        val preference = getPreference(isEncrypted)
         val key = preferenceKey.name
         when (value) {
-            is String -> preference.edit { putString(key, value) }
-            is Boolean -> preference.edit { putBoolean(key, value) }
-            else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}}")
+            is String -> preference.edit(byAsync) { putString(key, value) }
+            is Boolean -> preference.edit(byAsync) { putBoolean(key, value) }
+            else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}")
         }
+    }
+
+    private fun getPreference(isEncrypted: Boolean): SharedPreferences {
+        return if (isEncrypted) lgtmEncryptedPreferences else lgtmPreference
     }
 
     companion object {
@@ -41,9 +50,14 @@ class LgtmPreferenceDataSource @Inject constructor(
         }
     }
 
-    private inline fun SharedPreferences.edit(operation: SharedPreferences.Editor.() -> Unit) {
+    private inline fun SharedPreferences.edit(
+        byAsync: Boolean, operation: SharedPreferences.Editor.() -> Unit
+    ) {
         val editor = edit()
         operation(editor)
-        editor.apply()
+        if (byAsync)
+            editor.apply()
+        else
+            editor.commit()
     }
 }

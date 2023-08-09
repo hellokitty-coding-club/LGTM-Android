@@ -11,6 +11,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.lgtm.android.common_ui.R
 import com.lgtm.domain.firebase.LgtmMessagingService
+import com.lgtm.domain.usecase.DeviceTokenManagerUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -18,11 +19,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingService {
     @Inject
-    lateinit var firebaseTokenManager: FirebaseTokenManager
+    lateinit var deviceTokenManagerUseCase: DeviceTokenManagerUseCase
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        firebaseTokenManager.patchFcmToken(token)
+        deviceTokenManagerUseCase.patchFcmToken(token)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

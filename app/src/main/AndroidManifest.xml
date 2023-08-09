@@ -39,6 +39,9 @@
             android:name=".auth.ui.signup.SignUpActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="false" />
     </application>
 
 
