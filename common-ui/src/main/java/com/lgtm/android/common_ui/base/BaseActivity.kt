@@ -14,7 +14,7 @@ abstract class BaseActivity<T : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int
 ) : AppCompatActivity() {
     protected lateinit var binding: T
-    lateinit var viewModel: BaseViewModel
+    var viewModel: BaseViewModel? = null
 
     val lgtmNavigator: FakeLgtmNavigator by lazy {
         EntryPointAccessors.fromActivity(
@@ -31,14 +31,14 @@ abstract class BaseActivity<T : ViewDataBinding>(
     }
 
     fun moveToSignInActivity() {
-        viewModel.moveToSignIn.observe(this) {
+        viewModel?.moveToSignIn?.observe(this) {
             lgtmNavigator.navigateToSignIn(this)
             finishAffinity()
         }
     }
 
     fun makeToast() {
-        viewModel.unknownError.observe(this) {
+        viewModel?.unknownError?.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
     }
