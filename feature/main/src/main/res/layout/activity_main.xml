@@ -27,6 +27,7 @@
             android:background="@drawable/rectangle_black_radius_20"
             app:itemIconTint="@color/selector_bottom_navi"
             app:itemRippleColor="@null"
+            app:itemIconSize="32dp"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/menu_main" />
