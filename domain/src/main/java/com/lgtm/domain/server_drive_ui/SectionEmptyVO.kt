@@ -1,3 +1,5 @@
 package com.lgtm.domain.server_drive_ui
 
-object SectionEmptyVO : SduiContent
+data class SectionEmptyVO(
+    val viewType: String
+) : SduiContent

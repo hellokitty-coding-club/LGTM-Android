@@ -16,10 +16,14 @@ enum class SduiViewType(
             return values()[ordinalNum]
         }
 
-        fun findClassTypeByViewType(viewType: String): Type {
-            values().find { it.viewType == viewType }?.let {
-                return it.viewTypeClassType
-            } ?: return UNKNOWN.viewTypeClassType
+        fun SduiViewType.getViewTypeClassType(): Type {
+            return this.viewTypeClassType
+        }
+
+        fun findClassByItsName(viewTypeString: String?): SduiViewType {
+            values().find { it.name == viewTypeString }?.let {
+                return it
+            } ?: return UNKNOWN
         }
 
     }
