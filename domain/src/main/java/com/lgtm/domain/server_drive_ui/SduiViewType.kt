@@ -10,4 +10,17 @@ enum class SduiViewType(
     CLOSER("sectionCloser", SectionCloserVO::class.java),
     ITEM("sectionItem", SectionItemVO::class.java),
     UNKNOWN("sectionUnknown", SectionUnknownVO::class.java);
+
+    companion object {
+        fun getViewTypeByOrdinal(ordinalNum: Int): SduiViewType {
+            return values()[ordinalNum]
+        }
+
+        fun findClassTypeByViewType(viewType: String): Type {
+            values().find { it.viewType == viewType }?.let {
+                return it.viewTypeClassType
+            } ?: return UNKNOWN.viewTypeClassType
+        }
+
+    }
 }
