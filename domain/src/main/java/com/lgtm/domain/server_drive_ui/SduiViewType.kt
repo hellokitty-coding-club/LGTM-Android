@@ -6,7 +6,7 @@ enum class SduiViewType(
     val viewType: String, private val viewTypeClassType: Type
 ) {
     TITLE("sectionTitle", SectionTitleVO::class.java),
-    EMPTY("sectionEmpty", SectionEmptyVO::class.java),
+    EMPTY("empty", SectionEmptyVO::class.java),
     CLOSER("sectionCloser", SectionCloserVO::class.java),
     ITEM("sectionItem", SectionItemVO::class.java),
     UNKNOWN("sectionUnknown", SectionUnknownVO::class.java);
@@ -21,10 +21,9 @@ enum class SduiViewType(
         }
 
         fun findClassByItsName(viewTypeString: String?): SduiViewType {
-            values().find { it.name == viewTypeString }?.let {
+            values().find { it.viewType == viewTypeString }?.let {
                 return it
             } ?: return UNKNOWN
         }
-
     }
 }
