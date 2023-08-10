@@ -5,5 +5,6 @@ import com.lgtm.domain.server_drive_ui.SduiViewType
 
 data class SduiItemVO(
     val viewType: SduiViewType,
+    val theme: String,
     val content: SduiContent
 )
