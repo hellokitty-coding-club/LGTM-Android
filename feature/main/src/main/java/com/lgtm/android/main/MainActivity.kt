@@ -7,7 +7,9 @@ import com.lgtm.android.main.chat.ChatFragment
 import com.lgtm.android.main.databinding.ActivityMainBinding
 import com.lgtm.android.main.home.HomeFragment
 import com.lgtm.android.main.setting.SettingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
 

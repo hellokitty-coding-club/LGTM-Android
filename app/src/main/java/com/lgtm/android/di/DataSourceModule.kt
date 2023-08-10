@@ -22,5 +22,4 @@ object DataSourceModule {
         return LgtmPreferenceDataSource(sharedPreferences, encryptedSharedPreferences)
     }
 
-
 }

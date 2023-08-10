@@ -8,7 +8,9 @@ import com.lgtm.android.common_ui.adapter.SduiAdapter
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var commonAdapter: SduiAdapter
@@ -18,6 +20,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        homeViewModel.getHomeInfo()
         initAdapter()
         submitDataWhenDataChanged()
         setUpNotificationClickListener()
@@ -35,7 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun submitDataWhenDataChanged() {
-        homeViewModel.sduiList.observe(this) {
+        homeViewModel.sduiList.observe(viewLifecycleOwner) {
             commonAdapter.submitList(it)
         }
     }
