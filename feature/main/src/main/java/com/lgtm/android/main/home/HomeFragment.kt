@@ -3,16 +3,23 @@ package com.lgtm.android.main.home
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import com.lgtm.android.common_ui.adapter.SduiAdapter
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentHomeBinding
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+    private val homeViewModel by viewModels<HomeViewModel>()
+    private lateinit var commonAdapter: SduiAdapter
+
     override fun initializeViewModel() {
-        TODO("Not yet implemented")
+        viewModel = homeViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initAdapter()
+        submitDataWhenDataChanged()
         setUpNotificationClickListener()
     }
 
@@ -22,5 +29,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
+    private fun initAdapter() {
+        commonAdapter = SduiAdapter()
+        binding.rvSdui.adapter = commonAdapter
+    }
 
+    private fun submitDataWhenDataChanged() {
+        homeViewModel.sduiList.observe(this) {
+            commonAdapter.submitList(it)
+        }
+    }
 }
