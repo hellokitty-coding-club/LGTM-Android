@@ -18,7 +18,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun setUpNotificationClickListener() {
         binding.ivNotification.setOnClickListener {
-            Toast.makeText(requireContext(), "서비스 준비 중 입니다 :)", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "서비스 준비 중입니다 :)", Toast.LENGTH_SHORT).show()
         }
     }
 
