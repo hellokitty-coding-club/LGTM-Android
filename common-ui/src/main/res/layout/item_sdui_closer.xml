@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.lgtm.domain.server_drive_ui.SectionTitleVO" />
+            type="com.lgtm.domain.server_drive_ui.SectionCloserVO" />
 
         <variable
             name="theme"

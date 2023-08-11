@@ -20,7 +20,10 @@ class SduiAdapter : ListAdapter<SduiItemVO, SduiBaseHolder>(
     }
 
     override fun onBindViewHolder(holder: SduiBaseHolder, position: Int) {
-        holder.bind(getItem(position).content)
+        holder.bind(
+            theme = getItem(position).theme,
+            viewContent = getItem(position).content
+        )
     }
 
     override fun getItemViewType(position: Int): Int {

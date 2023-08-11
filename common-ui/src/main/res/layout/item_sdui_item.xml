@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="com.lgtm.domain.server_drive_ui.SduiTheme" />
+
+        <variable
+            name="data"
+            type="com.lgtm.domain.server_drive_ui.SectionItemVO" />
+
+        <variable
+            name="theme"
+            type="com.lgtm.domain.server_drive_ui.SduiTheme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,12 +21,65 @@
         android:layout_height="wrap_content"
         android:background="@color/gray_3">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="item"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rectangle_white_stroke_1_gray_2_side"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/mission_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="11dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{data.missionTitle}"
+                android:textAppearance="@style/Body2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 " />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/rectangle_white_stroke_gray_2_radius_5"
+                app:layout_constraintStart_toStartOf="@id/mission_title"
+                app:layout_constraintTop_toBottomOf="@id/mission_title">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tech_iv_1"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_tech_android" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:textAppearance="@style/Body3R"
+                    app:layout_constraintBottom_toBottomOf="@id/tech_iv_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tech_iv_1"
+                    app:layout_constraintTop_toTopOf="@id/tech_iv_1"
+                    tools:text="안드로이드" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

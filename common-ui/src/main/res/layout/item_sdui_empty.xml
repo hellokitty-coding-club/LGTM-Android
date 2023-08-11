@@ -4,6 +4,15 @@
 
     <data>
 
+        <import type="com.lgtm.domain.server_drive_ui.SduiTheme" />
+
+        <variable
+            name="data"
+            type="com.lgtm.domain.server_drive_ui.SectionEmptyVO" />
+
+        <variable
+            name="theme"
+            type="com.lgtm.domain.server_drive_ui.SduiTheme" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
