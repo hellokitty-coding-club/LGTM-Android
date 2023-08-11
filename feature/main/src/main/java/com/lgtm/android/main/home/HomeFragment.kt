@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initAdapter() {
-        commonAdapter = SduiAdapter()
+        commonAdapter = SduiAdapter(homeViewModel.role)
         binding.rvSdui.adapter = commonAdapter
     }
 
