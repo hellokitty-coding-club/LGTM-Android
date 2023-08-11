@@ -2,6 +2,7 @@ package com.lgtm.android.di
 
 import com.lgtm.android.data.service.AuthService
 import com.lgtm.android.data.service.IntroService
+import com.lgtm.android.data.service.MissionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,4 +24,8 @@ object RetrofitServiceModule {
     fun providesAuthService(retrofit: Retrofit): AuthService =
         retrofit.create(AuthService::class.java)
 
+    @Provides
+    @Singleton
+    fun providesMissionService(retrofit: Retrofit): MissionService =
+        retrofit.create(MissionService::class.java)
 }

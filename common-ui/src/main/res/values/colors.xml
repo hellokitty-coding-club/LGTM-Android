@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="yellow">#fac53d</color>
+    <color name="blue">#1d74f5</color>
+    <color name="red">#fe504f</color>
+    <color name="green">#56ee9b</color>
     <color name="black">#030c1b</color>
-    <color name="gray_8">#0b182b</color>
-    <color name="gray_7">#121f32</color>
-    <color name="gray_6">#394a66</color>
-    <color name="gray_5">#6c7d99</color>
-    <color name="gray_4">#a4b4cd</color>
+    <color name="gray_8">#0b1321</color>
+    <color name="gray_7">#172334</color>
+    <color name="gray_6">#495569</color>
+    <color name="gray_5">#78879f</color>
+    <color name="gray_4">#b1bed2</color>
     <color name="gray_3">#cfd8e7</color>
     <color name="gray_2">#e7ecf2</color>
     <color name="gray_1">#f4f5f9</color>
-    <color name="white">#ffffff</color>
-    <color name="green">#56ee9b</color>
-    <color name="red">#fe504f</color>
-    <color name="blue">#1d74f5</color>
-    <color name="yellow">#fac53d</color>
+    <color name="white">#fcfcfc</color>
 </resources>

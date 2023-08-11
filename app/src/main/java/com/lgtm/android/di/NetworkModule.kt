@@ -1,10 +1,13 @@
 package com.lgtm.android.di
 
+import com.google.gson.GsonBuilder
 import com.lgtm.android.BuildConfig.DEBUG
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_DEBUG
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_RELEASE
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource.Companion.PreferenceKey
+import com.lgtm.android.data.deserializer.SduiViewTypeDeserializer
+import com.lgtm.domain.entity.response.SduiItemVO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,7 +66,12 @@ object NetworkModule {
         Retrofit.Builder()
             .baseUrl(if (DEBUG) LGTM_BASE_URL_DEBUG else LGTM_BASE_URL_RELEASE)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+            .addConverterFactory(
+                GsonConverterFactory.create(
+                    GsonBuilder()
+                        .registerTypeAdapter(SduiItemVO::class.java, SduiViewTypeDeserializer())
+                        .create()
+                )
+            ).build()
 
 }

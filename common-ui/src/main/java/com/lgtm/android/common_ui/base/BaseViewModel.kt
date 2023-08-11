@@ -17,6 +17,7 @@ abstract class BaseViewModel : ViewModel() {
     val unknownError: LiveData<String> = _unknownError
 
     val lgtmErrorHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e(TAG, "[LgtmNetworkError] ${throwable.message}")
         if (throwable is LgtmResponseException) {
             when (throwable.httpCode) {
                 401 -> _moveToSignIn.postValue(true)
