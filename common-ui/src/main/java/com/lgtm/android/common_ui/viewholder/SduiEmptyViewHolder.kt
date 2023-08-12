@@ -4,7 +4,7 @@ import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.databinding.ItemSduiEmptyBinding
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.server_drive_ui.SduiContent
-import com.lgtm.domain.server_drive_ui.SduiEmptyUiVO
+import com.lgtm.domain.server_drive_ui.SduiEmptyUiState
 import com.lgtm.domain.server_drive_ui.SduiTheme
 import com.lgtm.domain.server_drive_ui.SectionEmptyVO
 import javax.inject.Inject
@@ -15,7 +15,7 @@ class SduiEmptyViewHolder @Inject constructor(
 
     override fun bind(theme: SduiTheme, viewContent: SduiContent, role: Role?) {
         check(viewContent is SectionEmptyVO) { "viewContent must be SectionEmptyVO" }
-        val uiData: SduiEmptyUiVO = when (viewContent.emptyViewTypeName) {
+        val uiState: SduiEmptyUiState = when (viewContent.emptyViewTypeName) {
             ONGOING_MISSION_EMPTY_VIEW -> onOngoingMissionEmpty(requireNotNull(role))
             RECOMMENDED_MISSION_EMPTY_VIEW -> onRecommendedMissionEmpty()
             TOTAL_MISSION_EMPTY_VIEW -> onTotalMissionEmpty()
@@ -23,15 +23,15 @@ class SduiEmptyViewHolder @Inject constructor(
         }
 
         binding.theme = theme
-        binding.uiData = uiData
+        binding.uiState = uiState
     }
 
-    private fun onOngoingMissionEmpty(role: Role): SduiEmptyUiVO {
+    private fun onOngoingMissionEmpty(role: Role): SduiEmptyUiState {
         val subMessage =
             if (role == Role.REVIEWER) SUGGEST_ADDING_MISSION else SUGGEST_JOINING_MISSION
         val arrowImage =
             if (role == Role.REVIEWER) R.drawable.ic_home_arrow_right else R.drawable.ic_home_arrow_mid
-        return SduiEmptyUiVO(
+        return SduiEmptyUiState(
             mainMessage = ONGOING_MISSION_MAIN_MESSAGE,
             subMessage = subMessage,
             isArrowVisible = true,
@@ -39,15 +39,15 @@ class SduiEmptyViewHolder @Inject constructor(
         )
     }
 
-    private fun onRecommendedMissionEmpty(): SduiEmptyUiVO {
-        return SduiEmptyUiVO(
+    private fun onRecommendedMissionEmpty(): SduiEmptyUiState {
+        return SduiEmptyUiState(
             mainMessage = RECOMMENDED_MISSION_MAIN_MESSAGE,
             subMessage = RECOMMENDED_MISSION_SUB_MESSAGE,
         )
     }
 
-    private fun onTotalMissionEmpty(): SduiEmptyUiVO {
-        return SduiEmptyUiVO(TOTAL_MISSION_MAIN_MESSAGE, TOTAL_MISSION_SUB_MESSAGE)
+    private fun onTotalMissionEmpty(): SduiEmptyUiState {
+        return SduiEmptyUiState(TOTAL_MISSION_MAIN_MESSAGE, TOTAL_MISSION_SUB_MESSAGE)
     }
 
     companion object {
