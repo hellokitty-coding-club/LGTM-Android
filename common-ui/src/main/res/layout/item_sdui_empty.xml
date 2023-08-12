@@ -24,7 +24,7 @@
         tools:background="@color/gray_3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            setLayerBackground="@{theme}"
+            setItemLayerBackground="@{theme}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
