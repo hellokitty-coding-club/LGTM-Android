@@ -1,4 +1,4 @@
-package com.lgtm.android.common_ui.base
+package com.lgtm.android.common_ui.adapter
 
 import android.view.View
 import android.widget.TextView
@@ -12,8 +12,8 @@ fun TextView.setInfoStatusColor(color: Int) {
     setTextColor(ContextCompat.getColor(this.context, color))
 }
 
-@BindingAdapter("setIcon")
-fun AppCompatImageView.setInfoStatusIcon(icon: Int) {
+@BindingAdapter("setImageResource")
+fun AppCompatImageView.setImageResource(icon: Int) {
     setImageResource(icon)
 }
 
