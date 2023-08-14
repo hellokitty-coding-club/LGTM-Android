@@ -4,6 +4,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.lgtm.domain.constants.ArrowDirection
 import com.lgtm.domain.server_drive_ui.SduiTheme
 
 @BindingAdapter("setTitleLayerBackground")
@@ -50,5 +51,14 @@ fun AppCompatImageView.setEmptyImage(theme: SduiTheme) {
     when (theme) {
         SduiTheme.WHITE -> setImageResource(com.lgtm.android.common_ui.R.drawable.img_home_empty_white)
         SduiTheme.GRAY -> setImageResource(com.lgtm.android.common_ui.R.drawable.img_home_empty_gray)
+    }
+}
+
+@BindingAdapter("setArrowImage")
+fun AppCompatImageView.setArrowImage(arrowType: ArrowDirection?) {
+    if (arrowType == null) return
+    when (arrowType) {
+        ArrowDirection.DOWNWARD -> setImageResource(com.lgtm.android.common_ui.R.drawable.ic_home_arrow_mid)
+        ArrowDirection.DOWNWARD_RIGHT -> setImageResource(com.lgtm.android.common_ui.R.drawable.ic_home_arrow_right)
     }
 }

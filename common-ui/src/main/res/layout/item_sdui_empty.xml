@@ -72,7 +72,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_arrow"
-                setImageResource="@{uiState.arrowImage}"
+                setArrowImage="@{uiState.arrowType}"
                 android:layout_width="7dp"
                 android:layout_height="15dp"
                 android:layout_marginTop="5dp"
