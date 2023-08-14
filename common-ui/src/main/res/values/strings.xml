@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">LGTM</string>
+
+    <string name="price_format">%,2d</string>
+
     <!-- 회원가입 -->
     <string name="terms_service"><u>약관 및 정책</u></string>
     <string name="terms_privacy"><u>개인정보처리방침</u></string>
@@ -45,4 +48,10 @@
     <string name="duplicate_nickname">중복된 닉네임입니다.</string>
     <string name="can_use">사용 가능합니다.</string>
     <string name="empty_value"></string>
+
+
+    <!-- home -->
+    <string name="mission_price">참여 비용</string>
+    <string name="mission_max_people">참여 인원</string>
+    <string name="mission_registration_date_limit">신청 기한</string>
 </resources>
