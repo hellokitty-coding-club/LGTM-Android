@@ -59,3 +59,31 @@ fun View.setBackgroundColor(isSelected: Boolean) {
         setBackgroundResource(R.drawable.rectangle_border_gray2_radius_10)
     }
 }
+
+@BindingAdapter("setBookmarkBackground")
+fun View.setBookmarkBackground(isBookmarked: Boolean) {
+    if (isBookmarked) {
+        setBackgroundResource(R.drawable.rectangle_black_radius_10)
+    } else {
+        setBackgroundResource(R.drawable.rectangle_white_stroke_gray_2_radius_10)
+    }
+}
+
+
+@BindingAdapter("setBookmarkTextColor")
+fun TextView.setBookmarkTextColor(isBookmarked: Boolean) {
+    if (isBookmarked) {
+        setTextColor(ContextCompat.getColor(this.context, R.color.white))
+    } else {
+        setTextColor(ContextCompat.getColor(this.context, R.color.black))
+    }
+}
+
+@BindingAdapter("setBookmarkImage")
+fun AppCompatImageView.setBookmarkImage(isBookmarked: Boolean) {
+    if (isBookmarked) {
+        setImageResource(R.drawable.ic_bookmark_selected)
+    } else {
+        setImageResource(R.drawable.ic_bookmark_unselected)
+    }
+}

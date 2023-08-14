@@ -1,5 +1,7 @@
 package com.lgtm.domain.server_drive_ui
 
+import com.google.gson.annotations.SerializedName
+
 data class SectionItemVO(
     // 진행 중인 미션, 추천 미션, 전체 미션
     val missionId: Int,
@@ -13,6 +15,7 @@ data class SectionItemVO(
     val currentPeopleNumber: Int? = null,
     val maxPeopleNumber: Int? = null,
     val scrapCount: Int? = null,
-    val scraped: Boolean? = null,
+    @SerializedName("scraped")
+    val isScraped: Boolean? = null,
 ) : SduiContent
 

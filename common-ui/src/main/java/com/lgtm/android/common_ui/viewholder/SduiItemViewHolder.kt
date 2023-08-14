@@ -12,5 +12,13 @@ class SduiItemViewHolder(
     override fun bind(theme: SduiTheme, viewContent: SduiContent, role: Role?) {
         binding.data = viewContent as SectionItemVO
         binding.theme = theme
+
+        if (viewContent.isScraped != null) {
+            binding.bookmarkButton.isBookmarked = viewContent.isScraped == true
+            binding.bookmarkButton.bookmarkNum = viewContent.scrapCount ?: 0
+            binding.bookmarkButton.btnBookmark.setOnClickListener {
+                // todo bookmark api 연동
+            }
+        }
     }
 }

@@ -335,7 +335,25 @@
                     app:layout_constraintTop_toTopOf="@id/view_time_divider"
                     tools:text="3일 후 마감" />
 
+                <!-- todo 북마크 기능 개발 이후 visibility on -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:visibility="visible">
+
+                    <include
+                        android:id="@+id/bookmark_button"
+                        layout="@layout/layout_bookmark_button" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
