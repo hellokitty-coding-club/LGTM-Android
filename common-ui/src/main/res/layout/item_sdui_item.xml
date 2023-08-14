@@ -65,6 +65,7 @@
                     android:id="@+id/tech_iv_1"
                     android:layout_width="12dp"
                     android:layout_height="12dp"
+                    setTechTagImageByItsName="@{data.techTagList[0].name}"
                     android:layout_marginVertical="4dp"
                     android:layout_marginStart="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"

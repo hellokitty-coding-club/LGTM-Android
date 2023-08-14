@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.lgtm.android.common_ui.R
+import com.lgtm.android.common_ui.constant.TechTag
 
 @BindingAdapter("infoStatusColor")
 fun TextView.setInfoStatusColor(color: Int) {
@@ -15,6 +16,12 @@ fun TextView.setInfoStatusColor(color: Int) {
 @BindingAdapter("setImageResource")
 fun AppCompatImageView.setImageResource(icon: Int) {
     setImageResource(icon)
+}
+
+@BindingAdapter("setTechTagImageByItsName")
+fun AppCompatImageView.setTechTagImageByItsName(string: String) {
+    val imageRes = TechTag.values().find { it.techTagVO.stack == string }?.defaultIcon
+    imageRes?.let { setImageResource(it) }
 }
 
 @BindingAdapter("setRevieweeRoleImage")
