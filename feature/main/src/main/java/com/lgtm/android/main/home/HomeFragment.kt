@@ -25,6 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         initAdapter()
         submitDataWhenDataChanged()
         setUpNotificationClickListener()
+        onClickNewMissionButton()
     }
 
     private fun getHomeInfo() {
@@ -49,6 +50,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun submitDataWhenDataChanged() {
         homeViewModel.sduiList.observe(viewLifecycleOwner) {
             commonAdapter.submitList(it)
+        }
+    }
+
+    private fun onClickNewMissionButton() {
+        binding.fabCreateMission.setOnClickListener {
+            lgtmNavigator.navigateToCreateMission(requireContext())
         }
     }
 }

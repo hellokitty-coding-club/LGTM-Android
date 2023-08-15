@@ -59,6 +59,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
+    implementation(project(":feature:create_mission"))
     implementation(project(":common-ui"))
 
     implementation(libs.hilt)
