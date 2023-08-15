@@ -17,6 +17,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         initAdapter()
         syncBottomNavWithVp()
+        setBottomNaviIconTintColor()
     }
 
     private fun initAdapter() {
@@ -36,6 +37,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
             return@setOnItemSelectedListener true
         }
+
+    }
+
+    private fun setBottomNaviIconTintColor() {
+        binding.bottomNav.itemIconTintList = null
     }
 
     override fun initializeViewModel() {

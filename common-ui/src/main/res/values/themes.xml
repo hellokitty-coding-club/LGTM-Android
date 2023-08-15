@@ -65,4 +65,8 @@
         <item name="android:dividerHeight">1dp</item>
     </style>
 
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/black</item>
+    </style>
+
 </resources>

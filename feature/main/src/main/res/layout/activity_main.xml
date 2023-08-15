@@ -23,14 +23,15 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_black_radius_top_20"
-            app:itemIconTint="@color/selector_bottom_navi"
-            app:itemRippleColor="@null"
+            android:layout_height="60dp"
+            android:background="@drawable/rectangle_white_stroke_gray_2_radius_top_20"
+            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
             app:itemIconSize="32dp"
+            app:itemRippleColor="@android:color/transparent"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/menu_main" />
+            app:menu="@menu/menu_main"
+            tools:layout_height="55dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
