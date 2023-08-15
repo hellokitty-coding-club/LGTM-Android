@@ -19,6 +19,7 @@ class CreateMissionActivity :
         super.onCreate(savedInstanceState)
         initAdapter()
         attachViewPagerToIndicator()
+        disableViewPagerSwipe()
     }
 
     private fun initAdapter() {
@@ -35,5 +36,9 @@ class CreateMissionActivity :
 
     private fun attachViewPagerToIndicator() {
         binding.wormDotsIndicator.attachTo(binding.vpMission)
+    }
+
+    private fun disableViewPagerSwipe() {
+        binding.vpMission.isUserInputEnabled = false
     }
 }
