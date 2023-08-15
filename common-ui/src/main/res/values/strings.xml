@@ -54,4 +54,5 @@
     <string name="mission_price">참여 비용</string>
     <string name="mission_max_people">참여 인원</string>
     <string name="mission_registration_date_limit">신청 기한</string>
+    <string name="new_mission">새로운 미션</string>
 </resources>

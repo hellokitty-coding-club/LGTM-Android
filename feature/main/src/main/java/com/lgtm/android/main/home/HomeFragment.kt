@@ -20,10 +20,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        homeViewModel.getHomeInfo()
+        setupViewModel()
+        getHomeInfo()
         initAdapter()
         submitDataWhenDataChanged()
         setUpNotificationClickListener()
+    }
+
+    private fun getHomeInfo() {
+        homeViewModel.getHomeInfo()
+    }
+
+    private fun setupViewModel() {
+        binding.viewModel = homeViewModel
     }
 
     private fun setUpNotificationClickListener() {

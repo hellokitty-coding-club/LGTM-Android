@@ -6,7 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
+import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.SduiItemVO
+import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,8 +16,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val useCase: MissionUseCase
+    private val useCase: MissionUseCase,
+    authRepository: AuthRepository
 ) : BaseViewModel() {
+
+    private val role = authRepository.getMemberType()
+    val fabVisibility = role == Role.REVIEWER
 
     private val _sduiList = MutableLiveData<List<SduiItemVO>>()
     val sduiList: LiveData<List<SduiItemVO>> = _sduiList
