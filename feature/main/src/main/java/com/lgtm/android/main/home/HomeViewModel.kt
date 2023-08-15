@@ -7,14 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.entity.response.SduiItemVO
-import com.lgtm.domain.repository.MissionRepository
+import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val missionRepository: MissionRepository
+    private val useCase: MissionUseCase
 ) : BaseViewModel() {
 
     private val _sduiList = MutableLiveData<List<SduiItemVO>>()
@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(
 
     fun getHomeInfo() {
         viewModelScope.launch(lgtmErrorHandler) {
-            missionRepository.getHomeMission()
+            useCase.getHomeMission()
                 .onSuccess {
                     _sduiList.postValue(it.contents)
                 }.onFailure {
@@ -30,5 +30,4 @@ class HomeViewModel @Inject constructor(
                 }
         }
     }
-
 }

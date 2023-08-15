@@ -1,7 +1,7 @@
 package com.lgtm.domain.constants
 
 enum class TechTagVO(val stack: String) {
-    JAVA("Java"),
+    JAVA("JAVA"),
     PYTHON("Python"),
     JAVASCRIPT("JavaScript"),
     ANDROID("Android"),

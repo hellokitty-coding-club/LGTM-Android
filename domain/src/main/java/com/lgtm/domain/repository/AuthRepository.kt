@@ -1,5 +1,6 @@
 package com.lgtm.domain.repository
 
+import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.request.SignUpJuniorRequestVO
 import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
@@ -11,6 +12,7 @@ interface AuthRepository {
     fun saveAccessToken(accessToken: String)
     fun saveRefreshToken(refreshToken: String)
     fun saveMemberType(memberType: String)
+    fun getMemberType(): Role
     fun isAutoLoginAvailable(): Boolean
     suspend fun signUpJunior(signUpJuniorVO: SignUpJuniorRequestVO): Result<SignUpResponseVO>
     suspend fun signUpSenior(signUpSeniorVO: SignUpSeniorRequestVO): Result<SignUpResponseVO>

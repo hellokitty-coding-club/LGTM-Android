@@ -64,6 +64,15 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 
+    override fun getMemberType(): Role {
+        val role = lgtmPreferenceDataSource.getValue(
+            preferenceKey = PreferenceKey.MEMBER_TYPE,
+            defaultValue = "",
+            isEncrypted = false
+        )
+        return Role.getRole(role)
+    }
+
     override fun isAutoLoginAvailable(): Boolean {
         val token = lgtmPreferenceDataSource.getValue(
             preferenceKey = PreferenceKey.ACCESS_TOKEN,

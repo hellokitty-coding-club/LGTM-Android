@@ -9,10 +9,8 @@ import com.lgtm.domain.entity.response.SduiItemVO
 import com.lgtm.domain.server_drive_ui.SduiViewType
 
 class SduiAdapter : ListAdapter<SduiItemVO, SduiBaseHolder>(
-    ItemDiffCallback<SduiItemVO>(
-        onContentsTheSame = { old, new -> old == new },
-        onItemsTheSame = { old, new -> old.content == new.content }
-    )
+    ItemDiffCallback<SduiItemVO>(onContentsTheSame = { old, new -> old == new },
+        onItemsTheSame = { old, new -> old.content == new.content })
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SduiBaseHolder {
@@ -21,8 +19,7 @@ class SduiAdapter : ListAdapter<SduiItemVO, SduiBaseHolder>(
 
     override fun onBindViewHolder(holder: SduiBaseHolder, position: Int) {
         holder.bind(
-            theme = getItem(position).theme,
-            viewContent = getItem(position).content
+            theme = getItem(position).theme, viewContent = getItem(position).content
         )
     }
 

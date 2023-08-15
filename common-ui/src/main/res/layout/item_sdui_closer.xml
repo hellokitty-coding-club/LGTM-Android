@@ -24,7 +24,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:background="@{theme == SduiTheme.LIGHT ? @drawable/rectangle_white_stroke_gray_2_radius_bottom_20 : @drawable/rectangle_gray_2_stroke_gray_3_radius_bottom_20}"
+            setCloserLayerBackground="@{theme}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

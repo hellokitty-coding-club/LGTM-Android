@@ -23,10 +23,10 @@
         tools:background="@color/gray_3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            setTitleLayerBackground="@{theme}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@{theme == SduiTheme.LIGHT ? @drawable/rectangle_white_stroke_gray_2_radius_top_20  : @drawable/rectangle_gray_2_stroke_gray_3_radius_top_20}"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -37,17 +37,19 @@
                 android:layout_marginTop="20dp"
                 android:text="@{data.title}"
                 android:textAppearance="@style/Heading4B"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="진행중인 미션" />
 
             <View
+                setDividerColor="@{theme}"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
-                android:backgroundTint="@{theme == SduiTheme.LIGHT ? @color/gray_3 : @color/gray_4}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title" />
