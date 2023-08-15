@@ -12,8 +12,8 @@ import dagger.hilt.components.SingletonComponent
 @Module
 interface NavigatorModule {
     @Binds
-    fun bindsSignInNavigator(
-        signInNavigator: LgtmNavigator
+    fun bindsLgtmNavigator(
+        lgtmNavigator: LgtmNavigator
     ): FakeLgtmNavigator
 
 }
