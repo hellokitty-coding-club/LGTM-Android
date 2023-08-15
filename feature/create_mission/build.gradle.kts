@@ -39,5 +39,6 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.hilt)
     implementation(libs.bundles.navigation)
+    implementation(libs.dots.indicator)
     kapt(libs.hilt.kapt)
 }
