@@ -1,8 +1,6 @@
 package com.lgtm.android.create_mission
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
@@ -22,6 +20,7 @@ class CreateMissionStep1Fragment :
         setupViewModel()
         setupEditText()
         onMissionTitleChanged()
+        onMissionRepoUrlChanged()
     }
 
     private fun setupViewModel() {
@@ -42,8 +41,14 @@ class CreateMissionStep1Fragment :
 
     private fun onMissionTitleChanged() {
         createMissionViewModel.missionTitle.observe(viewLifecycleOwner) {
-            Log.d(TAG, "onMissionTitleChanged: $it")
-            createMissionViewModel.checkMissionTitleInfoStatus()
+            createMissionViewModel.updateMissionTitleInfoStatus()
+            createMissionViewModel.setIsStep1DataValid()
+        }
+    }
+
+    private fun onMissionRepoUrlChanged() {
+        createMissionViewModel.missionRepoUrl.observe(viewLifecycleOwner) {
+            createMissionViewModel.updateMissionRepoUrlInfoStatus()
             createMissionViewModel.setIsStep1DataValid()
         }
     }

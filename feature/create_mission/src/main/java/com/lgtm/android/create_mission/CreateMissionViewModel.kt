@@ -34,7 +34,7 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     val missionTitle: LiveData<String> =
         missionTitleEditTextData.value?.text ?: MutableLiveData("")
 
-    fun checkMissionTitleInfoStatus() {
+    fun updateMissionTitleInfoStatus() {
         if (missionTitle.value?.isBlank() == true && missionTitle.value?.isNotEmpty() == true)
             missionTitleEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
         else
@@ -44,6 +44,18 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     private fun isMissionTitleValid(): Boolean {
         return missionTitleEditTextData.value?.infoStatus?.value == InfoType.NONE
                 && missionTitleEditTextData.value?.text?.value?.isNotBlank() == true
+    }
+
+    val missionRepoUrl: LiveData<String> =
+        missionRepoUrlEditTextData.value?.text ?: MutableLiveData("")
+
+    fun updateMissionRepoUrlInfoStatus() {
+        if (missionRepoUrl.value?.isBlank() == true && missionRepoUrl.value?.isNotEmpty() == true)
+            missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
+        else if (missionRepoUrl.value?.isNotBlank() == true && !isGithubUrl(missionRepoUrl.value!!))
+            missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
+        else
+            missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
     private fun isMissionRepoUrlValid(): Boolean {

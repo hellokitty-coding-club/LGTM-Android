@@ -60,4 +60,5 @@
     <!-- 미션 작성 -->
     <string name="enter_mission_title">미션 제목을 입력하세요.</string>
     <string name="enter_mission_repo_url">미션 레포지토리 URL을 입력하세요.</string>
+    <string name="github_url_only">미션은 Github Public Repository를 기반으로 합니다.</string>
 </resources>
