@@ -21,6 +21,7 @@ class CreateMissionActivity :
         attachViewPagerToIndicator()
         disableViewPagerSwipe()
         setOnBackButtonClickListener()
+        disableClickDotIndicator()
     }
 
     private fun initAdapter() {
@@ -49,5 +50,9 @@ class CreateMissionActivity :
             if (currentItem == 0) finish()
             else binding.vpMission.setCurrentItem(currentItem - 1, true)
         }
+    }
+
+    private fun disableClickDotIndicator() {
+        binding.wormDotsIndicator.dotsClickable = false
     }
 }
