@@ -74,7 +74,7 @@
             android:id="@+id/btn_next"
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
-            android:enabled="@{false}"
+            android:enabled="@{viewModel.isStep1DataValid, default=false}"
             android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent" />
 
