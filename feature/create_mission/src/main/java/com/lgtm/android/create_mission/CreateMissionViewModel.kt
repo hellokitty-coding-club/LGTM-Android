@@ -52,7 +52,10 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     fun updateMissionRepoUrlInfoStatus() {
         if (missionRepoUrl.value?.isBlank() == true && missionRepoUrl.value?.isNotEmpty() == true)
             missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
-        else if (missionRepoUrl.value?.isNotBlank() == true && !isGithubUrl(missionRepoUrl.value!!))
+        else if (missionRepoUrl.value?.isNotBlank() == true && !isGithubUrl(
+                missionRepoUrl.value ?: ""
+            )
+        )
             missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
         else
             missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
@@ -64,6 +67,7 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     }
 
     private fun isGithubUrl(url: String): Boolean {
+        // todo webview에서 https 없이도 열리는지 확인하고 https 없이도 열리는 경우에는 pattern 수정
         val pattern = "https://github\\.com/"
         val regex = Pattern.compile(pattern)
         val matcher = regex.matcher(url)
