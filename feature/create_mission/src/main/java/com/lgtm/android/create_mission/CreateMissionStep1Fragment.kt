@@ -17,9 +17,22 @@ class CreateMissionStep1Fragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
+        setupEditText()
     }
 
     private fun setupViewModel() {
         binding.viewModel = createMissionViewModel
+    }
+
+    private fun setupEditText() {
+        binding.etMissionTitle.apply {
+            setLifecycleOwner(viewLifecycleOwner)
+            bindEditTextData(createMissionViewModel.missionTitleEditTextData)
+        }
+
+        binding.etMissionRepoUrl.apply {
+            setLifecycleOwner(viewLifecycleOwner)
+            bindEditTextData(createMissionViewModel.missionRepoUrlEditTextData)
+        }
     }
 }
