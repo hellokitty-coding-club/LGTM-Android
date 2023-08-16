@@ -20,6 +20,7 @@ class CreateMissionActivity :
         initAdapter()
         attachViewPagerToIndicator()
         disableViewPagerSwipe()
+        setOnBackButtonClickListener()
     }
 
     private fun initAdapter() {
@@ -40,5 +41,13 @@ class CreateMissionActivity :
 
     private fun disableViewPagerSwipe() {
         binding.vpMission.isUserInputEnabled = false
+    }
+
+    private fun setOnBackButtonClickListener() {
+        binding.ivBack.setOnClickListener {
+            val currentItem = binding.vpMission.currentItem
+            if (currentItem == 0) finish()
+            else binding.vpMission.setCurrentItem(currentItem - 1, true)
+        }
     }
 }
