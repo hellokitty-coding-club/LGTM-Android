@@ -41,6 +41,7 @@
             android:text="@{String.valueOf(editTextData.maxLength)}"
             android:textAppearance="@style/Body3R"
             android:textColor="@color/gray_3"
+            android:visibility="@{editTextData.wordCountVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/edit_text"
             app:layout_constraintEnd_toStartOf="@id/iv_clear"
             app:layout_constraintTop_toTopOf="@id/edit_text"
@@ -53,6 +54,7 @@
             android:text="@string/dash"
             android:textAppearance="@style/Body3R"
             android:textColor="@color/gray_3"
+            android:visibility="@{editTextData.wordCountVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/tv_max_length"
             app:layout_constraintEnd_toStartOf="@id/tv_max_length" />
 
@@ -63,6 +65,7 @@
             android:text="@{String.valueOf(editTextData.text.length)}"
             android:textAppearance="@style/Body3R"
             android:textColor="@color/gray_3"
+            android:visibility="@{editTextData.wordCountVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/tv_slash"
             app:layout_constraintEnd_toStartOf="@id/tv_slash"
             tools:text="0" />
