@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_white_radius_bottom_20"
+            android:elevation="1dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -45,9 +46,11 @@
             android:id="@+id/rv_sdui"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="-20dp"
             android:clipToPadding="false"
             android:overScrollMode="never"
-            android:paddingBottom="5dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="25dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_top_bar" />
