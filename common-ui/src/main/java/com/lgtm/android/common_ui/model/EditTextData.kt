@@ -8,5 +8,6 @@ data class EditTextData(
     val text: MutableLiveData<String>,
     val maxLength: Int,
     val hint: String,
-    var infoStatus: MutableLiveData<InfoType> = MutableLiveData(InfoType.NONE)
+    var infoStatus: MutableLiveData<InfoType> = MutableLiveData(InfoType.NONE),
+    val wordCountVisibility: Boolean = true
 )

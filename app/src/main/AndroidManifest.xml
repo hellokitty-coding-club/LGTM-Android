@@ -42,6 +42,11 @@
         <activity
             android:name=".main.MainActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".create_mission.CreateMissionActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 

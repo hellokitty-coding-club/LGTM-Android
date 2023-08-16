@@ -5,7 +5,9 @@ import androidx.activity.viewModels
 import com.lgtm.android.common_ui.adapter.ViewPagerAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.create_mission.databinding.ActivityCreateMissionBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateMissionActivity :
     BaseActivity<ActivityCreateMissionBinding>(R.layout.activity_create_mission) {
     private val createMissionViewModel by viewModels<CreateMissionViewModel>()
