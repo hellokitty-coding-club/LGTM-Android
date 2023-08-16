@@ -23,14 +23,18 @@
             style="@style/LGTMEditTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
             android:hint="@{editTextData.hint}"
             android:maxLength="@{editTextData.maxLength}"
-            android:paddingEnd="75dp"
+            android:minHeight="42dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="80dp"
             android:text="@={editTextData.text}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="test test test test test test test test test ttest test test test test test test test test " />
 
         <TextView
             android:id="@+id/tv_max_length"
@@ -72,9 +76,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_clear"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginEnd="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
             android:onClick="@{() -> editText.setText(``)}"
             android:padding="4dp"
             android:src="@drawable/ic_close"
