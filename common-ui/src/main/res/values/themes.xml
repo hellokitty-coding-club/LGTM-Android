@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.LGTMAndroid" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.LGTMAndroid" parent="Theme.Material3.Light.NoActionBar">
         <!--color-->
         <item name="colorPrimary">@color/green</item>
         <!--status bar-->
@@ -63,6 +63,10 @@
     <style name="SpinnerStyle" parent="Widget.AppCompat.ListView.DropDown">
         <item name="android:divider">@color/gray_2</item>
         <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/black</item>
     </style>
 
 </resources>

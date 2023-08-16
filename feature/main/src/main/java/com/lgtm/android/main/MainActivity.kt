@@ -1,8 +1,8 @@
 package com.lgtm.android.main
 
 import android.os.Bundle
+import com.lgtm.android.common_ui.adapter.ViewPagerAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
-import com.lgtm.android.main.adapter.MainViewPagerAdapter
 import com.lgtm.android.main.chat.ChatFragment
 import com.lgtm.android.main.databinding.ActivityMainBinding
 import com.lgtm.android.main.home.HomeFragment
@@ -11,16 +11,17 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    private lateinit var mainViewPagerAdapter: MainViewPagerAdapter
+    private lateinit var mainViewPagerAdapter: ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initAdapter()
         syncBottomNavWithVp()
+        setBottomNaviIconTintColor()
     }
 
     private fun initAdapter() {
-        binding.vpMain.adapter = MainViewPagerAdapter(this).also { mainViewPagerAdapter = it }
+        binding.vpMain.adapter = ViewPagerAdapter(this).also { mainViewPagerAdapter = it }
         mainViewPagerAdapter.fragmentList =
             listOf(HomeFragment(), ChatFragment(), SettingFragment())
     }
@@ -36,6 +37,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
             return@setOnItemSelectedListener true
         }
+
+    }
+
+    private fun setBottomNaviIconTintColor() {
+        binding.bottomNav.itemIconTintList = null
     }
 
     override fun initializeViewModel() {

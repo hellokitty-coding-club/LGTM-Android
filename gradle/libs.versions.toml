@@ -55,6 +55,7 @@ gson-converter = "2.9.0"
 
 # UI
 lottie = "6.0.1"
+dots-indicator = "5.0"
 
 # Firebase
 google-services = "4.3.15"
@@ -112,6 +113,7 @@ hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" 
 hilt-kapt = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger-hilt" }
 
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+dots-indicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dots-indicator" }
 
 google-services = { module = "com.google.gms:google-services", version.ref = "google-services" }
 crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics" }

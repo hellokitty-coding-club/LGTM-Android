@@ -16,7 +16,7 @@ class MissionUseCase @Inject constructor(
     authRepository: AuthRepository
 ) {
 
-    val role = authRepository.getMemberType()
+    private val role = authRepository.getMemberType()
 
     suspend fun getHomeMission(): Result<SduiVO> {
         return try {

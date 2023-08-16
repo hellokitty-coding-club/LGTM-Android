@@ -6,4 +6,6 @@ interface FakeLgtmNavigator {
     fun navigateToSignIn(context: Context)
 
     fun navigateToMain(context: Context)
+
+    fun navigateToCreateMission(context: Context)
 }
