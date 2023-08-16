@@ -53,6 +53,7 @@
         <item name="colorControlHighlight">?attr/colorPrimary</item>
         <item name="android:textAppearance">@style/Body1B</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHighlight">?attr/colorPrimary</item>
         <item name="colorAccent">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/gray_3</item>
         <item name="android:paddingVertical">16dp</item>
