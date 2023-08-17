@@ -5,7 +5,8 @@
     <dimen name="radio_button_padding_vertical">24dp</dimen>
     <dimen name="radio_button_margin_top">20dp</dimen>
     <dimen name="chip_min_height">34dp</dimen>
-    <dimen name="chip_stroke_width">1dp</dimen>
+    <dimen name="chip_stroke_width_selected">2dp</dimen>
+    <dimen name="chip_stroke_width_unselected">1dp</dimen>
     <dimen name="chip_padding_horizontal">10dp</dimen>
     <dimen name="chip_spacing_horizontal">12dp</dimen>
     <dimen name="chip_spacing_vertical">15dp</dimen>
