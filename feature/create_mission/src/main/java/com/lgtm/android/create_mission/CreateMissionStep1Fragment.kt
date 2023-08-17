@@ -21,6 +21,7 @@ class CreateMissionStep1Fragment :
         setupEditText()
         onMissionTitleChanged()
         onMissionRepoUrlChanged()
+        setupNextButtonClickListener()
     }
 
     private fun setupViewModel() {
@@ -51,6 +52,12 @@ class CreateMissionStep1Fragment :
         createMissionViewModel.missionRepoUrl.observe(viewLifecycleOwner) {
             createMissionViewModel.updateMissionRepoUrlInfoStatus()
             createMissionViewModel.setIsStep1DataValid()
+        }
+    }
+
+    private fun setupNextButtonClickListener() {
+        binding.btnNext.setOnClickListener {
+            (requireActivity() as? CreateMissionActivity)?.let { it.onNextButtonClick(this.javaClass) }
         }
     }
 }
