@@ -97,4 +97,61 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     fun setIsTechTagValid() {
         _isStep2DataValid.value = (techTagList.value?.size ?: 0) > 0
     }
+
+    /** step3 */
+    val descriptionEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 1000,
+            hint = "내용을 입력하세요.",
+            wordCountVisibility = false
+        )
+    )
+
+    val description: LiveData<String> = descriptionEditTextData.value?.text ?: MutableLiveData("")
+
+    fun updateMissionDescriptionInfoStatus() {
+        descriptionEditTextData.value?.infoStatus?.value =
+            if (isConsistOnlyWithSpace(description)) InfoType.SPACE_ONLY_NOT_ALLOWED
+            else InfoType.NONE
+    }
+
+    private fun isMissionDescriptionValid(): Boolean {
+        return descriptionEditTextData.value?.infoStatus?.value == InfoType.NONE
+                && descriptionEditTextData.value?.text?.value?.isNotBlank() == true
+    }
+
+    val recommendGroupEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 1000,
+            hint = "내용을 입력하세요.",
+            wordCountVisibility = false
+        )
+    )
+
+    val recommendGroup: LiveData<String> =
+        recommendGroupEditTextData.value?.text ?: MutableLiveData("")
+
+    val notRecommendGroupEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 1000,
+            hint = "내용을 입력하세요.",
+            wordCountVisibility = false
+        )
+    )
+
+    val notRecommendGroup: LiveData<String> =
+        notRecommendGroupEditTextData.value?.text ?: MutableLiveData("")
+
+    private val _isStep3DataValid = MutableLiveData<Boolean>()
+    val isStep3DataValid: LiveData<Boolean> = _isStep3DataValid
+
+    fun setIsStep3DataValid() {
+        _isStep3DataValid.value = isMissionDescriptionValid()
+    }
 }
