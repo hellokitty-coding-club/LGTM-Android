@@ -4,4 +4,9 @@
     <dimen name="body1_b_text_size">16sp</dimen>
     <dimen name="radio_button_padding_vertical">24dp</dimen>
     <dimen name="radio_button_margin_top">20dp</dimen>
+    <dimen name="chip_min_height">34dp</dimen>
+    <dimen name="chip_stroke_width">1dp</dimen>
+    <dimen name="chip_padding_horizontal">10dp</dimen>
+    <dimen name="chip_spacing_horizontal">12dp</dimen>
+    <dimen name="chip_spacing_vertical">15dp</dimen>
 </resources>

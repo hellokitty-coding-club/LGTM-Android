@@ -1,9 +1,11 @@
 package com.lgtm.android.common_ui.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -58,6 +60,14 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     private fun setSoftKeyboard() {
         KeyboardUtil().setUpAsSoftKeyboard(binding.root)
+    }
+
+    fun closeKeyboard() {
+        val inputManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(
+            requireActivity().currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS
+        )
     }
 
     override fun onDestroyView() {

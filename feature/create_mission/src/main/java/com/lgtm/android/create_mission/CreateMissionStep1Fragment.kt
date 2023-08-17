@@ -7,6 +7,7 @@ import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep1Binding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class CreateMissionStep1Fragment :
     BaseFragment<FragmentCreateMissionStep1Binding>(R.layout.fragment_create_mission_step1) {
@@ -21,6 +22,7 @@ class CreateMissionStep1Fragment :
         setupEditText()
         onMissionTitleChanged()
         onMissionRepoUrlChanged()
+        setupNextButtonClickListener()
     }
 
     private fun setupViewModel() {
@@ -36,6 +38,7 @@ class CreateMissionStep1Fragment :
         binding.etMissionRepoUrl.apply {
             setLifecycleOwner(viewLifecycleOwner)
             bindEditTextData(createMissionViewModel.missionRepoUrlEditTextData)
+            setMaxLine(3)
         }
     }
 
@@ -50,6 +53,13 @@ class CreateMissionStep1Fragment :
         createMissionViewModel.missionRepoUrl.observe(viewLifecycleOwner) {
             createMissionViewModel.updateMissionRepoUrlInfoStatus()
             createMissionViewModel.setIsStep1DataValid()
+        }
+    }
+
+    private fun setupNextButtonClickListener() {
+        binding.btnNext.setOnClickListener {
+            closeKeyboard()
+            (requireActivity() as? CreateMissionActivity)?.let { it.onNextButtonClick(this.javaClass) }
         }
     }
 }

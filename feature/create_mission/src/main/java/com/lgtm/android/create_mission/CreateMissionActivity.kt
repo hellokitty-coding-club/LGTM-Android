@@ -6,6 +6,7 @@ import com.lgtm.android.common_ui.adapter.ViewPagerAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.create_mission.databinding.ActivityCreateMissionBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.reflect.Type
 
 @AndroidEntryPoint
 class CreateMissionActivity :
@@ -31,7 +32,7 @@ class CreateMissionActivity :
         viewPagerAdapter.fragmentList =
             listOf(
                 CreateMissionStep1Fragment(),
-                CreateMissionStep1Fragment(), // todo fragment 교체
+                CreateMissionStep2Fragment(), // todo fragment 교체
                 CreateMissionStep1Fragment(),
                 CreateMissionStep1Fragment(),
                 CreateMissionStep1Fragment()
@@ -56,5 +57,15 @@ class CreateMissionActivity :
 
     private fun disableClickDotIndicator() {
         binding.wormDotsIndicator.dotsClickable = false
+    }
+
+    fun onNextButtonClick(currentFragment: Type) {
+        when (currentFragment) {
+            CreateMissionStep1Fragment::class.java -> binding.vpMission.setCurrentItem(1, true)
+            CreateMissionStep2Fragment::class.java -> binding.vpMission.setCurrentItem(2, true)
+//            CreateMissionStep3Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
+//            CreateMissionStep4Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
+//            CreateMissionStep5Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
+        }
     }
 }

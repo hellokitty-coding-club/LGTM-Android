@@ -1,12 +1,14 @@
 package com.lgtm.android.common_ui.adapter
 
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.constant.TechTag
+import com.lgtm.android.common_ui.util.dpToPx
 
 @BindingAdapter("infoStatusColor")
 fun TextView.setInfoStatusColor(color: Int) {
@@ -22,6 +24,17 @@ fun AppCompatImageView.setImageResource(icon: Int) {
 fun AppCompatImageView.setTechTagImageByItsName(string: String) {
     val imageRes = TechTag.values().find { it.techTagVO.stack == string }?.defaultIcon
     imageRes?.let { setImageResource(it) }
+}
+
+@BindingAdapter("setLgtmEditTextPaddingEnd")
+fun EditText.setLgtmEditTextPaddingEnd(isWordCountVisible: Boolean) {
+    val scale: Float = resources.displayMetrics.density
+    val paddingEndShort = dpToPx(44, scale)
+    val paddingEndLong = dpToPx(94, scale)
+    val paddingStart = dpToPx(10, scale)
+    val paddingEnd = if (isWordCountVisible) paddingEndLong else paddingEndShort
+
+    setPadding(paddingStart, paddingTop, paddingEnd, paddingBottom)
 }
 
 @BindingAdapter("setRevieweeRoleImage")

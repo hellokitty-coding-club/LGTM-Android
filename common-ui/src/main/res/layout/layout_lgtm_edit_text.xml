@@ -21,17 +21,15 @@
         <EditText
             android:id="@+id/edit_text"
             style="@style/LGTMEditTextStyle"
+            setLgtmEditTextPaddingEnd="@{editTextData.wordCountVisibility}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
             android:hint="@{editTextData.hint}"
             android:maxLength="@{editTextData.maxLength}"
             android:minHeight="42dp"
-            android:paddingStart="10dp"
-            android:paddingEnd="80dp"
             android:text="@={editTextData.text}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="test test test test test test test test test ttest test test test test test test test test " />
@@ -49,7 +47,7 @@
             app:layout_constraintBottom_toBottomOf="@id/edit_text"
             app:layout_constraintEnd_toStartOf="@id/iv_clear"
             app:layout_constraintTop_toTopOf="@id/edit_text"
-            tools:text="10" />
+            tools:text="100" />
 
         <TextView
             android:id="@+id/tv_slash"
@@ -72,7 +70,7 @@
             android:visibility="@{editTextData.wordCountVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@id/tv_slash"
             app:layout_constraintEnd_toStartOf="@id/tv_slash"
-            tools:text="0" />
+            tools:text="100" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_clear"
