@@ -32,25 +32,25 @@ class CreateMissionStep1Fragment :
     private fun setupEditText() {
         binding.etMissionTitle.apply {
             setLifecycleOwner(viewLifecycleOwner)
-            bindEditTextData(createMissionViewModel.missionTitleEditTextData)
+            bindEditTextData(createMissionViewModel.titleEditTextData)
         }
 
         binding.etMissionRepoUrl.apply {
             setLifecycleOwner(viewLifecycleOwner)
-            bindEditTextData(createMissionViewModel.missionRepoUrlEditTextData)
+            bindEditTextData(createMissionViewModel.repoUrlEditTextData)
             setMaxLine(3)
         }
     }
 
     private fun onMissionTitleChanged() {
-        createMissionViewModel.missionTitle.observe(viewLifecycleOwner) {
+        createMissionViewModel.title.observe(viewLifecycleOwner) {
             createMissionViewModel.updateMissionTitleInfoStatus()
             createMissionViewModel.setIsStep1DataValid()
         }
     }
 
     private fun onMissionRepoUrlChanged() {
-        createMissionViewModel.missionRepoUrl.observe(viewLifecycleOwner) {
+        createMissionViewModel.repositoryUrl.observe(viewLifecycleOwner) {
             createMissionViewModel.updateMissionRepoUrlInfoStatus()
             createMissionViewModel.setIsStep1DataValid()
         }
@@ -59,7 +59,7 @@ class CreateMissionStep1Fragment :
     private fun setupNextButtonClickListener() {
         binding.btnNext.setOnClickListener {
             closeKeyboard()
-            (requireActivity() as? CreateMissionActivity)?.let { it.onNextButtonClick(this.javaClass) }
+            (requireActivity() as? CreateMissionActivity)?.onNextButtonClick(this.javaClass)
         }
     }
 }
