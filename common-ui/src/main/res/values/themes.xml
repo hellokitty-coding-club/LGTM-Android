@@ -16,6 +16,7 @@
         <item name="bottomSheetDialogTheme">@style/LgtmBottomSheetStyle</item>
         <item name="editTextStyle">@style/LGTMEditTextStyle</item>
         <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
+        <item name="chipCornerRadius">100dp</item>
     </style>
 
     <style name="LgtmBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
