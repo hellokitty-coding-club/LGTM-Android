@@ -36,6 +36,7 @@ class CreateMissionStep1Fragment :
         binding.etMissionRepoUrl.apply {
             setLifecycleOwner(viewLifecycleOwner)
             bindEditTextData(createMissionViewModel.missionRepoUrlEditTextData)
+            setMaxLine(3)
         }
     }
 

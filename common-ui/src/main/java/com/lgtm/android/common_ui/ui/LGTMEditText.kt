@@ -38,6 +38,10 @@ class LGTMEditText @JvmOverloads constructor(
         binding.lifecycleOwner = lifecycleOwner
     }
 
+    fun setMaxLine(lines: Int) {
+        binding.editText.maxLines = lines
+    }
+
     private fun initializeView() {
         addView(binding.root)
         showClearButton()
