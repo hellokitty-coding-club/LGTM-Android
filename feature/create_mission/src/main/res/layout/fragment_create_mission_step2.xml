@@ -21,7 +21,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="9dp"
             android:text="@string/which_stack_to_use"
             android:textAppearance="@style/Heading4B"
             android:textColor="@color/black"
@@ -42,9 +41,9 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_tech_tag"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="22dp"
+            android:layout_marginHorizontal="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
