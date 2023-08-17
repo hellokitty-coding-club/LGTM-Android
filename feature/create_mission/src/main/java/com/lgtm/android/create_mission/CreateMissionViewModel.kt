@@ -12,6 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
 
+    /** step 1 */
+
     val missionTitleEditTextData = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
@@ -80,5 +82,15 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
 
     fun setIsStep1DataValid() {
         _isStep1DataValid.value = isMissionTitleValid() && isMissionRepoUrlValid()
+    }
+
+    /** step2 */
+    val techTagList = MutableLiveData<MutableList<String>>(mutableListOf())
+
+    private val _isStep2DataValid = MutableLiveData<Boolean>()
+    val isStep2DataValid: LiveData<Boolean> = _isStep2DataValid
+
+    fun setIsTechTagValid() {
+        _isStep2DataValid.value = (techTagList.value?.size ?: 0) > 0
     }
 }
