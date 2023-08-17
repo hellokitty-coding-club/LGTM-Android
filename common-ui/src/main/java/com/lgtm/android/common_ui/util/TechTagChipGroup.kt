@@ -28,24 +28,29 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
 
     fun setChipGroup(selectedTagList: MutableLiveData<MutableList<String>>) {
         this.selectedTagList = selectedTagList
-
+        setChipSpacing()
         TechTag.values().forEach { tag ->
             val chip = createChip(tag)
             chipGroup.addView(chip)
         }
     }
 
+    private fun setChipSpacing() {
+        chipGroup.apply {
+            chipSpacingHorizontal = resources.getDimension(R.dimen.chip_spacing_horizontal).toInt()
+            chipSpacingVertical = 0
+        }
+    }
 
     private fun createChip(techTag: TechTag): Chip {
-
         return Chip(chipGroup.context).apply {
-            val screenWidth = resources.displayMetrics.widthPixels
             text = techTag.techTagVO.stack
-            this.chipStartPadding = screenWidth * 0.035F
-            this.chipEndPadding = screenWidth * 0.035F
+            this.chipStartPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
+            this.chipEndPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
+            this.chipMinHeight = resources.getDimension(R.dimen.chip_min_height)
             this.chipStrokeColor =
                 if (theme == TechTagTheme.LIGHT) strokeStateListLight else strokeStateListDark
-            this.chipStrokeWidth = screenWidth * 0.005F
+            this.chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width)
             this.chipBackgroundColor = backgroundStateList
             this.setChipIconResource(techTag.defaultIcon)
             this.setTextAppearance(R.style.Body2)
@@ -55,9 +60,7 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
                 if (it.isSelected) {
                     this@TechTagChipGroup.selectedTagList.value?.add(this.text.toString())
                     techTag.selectedIcon?.let { selectedIcon ->
-                        this.setChipIconResource(
-                            selectedIcon
-                        )
+                        this.setChipIconResource(selectedIcon)
                     }
                 } else {
                     this@TechTagChipGroup.selectedTagList.value?.remove(this.text.toString())
