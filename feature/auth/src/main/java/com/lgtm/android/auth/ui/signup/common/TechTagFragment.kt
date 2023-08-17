@@ -9,6 +9,7 @@ import com.lgtm.android.auth.databinding.FragmentTechTagBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.TechTagChipGroup
+import com.lgtm.android.common_ui.util.TechTagTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +32,7 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
 
     private fun setChips() {
         signUpViewModel.techTagList.let {
-            TechTagChipGroup(binding.chipTechTag).setChipGroup(it)
+            TechTagChipGroup(binding.chipTechTag, TechTagTheme.DARK).setChipGroup(it)
         }
     }
 

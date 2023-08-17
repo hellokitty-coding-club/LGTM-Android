@@ -8,7 +8,12 @@ import com.google.android.material.chip.ChipGroup
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.constant.TechTag
 
-class TechTagChipGroup(private val chipGroup: ChipGroup) {
+
+enum class TechTagTheme {
+    LIGHT, DARK
+}
+
+class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: TechTagTheme) {
     private lateinit var selectedTagList: MutableLiveData<MutableList<String>>
 
     private val states = arrayOf(
@@ -18,7 +23,8 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
 
     private val backgroundStateList = getColorStateList(R.color.black, R.color.white)
     private val textStateList = getColorStateList(R.color.green, R.color.black)
-    private val strokeStateList = getColorStateList(R.color.green, R.color.white)
+    private val strokeStateListLight = getColorStateList(R.color.green, R.color.gray_3)
+    private val strokeStateListDark = getColorStateList(R.color.green, R.color.white)
 
     fun setChipGroup(selectedTagList: MutableLiveData<MutableList<String>>) {
         this.selectedTagList = selectedTagList
@@ -37,7 +43,8 @@ class TechTagChipGroup(private val chipGroup: ChipGroup) {
             text = techTag.techTagVO.stack
             this.chipStartPadding = screenWidth * 0.035F
             this.chipEndPadding = screenWidth * 0.035F
-            this.chipStrokeColor = strokeStateList
+            this.chipStrokeColor =
+                if (theme == TechTagTheme.LIGHT) strokeStateListLight else strokeStateListDark
             this.chipStrokeWidth = screenWidth * 0.005F
             this.chipBackgroundColor = backgroundStateList
             this.setChipIconResource(techTag.defaultIcon)
