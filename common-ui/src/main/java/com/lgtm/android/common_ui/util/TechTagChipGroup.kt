@@ -45,30 +45,32 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
     private fun createChip(techTag: TechTag): Chip {
         return Chip(chipGroup.context).apply {
             text = techTag.techTagVO.stack
-            this.chipStartPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
-            this.chipEndPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
-            this.chipMinHeight = resources.getDimension(R.dimen.chip_min_height)
-            this.chipStrokeColor =
+            chipStartPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
+            chipEndPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
+            chipMinHeight = resources.getDimension(R.dimen.chip_min_height)
+            chipStrokeColor =
                 if (theme == TechTagTheme.LIGHT) strokeStateListLight else strokeStateListDark
-            this.chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width)
-            this.chipBackgroundColor = backgroundStateList
-            this.setChipIconResource(techTag.defaultIcon)
-            this.setTextAppearance(R.style.Body2)
-            this.setTextColor(textStateList) // (순서 중요) textAppearance 후에 배치
-            this.setOnClickListener {
-                it.isSelected = !it.isSelected
-                if (it.isSelected) {
-                    this@TechTagChipGroup.selectedTagList.value?.add(this.text.toString())
-                    techTag.selectedIcon?.let { selectedIcon ->
-                        this.setChipIconResource(selectedIcon)
-                    }
-                } else {
-                    this@TechTagChipGroup.selectedTagList.value?.remove(this.text.toString())
-                    this.setChipIconResource(techTag.defaultIcon)
-                }
-                this@TechTagChipGroup.selectedTagList.value =
-                    this@TechTagChipGroup.selectedTagList.value?.toMutableList()
+            chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width)
+            chipBackgroundColor = backgroundStateList
+            setChipIconResource(techTag.defaultIcon)
+            setTextAppearance(R.style.Body2)
+            setTextColor(textStateList) // (순서 중요) textAppearance 후에 배치
+            setOnClickListener { onChipSelected(this, techTag) }
+        }
+    }
+
+    private fun onChipSelected(chip: Chip, techTag: TechTag) {
+        chip.apply {
+            isSelected = !isSelected
+            if (isSelected) {
+                this@TechTagChipGroup.selectedTagList.value?.add(this.text.toString())
+                techTag.selectedIcon?.let { selectedIcon -> this.setChipIconResource(selectedIcon) }
+            } else {
+                this@TechTagChipGroup.selectedTagList.value?.remove(this.text.toString())
+                this.setChipIconResource(techTag.defaultIcon)
             }
+            this@TechTagChipGroup.selectedTagList.value =
+                this@TechTagChipGroup.selectedTagList.value?.toMutableList()
         }
     }
 
