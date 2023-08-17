@@ -7,6 +7,7 @@ import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep1Binding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class CreateMissionStep1Fragment :
     BaseFragment<FragmentCreateMissionStep1Binding>(R.layout.fragment_create_mission_step1) {
@@ -57,6 +58,7 @@ class CreateMissionStep1Fragment :
 
     private fun setupNextButtonClickListener() {
         binding.btnNext.setOnClickListener {
+            closeKeyboard()
             (requireActivity() as? CreateMissionActivity)?.let { it.onNextButtonClick(this.javaClass) }
         }
     }
