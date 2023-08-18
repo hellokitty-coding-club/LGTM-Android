@@ -12,9 +12,13 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
 
+    private fun isConsistOnlyWithSpace(liveData: LiveData<String>) =
+        (liveData.value?.isBlank() == true && liveData.value?.isNotEmpty() == true)
+
+
     /** step 1 */
 
-    val missionTitleEditTextData = MutableLiveData(
+    val titleEditTextData = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
             infoStatus = MutableLiveData(InfoType.NONE),
@@ -23,7 +27,7 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
         )
     )
 
-    val missionRepoUrlEditTextData = MutableLiveData(
+    val repoUrlEditTextData = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
             infoStatus = MutableLiveData(InfoType.NONE),
@@ -33,39 +37,39 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
         )
     )
 
-    val missionTitle: LiveData<String> =
-        missionTitleEditTextData.value?.text ?: MutableLiveData("")
+    val title: LiveData<String> =
+        titleEditTextData.value?.text ?: MutableLiveData("")
 
     fun updateMissionTitleInfoStatus() {
-        if (missionTitle.value?.isBlank() == true && missionTitle.value?.isNotEmpty() == true)
-            missionTitleEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
+        if (isConsistOnlyWithSpace(title))
+            titleEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
         else
-            missionTitleEditTextData.value?.infoStatus?.value = InfoType.NONE
+            titleEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
-    private fun isMissionTitleValid(): Boolean {
-        return missionTitleEditTextData.value?.infoStatus?.value == InfoType.NONE
-                && missionTitleEditTextData.value?.text?.value?.isNotBlank() == true
+    private fun isTitleValid(): Boolean {
+        return titleEditTextData.value?.infoStatus?.value == InfoType.NONE
+                && titleEditTextData.value?.text?.value?.isNotBlank() == true
     }
 
-    val missionRepoUrl: LiveData<String> =
-        missionRepoUrlEditTextData.value?.text ?: MutableLiveData("")
+    val repositoryUrl: LiveData<String> =
+        repoUrlEditTextData.value?.text ?: MutableLiveData("")
 
     fun updateMissionRepoUrlInfoStatus() {
-        if (missionRepoUrl.value?.isBlank() == true && missionRepoUrl.value?.isNotEmpty() == true)
-            missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
-        else if (missionRepoUrl.value?.isNotBlank() == true && !isGithubUrl(
-                missionRepoUrl.value ?: ""
+        if (isConsistOnlyWithSpace(repositoryUrl))
+            repoUrlEditTextData.value?.infoStatus?.value = InfoType.SPACE_ONLY_NOT_ALLOWED
+        else if (repositoryUrl.value?.isNotBlank() == true && !isGithubUrl(
+                repositoryUrl.value ?: ""
             )
         )
-            missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
+            repoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
         else
-            missionRepoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
+            repoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
     private fun isMissionRepoUrlValid(): Boolean {
-        return missionRepoUrlEditTextData.value?.infoStatus?.value == InfoType.NONE
-                && missionRepoUrlEditTextData.value?.text?.value?.isNotBlank() == true
+        return repoUrlEditTextData.value?.infoStatus?.value == InfoType.NONE
+                && repoUrlEditTextData.value?.text?.value?.isNotBlank() == true
     }
 
     private fun isGithubUrl(url: String): Boolean {
@@ -81,7 +85,7 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     val isStep1DataValid: LiveData<Boolean> = _isStep1DataValid
 
     fun setIsStep1DataValid() {
-        _isStep1DataValid.value = isMissionTitleValid() && isMissionRepoUrlValid()
+        _isStep1DataValid.value = isTitleValid() && isMissionRepoUrlValid()
     }
 
     /** step2 */
@@ -92,5 +96,62 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
 
     fun setIsTechTagValid() {
         _isStep2DataValid.value = (techTagList.value?.size ?: 0) > 0
+    }
+
+    /** step3 */
+    val descriptionEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 1000,
+            hint = "내용을 입력하세요.",
+            wordCountVisibility = false
+        )
+    )
+
+    val description: LiveData<String> = descriptionEditTextData.value?.text ?: MutableLiveData("")
+
+    fun updateMissionDescriptionInfoStatus() {
+        descriptionEditTextData.value?.infoStatus?.value =
+            if (isConsistOnlyWithSpace(description)) InfoType.SPACE_ONLY_NOT_ALLOWED
+            else InfoType.NONE
+    }
+
+    private fun isMissionDescriptionValid(): Boolean {
+        return descriptionEditTextData.value?.infoStatus?.value == InfoType.NONE
+                && descriptionEditTextData.value?.text?.value?.isNotBlank() == true
+    }
+
+    val recommendGroupEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 1000,
+            hint = "내용을 입력하세요.",
+            wordCountVisibility = false
+        )
+    )
+
+    val recommendGroup: LiveData<String> =
+        recommendGroupEditTextData.value?.text ?: MutableLiveData("")
+
+    val notRecommendGroupEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 1000,
+            hint = "내용을 입력하세요.",
+            wordCountVisibility = false
+        )
+    )
+
+    val notRecommendGroup: LiveData<String> =
+        notRecommendGroupEditTextData.value?.text ?: MutableLiveData("")
+
+    private val _isStep3DataValid = MutableLiveData<Boolean>()
+    val isStep3DataValid: LiveData<Boolean> = _isStep3DataValid
+
+    fun setIsStep3DataValid() {
+        _isStep3DataValid.value = isMissionDescriptionValid()
     }
 }

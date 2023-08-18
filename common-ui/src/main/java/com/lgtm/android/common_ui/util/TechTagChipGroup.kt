@@ -50,7 +50,6 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
             chipMinHeight = resources.getDimension(R.dimen.chip_min_height)
             chipStrokeColor =
                 if (theme == TechTagTheme.LIGHT) strokeStateListLight else strokeStateListDark
-            chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width)
             chipBackgroundColor = backgroundStateList
             setChipIconResource(techTag.defaultIcon)
             setTextAppearance(R.style.Body2)
@@ -63,9 +62,11 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
         chip.apply {
             isSelected = !isSelected
             if (isSelected) {
+                chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width_selected)
                 this@TechTagChipGroup.selectedTagList.value?.add(this.text.toString())
                 techTag.selectedIcon?.let { selectedIcon -> this.setChipIconResource(selectedIcon) }
             } else {
+                chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width_unselected)
                 this@TechTagChipGroup.selectedTagList.value?.remove(this.text.toString())
                 this.setChipIconResource(techTag.defaultIcon)
             }

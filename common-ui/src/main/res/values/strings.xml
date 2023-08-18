@@ -63,4 +63,8 @@
     <string name="github_url_only">미션은 Github Public Repository를 기반으로 합니다.</string>
     <string name="which_stack_to_use">어떤 스택을 사용하시나요?</string>
     <string name="choose_over_one">한 개 이상 선택하세요.</string>
+    <string name="what_kind_of_mission">어떤 미션인가요?</string>
+    <string name="mission_description_example">ex) 미션 소개, 구현 요구 사항, 배울 수 있는 것</string>
+    <string name="recommend_group">이런 사람에게 추천해요.</string>
+    <string name="not_recommend_group">이런 사람에게는 추천하지 않아요.</string>
 </resources>

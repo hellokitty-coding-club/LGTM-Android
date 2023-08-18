@@ -32,9 +32,9 @@ class CreateMissionActivity :
         viewPagerAdapter.fragmentList =
             listOf(
                 CreateMissionStep1Fragment(),
-                CreateMissionStep2Fragment(), // todo fragment 교체
-                CreateMissionStep1Fragment(),
-                CreateMissionStep1Fragment(),
+                CreateMissionStep2Fragment(),
+                CreateMissionStep3Fragment(),
+                CreateMissionStep1Fragment(),  // todo fragment 교체
                 CreateMissionStep1Fragment()
             )
     }
@@ -63,7 +63,7 @@ class CreateMissionActivity :
         when (currentFragment) {
             CreateMissionStep1Fragment::class.java -> binding.vpMission.setCurrentItem(1, true)
             CreateMissionStep2Fragment::class.java -> binding.vpMission.setCurrentItem(2, true)
-//            CreateMissionStep3Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
+            CreateMissionStep3Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
 //            CreateMissionStep4Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
 //            CreateMissionStep5Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
         }

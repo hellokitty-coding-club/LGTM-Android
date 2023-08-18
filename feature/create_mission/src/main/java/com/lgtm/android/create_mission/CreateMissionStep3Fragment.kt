@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
-import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep1Binding
+import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep3Binding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class CreateMissionStep1Fragment :
-    BaseFragment<FragmentCreateMissionStep1Binding>(R.layout.fragment_create_mission_step1) {
+class CreateMissionStep3Fragment :
+    BaseFragment<FragmentCreateMissionStep3Binding>(R.layout.fragment_create_mission_step3) {
     private val createMissionViewModel by activityViewModels<CreateMissionViewModel>()
 
     override fun initializeViewModel() {
@@ -20,9 +19,8 @@ class CreateMissionStep1Fragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
         setupEditText()
-        onMissionTitleChanged()
-        onMissionRepoUrlChanged()
         setupNextButtonClickListener()
+        onMissionDescriptionChanged()
     }
 
     private fun setupViewModel() {
@@ -30,35 +28,30 @@ class CreateMissionStep1Fragment :
     }
 
     private fun setupEditText() {
-        binding.etMissionTitle.apply {
+        binding.etMissionDescription.apply {
             setLifecycleOwner(viewLifecycleOwner)
-            bindEditTextData(createMissionViewModel.titleEditTextData)
+            bindEditTextData(createMissionViewModel.descriptionEditTextData)
         }
 
-        binding.etMissionRepoUrl.apply {
+        binding.etRecommendGroup.apply {
             setLifecycleOwner(viewLifecycleOwner)
-            bindEditTextData(createMissionViewModel.repoUrlEditTextData)
-            setMaxLine(3)
+            bindEditTextData(createMissionViewModel.recommendGroupEditTextData)
+        }
+        binding.etNotRecommendGroup.apply {
+            setLifecycleOwner(viewLifecycleOwner)
+            bindEditTextData(createMissionViewModel.notRecommendGroupEditTextData)
         }
     }
 
-    private fun onMissionTitleChanged() {
-        createMissionViewModel.title.observe(viewLifecycleOwner) {
-            createMissionViewModel.updateMissionTitleInfoStatus()
-            createMissionViewModel.setIsStep1DataValid()
-        }
-    }
-
-    private fun onMissionRepoUrlChanged() {
-        createMissionViewModel.repositoryUrl.observe(viewLifecycleOwner) {
-            createMissionViewModel.updateMissionRepoUrlInfoStatus()
-            createMissionViewModel.setIsStep1DataValid()
+    private fun onMissionDescriptionChanged() {
+        createMissionViewModel.description.observe(viewLifecycleOwner) {
+            createMissionViewModel.updateMissionDescriptionInfoStatus()
+            createMissionViewModel.setIsStep3DataValid()
         }
     }
 
     private fun setupNextButtonClickListener() {
         binding.btnNext.setOnClickListener {
-            closeKeyboard()
             (requireActivity() as? CreateMissionActivity)?.onNextButtonClick(this.javaClass)
         }
     }
