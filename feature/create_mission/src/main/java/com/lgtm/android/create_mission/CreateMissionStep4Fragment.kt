@@ -2,6 +2,7 @@ package com.lgtm.android.create_mission
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep4Binding
@@ -19,6 +20,22 @@ class CreateMissionStep4Fragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
         setupNextButtonClickListener()
+        onPriceChanged()
+        onRecruitNumberChanged()
+    }
+
+    private fun onRecruitNumberChanged() {
+        binding.etNumOfRecruits.addTextChangedListener {
+            createMissionViewModel.setNumOfRecruits(it.toString())
+            createMissionViewModel.setIsStep4DataValid()
+        }
+    }
+
+    private fun onPriceChanged() {
+        binding.etPrice.addTextChangedListener {
+            createMissionViewModel.setPrice(it.toString())
+            createMissionViewModel.setIsStep4DataValid()
+        }
     }
 
     private fun setupViewModel() {
