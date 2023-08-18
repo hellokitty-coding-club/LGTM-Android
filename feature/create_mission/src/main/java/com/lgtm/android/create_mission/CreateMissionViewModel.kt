@@ -154,4 +154,12 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     fun setIsStep3DataValid() {
         _isStep3DataValid.value = isMissionDescriptionValid()
     }
+
+    /** step4 */
+    private val _isStep4DataValid = MutableLiveData<Boolean>()
+    val isStep4DataValid: LiveData<Boolean> = _isStep4DataValid
+
+    fun setIsStep4DataValid() {
+        _isStep4DataValid.value = isMissionDescriptionValid()
+    }
 }
