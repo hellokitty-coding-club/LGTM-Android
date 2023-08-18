@@ -24,7 +24,6 @@
             setLgtmEditTextPaddingEnd="@{editTextData.wordCountVisibility}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
             android:hint="@{editTextData.hint}"
             android:maxLength="@{editTextData.maxLength}"
             android:minHeight="42dp"
