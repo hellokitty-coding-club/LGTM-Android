@@ -58,6 +58,7 @@
         <item name="colorAccent">?attr/colorPrimary</item>
         <item name="android:textColorHint">@color/gray_3</item>
         <item name="android:paddingVertical">16dp</item>
+        <item name="android:background">@drawable/rectangle_white_stroke_gray_3_radius_10</item>
         <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
     </style>
 

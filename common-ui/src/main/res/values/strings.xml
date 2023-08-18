@@ -67,4 +67,9 @@
     <string name="mission_description_example">ex) 미션 소개, 구현 요구 사항, 배울 수 있는 것</string>
     <string name="recommend_group">이런 사람에게 추천해요.</string>
     <string name="not_recommend_group">이런 사람에게는 추천하지 않아요.</string>
+    <string name="enter_max_people_num">모집 인원을 입력하세요.</string>
+    <string name="persons">명</string>
+    <string name="won">원</string>
+    <string name="num_hint">00</string>
+    <string name="enter_price">가격을 입력하세요.</string>
 </resources>

@@ -34,7 +34,7 @@ class CreateMissionActivity :
                 CreateMissionStep1Fragment(),
                 CreateMissionStep2Fragment(),
                 CreateMissionStep3Fragment(),
-                CreateMissionStep1Fragment(),  // todo fragment 교체
+                CreateMissionStep4Fragment(),  // todo fragment 교체
                 CreateMissionStep1Fragment()
             )
     }
@@ -64,7 +64,7 @@ class CreateMissionActivity :
             CreateMissionStep1Fragment::class.java -> binding.vpMission.setCurrentItem(1, true)
             CreateMissionStep2Fragment::class.java -> binding.vpMission.setCurrentItem(2, true)
             CreateMissionStep3Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
-//            CreateMissionStep4Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
+            CreateMissionStep4Fragment::class.java -> binding.vpMission.setCurrentItem(4, true)
 //            CreateMissionStep5Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
         }
     }
