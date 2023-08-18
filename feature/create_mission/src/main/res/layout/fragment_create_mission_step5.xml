@@ -42,75 +42,73 @@
                     app:layout_constraintGuide_end="20dp" />
 
                 <TextView
-                    android:id="@+id/tv_num_of_recruits"
+                    android:id="@+id/tv_registration_due_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/enter_max_people_num"
+                    android:text="@string/enter_registration_date_limit"
                     android:textAppearance="@style/Heading4B"
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/et_num_of_recruits"
+                    android:id="@+id/et_registration_due_date"
                     style="@style/LGTMEditTextStyle"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:enabled="false"
                     android:gravity="center"
-                    android:hint="@string/num_hint"
-                    android:inputType="number"
-                    android:maxLength="9"
+                    android:hint="@string/date_hint"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_num_of_recruits" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_registration_due_date" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@string/persons"
+                    android:text="@string/until"
                     android:textAppearance="@style/Body1B"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@id/et_num_of_recruits"
-                    app:layout_constraintStart_toEndOf="@id/et_num_of_recruits"
-                    app:layout_constraintTop_toTopOf="@id/et_num_of_recruits" />
+                    app:layout_constraintBottom_toBottomOf="@id/et_registration_due_date"
+                    app:layout_constraintStart_toEndOf="@id/et_registration_due_date"
+                    app:layout_constraintTop_toTopOf="@id/et_registration_due_date" />
 
                 <TextView
-                    android:id="@+id/tv_price"
+                    android:id="@+id/tv_enter_assignment_due_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="@string/enter_price"
+                    android:text="@string/enter_assignment_due_date"
                     android:textAppearance="@style/Heading4B"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/et_num_of_recruits" />
+                    app:layout_constraintTop_toBottomOf="@id/et_registration_due_date" />
 
                 <EditText
-                    android:id="@+id/et_price"
+                    android:id="@+id/et_assignment_due_date"
                     style="@style/LGTMEditTextStyle"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="92dp"
+                    android:enabled="false"
                     android:gravity="center"
-                    android:hint="@string/num_hint"
-                    android:inputType="numberDecimal"
-                    android:maxLength="9"
+                    android:hint="@string/date_hint"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_price"
-                    tools:text="100,000" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_enter_assignment_due_date"
+                    tools:hint="0000.00.00" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@string/won"
+                    android:text="@string/until"
                     android:textAppearance="@style/Body1B"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@id/et_price"
-                    app:layout_constraintStart_toEndOf="@id/et_price"
-                    app:layout_constraintTop_toTopOf="@id/et_price" />
+                    app:layout_constraintBottom_toBottomOf="@id/et_assignment_due_date"
+                    app:layout_constraintStart_toEndOf="@id/et_assignment_due_date"
+                    app:layout_constraintTop_toTopOf="@id/et_assignment_due_date" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
