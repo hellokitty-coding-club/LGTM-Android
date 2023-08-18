@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
-import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep3Binding
+import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep4Binding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CreateMissionStep4Fragment :
-    BaseFragment<FragmentCreateMissionStep3Binding>(R.layout.fragment_create_mission_step3) {
+    BaseFragment<FragmentCreateMissionStep4Binding>(R.layout.fragment_create_mission_step4) {
     private val createMissionViewModel by activityViewModels<CreateMissionViewModel>()
 
     override fun initializeViewModel() {
