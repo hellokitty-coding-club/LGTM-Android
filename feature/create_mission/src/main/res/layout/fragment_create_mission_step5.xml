@@ -85,7 +85,7 @@
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:enabled="@{viewModel.isStep5DataValid, default=false}"
-            android:text="@string/next"
+            android:text="@string/complete"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

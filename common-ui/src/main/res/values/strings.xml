@@ -77,4 +77,5 @@
     <string name="until">까지</string>
     <string name="enter_assignment_due_date">미션 마감일을 입력하세요.</string>
     <string name="optional">*선택</string>
+    <string name="complete">완료</string>
 </resources>
