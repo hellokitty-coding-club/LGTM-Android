@@ -7,8 +7,10 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.R.*
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.dotStyleFormatter
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep5Binding
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
 import java.util.Calendar
 
 @AndroidEntryPoint
@@ -24,6 +26,7 @@ class CreateMissionStep5Fragment :
         setupViewModel()
         setupNextButtonClickListener()
         onEditTextClicked()
+        observeRegistrationDueDate()
     }
 
     private fun onEditTextClicked() {
@@ -34,10 +37,19 @@ class CreateMissionStep5Fragment :
 
     @SuppressLint("SetTextI18n")
     val onDateClicked = DatePickerDialog.OnDateSetListener { _, year, month, day ->
-        val formattedMonth = String.format("%02d", month + 1)
-        val formattedDay = String.format("%02d", day)
-        binding.etRegistrationDueDate.setText("$year.$formattedMonth.$formattedDay")
-        //viewmodel
+        createMissionViewModel.setRegistrationDueDate(year, month, day)
+    }
+
+    private fun observeRegistrationDueDate() {
+        createMissionViewModel.registrationDueDate.observe(viewLifecycleOwner) {
+            setFormattedDate(it)
+            createMissionViewModel.setIsStep5DataValid()
+        }
+    }
+
+    private fun setFormattedDate(localDate: LocalDate) {
+        val formattedDate = localDate.format(dotStyleFormatter)
+        binding.etRegistrationDueDate.setText(formattedDate)
     }
 
     private fun showDatePickerDialog() {
@@ -52,7 +64,6 @@ class CreateMissionStep5Fragment :
         )
         datePickerDialog.show()
     }
-
 
     private fun setupViewModel() {
         binding.viewModel = createMissionViewModel
