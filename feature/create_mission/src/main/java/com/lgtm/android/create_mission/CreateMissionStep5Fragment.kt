@@ -62,7 +62,9 @@ class CreateMissionStep5Fragment :
             requireContext(), style.ThemeOverlay_App_DatePicker, onDateClicked,
             currentYear, currentMonth, currentDay
         )
-        datePickerDialog.show()
+
+        if (!requireActivity().isFinishing)
+            datePickerDialog.show()
     }
 
     private fun setupViewModel() {
