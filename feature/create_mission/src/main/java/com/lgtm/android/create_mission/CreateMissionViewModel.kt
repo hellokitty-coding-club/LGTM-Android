@@ -1,5 +1,6 @@
 package com.lgtm.android.create_mission
 
+import android.app.DatePickerDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -143,7 +144,7 @@ class CreateMissionViewModel @Inject constructor(
         )
     )
 
-    val recommendGroup: LiveData<String> =
+    private val recommendGroup: LiveData<String> =
         recommendGroupEditTextData.value?.text ?: MutableLiveData("")
 
     val notRecommendGroupEditTextData = MutableLiveData(
@@ -156,7 +157,7 @@ class CreateMissionViewModel @Inject constructor(
         )
     )
 
-    val notRecommendGroup: LiveData<String> =
+    private val notRecommendGroup: LiveData<String> =
         notRecommendGroupEditTextData.value?.text ?: MutableLiveData("")
 
     private val _isStep3DataValid = MutableLiveData<Boolean>()
@@ -168,14 +169,14 @@ class CreateMissionViewModel @Inject constructor(
 
     /** step4 */
     private val _numOfRecruits = MutableLiveData<Int>()
-    val numOfRecruits: LiveData<Int> = _numOfRecruits
+    private val numOfRecruits: LiveData<Int> = _numOfRecruits
 
     fun setNumOfRecruits(num: String) {
         _numOfRecruits.value = if (num.isEmpty()) null else num.toInt()
     }
 
     private val _price = MutableLiveData<Int>()
-    val price: LiveData<Int> = _price
+    private val price: LiveData<Int> = _price
 
     fun setPrice(price: String) {
         _price.value = if (price.isEmpty()) null else price.toInt()
@@ -189,14 +190,13 @@ class CreateMissionViewModel @Inject constructor(
     }
 
     /** step5 */
-    private val _registrationDueDate = MutableLiveData<LocalDate>()
-    val registrationDueDate: LiveData<LocalDate> = _registrationDueDate
-
-    fun setRegistrationDueDate(year: Int, month: Int, dayOfMonth: Int) {
-        val date = LocalDate.of(year, month + 1, dayOfMonth)
+    val onDateClicked = DatePickerDialog.OnDateSetListener { _, year, month, day ->
+        val date = LocalDate.of(year, month + 1, day)
         _registrationDueDate.value = date
     }
 
+    private val _registrationDueDate = MutableLiveData<LocalDate>()
+    val registrationDueDate: LiveData<LocalDate> = _registrationDueDate
 
     private val _isStep5DataValid = MutableLiveData<Boolean>()
     val isStep5DataValid: LiveData<Boolean> = _isStep5DataValid
@@ -238,6 +238,4 @@ class CreateMissionViewModel @Inject constructor(
                 }
         }
     }
-
-
 }

@@ -1,12 +1,11 @@
 package com.lgtm.android.create_mission
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import com.lgtm.android.common_ui.R.*
+import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.dotStyleFormatter
@@ -38,11 +37,6 @@ class CreateMissionStep5Fragment :
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    val onDateClicked = DatePickerDialog.OnDateSetListener { _, year, month, day ->
-        createMissionViewModel.setRegistrationDueDate(year, month, day)
-    }
-
     private fun observeRegistrationDueDate() {
         createMissionViewModel.registrationDueDate.observe(viewLifecycleOwner) {
             setFormattedDate(it)
@@ -62,8 +56,12 @@ class CreateMissionStep5Fragment :
         val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
-            requireContext(), style.ThemeOverlay_App_DatePicker, onDateClicked,
-            currentYear, currentMonth, currentDay
+            requireContext(),
+            style.ThemeOverlay_App_DatePicker,
+            createMissionViewModel.onDateClicked,
+            currentYear,
+            currentMonth,
+            currentDay
         )
 
         if (!requireActivity().isFinishing)
