@@ -71,5 +71,9 @@
     <string name="persons">명</string>
     <string name="won">원</string>
     <string name="num_hint">00</string>
+    <string name="date_hint">0000.00.00</string>
     <string name="enter_price">가격을 입력하세요.</string>
+    <string name="enter_registration_date_limit">모집 기한을 입력하세요.</string>
+    <string name="until">까지</string>
+    <string name="enter_assignment_due_date">미션 마감일을 입력하세요.</string>
 </resources>

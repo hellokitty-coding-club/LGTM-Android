@@ -6,6 +6,7 @@ import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.time.LocalDate
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -175,5 +176,22 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
 
     fun setIsStep4DataValid() {
         _isStep4DataValid.value = (numOfRecruits.value ?: 0) > 0 && (price.value != null)
+    }
+
+    /** step5 */
+    private val _registrationDueDate = MutableLiveData<LocalDate>()
+    val registrationDueDate: LiveData<LocalDate> = _registrationDueDate
+
+    fun setRegistrationDueDate(year: Int, month: Int, dayOfMonth: Int) {
+        val date = LocalDate.of(year, month, dayOfMonth)
+        _registrationDueDate.value = date
+    }
+
+
+    private val _isStep5DataValid = MutableLiveData<Boolean>()
+    val isStep5DataValid: LiveData<Boolean> = _isStep5DataValid
+
+    fun setIsStep5DataValid() {
+        _isStep5DataValid.value = registrationDueDate.value != null
     }
 }
