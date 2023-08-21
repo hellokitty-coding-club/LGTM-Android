@@ -1,17 +1,28 @@
 package com.lgtm.android.create_mission
 
+import android.app.DatePickerDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
+import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.common_ui.util.isoStyleFormatter
+import com.lgtm.domain.entity.LgtmResponseException
+import com.lgtm.domain.entity.request.PostMissionRequestDTO
+import com.lgtm.domain.entity.response.PostMissionResponseVO
+import com.lgtm.domain.repository.MissionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
+class CreateMissionViewModel @Inject constructor(
+    private val missionRepository: MissionRepository
+) : BaseViewModel() {
 
     private fun isConsistOnlyWithSpace(liveData: LiveData<String>) =
         (liveData.value?.isBlank() == true && liveData.value?.isNotEmpty() == true)
@@ -133,7 +144,7 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
         )
     )
 
-    val recommendGroup: LiveData<String> =
+    private val recommendGroup: LiveData<String> =
         recommendGroupEditTextData.value?.text ?: MutableLiveData("")
 
     val notRecommendGroupEditTextData = MutableLiveData(
@@ -146,7 +157,7 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
         )
     )
 
-    val notRecommendGroup: LiveData<String> =
+    private val notRecommendGroup: LiveData<String> =
         notRecommendGroupEditTextData.value?.text ?: MutableLiveData("")
 
     private val _isStep3DataValid = MutableLiveData<Boolean>()
@@ -158,14 +169,14 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
 
     /** step4 */
     private val _numOfRecruits = MutableLiveData<Int>()
-    val numOfRecruits: LiveData<Int> = _numOfRecruits
+    private val numOfRecruits: LiveData<Int> = _numOfRecruits
 
     fun setNumOfRecruits(num: String) {
         _numOfRecruits.value = if (num.isEmpty()) null else num.toInt()
     }
 
     private val _price = MutableLiveData<Int>()
-    val price: LiveData<Int> = _price
+    private val price: LiveData<Int> = _price
 
     fun setPrice(price: String) {
         _price.value = if (price.isEmpty()) null else price.toInt()
@@ -179,19 +190,52 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
     }
 
     /** step5 */
-    private val _registrationDueDate = MutableLiveData<LocalDate>()
-    val registrationDueDate: LiveData<LocalDate> = _registrationDueDate
-
-    fun setRegistrationDueDate(year: Int, month: Int, dayOfMonth: Int) {
-        val date = LocalDate.of(year, month, dayOfMonth)
+    val onDateClicked = DatePickerDialog.OnDateSetListener { _, year, month, day ->
+        val date = LocalDate.of(year, month + 1, day)
         _registrationDueDate.value = date
     }
 
+    private val _registrationDueDate = MutableLiveData<LocalDate>()
+    val registrationDueDate: LiveData<LocalDate> = _registrationDueDate
 
     private val _isStep5DataValid = MutableLiveData<Boolean>()
     val isStep5DataValid: LiveData<Boolean> = _isStep5DataValid
 
     fun setIsStep5DataValid() {
         _isStep5DataValid.value = registrationDueDate.value != null
+    }
+
+    private val _createMissionState: MutableLiveData<NetworkState<PostMissionResponseVO>> =
+        MutableLiveData(NetworkState.Init)
+    val createMissionState: LiveData<NetworkState<PostMissionResponseVO>> = _createMissionState
+
+
+    private fun createPostMissionRequestDTO(): PostMissionRequestDTO {
+        val formattedDate = registrationDueDate.value?.format(isoStyleFormatter)
+        val tempDate = formattedDate?.substring(0, 10)?.replace("-", ".")// todo 서버 코드 바뀌면 수정
+        return PostMissionRequestDTO(
+            description = requireNotNull(description.value),
+            maxPeopleNumber = requireNotNull(numOfRecruits.value),
+            missionRepositoryUrl = requireNotNull(repositoryUrl.value),
+            notRecommendTo = notRecommendGroup.value,
+            recommendTo = recommendGroup.value,
+            price = requireNotNull(price.value),
+            registrationDueDate = requireNotNull(tempDate),
+            tagList = requireNotNull(techTagList.value),
+            title = requireNotNull(title.value)
+        )
+    }
+
+    fun createMission() {
+        val mission = createPostMissionRequestDTO()
+        viewModelScope.launch(lgtmErrorHandler) {
+            missionRepository.createMission(mission)
+                .onSuccess {
+                    _createMissionState.postValue(NetworkState.Success(it))
+                }.onFailure {
+                    val errorMessage = if (it is LgtmResponseException) it.message else "미션 생성 실패"
+                    _createMissionState.postValue(NetworkState.Failure(errorMessage))
+                }
+        }
     }
 }

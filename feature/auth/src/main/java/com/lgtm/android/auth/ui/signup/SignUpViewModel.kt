@@ -343,7 +343,7 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    // todo usecase 에서 create & trim
+    // todo: Refactor - usecase 에서 trim
     private fun createSignUpSeniorRequestVO(): SignUpSeniorRequestVO {
         return try {
             SignUpSeniorRequestVO(
