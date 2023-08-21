@@ -33,7 +33,7 @@ class CreateMissionViewModel @Inject constructor() : BaseViewModel() {
             text = MutableLiveData(""),
             infoStatus = MutableLiveData(InfoType.NONE),
             maxLength = 5000,
-            hint = "URL을 입력하세요.",
+            hint = "Github URL을 입력하세요.",
             wordCountVisibility = false
         )
     )

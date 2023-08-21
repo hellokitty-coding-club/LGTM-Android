@@ -51,6 +51,18 @@
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/tv_registration_due_date_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/until_when_should_you_recruit_reviewers"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_registration_due_date" />
+
+
                 <EditText
                     android:id="@+id/et_registration_due_date"
                     style="@style/LGTMEditTextStyle"
@@ -63,7 +75,7 @@
                     android:hint="@string/date_hint"
                     android:textIsSelectable="false"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_registration_due_date" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_registration_due_date_description" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,7 +97,7 @@
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:enabled="@{viewModel.isStep5DataValid, default=false}"
-            android:text="@string/next"
+            android:text="@string/complete"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,7 +60,7 @@
     <!-- 미션 작성 -->
     <string name="enter_mission_title">미션 제목을 입력하세요.</string>
     <string name="enter_mission_repo_url">미션 레포지토리 URL을 입력하세요.</string>
-    <string name="github_url_only">미션은 Github Public Repository를 기반으로 합니다.</string>
+    <string name="github_url_only">전체공개된 github URL만 입력할 수 있습니다.</string>
     <string name="which_stack_to_use">어떤 스택을 사용하시나요?</string>
     <string name="choose_over_one">한 개 이상 선택하세요.</string>
     <string name="what_kind_of_mission">어떤 미션인가요?</string>
@@ -76,4 +76,7 @@
     <string name="enter_registration_date_limit">모집 기한을 입력하세요.</string>
     <string name="until">까지</string>
     <string name="enter_assignment_due_date">미션 마감일을 입력하세요.</string>
+    <string name="optional">*선택</string>
+    <string name="complete">완료</string>
+    <string name="until_when_should_you_recruit_reviewers">언제까지 리뷰이를 모집할까요?</string>
 </resources>

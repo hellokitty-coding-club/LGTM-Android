@@ -84,6 +84,19 @@
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/et_mission_description" />
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/optional"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_recommend_group"
+                    app:layout_constraintStart_toEndOf="@id/tv_recommend_group"
+                    app:layout_constraintTop_toTopOf="@id/tv_recommend_group" />
+
+
                 <com.lgtm.android.common_ui.ui.LGTMEditText
                     android:id="@+id/et_recommend_group"
                     android:layout_width="0dp"
@@ -104,6 +117,19 @@
                     android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/et_recommend_group" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/optional"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/blue"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_not_recommend_group"
+                    app:layout_constraintStart_toEndOf="@id/tv_not_recommend_group"
+                    app:layout_constraintTop_toTopOf="@id/tv_not_recommend_group" />
+
 
                 <com.lgtm.android.common_ui.ui.LGTMEditText
                     android:id="@+id/et_not_recommend_group"
