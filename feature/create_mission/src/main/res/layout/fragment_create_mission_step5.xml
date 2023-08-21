@@ -57,9 +57,11 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:enabled="false"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
                     android:gravity="center"
                     android:hint="@string/date_hint"
+                    android:textIsSelectable="false"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_registration_due_date" />
 
@@ -73,42 +75,6 @@
                     app:layout_constraintBottom_toBottomOf="@id/et_registration_due_date"
                     app:layout_constraintStart_toEndOf="@id/et_registration_due_date"
                     app:layout_constraintTop_toTopOf="@id/et_registration_due_date" />
-
-                <TextView
-                    android:id="@+id/tv_enter_assignment_due_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="@string/enter_assignment_due_date"
-                    android:textAppearance="@style/Heading4B"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/et_registration_due_date" />
-
-                <EditText
-                    android:id="@+id/et_assignment_due_date"
-                    style="@style/LGTMEditTextStyle"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="92dp"
-                    android:enabled="false"
-                    android:gravity="center"
-                    android:hint="@string/date_hint"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_enter_assignment_due_date"
-                    tools:hint="0000.00.00" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/until"
-                    android:textAppearance="@style/Body1B"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@id/et_assignment_due_date"
-                    app:layout_constraintStart_toEndOf="@id/et_assignment_due_date"
-                    app:layout_constraintTop_toTopOf="@id/et_assignment_due_date" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
