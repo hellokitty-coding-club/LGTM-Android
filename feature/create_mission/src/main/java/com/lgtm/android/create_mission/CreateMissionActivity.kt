@@ -1,7 +1,6 @@
 package com.lgtm.android.create_mission
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.adapter.ViewPagerAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
@@ -67,11 +66,7 @@ class CreateMissionActivity :
             CreateMissionStep2Fragment::class.java -> binding.vpMission.setCurrentItem(2, true)
             CreateMissionStep3Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
             CreateMissionStep4Fragment::class.java -> binding.vpMission.setCurrentItem(4, true)
-            CreateMissionStep5Fragment::class.java -> Toast.makeText(
-                this,
-                "서버 연동 구현해야함!",
-                Toast.LENGTH_SHORT
-            ).show()
+            CreateMissionStep5Fragment::class.java -> finish()
         }
     }
 }
