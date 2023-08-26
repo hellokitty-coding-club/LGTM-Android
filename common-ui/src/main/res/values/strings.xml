@@ -79,4 +79,6 @@
     <string name="optional">*선택</string>
     <string name="complete">완료</string>
     <string name="until_when_should_you_recruit_reviewers">언제까지 리뷰이를 모집할까요?</string>
+    <string name="service_under_preparation">서비스 준비중입니다.</string>
+    <string name="coming_soon_oct">10월에 만나요!</string>
 </resources>
