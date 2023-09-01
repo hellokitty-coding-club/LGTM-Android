@@ -13,15 +13,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="11dp"
-        android:background="@color/white">
+        android:layout_height="42dp"
+        tools:background="@color/white">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_bank_logo"
-            setImageResource="@{bank.icon}"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginVertical="7dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="fitCenter"
+            app:imageResource="@{bank.icon}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

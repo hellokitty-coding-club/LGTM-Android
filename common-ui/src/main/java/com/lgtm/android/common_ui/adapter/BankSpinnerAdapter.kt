@@ -16,7 +16,6 @@ import com.lgtm.android.common_ui.constant.BankList
 import com.lgtm.android.common_ui.databinding.ItemBankEmptySpinnerBinding
 import com.lgtm.android.common_ui.databinding.ItemBankHintSpinnerBinding
 import com.lgtm.android.common_ui.databinding.ItemBankSpinnerBinding
-import com.lgtm.android.common_ui.util.dpToPx
 
 class BankSpinnerAdapter(
     context: Context,
@@ -42,9 +41,6 @@ class BankSpinnerAdapter(
                     bankHint = getItem(position) as BankHint
                     tvBankName.setTextAppearance(R.style.Body1B)
                     tvBankName.setTextColor(ContextCompat.getColor(context, R.color.gray_3))
-                    val scale: Float = context.resources.displayMetrics.density
-                    val paddingStart = dpToPx(10, scale)
-                    root.setPadding(paddingStart, 0, 0, 0)
                 }
             }
 
@@ -60,7 +56,6 @@ class BankSpinnerAdapter(
                     bank = getItem(position) as Bank
                     tvBankName.setTextAppearance(R.style.Body1B)
                     tvBankName.setTextColor(ContextCompat.getColor(context, R.color.black))
-                    root.setPadding(0, 0, 0, 0)
                 }
             }
         }
