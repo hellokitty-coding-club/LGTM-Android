@@ -1,12 +1,12 @@
 package com.lgtm.android.create_mission
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.adapter.ViewPagerAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.create_mission.databinding.ActivityCreateMissionBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.reflect.Type
 
 @AndroidEntryPoint
 class CreateMissionActivity :
@@ -25,6 +25,16 @@ class CreateMissionActivity :
         disableViewPagerSwipe()
         setOnBackButtonClickListener()
         disableClickDotIndicator()
+        setOnBackPressedCallback()
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            setPreviousPage()
+        }
+    }
+    private fun setOnBackPressedCallback() {
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun initAdapter() {
@@ -49,9 +59,7 @@ class CreateMissionActivity :
 
     private fun setOnBackButtonClickListener() {
         binding.ivBack.setOnClickListener {
-            val currentItem = binding.vpMission.currentItem
-            if (currentItem == 0) finish()
-            else binding.vpMission.setCurrentItem(currentItem - 1, true)
+            setPreviousPage()
         }
     }
 
@@ -60,13 +68,15 @@ class CreateMissionActivity :
             binding.wormDotsIndicator.dotsClickable = false
     }
 
-    fun onNextButtonClick(currentFragment: Type) {
-        when (currentFragment) {
-            CreateMissionStep1Fragment::class.java -> binding.vpMission.setCurrentItem(1, true)
-            CreateMissionStep2Fragment::class.java -> binding.vpMission.setCurrentItem(2, true)
-            CreateMissionStep3Fragment::class.java -> binding.vpMission.setCurrentItem(3, true)
-            CreateMissionStep4Fragment::class.java -> binding.vpMission.setCurrentItem(4, true)
-            CreateMissionStep5Fragment::class.java -> finish()
-        }
+    private fun setPreviousPage() {
+        val currentItem = binding.vpMission.currentItem
+        if (currentItem == 0) finish()
+        else binding.vpMission.setCurrentItem(currentItem - 1, true)
+    }
+
+    fun setNextPage(){
+        val currentItem = binding.vpMission.currentItem
+        if (currentItem == 4) finish()
+        else binding.vpMission.setCurrentItem(currentItem + 1, true)
     }
 }

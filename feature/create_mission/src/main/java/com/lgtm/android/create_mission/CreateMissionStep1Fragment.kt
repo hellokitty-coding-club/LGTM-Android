@@ -59,7 +59,7 @@ class CreateMissionStep1Fragment :
     private fun setupNextButtonClickListener() {
         binding.btnNext.setOnClickListener {
             closeKeyboard()
-            (requireActivity() as? CreateMissionActivity)?.onNextButtonClick(this.javaClass)
+            (requireActivity() as? CreateMissionActivity)?.setNextPage()
         }
     }
 }

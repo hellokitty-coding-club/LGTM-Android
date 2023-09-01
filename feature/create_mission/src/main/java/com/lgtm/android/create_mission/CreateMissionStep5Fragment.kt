@@ -84,7 +84,7 @@ class CreateMissionStep5Fragment :
             when (it) {
                 is NetworkState.Init -> {} /* No-Op*/
                 is NetworkState.Success ->
-                    (requireActivity() as? CreateMissionActivity)?.onNextButtonClick(this.javaClass)
+                    (requireActivity() as? CreateMissionActivity)?.setNextPage()
 
                 is NetworkState.Failure ->
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
