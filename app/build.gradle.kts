@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
     implementation(project(":feature:create_mission"))
+    implementation(project(":feature:mission_detail"))
     implementation(project(":common-ui"))
 
     implementation(libs.hilt)

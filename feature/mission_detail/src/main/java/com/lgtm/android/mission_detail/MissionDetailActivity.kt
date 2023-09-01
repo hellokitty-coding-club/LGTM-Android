@@ -14,4 +14,7 @@ class MissionDetailActivity : BaseActivity<ActivityMissionDetailBinding>(R.layou
         viewModel = missionDetailViewModel
     }
 
+    companion object {
+        const val MISSION_ID = "mission_id"
+    }
 }

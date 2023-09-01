@@ -49,7 +49,7 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".mission_detal.MissionDetailActivity"
+            android:name=".mission_detail.MissionDetailActivity"
             android:exported="false" />
     </application>
 

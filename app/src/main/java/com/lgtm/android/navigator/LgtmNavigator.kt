@@ -6,6 +6,7 @@ import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
 import com.lgtm.android.create_mission.CreateMissionActivity
 import com.lgtm.android.main.MainActivity
+import com.lgtm.android.mission_detail.MissionDetailActivity
 import javax.inject.Inject
 
 class LgtmNavigator @Inject constructor(
@@ -24,4 +25,12 @@ class LgtmNavigator @Inject constructor(
         val intent = Intent(context, CreateMissionActivity::class.java)
         context.startActivity(intent)
     }
+
+    override fun navigateToMissionDetail(context: Context, missionId: Int) {
+        val intent = Intent(context, MissionDetailActivity::class.java).apply {
+            putExtra(MissionDetailActivity.MISSION_ID, missionId)
+        }
+        context.startActivity(intent)
+    }
+
 }
