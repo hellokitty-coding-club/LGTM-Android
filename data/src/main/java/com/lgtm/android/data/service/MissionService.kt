@@ -1,6 +1,7 @@
 package com.lgtm.android.data.service
 
 import com.lgtm.android.data.model.response.BaseDTO
+import com.lgtm.android.data.model.response.MissionDetailDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.model.response.SduiDTO
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
@@ -8,6 +9,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface MissionService {
 
@@ -19,5 +21,9 @@ interface MissionService {
         @Body postMissionRequest: PostMissionRequestDTO
     ): Response<BaseDTO<PostMissionResponseDTO>>
 
+    @GET("v1/mission/detail")
+    suspend fun getMissionDetail(
+        @Query("missionId") missionId: Int
+    ): Response<BaseDTO<MissionDetailDTO>>
 }
 
