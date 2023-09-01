@@ -52,7 +52,7 @@ class CreateMissionStep3Fragment :
 
     private fun setupNextButtonClickListener() {
         binding.btnNext.setOnClickListener {
-            (requireActivity() as? CreateMissionActivity)?.onNextButtonClick(this.javaClass)
+            (requireActivity() as? CreateMissionActivity)?.setNextPage()
         }
     }
 }

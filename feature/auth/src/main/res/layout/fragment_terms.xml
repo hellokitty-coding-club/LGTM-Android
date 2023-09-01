@@ -28,29 +28,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-        <CheckBox
-            android:id="@+id/cb_terms_all"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="91dp"
-            android:background="@drawable/selector_lgtm_checkbox_icon"
-            android:button="@null"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="@id/tv_terms_description"
-            app:layout_constraintTop_toBottomOf="@id/tv_terms_description"
-            tools:background="@drawable/ic_checkbox_disable" />
-
-        <TextView
-            android:id="@+id/tv_terms_all"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_terms_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="@string/agree_all"
-            android:textAppearance="@style/Heading4M"
-            app:layout_constraintBottom_toBottomOf="@id/cb_terms_all"
-            app:layout_constraintStart_toEndOf="@id/cb_terms_all"
-            app:layout_constraintTop_toTopOf="@id/cb_terms_all" />
+            android:layout_marginTop="91dp"
+            android:clickable="true"
+            app:layout_constraintStart_toStartOf="@id/tv_terms_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_terms_description">
+
+
+            <CheckBox
+                android:id="@+id/cb_terms_all"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/selector_lgtm_checkbox_icon"
+                android:button="@null"
+                android:clickable="false"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/ic_checkbox_disable" />
+
+            <TextView
+                android:id="@+id/tv_terms_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/agree_all"
+                android:textAppearance="@style/Heading4M"
+                app:layout_constraintBottom_toBottomOf="@id/cb_terms_all"
+                app:layout_constraintStart_toEndOf="@id/cb_terms_all"
+                app:layout_constraintTop_toTopOf="@id/cb_terms_all" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <View
             android:id="@+id/view_divider"
@@ -59,7 +71,7 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="15dp"
             android:background="@color/gray_3"
-            app:layout_constraintTop_toBottomOf="@id/cb_terms_all" />
+            app:layout_constraintTop_toBottomOf="@id/cl_terms_all" />
 
         <!--약관 및 정책-->
         <CheckBox
@@ -70,7 +82,7 @@
             android:background="@drawable/selector_lgtm_checkbox_icon"
             android:button="@null"
             android:padding="5dp"
-            app:layout_constraintStart_toStartOf="@id/cb_terms_all"
+            app:layout_constraintStart_toStartOf="@id/cl_terms_all"
             app:layout_constraintTop_toBottomOf="@id/view_divider" />
 
         <TextView

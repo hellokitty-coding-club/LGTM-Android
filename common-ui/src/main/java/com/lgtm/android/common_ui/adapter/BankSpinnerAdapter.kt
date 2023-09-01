@@ -51,11 +51,11 @@ class BankSpinnerAdapter(
                     )
                 else DataBindingUtil.getBinding(convertView) ?: throw IllegalStateException()
 
+
                 bankBinding.apply {
                     bank = getItem(position) as Bank
                     tvBankName.setTextAppearance(R.style.Body1B)
                     tvBankName.setTextColor(ContextCompat.getColor(context, R.color.black))
-                    root.setPadding(0, 0, 0, 0)
                 }
             }
         }

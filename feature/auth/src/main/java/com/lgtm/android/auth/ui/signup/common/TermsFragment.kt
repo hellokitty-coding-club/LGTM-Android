@@ -64,11 +64,9 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
     }
 
     private fun setUpCheckBoxListeners() {
-        binding.cbTermsAll.setOnClickListener {
-            val isChecked = binding.cbTermsAll.isChecked
-            binding.cbTermsMarketing.isChecked = isChecked
-            binding.cbTermsPrivacy.isChecked = isChecked
-            binding.cbTermsService.isChecked = isChecked
+        binding.clTermsAll.setOnClickListener {
+            toggleTermsAll()
+            setDescendantsState(binding.cbTermsAll.isChecked)
             updateNextButtonState()
         }
 
@@ -87,6 +85,16 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
             updateTermsAllState()
             updateNextButtonState()
         }
+    }
+
+    private fun toggleTermsAll(){
+        binding.cbTermsAll.isChecked = !binding.cbTermsAll.isChecked
+    }
+
+    private fun setDescendantsState(isChecked: Boolean) {
+        binding.cbTermsMarketing.isChecked = isChecked
+        binding.cbTermsPrivacy.isChecked = isChecked
+        binding.cbTermsService.isChecked = isChecked
     }
 
     private fun updateTermsAllState() {
