@@ -75,7 +75,8 @@
         <item name="colorAccent">@color/black</item> <!-- Header background color -->
         <item name="colorPrimary">@color/black</item> <!-- cancel, OK Button Text Color -->
         <item name="android:textColorPrimaryInverse">@color/green</item> <!-- Header Text Color -->
-        <item name="android:textColorSecondaryInverse">@color/green</item> <!-- Header Year Color -->
+        <item name="android:textColorSecondaryInverse">@color/green
+        </item> <!-- Header Year Color -->
         <item name="android:textColorSecondary">@color/gray_6</item>
     </style>
 
