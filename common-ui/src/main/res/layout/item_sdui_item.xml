@@ -25,6 +25,7 @@
         tools:background="@drawable/rectangle_white_stroke_1_gray_2_side">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_mission"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
