@@ -1,9 +1,6 @@
 package com.lgtm.android.mission_detail
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
@@ -23,12 +20,16 @@ class MissionDetailActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getExtraData()
+        setupViewModel()
+    }
+
+    override fun onStart() {
+        super.onStart()
         getMissionDetail()
     }
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
-        getMissionDetail()
+    private fun setupViewModel() {
+        binding.viewModel = missionDetailViewModel
     }
 
     private fun getExtraData() {
