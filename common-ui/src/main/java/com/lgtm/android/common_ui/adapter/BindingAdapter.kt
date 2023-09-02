@@ -5,8 +5,9 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.lgtm.android.common_ui.R
-import com.lgtm.android.common_ui.constant.TechTag
+import com.lgtm.android.common_ui.constant.TechTagUI
 
 @BindingAdapter("infoStatusColor")
 fun TextView.setInfoStatusColor(color: Int) {
@@ -15,12 +16,21 @@ fun TextView.setInfoStatusColor(color: Int) {
 
 @BindingAdapter("setImageResource")
 fun AppCompatImageView.setImageResource(icon: Int) {
-    setImageResource(icon)
+    Glide.with(this.context)
+        .load(icon)
+        .into(this)
+}
+
+@BindingAdapter("setImageUrl")
+fun AppCompatImageView.setImageUrl(url: String) {
+    Glide.with(this.context)
+        .load(url)
+        .into(this)
 }
 
 @BindingAdapter("setTechTagImageByItsName")
 fun AppCompatImageView.setTechTagImageByItsName(string: String) {
-    val imageRes = TechTag.values().find { it.techTagVO.stack == string }?.defaultIcon
+    val imageRes = TechTagUI.values().find { it.techTag.stack == string }?.defaultIcon
     imageRes?.let { setImageResource(it) }
 }
 
