@@ -26,6 +26,8 @@ android {
 
 dependencies {
     api(project(":domain"))
+    api(libs.flexbox)
+    api(libs.glide)
 
     implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
