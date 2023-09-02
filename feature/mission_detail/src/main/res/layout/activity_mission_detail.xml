@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.mission_detail.MissionDetailViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +77,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <!-- 진행 상황 태그 -->
-
+            <!-- todo : Enum활용해서 로직 수정 필요 -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_progress"
                 style="@style/MissionStatus"
@@ -81,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="19dp"
                 android:layout_marginTop="84dp"
+                android:clickable="false"
                 android:text="참가자 모집중"
                 app:iconTint="@color/green"
                 app:layout_constraintStart_toStartOf="parent"
@@ -88,10 +93,12 @@
                 tools:background="@drawable/rectangle_black_radius_5" />
 
             <TextView
+                android:id="@+id/tv_mission_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
+                android:text="@{viewModel.missionDetailVO.missionTitle}"
                 android:textAppearance="@style/Heading3B"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +106,135 @@
                 tools:text="개발자 김효림과 함께하는 안드로이드 기초 강의입니다!" />
 
             <!-- 기술 태그 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tech_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tv_mission_title"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_tech_tag" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_mission_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rectangle_green_radius_5"
+                app:layout_constraintTop_toBottomOf="@id/rv_tech_tag">
+
+                <TextView
+                    android:id="@+id/tv_mission_url_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="17dp"
+                    android:text="@string/mission_url_title"
+                    android:textAppearance="@style/Body1B"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_mission_url"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_marginBottom="17dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{viewModel.missionDetailVO.missionRepositoryUrl}"
+                    android:textAppearance="@style/Body3M"
+                    android:textColor="@color/gray_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mission_url_title"
+                    tools:text="https://github.com/hellokitty-coding-club/LGTM-Android/issues/103" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:rotationY="180"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tv_due_date_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/mission_registration_date_limit"
+                android:textAppearance="@style/Body2"
+                app:layout_constraintStart_toStartOf="@id/cl_mission_url"
+                app:layout_constraintTop_toBottomOf="@id/cl_mission_url" />
+
+            <TextView
+                android:id="@+id/tv_due_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@{String.valueOf(viewModel.missionDetailVO.remainingRegisterDays)+ `일 후 마감`}"
+                android:textAppearance="@style/Body2"
+                android:textColor="@color/gray_5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_due_date_title"
+                tools:text="3일 후" />
+
+            <TextView
+                android:id="@+id/tv_num_of_people_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/mission_num_of_people"
+                android:textAppearance="@style/Body2"
+                app:layout_constraintStart_toStartOf="@id/tv_due_date_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_due_date_title" />
+
+            <TextView
+                android:id="@+id/tv_num_of_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@{String.valueOf(viewModel.missionDetailVO.currentPeopleNumber) + `/` + String.valueOf(viewModel.missionDetailVO.maxPeopleNumber)+`명`}"
+                android:textAppearance="@style/Body2"
+                android:textColor="@color/gray_5"
+                app:layout_constraintEnd_toEndOf="@id/tv_due_date"
+                app:layout_constraintTop_toTopOf="@id/tv_num_of_people_title"
+                tools:text="10/20명" />
+
+            <TextView
+                android:id="@+id/tv_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="23dp"
+                android:text="@string/mission_price"
+                android:textAppearance="@style/Body2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_due_date_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_num_of_people_title" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@{@string/price_format(viewModel.missionDetailVO.price)+ `원`}"
+                android:textAppearance="@style/Body2"
+                android:textColor="@color/gray_5"
+                app:layout_constraintEnd_toEndOf="@id/tv_due_date"
+                app:layout_constraintTop_toTopOf="@id/tv_price_title"
+                tools:text="10000원" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

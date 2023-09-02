@@ -50,7 +50,7 @@
     <string name="empty_value"></string>
 
 
-    <!-- home -->
+    <!-- 미션 조회 -->
     <string name="mission_price">참여 비용</string>
     <string name="mission_max_people">참여 인원</string>
     <string name="mission_registration_date_limit">신청 기한</string>
@@ -81,4 +81,6 @@
     <string name="until_when_should_you_recruit_reviewers">언제까지 리뷰이를 모집할까요?</string>
     <string name="service_under_preparation">서비스 준비중입니다.</string>
     <string name="coming_soon_oct">10월에 만나요!</string>
+    <string name="mission_url_title">미션 URL</string>
+    <string name="recruitment_deadline">모집 마감일</string>
 </resources>
