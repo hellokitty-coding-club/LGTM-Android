@@ -1,6 +1,7 @@
 package com.lgtm.android.data.datasource
 
 import com.lgtm.android.data.model.response.BaseDTO
+import com.lgtm.android.data.model.response.MissionDetailDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.service.MissionService
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
@@ -11,5 +12,9 @@ class MissionDataSource @Inject constructor(
 ) : BaseNetworkDataSource() {
     suspend fun createMission(postMissionRequest: PostMissionRequestDTO): BaseDTO<PostMissionResponseDTO> {
         return checkResponse(missionService.postMission(postMissionRequest = postMissionRequest))
+    }
+
+    suspend fun getMissionDetail(missionId: Int): BaseDTO<MissionDetailDTO> {
+        return checkResponse(missionService.getMissionDetail(missionId = missionId))
     }
 }

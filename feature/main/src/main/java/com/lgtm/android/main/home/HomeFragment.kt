@@ -43,8 +43,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initAdapter() {
-        commonAdapter = SduiAdapter()
+        commonAdapter = SduiAdapter(::moveToMissionDetail)
         binding.rvSdui.adapter = commonAdapter
+    }
+
+    private fun moveToMissionDetail(missionId: Int) {
+        lgtmNavigator.navigateToMissionDetail(requireContext(), missionId)
     }
 
     private fun submitDataWhenDataChanged() {

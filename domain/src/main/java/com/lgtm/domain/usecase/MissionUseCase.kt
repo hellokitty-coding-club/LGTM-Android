@@ -22,11 +22,14 @@ class MissionUseCase @Inject constructor(
         return try {
             val response = missionRepository.getHomeMission().getOrNull()
             return Result.success(response?.copy(contents = response.contents.map {
-                if (it.viewType == SduiViewType.EMPTY) {
-                    val emptyUiState: SduiContent =
-                        getMissionEmptyUiState(it.content as SectionEmptyVO)
-                    it.copy(content = emptyUiState)
-                } else it
+                when(it.viewType){
+                    SduiViewType.EMPTY -> {
+                        val emptyUiState: SduiContent =
+                            getMissionEmptyUiState(it.content as SectionEmptyVO)
+                        it.copy(content = emptyUiState)
+                    }
+                    else -> it
+                }
             }) ?: throw IllegalStateException("${this.javaClass} response is null"))
         } catch (e: Exception) {
             Result.failure(e)
