@@ -1,6 +1,7 @@
 package com.lgtm.domain.server_drive_ui
 
 import com.google.gson.annotations.SerializedName
+import com.lgtm.domain.entity.response.TechTagVO
 
 data class SectionItemVO(
     // 진행 중인 미션, 추천 미션, 전체 미션

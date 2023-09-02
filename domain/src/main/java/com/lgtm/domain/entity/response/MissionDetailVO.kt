@@ -13,7 +13,7 @@ data class MissionDetailVO(
     val notRecommendTo: String,
     val price: Int,
     val recommendTo: String,
-    val registrationDueDate: String,
+    val remainingRegisterDays: Int,
     val scraped: Boolean,
     val techTagList: List<TechTagVO>
 )

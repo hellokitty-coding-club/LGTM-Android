@@ -15,7 +15,7 @@ data class MissionDetailDTO(
     val notRecommendTo: String?,
     val price: Int?,
     val recommendTo: String?,
-    val registrationDueDate: String?,
+    val remainingRegisterDays: Int?,
     val scraped: Boolean?,
     val techTagList: List<TechTagDTO>?
 ){
@@ -33,7 +33,7 @@ data class MissionDetailDTO(
             notRecommendTo = requireNotNull(notRecommendTo),
             price = requireNotNull(price),
             recommendTo = requireNotNull(recommendTo),
-            registrationDueDate = requireNotNull(registrationDueDate),
+            remainingRegisterDays = requireNotNull(remainingRegisterDays),
             scraped = requireNotNull(scraped),
             techTagList = requireNotNull(techTagList).map { it.toVO() }
         )
