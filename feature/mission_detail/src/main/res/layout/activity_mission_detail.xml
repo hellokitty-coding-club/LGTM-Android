@@ -21,7 +21,7 @@
             android:id="@+id/ic_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="@dimen/base_guideline"
             android:layout_marginTop="30dp"
             android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
             android:elevation="1dp"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="@dimen/base_guideline"
             android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
             android:elevation="1dp"
             android:padding="3dp"
@@ -73,14 +73,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_begin="24dp" />
+                    app:layout_constraintGuide_begin="@dimen/base_guideline" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/gl_end"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_end="24dp" />
+                    app:layout_constraintGuide_end="@dimen/base_guideline" />
 
 
                 <!-- 상단 레이아웃 -->
@@ -99,7 +99,7 @@
                         style="@style/MissionStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
+                        android:layout_marginStart="@dimen/base_guideline"
                         android:layout_marginTop="84dp"
                         android:clickable="false"
                         android:text="참가자 모집중"
@@ -112,7 +112,7 @@
                         android:id="@+id/tv_mission_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginHorizontal="@dimen/base_guideline"
                         android:layout_marginTop="12dp"
                         android:text="@{viewModel.missionDetailVO.missionTitle}"
                         android:textAppearance="@style/Heading3B"
@@ -126,7 +126,7 @@
                         android:id="@+id/rv_tech_tag"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginHorizontal="@dimen/base_guideline"
                         android:layout_marginTop="16dp"
                         app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
                         app:layout_constraintTop_toBottomOf="@id/tv_mission_title"
@@ -137,7 +137,7 @@
                         android:id="@+id/cl_mission_url"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginHorizontal="@dimen/inner_guideline"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/rectangle_green_radius_5"
                         app:layout_constraintTop_toBottomOf="@id/rv_tech_tag">
@@ -188,17 +188,18 @@
                         android:id="@+id/tv_due_date_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/base_guideline"
                         android:layout_marginTop="20dp"
                         android:text="@string/mission_registration_date_limit"
                         android:textAppearance="@style/Body2"
-                        app:layout_constraintStart_toStartOf="@id/cl_mission_url"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/cl_mission_url" />
 
                     <TextView
                         android:id="@+id/tv_due_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="24dp"
+                        android:layout_marginEnd="@dimen/base_guideline"
                         android:text="@{String.valueOf(viewModel.missionDetailVO.remainingRegisterDays)+ `일 후 마감`}"
                         android:textAppearance="@style/Body2"
                         android:textColor="@color/gray_5"
