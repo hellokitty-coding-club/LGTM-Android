@@ -7,7 +7,8 @@ data class MemberProfileDTO(
     val githubId: String?,
     val memberId: Int?,
     val nickName: String?,
-    val profileImageUrl: String?
+    val profileImageUrl: String?,
+    val position: String?
 ) {
     fun toVO(): MemberProfileVO {
         return MemberProfileVO(
@@ -15,7 +16,8 @@ data class MemberProfileDTO(
             githubId = requireNotNull(githubId),
             memberId = requireNotNull(memberId),
             nickName = requireNotNull(nickName),
-            profileImageUrl = requireNotNull(profileImageUrl)
+            profileImageUrl = requireNotNull(profileImageUrl),
+            position = "안드로이드" // todo 서버 수정 후 변경
         )
     }
 }

@@ -22,10 +22,23 @@ fun AppCompatImageView.setImageResource(icon: Int) {
 }
 
 @BindingAdapter("setImageUrl")
-fun AppCompatImageView.setImageUrl(url: String) {
-    Glide.with(this.context)
-        .load(url)
-        .into(this)
+fun AppCompatImageView.setImageUrl(url: String?) {
+    url?.let {
+        Glide.with(this.context)
+            .load(url)
+            .into(this)
+    }
+}
+
+@BindingAdapter("setProfileImageUrl")
+fun AppCompatImageView.setProfileImageUrl(url: String?) {
+    url?.let {
+        Glide.with(this.context)
+            .load(url)
+            .error(R.drawable.ic_profile_error)
+            .circleCrop()
+            .into(this)
+    }
 }
 
 @BindingAdapter("setTechTagImageByItsName")
@@ -35,7 +48,7 @@ fun AppCompatImageView.setTechTagImageByItsName(string: String) {
 }
 
 @BindingAdapter("setRevieweeRoleImage")
-fun AppCompatImageView.setImageBySelector(isSelected: Boolean) {
+fun AppCompatImageView.setRevieweeRoleImage(isSelected: Boolean) {
     if (isSelected) {
         setImageResource(R.drawable.ic_reviewee_white)
     } else {
@@ -44,7 +57,7 @@ fun AppCompatImageView.setImageBySelector(isSelected: Boolean) {
 }
 
 @BindingAdapter("setReviewerRoleImage")
-fun AppCompatImageView.setImageBySelector2(isSelected: Boolean) {
+fun AppCompatImageView.setReviewerRoleImage(isSelected: Boolean) {
     if (isSelected) {
         setImageResource(R.drawable.ic_reviewer_white)
     } else {

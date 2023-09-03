@@ -95,4 +95,8 @@
         <item name="iconSize">9dp</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.CircleImage" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

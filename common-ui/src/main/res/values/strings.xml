@@ -79,8 +79,17 @@
     <string name="optional">*선택</string>
     <string name="complete">완료</string>
     <string name="until_when_should_you_recruit_reviewers">언제까지 리뷰이를 모집할까요?</string>
+
+    <!-- 서비스 준비 중 -->
     <string name="service_under_preparation">서비스 준비중입니다.</string>
     <string name="coming_soon_oct">10월에 만나요!</string>
+
+    <!-- 미션 조회 -->
     <string name="mission_url_title">미션 URL</string>
     <string name="recruitment_deadline">모집 마감일</string>
+    <string name="mission_num_of_people">참여중/최대 인원</string>
+    <string name="nickname">닉네임</string>
+    <string name="github_kr">깃허브</string>
+    <string name="company_slash_position">회사/직책</string>
+    <string name="mission_description">미션 설명</string>
 </resources>
