@@ -490,6 +490,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout> <!-- End of ScrollView ViewGroup -->
         </ScrollView>
 
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/LGTMButtonLight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/base_guideline"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="미션 진행하기" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
