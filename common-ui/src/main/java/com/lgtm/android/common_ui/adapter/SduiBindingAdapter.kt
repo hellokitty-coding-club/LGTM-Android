@@ -49,8 +49,8 @@ fun View.setDividerColor(theme: SduiTheme) {
 @BindingAdapter("setEmptyIcon")
 fun AppCompatImageView.setEmptyImage(theme: SduiTheme) {
     when (theme) {
-        SduiTheme.WHITE -> setImageResource(com.lgtm.android.common_ui.R.drawable.img_home_empty_white)
-        SduiTheme.GRAY -> setImageResource(com.lgtm.android.common_ui.R.drawable.img_home_empty_gray)
+        SduiTheme.WHITE -> setImageResource(com.lgtm.android.common_ui.R.drawable.img_empty_white)
+        SduiTheme.GRAY -> setImageResource(com.lgtm.android.common_ui.R.drawable.img_empty_gray)
     }
 }
 

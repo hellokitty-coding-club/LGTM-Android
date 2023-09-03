@@ -41,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                tools:src="@drawable/img_home_empty_gray" />
+                tools:src="@drawable/img_empty_gray" />
 
             <TextView
                 android:id="@+id/tv_message_main"
