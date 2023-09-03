@@ -6,8 +6,16 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.constant.TechTagUI
+
+
+@BindingAdapter("setIconColor")
+fun MaterialButton.setIconColor(color: Int?) {
+    if (color == 0 || color == null) return
+    iconTint = ContextCompat.getColorStateList(this.context, color)
+}
 
 @BindingAdapter("infoStatusColor")
 fun TextView.setInfoStatusColor(color: Int) {

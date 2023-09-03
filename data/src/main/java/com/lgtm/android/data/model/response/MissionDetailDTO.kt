@@ -1,5 +1,6 @@
 package com.lgtm.android.data.model.response
 
+import com.lgtm.domain.constants.MissionStatus.Companion.getMissionStatus
 import com.lgtm.domain.entity.response.MissionDetailVO
 
 data class MissionDetailDTO(
@@ -28,7 +29,7 @@ data class MissionDetailDTO(
             memberType = requireNotNull(memberType),
             missionId = requireNotNull(missionId),
             missionRepositoryUrl = requireNotNull(missionRepositoryUrl),
-            missionStatus = requireNotNull(missionStatus),
+            missionStatus = getMissionStatus(missionStatus),
             missionTitle = requireNotNull(missionTitle),
             notRecommendTo = requireNotNull(notRecommendTo),
             price = requireNotNull(price),

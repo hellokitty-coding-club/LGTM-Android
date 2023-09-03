@@ -18,7 +18,7 @@
         tools:context=".MissionDetailActivity">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ic_back"
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base_guideline"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ic_menu"
+            android:id="@+id/iv_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ic_share"
+            android:id="@+id/iv_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -53,7 +53,7 @@
             android:elevation="1dp"
             android:padding="7dp"
             android:src="@drawable/ic_share"
-            app:layout_constraintEnd_toStartOf="@id/ic_menu"
+            app:layout_constraintEnd_toStartOf="@id/iv_menu"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
@@ -93,7 +93,6 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <!-- 진행 상황 태그 -->
-                    <!-- todo : Enum활용해서 로직 수정 필요 -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_progress"
                         style="@style/MissionStatus"
@@ -102,8 +101,8 @@
                         android:layout_marginStart="@dimen/base_guideline"
                         android:layout_marginTop="84dp"
                         android:clickable="false"
-                        android:text="참가자 모집중"
-                        app:iconTint="@color/green"
+                        setIconColor="@{viewModel.missionDetailUiState.missionStatus.color}"
+                        android:text="@{viewModel.missionDetailUiState.missionStatus.message}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:background="@drawable/rectangle_black_radius_5" />
@@ -114,7 +113,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/base_guideline"
                         android:layout_marginTop="12dp"
-                        android:text="@{viewModel.missionDetailVO.missionTitle}"
+                        android:text="@{viewModel.missionDetailUiState.missionTitle}"
                         android:textAppearance="@style/Heading3B"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -163,7 +162,7 @@
                             android:layout_marginBottom="17dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="@{viewModel.missionDetailVO.missionRepositoryUrl}"
+                            android:text="@{viewModel.missionDetailUiState.missionRepositoryUrl}"
                             android:textAppearance="@style/Body3M"
                             android:textColor="@color/gray_1"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -200,7 +199,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/base_guideline"
-                        android:text="@{String.valueOf(viewModel.missionDetailVO.remainingRegisterDays)+ `일 후 마감`}"
+                        android:text="@{String.valueOf(viewModel.missionDetailUiState.remainingRegisterDays)+ `일 후 마감`}"
                         android:textAppearance="@style/Body2"
                         android:textColor="@color/gray_5"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -222,7 +221,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="@{String.valueOf(viewModel.missionDetailVO.currentPeopleNumber) + `/` + String.valueOf(viewModel.missionDetailVO.maxPeopleNumber)+`명`}"
+                        android:text="@{String.valueOf(viewModel.missionDetailUiState.currentPeopleNumber) + `/` + String.valueOf(viewModel.missionDetailUiState.maxPeopleNumber)+`명`}"
                         android:textAppearance="@style/Body2"
                         android:textColor="@color/gray_5"
                         app:layout_constraintEnd_toEndOf="@id/tv_due_date"
@@ -246,7 +245,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="@{@string/price_format(viewModel.missionDetailVO.price)+ `원`}"
+                        android:text="@{@string/price_format(viewModel.missionDetailUiState.price)+ `원`}"
                         android:textAppearance="@style/Body2"
                         android:textColor="@color/gray_5"
                         app:layout_constraintEnd_toEndOf="@id/tv_due_date"
@@ -278,7 +277,7 @@
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/iv_profile_image"
-                        setProfileImageUrl="@{viewModel.missionDetailVO.memberProfile.profileImageUrl}"
+                        setProfileImageUrl="@{viewModel.missionDetailUiState.memberProfile.profileImageUrl}"
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:layout_marginStart="15dp"
@@ -315,7 +314,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="@{viewModel.missionDetailVO.memberProfile.nickName}"
+                        android:text="@{viewModel.missionDetailUiState.memberProfile.nickName}"
                         android:textAppearance="@style/Body3M"
                         app:layout_constraintBottom_toBottomOf="@id/tv_nickname_title"
                         app:layout_constraintStart_toEndOf="@id/view_divider_nickname"
@@ -347,7 +346,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="@{viewModel.missionDetailVO.memberProfile.githubId}"
+                        android:text="@{viewModel.missionDetailUiState.memberProfile.githubId}"
                         android:textAppearance="@style/Body3M"
                         app:layout_constraintBottom_toBottomOf="@id/tv_github_title"
                         app:layout_constraintStart_toEndOf="@id/view_divider_github"
@@ -381,7 +380,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="@{viewModel.missionDetailVO.memberProfile.company + ` / ` + viewModel.missionDetailVO.memberProfile.position}"
+                        android:text="@{viewModel.missionDetailUiState.memberProfile.company + ` / ` + viewModel.missionDetailUiState.memberProfile.position}"
                         android:textAppearance="@style/Body3M"
                         app:layout_constraintBottom_toBottomOf="@id/tv_company_and_position_title"
                         app:layout_constraintStart_toEndOf="@id/view_divider_company_and_position"
@@ -412,7 +411,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@{viewModel.missionDetailVO.description}"
+                    android:text="@{viewModel.missionDetailUiState.description}"
                     android:textAppearance="@style/Body2"
                     android:textColor="@color/gray_6"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -443,7 +442,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@{viewModel.missionDetailVO.recommendTo}"
+                    android:text="@{viewModel.missionDetailUiState.recommendTo}"
                     android:textAppearance="@style/Body2"
                     android:textColor="@color/gray_6"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
@@ -478,7 +477,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="139dp"
-                    android:text="@{viewModel.missionDetailVO.notRecommendTo}"
+                    android:text="@{viewModel.missionDetailUiState.notRecommendTo}"
                     android:textAppearance="@style/Body2"
                     android:textColor="@color/gray_6"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -491,6 +490,7 @@
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_mission_detail"
             style="@style/LGTMButtonLight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

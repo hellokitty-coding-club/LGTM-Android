@@ -1,8 +1,10 @@
-package com.lgtm.domain.entity.response
+package com.lgtm.android.common_ui.model
 
-import com.lgtm.domain.constants.MissionStatus
+import com.lgtm.android.common_ui.constant.MissionStatusUI
+import com.lgtm.domain.entity.response.MemberProfileVO
+import com.lgtm.domain.entity.response.TechTagVO
 
-data class MissionDetailVO(
+data class MissionDetailUiState(
     val currentPeopleNumber: Int,
     val description: String,
     val maxPeopleNumber: Int,
@@ -10,7 +12,7 @@ data class MissionDetailVO(
     val memberType: String,
     val missionId: Int,
     val missionRepositoryUrl: String,
-    val missionStatus: MissionStatus,
+    val missionStatus: MissionStatusUI,
     val missionTitle: String,
     val notRecommendTo: String,
     val price: Int,

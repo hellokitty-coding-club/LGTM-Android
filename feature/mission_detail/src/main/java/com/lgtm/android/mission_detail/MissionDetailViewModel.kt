@@ -6,25 +6,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
-import com.lgtm.domain.entity.response.MissionDetailVO
-import com.lgtm.domain.repository.MissionRepository
+import com.lgtm.android.common_ui.model.MissionDetailUiState
+import com.lgtm.android.common_ui.model.mapper.toUiModel
+import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MissionDetailViewModel @Inject constructor(
-    private val missionRepository: MissionRepository
+    private val missionUseCase: MissionUseCase
 ) : BaseViewModel() {
 
-    private val _missionDetailVO: MutableLiveData<MissionDetailVO> = MutableLiveData()
-    val missionDetailVO: LiveData<MissionDetailVO> = _missionDetailVO
+    private val _missionDetailUiState: MutableLiveData<MissionDetailUiState> = MutableLiveData()
+    val missionDetailUiState: LiveData<MissionDetailUiState> = _missionDetailUiState
 
     fun getMissionDetail(missionId: Int) {
         viewModelScope.launch(lgtmErrorHandler) {
-            missionRepository.getMissionDetail(missionId)
+            missionUseCase.getMissionDetail(missionId)
                 .onSuccess {
-                    _missionDetailVO.value = it
+                    _missionDetailUiState.postValue(it.toUiModel())
                 }.onFailure {
                     Log.e(TAG, "getMissionDetail: $it")
                 }
