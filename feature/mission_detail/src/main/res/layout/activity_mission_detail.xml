@@ -9,6 +9,8 @@
             name="viewModel"
             type="com.lgtm.android.mission_detail.MissionDetailViewModel" />
 
+        <import type="android.view.View"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -96,12 +98,12 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_progress"
                         style="@style/MissionStatus"
+                        setIconColor="@{viewModel.missionDetailUiState.missionStatus.color}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/base_guideline"
                         android:layout_marginTop="84dp"
                         android:clickable="false"
-                        setIconColor="@{viewModel.missionDetailUiState.missionStatus.color}"
                         android:text="@{viewModel.missionDetailUiState.missionStatus.message}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -450,7 +452,18 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_recommend_to_title"
                     tools:text="@tools:sample/lorem" />
 
-                <!-- todo Empty View-->
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_recommend_to_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="14dp"
+                    android:visibility="@{viewModel.recommendToEmptyVisibility ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommend_to_title">
+
+                    <include layout="@layout/layout_empty_no_content" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
                     android:id="@+id/view_divider_recommend_to"
@@ -458,7 +471,7 @@
                     android:layout_height="8dp"
                     android:layout_marginTop="24dp"
                     android:background="@color/gray_2"
-                    app:layout_constraintTop_toBottomOf="@id/tv_recommend_to" />
+                    app:layout_constraintTop_toBottomOf="@id/cl_recommend_to_empty" />
 
                 <TextView
                     android:id="@+id/tv_not_recommend_to_title"

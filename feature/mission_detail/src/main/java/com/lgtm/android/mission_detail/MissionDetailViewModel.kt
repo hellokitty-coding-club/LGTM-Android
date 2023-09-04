@@ -21,6 +21,10 @@ class MissionDetailViewModel @Inject constructor(
     private val _missionDetailUiState: MutableLiveData<MissionDetailUiState> = MutableLiveData()
     val missionDetailUiState: LiveData<MissionDetailUiState> = _missionDetailUiState
 
+    private val _recommendToEmptyVisibility: MutableLiveData<Boolean> =
+        MutableLiveData(_missionDetailUiState.value?.recommendTo.isNullOrEmpty())
+    val recommendToEmptyVisibility: LiveData<Boolean> = _recommendToEmptyVisibility
+
     fun getMissionDetail(missionId: Int) {
         viewModelScope.launch(lgtmErrorHandler) {
             missionUseCase.getMissionDetail(missionId)

@@ -2,6 +2,7 @@ package com.lgtm.domain.usecase
 
 import com.lgtm.domain.constants.ArrowDirection
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.MissionRepository
