@@ -1,5 +1,6 @@
 package com.lgtm.android.common_ui.model
 
+import com.lgtm.android.common_ui.constant.MissionDetailButtonStatus
 import com.lgtm.android.common_ui.constant.MissionStatusUI
 import com.lgtm.domain.entity.response.MemberProfileVO
 import com.lgtm.domain.entity.response.TechTagVO
@@ -19,5 +20,6 @@ data class MissionDetailUiState(
     val recommendTo: String?,
     val remainingRegisterDays: Int,
     val scraped: Boolean,
-    val techTagList: List<TechTagVO>
+    val techTagList: List<TechTagVO>,
+    val missionDetailButtonStatusUI: MissionDetailButtonStatus
 )

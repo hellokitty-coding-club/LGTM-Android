@@ -1,5 +1,6 @@
 package com.lgtm.domain.entity.response
 
+import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.constants.MissionStatus
 
 data class MissionDetailVO(
@@ -17,5 +18,6 @@ data class MissionDetailVO(
     val recommendTo: String?,
     val remainingRegisterDays: Int,
     val scraped: Boolean,
-    val techTagList: List<TechTagVO>
+    val techTagList: List<TechTagVO>,
+    val missionDetailStatus: MissionDetailStatus
 )
