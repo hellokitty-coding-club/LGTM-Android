@@ -150,7 +150,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
-            style="@style/LGTMButtonLight"
+            style="@style/LGTMButtonLightWhiteTheme"
             android:layout_width="match_parent"
             android:enabled="@{viewModel.isStep3DataValid, default=false}"
             android:text="@string/next"

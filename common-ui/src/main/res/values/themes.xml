@@ -38,14 +38,14 @@
         <item name="android:textAppearance">@style/Body1M</item>
     </style>
 
-    <style name="LGTMButtonLight" parent="LGTMButton">
+    <style name="LGTMButtonLightWhiteTheme" parent="LGTMButton">
         <item name="android:background">@drawable/selector_lgtm_button_light_background</item>
-        <item name="android:textColor">@color/selector_if_enabled_black_gray_4</item>
+        <item name="android:textColor">@color/selector_if_enabled_black_else_gray_4</item>
     </style>
 
-    <style name="LGTMButtonDark" parent="LGTMButton">
+    <style name="LGTMButtonGrayTheme" parent="LGTMButton">
         <item name="android:background">@drawable/selector_lgtm_button_dark_background</item>
-        <item name="android:textColor">@color/selector_if_enabled_gray_6_gray_4</item>
+        <item name="android:textColor">@color/selector_if_enabled_black_else_gray_5</item>
     </style>
 
 

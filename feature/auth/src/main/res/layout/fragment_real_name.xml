@@ -49,7 +49,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_complete"
-            style="@style/LGTMButtonLight"
+            style="@style/LGTMButtonLightWhiteTheme"
             android:layout_width="match_parent"
             android:enabled="@{viewModel.isRealNameValid, default=false}"
             android:text="@string/signup_complete"

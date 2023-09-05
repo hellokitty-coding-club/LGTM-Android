@@ -73,7 +73,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_complete"
-            style="@style/LGTMButtonLight"
+            style="@style/LGTMButtonLightWhiteTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:enabled="@{viewModel.isValidAccountInfo(), default=false}"

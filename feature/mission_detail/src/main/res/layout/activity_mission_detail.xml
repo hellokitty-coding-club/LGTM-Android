@@ -533,7 +533,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_mission_detail"
-            style="@style/LGTMButtonLight"
+            style="@style/LGTMButtonGrayTheme"
             setButtonStringRes="@{viewModel.missionDetailUiState.missionDetailButtonStatusUI.string}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
