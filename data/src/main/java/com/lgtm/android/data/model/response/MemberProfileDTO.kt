@@ -17,7 +17,7 @@ data class MemberProfileDTO(
             memberId = requireNotNull(memberId),
             nickName = requireNotNull(nickName),
             profileImageUrl = requireNotNull(profileImageUrl),
-            position = "안드로이드" // todo 서버 수정 후 변경
+            position = requireNotNull(position)
         )
     }
 }
