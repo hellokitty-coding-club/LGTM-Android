@@ -3,6 +3,7 @@ package com.lgtm.android.mission_detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.widget.PopupMenu
 import com.lgtm.android.common_ui.R.id
 import com.lgtm.android.common_ui.R.string
+import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,7 +83,9 @@ class MissionDetailActivity :
     }
 
     private fun showMenu(v: View) {
-        PopupMenu(this, v).apply {
+        PopupMenu(
+            this, v, Gravity.START, 0, style.PopupMenu
+        ).apply {
             val menu = if (missionDetailViewModel.isMyMission())
                 com.lgtm.android.common_ui.R.menu.menu_edit_delete else com.lgtm.android.common_ui.R.menu.menu_report
             setOnMenuItemClickListener(this@MissionDetailActivity)
