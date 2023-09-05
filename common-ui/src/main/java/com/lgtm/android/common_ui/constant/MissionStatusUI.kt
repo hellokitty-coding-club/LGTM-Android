@@ -1,17 +1,18 @@
 package com.lgtm.android.common_ui.constant
 
 import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import com.lgtm.android.common_ui.R
 import com.lgtm.domain.constants.MissionStatus
 
 enum class MissionStatusUI(
     private val missionStatus: MissionStatus,
-    val message: String,
+    @StringRes val message: Int,
     @ColorRes val color: Int
 ) {
-    RECRUITING(MissionStatus.RECRUITING, "참가자 모집중", R.color.green),
-    MISSION_PROCEEDING(MissionStatus.MISSION_PROCEEDING, "미션 진행중", R.color.yellow),
-    MISSION_FINISHED(MissionStatus.MISSION_FINISHED, "미션 종료", R.color.gray_6);
+    RECRUITING(MissionStatus.RECRUITING, R.string.mission_status_recruiting, R.color.green),
+    MISSION_PROCEEDING(MissionStatus.MISSION_PROCEEDING, R.string.mission_proceeding, R.color.yellow),
+    MISSION_FINISHED(MissionStatus.MISSION_FINISHED, R.string.mission_finished, R.color.gray_6);
 
     companion object {
         fun getMissionStatusUI(missionStatus: MissionStatus): MissionStatusUI {

@@ -2,6 +2,7 @@ package com.lgtm.android.common_ui.adapter
 
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -11,10 +12,16 @@ import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.constant.TechTagUI
 
 
-@BindingAdapter("setIconColor")
-fun MaterialButton.setIconColor(color: Int?) {
+@BindingAdapter("setIconColorRes")
+fun MaterialButton.setIconColorRes(color: Int?) {
     if (color == 0 || color == null) return
     iconTint = ContextCompat.getColorStateList(this.context, color)
+}
+
+@BindingAdapter("setButtonStringRes")
+fun AppCompatButton.setButtonStringRes(stringRes: Int?) {
+    if (stringRes == 0 || stringRes == null) return
+    text = this.context.getString(stringRes)
 }
 
 @BindingAdapter("infoStatusColor")

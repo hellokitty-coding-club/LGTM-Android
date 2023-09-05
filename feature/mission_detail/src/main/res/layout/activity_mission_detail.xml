@@ -9,7 +9,7 @@
             name="viewModel"
             type="com.lgtm.android.mission_detail.MissionDetailViewModel" />
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
     </data>
 
@@ -98,13 +98,13 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_progress"
                         style="@style/MissionStatus"
-                        setIconColor="@{viewModel.missionDetailUiState.missionStatus.color}"
+                        setButtonStringRes="@{viewModel.missionDetailUiState.missionStatus.message}"
+                        setIconColorRes="@{viewModel.missionDetailUiState.missionStatus.color}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/base_guideline"
                         android:layout_marginTop="84dp"
                         android:clickable="false"
-                        android:text="@{viewModel.missionDetailUiState.missionStatus.message}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:background="@drawable/rectangle_black_radius_5" />

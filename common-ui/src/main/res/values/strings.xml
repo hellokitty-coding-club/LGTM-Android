@@ -92,4 +92,8 @@
     <string name="github_kr">깃허브</string>
     <string name="company_slash_position">회사/직책</string>
     <string name="mission_description">미션 설명</string>
+    <string name="mission_status_recruiting">참가자 모집중</string>
+    <string name="mission_proceeding">미션 진행중</string>
+    <string name="mission_finished">미션 종료</string>
+
 </resources>
