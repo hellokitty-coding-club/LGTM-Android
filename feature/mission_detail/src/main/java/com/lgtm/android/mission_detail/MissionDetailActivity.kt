@@ -57,9 +57,9 @@ class MissionDetailActivity :
 
     private fun setShareButtonClickListener() {
         binding.ivShare.setOnClickListener {
-            // todo show android share intent using deep link
+            val message = missionDetailViewModel.getMissionInfoMessage()
             val intentShare = Intent(Intent.ACTION_SEND)
-            intentShare.putExtra(Intent.EXTRA_TEXT, intent.getStringExtra("url"))
+            intentShare.putExtra(Intent.EXTRA_TEXT, intent.getStringExtra(message))
             intentShare.type = "text/plain"
             startActivity(Intent.createChooser(intentShare, "앱을 선택해 주세요."))
         }
@@ -73,10 +73,6 @@ class MissionDetailActivity :
 
     private fun showMenuDialog() {
         // todo show menu dialog
-    }
-
-    private fun showShareDialog() {
-        // todo show share dialog
     }
 
     private fun setOnClickBottomButton() {
