@@ -101,5 +101,8 @@
     <string name="reviewer_cannot_participate">리뷰이는 미션에 참여할 수 없어요.</string>
     <string name="mission_progress_management">미션 진행 상황 관리</string>
     <string name="mission_recruiting_finished">모집이 마감되었습니다</string>
+    <string name="report">신고하기</string>
+    <string name="edit">수정하기</string>
+    <string name="delete">삭제하기</string>
 
 </resources>

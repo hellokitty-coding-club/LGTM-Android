@@ -2,7 +2,13 @@ package com.lgtm.android.mission_detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.PopupMenu
+import com.lgtm.android.common_ui.R.id
+import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,7 +17,8 @@ import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class MissionDetailActivity :
-    BaseActivity<ActivityMissionDetailBinding>(R.layout.activity_mission_detail) {
+    BaseActivity<ActivityMissionDetailBinding>(R.layout.activity_mission_detail),
+    PopupMenu.OnMenuItemClickListener {
     private val missionDetailViewModel by viewModels<MissionDetailViewModel>()
     private var missionId by Delegates.notNull<Int>()
     override fun initializeViewModel() {
@@ -67,13 +74,41 @@ class MissionDetailActivity :
 
     private fun setMenuButtonClickListener() {
         binding.ivMenu.setOnClickListener {
-            showMenuDialog()
+            showMenu(it)
         }
     }
 
-    private fun showMenuDialog() {
-        // todo show menu dialog
+    private fun showMenu(v: View) {
+        PopupMenu(this, v).apply {
+            val menu = if (missionDetailViewModel.isMyMission())
+                com.lgtm.android.common_ui.R.menu.menu_edit_delete else com.lgtm.android.common_ui.R.menu.menu_report
+            setOnMenuItemClickListener(this@MissionDetailActivity)
+            inflate(menu)
+            show()
+        }
     }
+
+    override fun onMenuItemClick(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            id.report -> {
+                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            id.delete_mission -> {
+                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            id.edit_mission -> {
+                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
+                true
+            }
+
+            else -> false
+        }
+    }
+
 
     private fun setOnClickBottomButton() {
         binding.btnMissionDetail.setOnClickListener {

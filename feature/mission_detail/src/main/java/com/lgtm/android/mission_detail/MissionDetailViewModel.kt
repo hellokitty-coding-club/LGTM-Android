@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.MissionDetailUiState
 import com.lgtm.android.common_ui.model.mapper.toUiModel
+import com.lgtm.domain.constants.MissionDetailStatus
+import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,13 +23,19 @@ class MissionDetailViewModel @Inject constructor(
     private val _missionDetailUiState: MutableLiveData<MissionDetailUiState> = MutableLiveData()
     val missionDetailUiState: LiveData<MissionDetailUiState> = _missionDetailUiState
 
+    private val _missionDetailVO = MutableLiveData<MissionDetailVO>()
+
     private val _recommendToEmptyVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
     val recommendToEmptyVisibility: LiveData<Boolean> = _recommendToEmptyVisibility
 
     private val _notRecommendToEmptyVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
     val notRecommendToEmptyVisibility: LiveData<Boolean> = _notRecommendToEmptyVisibility
 
-    fun getMissionInfoMessage() : String {
+    fun isMyMission() =
+        _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_RECRUITING ||
+                _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_MISSION_FINISH
+
+    fun getMissionInfoMessage(): String {
         val missionTitle = _missionDetailUiState.value?.missionTitle ?: ""
         val reviewerNickname = _missionDetailUiState.value?.memberProfile?.nickName ?: ""
         return "\uD83C\uDF31LGTM\uD83C\uDF31\n\n\uD83D\uDCC4미션 제목 : $missionTitle\n🧑🏻‍💻리뷰어 : $reviewerNickname"
@@ -49,6 +57,7 @@ class MissionDetailViewModel @Inject constructor(
         viewModelScope.launch(lgtmErrorHandler) {
             missionUseCase.getMissionDetail(missionId)
                 .onSuccess {
+                    _missionDetailVO.postValue(it)
                     _missionDetailUiState.postValue(it.toUiModel())
                 }.onFailure {
                     Log.e(TAG, "getMissionDetail: $it")
