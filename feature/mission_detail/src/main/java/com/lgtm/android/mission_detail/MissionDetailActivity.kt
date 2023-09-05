@@ -9,9 +9,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.PopupMenu
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.lgtm.android.common_ui.R.id
 import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.R.style
+import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.getDrawableCompat
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
@@ -25,6 +28,7 @@ class MissionDetailActivity :
     PopupMenu.OnMenuItemClickListener, PopupMenu.OnDismissListener {
     private val missionDetailViewModel by viewModels<MissionDetailViewModel>()
     private var missionId by Delegates.notNull<Int>()
+    private lateinit var techTagAdapter: TechTagAdapter
     override fun initializeViewModel() {
         viewModel = missionDetailViewModel
     }
@@ -39,6 +43,8 @@ class MissionDetailActivity :
         setOnClickBottomButton()
         setOnMissionUrlClickListener()
         observeMissionDetailUiState()
+        initAdapter()
+        setRecyclerViewLayoutManager()
     }
 
     override fun onStart() {
@@ -46,10 +52,23 @@ class MissionDetailActivity :
         getMissionDetail()
     }
 
+    private fun initAdapter() {
+        techTagAdapter = TechTagAdapter()
+        binding.rvTechTag.adapter = techTagAdapter
+    }
+
+    private fun setRecyclerViewLayoutManager() {
+        val layoutManager = FlexboxLayoutManager(this).apply {
+            flexWrap = FlexWrap.WRAP
+        }
+        binding.rvTechTag.layoutManager = layoutManager
+    }
+
     private fun observeMissionDetailUiState() {
         missionDetailViewModel.missionDetailUiState.observe(this) {
             missionDetailViewModel.setRecommendToEmptyVisibility()
             missionDetailViewModel.setNotRecommendToEmptyVisibility()
+            techTagAdapter.submitList(it.techTagList)
         }
     }
 

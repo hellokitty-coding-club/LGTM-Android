@@ -12,10 +12,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/tech_tag"
+        android:id="@+id/cl_tech_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/rectangle_white_stroke_gray_2_radius_5"
         app:layout_constraintBottom_toBottomOf="@id/tech_tag_1"
         app:layout_constraintStart_toEndOf="@id/tech_tag_1"
