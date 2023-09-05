@@ -31,9 +31,9 @@ data class MissionDetailDTO(
             missionRepositoryUrl = requireNotNull(missionRepositoryUrl),
             missionStatus = getMissionStatus(missionStatus),
             missionTitle = requireNotNull(missionTitle),
-            notRecommendTo = requireNotNull(notRecommendTo),
+            notRecommendTo = notRecommendTo,
             price = requireNotNull(price),
-            recommendTo = requireNotNull(recommendTo),
+            recommendTo = recommendTo,
             remainingRegisterDays = requireNotNull(remainingRegisterDays),
             scraped = requireNotNull(scraped),
             techTagList = requireNotNull(techTagList).map { it.toVO() }

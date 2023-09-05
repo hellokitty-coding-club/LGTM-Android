@@ -14,9 +14,9 @@ data class MissionDetailUiState(
     val missionRepositoryUrl: String,
     val missionStatus: MissionStatusUI,
     val missionTitle: String,
-    val notRecommendTo: String,
+    val notRecommendTo: String?,
     val price: Int,
-    val recommendTo: String,
+    val recommendTo: String?,
     val remainingRegisterDays: Int,
     val scraped: Boolean,
     val techTagList: List<TechTagVO>

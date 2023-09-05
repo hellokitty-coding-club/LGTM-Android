@@ -447,9 +447,12 @@
                     android:text="@{viewModel.missionDetailUiState.recommendTo}"
                     android:textAppearance="@style/Body2"
                     android:textColor="@color/gray_6"
+                    android:visibility="@{viewModel.recommendToEmptyVisibility ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintBottom_toTopOf="@id/view_divider_recommend_to"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_recommend_to_title"
+                    app:layout_constraintVertical_bias="0.0"
                     tools:text="@tools:sample/lorem" />
 
 
@@ -460,7 +463,7 @@
                     android:paddingTop="24dp"
                     android:paddingBottom="14dp"
                     android:visibility="@{viewModel.recommendToEmptyVisibility ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintTop_toBottomOf="@id/tv_recommend_to_title">
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommend_to">
 
                     <include layout="@layout/layout_empty_no_content" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -493,12 +496,27 @@
                     android:text="@{viewModel.missionDetailUiState.notRecommendTo}"
                     android:textAppearance="@style/Body2"
                     android:textColor="@color/gray_6"
+                    android:visibility="@{viewModel.notRecommendToEmptyVisibility ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/gl_end"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/tv_not_recommend_to_title"
+                    app:layout_constraintVertical_bias="0.0"
                     tools:text="@tools:sample/lorem" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_not_recommend_to_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="154dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="14dp"
+                    android:visibility="@{viewModel.notRecommendToEmptyVisibility ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_not_recommend_to_title">
+
+                    <include layout="@layout/layout_empty_no_content" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout> <!-- End of ScrollView ViewGroup -->
         </ScrollView>
 
@@ -512,8 +530,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="미션 진행하기" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </layout>

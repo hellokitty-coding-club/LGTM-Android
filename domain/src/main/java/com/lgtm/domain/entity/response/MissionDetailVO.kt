@@ -12,9 +12,9 @@ data class MissionDetailVO(
     val missionRepositoryUrl: String,
     val missionStatus: MissionStatus,
     val missionTitle: String,
-    val notRecommendTo: String,
+    val notRecommendTo: String?,
     val price: Int,
-    val recommendTo: String,
+    val recommendTo: String?,
     val remainingRegisterDays: Int,
     val scraped: Boolean,
     val techTagList: List<TechTagVO>
