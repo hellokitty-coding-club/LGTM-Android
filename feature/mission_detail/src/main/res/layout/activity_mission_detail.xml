@@ -41,7 +41,7 @@
             android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
             android:elevation="1dp"
             android:padding="3dp"
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/ic_menu_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/inner_guideline"
                         android:layout_marginTop="20dp"
-                        android:background="@drawable/rectangle_green_radius_5"
+                        android:background="@drawable/rectangle_green_radius_10"
                         app:layout_constraintTop_toBottomOf="@id/rv_tech_tag">
 
                         <TextView
@@ -189,7 +189,7 @@
                         android:id="@+id/tv_due_date_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/base_guideline"
+                        android:layout_marginStart="@dimen/inner_guideline"
                         android:layout_marginTop="20dp"
                         android:text="@string/mission_registration_date_limit"
                         android:textAppearance="@style/Body2"
@@ -200,7 +200,7 @@
                         android:id="@+id/tv_due_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/base_guideline"
+                        android:layout_marginEnd="@dimen/inner_guideline"
                         android:text="@{String.valueOf(viewModel.missionDetailUiState.remainingRegisterDays)+ `일 후 마감`}"
                         android:textAppearance="@style/Body2"
                         android:textColor="@color/gray_5"
@@ -289,6 +289,17 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:background="@color/gray_4"
                         tools:src="@drawable/ic_profile_error" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/ic_back"
+                        android:backgroundTint="@color/gray_4"
+                        android:rotationY="180"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/tv_nickname_title"
@@ -524,11 +535,11 @@
             android:id="@+id/btn_mission_detail"
             style="@style/LGTMButtonLight"
             setButtonStringRes="@{viewModel.missionDetailUiState.missionDetailButtonStatusUI.string}"
-            android:enabled="@{viewModel.missionDetailUiState.missionDetailButtonStatusUI.isEnable}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/base_guideline"
             android:layout_marginBottom="25dp"
+            android:enabled="@{viewModel.missionDetailUiState.missionDetailButtonStatusUI.isEnable}"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="미션 진행하기" />
 

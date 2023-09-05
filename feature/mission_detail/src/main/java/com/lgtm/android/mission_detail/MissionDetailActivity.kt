@@ -13,6 +13,7 @@ import com.lgtm.android.common_ui.R.id
 import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.getDrawableCompat
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
@@ -21,7 +22,7 @@ import kotlin.properties.Delegates
 @AndroidEntryPoint
 class MissionDetailActivity :
     BaseActivity<ActivityMissionDetailBinding>(R.layout.activity_mission_detail),
-    PopupMenu.OnMenuItemClickListener {
+    PopupMenu.OnMenuItemClickListener, PopupMenu.OnDismissListener {
     private val missionDetailViewModel by viewModels<MissionDetailViewModel>()
     private var missionId by Delegates.notNull<Int>()
     override fun initializeViewModel() {
@@ -79,8 +80,30 @@ class MissionDetailActivity :
     private fun setMenuButtonClickListener() {
         binding.ivMenu.setOnClickListener {
             showMenu(it)
+            setDartMenuIcon()
         }
     }
+
+    override fun onDismiss(menu: PopupMenu?) {
+        setLightMenuIcon()
+    }
+
+    private fun setDartMenuIcon() {
+        with(binding.ivMenu) {
+            background =
+                this.getDrawableCompat(com.lgtm.android.common_ui.R.drawable.rectangle_black_radius_10)
+            setImageDrawable(this.getDrawableCompat(com.lgtm.android.common_ui.R.drawable.ic_menu_green))
+        }
+    }
+
+    private fun setLightMenuIcon() {
+        with(binding.ivMenu) {
+            background =
+                this.getDrawableCompat(com.lgtm.android.common_ui.R.drawable.rectangle_white_stroke_gray_3_radius_10)
+            setImageDrawable(this.getDrawableCompat(com.lgtm.android.common_ui.R.drawable.ic_menu_black))
+        }
+    }
+
 
     private fun showMenu(v: View) {
         PopupMenu(
@@ -89,6 +112,7 @@ class MissionDetailActivity :
             val menu = if (missionDetailViewModel.isMyMission())
                 com.lgtm.android.common_ui.R.menu.menu_edit_delete else com.lgtm.android.common_ui.R.menu.menu_report
             setOnMenuItemClickListener(this@MissionDetailActivity)
+            setOnDismissListener(this@MissionDetailActivity)
             inflate(menu)
             show()
         }
