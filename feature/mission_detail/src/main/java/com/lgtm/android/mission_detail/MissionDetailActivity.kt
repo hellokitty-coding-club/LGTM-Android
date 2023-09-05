@@ -1,6 +1,7 @@
 package com.lgtm.android.mission_detail
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -33,6 +34,7 @@ class MissionDetailActivity :
         setShareButtonClickListener()
         setMenuButtonClickListener()
         setOnClickBottomButton()
+        setOnMissionUrlClickListener()
         observeMissionDetailUiState()
     }
 
@@ -109,10 +111,19 @@ class MissionDetailActivity :
         }
     }
 
+    private fun setOnMissionUrlClickListener() {
+        binding.clMissionUrl.setOnClickListener {
+            val url: String = missionDetailViewModel.getMissionUrl() ?: return@setOnClickListener
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+    }
+
 
     private fun setOnClickBottomButton() {
         binding.btnMissionDetail.setOnClickListener {
-            // todo set on click bottom button
+            Toast.makeText(this, "다음 화면으로 이동", Toast.LENGTH_SHORT).show()
         }
     }
 
