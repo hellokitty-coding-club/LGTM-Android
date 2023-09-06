@@ -13,8 +13,8 @@
         android:title="@string/chat" />
 
     <item
-        android:id="@+id/menu_setting"
-        android:icon="@drawable/selector_bottom_navi_setting"
-        android:title="@string/setting" />
+        android:id="@+id/menu_my_page"
+        android:icon="@drawable/selector_bottom_navi_my_page"
+        android:title="@string/my_page" />
 
 </menu>
