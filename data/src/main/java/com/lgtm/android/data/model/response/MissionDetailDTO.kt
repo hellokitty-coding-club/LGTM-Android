@@ -1,5 +1,9 @@
 package com.lgtm.android.data.model.response
 
+import com.google.gson.annotations.SerializedName
+import com.lgtm.domain.constants.MissionDetailStatus.Companion.getMissionDetailStatus
+import com.lgtm.domain.constants.MissionStatus.Companion.getMissionStatus
+import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.MissionDetailVO
 
 data class MissionDetailDTO(
@@ -15,11 +19,15 @@ data class MissionDetailDTO(
     val notRecommendTo: String?,
     val price: Int?,
     val recommendTo: String?,
-    val registrationDueDate: String?,
+    val remainingRegisterDays: Int?,
     val scraped: Boolean?,
-    val techTagList: List<TechTagDTO>?
-){
-    fun toVO() : MissionDetailVO{
+    val techTagList: List<TechTagDTO>?,
+    @SerializedName("participated")
+    val isParticipated: Boolean?,
+    @SerializedName("closed")
+    val isRecruiting: Boolean?
+) {
+    fun toVO(role: Role): MissionDetailVO {
         return MissionDetailVO(
             currentPeopleNumber = requireNotNull(currentPeopleNumber),
             description = requireNotNull(description),
@@ -28,14 +36,19 @@ data class MissionDetailDTO(
             memberType = requireNotNull(memberType),
             missionId = requireNotNull(missionId),
             missionRepositoryUrl = requireNotNull(missionRepositoryUrl),
-            missionStatus = requireNotNull(missionStatus),
+            missionStatus = getMissionStatus(missionStatus),
             missionTitle = requireNotNull(missionTitle),
-            notRecommendTo = requireNotNull(notRecommendTo),
+            notRecommendTo = notRecommendTo,
             price = requireNotNull(price),
-            recommendTo = requireNotNull(recommendTo),
-            registrationDueDate = requireNotNull(registrationDueDate),
+            recommendTo = recommendTo,
+            remainingRegisterDays = requireNotNull(remainingRegisterDays),
             scraped = requireNotNull(scraped),
-            techTagList = requireNotNull(techTagList).map { it.toVO() }
+            techTagList = requireNotNull(techTagList).map { it.toVO() },
+            missionDetailStatus = getMissionDetailStatus(
+                role,
+                requireNotNull(isParticipated),
+                requireNotNull(isRecruiting)
+            )
         )
     }
 }

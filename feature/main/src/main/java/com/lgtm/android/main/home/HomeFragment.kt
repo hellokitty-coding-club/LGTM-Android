@@ -21,11 +21,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewModel()
-        getHomeInfo()
         initAdapter()
         submitDataWhenDataChanged()
         setUpNotificationClickListener()
         onClickNewMissionButton()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getHomeInfo()
     }
 
     private fun getHomeInfo() {

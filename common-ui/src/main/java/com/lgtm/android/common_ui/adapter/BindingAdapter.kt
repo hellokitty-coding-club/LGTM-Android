@@ -2,11 +2,27 @@ package com.lgtm.android.common_ui.adapter
 
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.google.android.material.button.MaterialButton
 import com.lgtm.android.common_ui.R
-import com.lgtm.android.common_ui.constant.TechTag
+import com.lgtm.android.common_ui.constant.TechTagUI
+
+
+@BindingAdapter("setIconColorRes")
+fun MaterialButton.setIconColorRes(color: Int?) {
+    if (color == 0 || color == null) return
+    iconTint = ContextCompat.getColorStateList(this.context, color)
+}
+
+@BindingAdapter("setButtonStringRes")
+fun AppCompatButton.setButtonStringRes(stringRes: Int?) {
+    if (stringRes == 0 || stringRes == null) return
+    text = this.context.getString(stringRes)
+}
 
 @BindingAdapter("infoStatusColor")
 fun TextView.setInfoStatusColor(color: Int) {
@@ -15,17 +31,39 @@ fun TextView.setInfoStatusColor(color: Int) {
 
 @BindingAdapter("setImageResource")
 fun AppCompatImageView.setImageResource(icon: Int) {
-    setImageResource(icon)
+    Glide.with(this.context)
+        .load(icon)
+        .into(this)
+}
+
+@BindingAdapter("setImageUrl")
+fun AppCompatImageView.setImageUrl(url: String?) {
+    url?.let {
+        Glide.with(this.context)
+            .load(url)
+            .into(this)
+    }
+}
+
+@BindingAdapter("setProfileImageUrl")
+fun AppCompatImageView.setProfileImageUrl(url: String?) {
+    url?.let {
+        Glide.with(this.context)
+            .load(url)
+            .error(R.drawable.ic_profile_error)
+            .circleCrop()
+            .into(this)
+    }
 }
 
 @BindingAdapter("setTechTagImageByItsName")
 fun AppCompatImageView.setTechTagImageByItsName(string: String) {
-    val imageRes = TechTag.values().find { it.techTagVO.stack == string }?.defaultIcon
+    val imageRes = TechTagUI.values().find { it.techTag.stack == string }?.defaultIcon
     imageRes?.let { setImageResource(it) }
 }
 
 @BindingAdapter("setRevieweeRoleImage")
-fun AppCompatImageView.setImageBySelector(isSelected: Boolean) {
+fun AppCompatImageView.setRevieweeRoleImage(isSelected: Boolean) {
     if (isSelected) {
         setImageResource(R.drawable.ic_reviewee_white)
     } else {
@@ -34,7 +72,7 @@ fun AppCompatImageView.setImageBySelector(isSelected: Boolean) {
 }
 
 @BindingAdapter("setReviewerRoleImage")
-fun AppCompatImageView.setImageBySelector2(isSelected: Boolean) {
+fun AppCompatImageView.setReviewerRoleImage(isSelected: Boolean) {
     if (isSelected) {
         setImageResource(R.drawable.ic_reviewer_white)
     } else {

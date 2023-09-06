@@ -5,5 +5,6 @@ data class MemberProfileVO(
     val githubId: String,
     val memberId: Int,
     val nickName: String,
+    val position : String,
     val profileImageUrl: String
 )

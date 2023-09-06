@@ -10,4 +10,6 @@
     <dimen name="chip_padding_horizontal">10dp</dimen>
     <dimen name="chip_spacing_horizontal">12dp</dimen>
     <dimen name="chip_spacing_vertical">15dp</dimen>
+    <dimen name="base_guideline">20dp</dimen>
+    <dimen name="inner_guideline">24dp</dimen>
 </resources>

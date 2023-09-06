@@ -1,6 +1,6 @@
 package com.lgtm.domain.constants
 
-enum class TechTagVO(val stack: String) {
+enum class TechTag(val stack: String) {
     JAVA("JAVA"),
     PYTHON("Python"),
     JAVASCRIPT("JavaScript"),

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.lgtm.android.common_ui.R
-import com.lgtm.android.common_ui.constant.TechTag
+import com.lgtm.android.common_ui.constant.TechTagUI
 
 
 enum class TechTagTheme {
@@ -29,7 +29,7 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
     fun setChipGroup(selectedTagList: MutableLiveData<MutableList<String>>) {
         this.selectedTagList = selectedTagList
         setChipSpacing()
-        TechTag.values().forEach { tag ->
+        TechTagUI.values().forEach { tag ->
             val chip = createChip(tag)
             chipGroup.addView(chip)
         }
@@ -42,33 +42,33 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
         }
     }
 
-    private fun createChip(techTag: TechTag): Chip {
+    private fun createChip(techTagUI: TechTagUI): Chip {
         return Chip(chipGroup.context).apply {
-            text = techTag.techTagVO.stack
+            text = techTagUI.techTag.stack
             chipStartPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
             chipEndPadding = resources.getDimension(R.dimen.chip_padding_horizontal)
             chipMinHeight = resources.getDimension(R.dimen.chip_min_height)
             chipStrokeColor =
                 if (theme == TechTagTheme.LIGHT) strokeStateListLight else strokeStateListDark
             chipBackgroundColor = backgroundStateList
-            setChipIconResource(techTag.defaultIcon)
+            setChipIconResource(techTagUI.defaultIcon)
             setTextAppearance(R.style.Body2)
             setTextColor(textStateList) // (순서 중요) textAppearance 후에 배치
-            setOnClickListener { onChipSelected(this, techTag) }
+            setOnClickListener { onChipSelected(this, techTagUI) }
         }
     }
 
-    private fun onChipSelected(chip: Chip, techTag: TechTag) {
+    private fun onChipSelected(chip: Chip, techTagUI: TechTagUI) {
         chip.apply {
             isSelected = !isSelected
             if (isSelected) {
                 chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width_selected)
                 this@TechTagChipGroup.selectedTagList.value?.add(this.text.toString())
-                techTag.selectedIcon?.let { selectedIcon -> this.setChipIconResource(selectedIcon) }
+                techTagUI.selectedIcon?.let { selectedIcon -> this.setChipIconResource(selectedIcon) }
             } else {
                 chipStrokeWidth = resources.getDimension(R.dimen.chip_stroke_width_unselected)
                 this@TechTagChipGroup.selectedTagList.value?.remove(this.text.toString())
-                this.setChipIconResource(techTag.defaultIcon)
+                this.setChipIconResource(techTagUI.defaultIcon)
             }
             this@TechTagChipGroup.selectedTagList.value =
                 this@TechTagChipGroup.selectedTagList.value?.toMutableList()

@@ -2,6 +2,7 @@ package com.lgtm.domain.usecase
 
 import com.lgtm.domain.constants.ArrowDirection
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.MissionRepository
@@ -22,12 +23,13 @@ class MissionUseCase @Inject constructor(
         return try {
             val response = missionRepository.getHomeMission().getOrNull()
             return Result.success(response?.copy(contents = response.contents.map {
-                when(it.viewType){
+                when (it.viewType) {
                     SduiViewType.EMPTY -> {
                         val emptyUiState: SduiContent =
                             getMissionEmptyUiState(it.content as SectionEmptyVO)
                         it.copy(content = emptyUiState)
                     }
+
                     else -> it
                 }
             }) ?: throw IllegalStateException("${this.javaClass} response is null"))
@@ -67,6 +69,14 @@ class MissionUseCase @Inject constructor(
 
     private fun onTotalMissionEmpty(): SduiEmptyUiState {
         return SduiEmptyUiState(TOTAL_MISSION_MAIN_MESSAGE, TOTAL_MISSION_SUB_MESSAGE)
+    }
+
+    suspend fun getMissionDetail(missionId: Int): Result<MissionDetailVO> {
+        return try {
+            missionRepository.getMissionDetail(missionId)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     companion object {
