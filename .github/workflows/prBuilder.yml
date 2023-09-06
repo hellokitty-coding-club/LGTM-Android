@@ -74,7 +74,7 @@ jobs:
           SLACK_TITLE: '[LGTM] PR Check SUCCESS ✅'
           MSG_MINIMAL: true
           SLACK_USERNAME: LGTM-Android
-          SLACK_MESSAGE: 'PR이 완료되었습니다!!! 🎉🎉🎉'
+          SLACK_MESSAGE: 'Build and App distribution Success🎉🎉🎉'
 
       - name: On Failed, Notify in Slack
         if: ${{ failure() }}
