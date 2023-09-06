@@ -60,7 +60,7 @@ class BankAccountFragment :
                 signUpViewModel.setIsAccountInfoValid()
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onNothingSelected(parent: AdapterView<*>?) {/*no-op*/}
         }
     }
 
