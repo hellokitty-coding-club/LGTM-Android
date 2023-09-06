@@ -114,5 +114,10 @@
     <string name="logout">로그아웃</string>
     <string name="cs_center">고객센터</string>
     <string name="version_info">버전 정보</string>
+    <string name="my_activity">내 활동</string>
+    <string name="service_info">서비스 정보</string>
+    <string name="cs_center_mail">hkcc.swm.official@gmail.com</string>
+    <string name="current_version_1">현재 버전 1.0.0</string>
+    <string name="recent_version">최신 버전</string>
 
 </resources>
