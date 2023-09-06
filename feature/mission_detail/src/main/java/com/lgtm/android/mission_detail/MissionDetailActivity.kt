@@ -69,6 +69,7 @@ class MissionDetailActivity :
             missionDetailViewModel.setRecommendToEmptyVisibility()
             missionDetailViewModel.setNotRecommendToEmptyVisibility()
             techTagAdapter.submitList(it.techTagList)
+            binding.profileGlance.data = requireNotNull(it.memberProfile)
         }
     }
 

@@ -47,13 +47,11 @@ fun AppCompatImageView.setImageUrl(url: String?) {
 
 @BindingAdapter("setProfileImageUrl")
 fun AppCompatImageView.setProfileImageUrl(url: String?) {
-    url?.let {
-        Glide.with(this.context)
-            .load(url)
-            .error(R.drawable.ic_profile_error)
-            .circleCrop()
-            .into(this)
-    }
+    Glide.with(this.context)
+        .load(url)
+        .error(R.drawable.img_profile_empty)
+        .circleCrop()
+        .into(this)
 }
 
 @BindingAdapter("setTechTagImageByItsName")
