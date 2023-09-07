@@ -123,6 +123,57 @@
                         app:layout_constraintTop_toBottomOf="@id/view_my_activity" />
                 </androidx.constraintlayout.widget.ConstraintLayout> <!-- 내 활동 -->
 
+                <!-- 설정 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/rectangle_gray_2_radius_20"
+                    app:layout_constraintTop_toBottomOf="@id/cl_my_activity">
+
+                    <TextView
+                        android:id="@+id/tv_setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="18dp"
+                        android:text="@string/setting"
+                        android:textAppearance="@style/Body1M"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/view_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/gray_3"
+                        app:layout_constraintTop_toBottomOf="@id/tv_setting" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_notification_setting"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="18dp"
+                        android:background="@drawable/rectangle_white_stroke_gray_2_radius_10"
+                        android:drawableEnd="@drawable/ic_next"
+                        android:drawableTint="@color/gray_4"
+                        android:gravity="center_vertical"
+                        android:paddingVertical="10dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="10dp"
+                        android:stateListAnimator="@null"
+                        android:text="@string/notification_setting"
+                        android:textAppearance="@style/Body3M"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/view_setting" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout> <!-- end of 설정 -->
                 <!-- 서비스 정보 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_service_info"
@@ -130,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:background="@drawable/rectangle_gray_2_radius_20"
-                    app:layout_constraintTop_toBottomOf="@id/cl_my_activity">
+                    app:layout_constraintTop_toBottomOf="@id/cl_setting">
 
                     <TextView
                         android:id="@+id/tv_service_info"

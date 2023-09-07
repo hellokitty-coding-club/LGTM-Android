@@ -22,6 +22,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         super.onViewCreated(view, savedInstanceState)
         setProfileOnClickListener()
         setMyMissionOnClickListener()
+        setNotificationSettingClickListener()
         setNoticeOnClickListener()
         setTermsAndPoliciesOnClickListener()
         serviceGuidelines()
@@ -41,6 +42,18 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         binding.btnMyMission.setOnClickListener {
             // MVP 구현사항 아님
             // 추후 업데이트 시 구현
+        }
+    }
+
+    private fun setNotificationSettingClickListener() {
+        binding.btnNotificationSetting.setOnClickListener {
+            val intent = Intent().apply {
+                action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                putExtra("android.provider.extra.APP_PACKAGE", requireContext().packageName)
+                putExtra("app_uid", requireContext().applicationInfo.uid)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(intent)
         }
     }
 

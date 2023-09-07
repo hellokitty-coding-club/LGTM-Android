@@ -3,4 +3,5 @@
     <string name="chat">chat</string>
     <string name="home">home</string>
     <string name="my_page">my_page</string>
+    <string name="notification_setting">알림 설정</string>
 </resources>
