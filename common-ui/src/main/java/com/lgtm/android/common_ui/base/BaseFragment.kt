@@ -42,14 +42,19 @@ abstract class BaseFragment<T : ViewDataBinding>(
         _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         setSoftKeyboard()
+        initializeViewModel()
         return binding.root
     }
 
-    fun moveToSignInActivity() {
+    fun moveToSignInActivityOnUnauthorized() {
         viewModel.moveToSignIn.observe(this) {
-            lgtmNavigator.navigateToSignIn(requireContext())
-            requireActivity().finishAffinity()
+            moveToSignInActivity()
         }
+    }
+
+    fun moveToSignInActivity(){
+        requireActivity().finishAffinity()
+        lgtmNavigator.navigateToSignIn(requireContext())
     }
 
     fun makeToast() {

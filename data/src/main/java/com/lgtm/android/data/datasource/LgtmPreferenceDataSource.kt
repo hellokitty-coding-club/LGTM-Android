@@ -37,6 +37,13 @@ class LgtmPreferenceDataSource @Inject constructor(
         }
     }
 
+    fun clearValue(
+        isEncrypted: Boolean,
+    ) {
+        val preference = getPreference(isEncrypted)
+        preference.edit().clear().apply()
+    }
+
     private fun getPreference(isEncrypted: Boolean): SharedPreferences {
         return if (isEncrypted) lgtmEncryptedPreferences else lgtmPreference
     }

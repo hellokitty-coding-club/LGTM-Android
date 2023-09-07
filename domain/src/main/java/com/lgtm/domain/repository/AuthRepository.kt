@@ -9,6 +9,8 @@ import com.lgtm.domain.entity.response.SignUpResponseVO
 interface AuthRepository {
     fun saveUserData(memberData: MemberDataDTO)
     fun saveUserData(signUpResponseVO: SignUpResponseVO, memberType: String?)
+
+    fun clearUserData()
     fun saveAccessToken(accessToken: String)
     fun saveRefreshToken(refreshToken: String)
     fun saveMemberType(memberType: String)

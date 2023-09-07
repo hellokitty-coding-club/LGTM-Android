@@ -8,14 +8,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentMyPageBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
+    private val myPageViewModel by viewModels<MyPageViewModel>()
     override fun initializeViewModel() {
-        TODO("Not yet implemented")
+        viewModel = myPageViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,7 +91,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     private fun setLogoutOnClickListener() {
         binding.btnLogout.setOnClickListener {
-            // dialog 작업
+            myPageViewModel.clearUserData()
+            moveToSignInActivity()
         }
     }
 

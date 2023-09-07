@@ -33,6 +33,11 @@ class AuthRepositoryImpl @Inject constructor(
         saveMemberType(requireNotNull(memberType))  // todo 추후에 SignUpResponseVO에 memberType이 추가되면 변경
     }
 
+    override fun clearUserData() {
+        lgtmPreferenceDataSource.clearValue(true)
+        lgtmPreferenceDataSource.clearValue(false)
+    }
+
 
     override fun saveAccessToken(accessToken: String) {
         lgtmPreferenceDataSource.setValue(
