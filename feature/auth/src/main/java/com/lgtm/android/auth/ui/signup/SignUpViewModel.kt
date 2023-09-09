@@ -329,7 +329,7 @@ class SignUpViewModel @Inject constructor(
             SignUpJuniorRequestVO(
                 githubId = requireNotNull(memberData.value?.githubId),
                 githubOauthId = requireNotNull(memberData.value?.githubOauthId),
-                nickName = requireNotNull(nickname.value),
+                nickname = requireNotNull(nickname.value),
                 deviceToken = deviceToken.value,
                 profileImageUrl = requireNotNull(memberData.value?.profileImageUrl),
                 introduction = requireNotNull(introduction.value),
@@ -349,7 +349,7 @@ class SignUpViewModel @Inject constructor(
             SignUpSeniorRequestVO(
                 githubId = requireNotNull(memberData.value?.githubId),
                 githubOauthId = requireNotNull(memberData.value?.githubOauthId),
-                nickName = requireNotNull(nickname.value),
+                nickname = requireNotNull(nickname.value),
                 deviceToken = deviceToken.value,
                 profileImageUrl = requireNotNull(memberData.value?.profileImageUrl),
                 introduction = requireNotNull(introduction.value),

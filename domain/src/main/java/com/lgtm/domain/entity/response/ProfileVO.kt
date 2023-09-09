@@ -1,14 +1,21 @@
 package com.lgtm.domain.entity.response
 
+import com.lgtm.domain.constants.Role
+
 data class ProfileVO(
-    val agreeWithEventInfo: Boolean,
+    val agreeWithEventInfo: Boolean?,
     val githubId: String,
     val introduction: String,
-    val memberDetailInfo: MemberDetailInfoVO,
     val memberId: Int,
-    val memberMissionHistory: List<MemberMissionHistoryVO>?,
-    val memberType: String,
-    val nickName: String,
+    val memberType: Role?,
+    val nickname: String,
     val profileImageUrl: String,
-    val techTagList: List<TechTagVO>
+    val techTagList: List<TechTagVO>,
+    val memberMissionHistory: List<MemberMissionHistoryVO>?,
+    // for junior
+    val educationalHistory: String?,
+    // for senior
+    val position: String?,
+    val company: String?,
+    val careerPeriod: Int?,
 )

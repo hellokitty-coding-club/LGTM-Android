@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class SignUpJuniorRequestVO(
     val githubId: String,
     val githubOauthId: Int,
-    val nickName: String,
+    val nickname: String,
     val deviceToken: String? = null,
     val profileImageUrl: String,
     val introduction: String,

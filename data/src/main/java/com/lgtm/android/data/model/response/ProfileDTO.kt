@@ -1,5 +1,7 @@
 package com.lgtm.android.data.model.response
 
+import com.google.gson.annotations.SerializedName
+import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.ProfileVO
 
 data class ProfileDTO(
@@ -10,22 +12,28 @@ data class ProfileDTO(
     val memberId: Int?,
     val memberMissionHistory: List<MemberMissionHistoryDTO>?,
     val memberType: String?,
-    val nickName: String?,
+    @SerializedName("nickName")
+    val nickname: String?,
     val profileImageUrl: String?,
-    val techTagList: List<TechTagDTO>?
+    val techTagList: List<TechTagDTO>?,
+    val company: String?,
+    val position: String?,
 ) {
     fun toVO(): ProfileVO {
         return ProfileVO(
-            agreeWithEventInfo ?: false,
-            githubId ?: "",
-            introduction ?: "",
-            memberDetailInfo?.toVO() ?: throw IllegalStateException("memberDetailInfo must not be null"),
-            memberId ?: 0,
-            memberMissionHistory?.map { it.toVO() },
-            memberType ?: "",
-            nickName ?: "",
-            profileImageUrl ?: "",
-            techTagList?.map { it.toVO() } ?: listOf()
+            agreeWithEventInfo = agreeWithEventInfo ?: false,
+            githubId = githubId ?: "unknown",
+            introduction = introduction ?: "",
+            memberId = memberId ?: 0,
+            memberMissionHistory = memberMissionHistory?.map { it.toVO() },
+            memberType = Role.getRole(memberType),
+            nickname = nickname ?: "",
+            profileImageUrl = profileImageUrl ?: "",
+            techTagList = techTagList?.map { it.toVO() } ?: listOf(),
+            educationalHistory = memberDetailInfo?.educationalHistory,
+            position = position ?: memberDetailInfo?.position,
+            company = company ?: memberDetailInfo?.companyInfo,
+            careerPeriod = memberDetailInfo?.careerPeriod
         )
     }
 }

@@ -82,7 +82,7 @@ class CreateMissionStep5Fragment :
     private fun observeCreateMissionState() {
         createMissionViewModel.createMissionState.observe(viewLifecycleOwner) {
             when (it) {
-                is NetworkState.Init -> {} /* No-Op*/
+                is NetworkState.Init -> {/* No-Op*/}
                 is NetworkState.Success ->
                     (requireActivity() as? CreateMissionActivity)?.setNextPage()
 

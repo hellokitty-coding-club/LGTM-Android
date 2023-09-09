@@ -120,5 +120,6 @@
     <string name="current_version_1">현재 버전 1.0.0</string>
     <string name="recent_version">최신 버전</string>
     <string name="setting">설정</string>
+    <string name="education">학력</string>
 
 </resources>

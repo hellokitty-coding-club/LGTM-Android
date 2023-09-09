@@ -13,7 +13,8 @@ data class SignUpSeniorRequestDTO(
     val githubId: String,
     val githubOauthId: Int,
     val introduction: String,
-    val nickName: String,
+    @SerializedName("nickName")
+    val nickname: String,
     val position: String,
     val profileImageUrl: String,
     val tagList: List<String>

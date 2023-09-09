@@ -34,6 +34,18 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         setLogoutOnClickListener()
         setCsCenterOnClickListener()
         setVersionInfoOnClickListener()
+        fetchProfileData()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        myPageViewModel.getProfileInfo()
+    }
+
+    private fun fetchProfileData() {
+        myPageViewModel.profileInfo.observe(viewLifecycleOwner) {
+            binding.layoutMyProfile.data = it
+        }
     }
 
     private fun setProfileOnClickListener() {

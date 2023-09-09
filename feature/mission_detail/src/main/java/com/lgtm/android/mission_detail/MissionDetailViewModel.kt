@@ -37,7 +37,7 @@ class MissionDetailViewModel @Inject constructor(
 
     fun getMissionInfoMessage(): String {
         val missionTitle = _missionDetailUiState.value?.missionTitle ?: ""
-        val reviewerNickname = _missionDetailUiState.value?.memberProfile?.nickName ?: ""
+        val reviewerNickname = _missionDetailUiState.value?.memberProfile?.nickname ?: ""
         return "\uD83C\uDF31LGTM\uD83C\uDF31\n\n\uD83D\uDCC4미션 제목 : $missionTitle\n🧑🏻‍💻리뷰어 : $reviewerNickname"
     }
 

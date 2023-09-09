@@ -75,7 +75,7 @@ class AuthRepositoryImpl @Inject constructor(
             defaultValue = "",
             isEncrypted = false
         )
-        return Role.getRole(role)
+        return Role.getRole(role) ?: throw IllegalStateException("memberType is not set")
     }
 
     override fun isAutoLoginAvailable(): Boolean {
@@ -93,7 +93,7 @@ class AuthRepositoryImpl @Inject constructor(
                 SignUpJuniorRequestDTO(
                     githubId = signUpJuniorVO.githubId,
                     githubOauthId = signUpJuniorVO.githubOauthId,
-                    nickName = signUpJuniorVO.nickName,
+                    nickname = signUpJuniorVO.nickname,
                     deviceToken = signUpJuniorVO.deviceToken,
                     profileImageUrl = signUpJuniorVO.profileImageUrl,
                     introduction = signUpJuniorVO.introduction,
@@ -115,7 +115,7 @@ class AuthRepositoryImpl @Inject constructor(
                 SignUpSeniorRequestDTO(
                     githubId = signUpSeniorVO.githubId,
                     githubOauthId = signUpSeniorVO.githubOauthId,
-                    nickName = signUpSeniorVO.nickName,
+                    nickname = signUpSeniorVO.nickname,
                     deviceToken = signUpSeniorVO.deviceToken,
                     profileImageUrl = signUpSeniorVO.profileImageUrl,
                     introduction = signUpSeniorVO.introduction,
