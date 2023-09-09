@@ -9,7 +9,7 @@
 
         <variable
             name="data"
-            type="com.lgtm.domain.entity.response.MemberProfileVO" />
+            type="com.lgtm.android.common_ui.model.ProfileGlanceUI" />
 
     </data>
 
@@ -24,7 +24,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_profile_image"
-            setProfileImageUrl="@{data.profileImageUrl}"
+            setProfileImageUrl="@{data.profileImage}"
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_marginStart="15dp"
@@ -76,7 +76,7 @@
             android:layout_marginEnd="10dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{data.nickName}"
+            android:text="@{data.nickname}"
             android:textAppearance="@style/Body3M"
             app:layout_constraintBottom_toBottomOf="@id/tv_nickname_title"
             app:layout_constraintEnd_toStartOf="@id/iv_reviewer_arrow"
@@ -124,13 +124,14 @@
 
         <TextView
             android:id="@+id/tv_company_and_position_title"
+            setTextRes="@{data.detailInfoLabel}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/company_slash_position"
             android:textAppearance="@style/Body3R"
             app:layout_constraintStart_toStartOf="@id/tv_github_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_github_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_github_title"
+            tools:text="회사/직책" />
 
         <View
             android:id="@+id/view_divider_company_and_position"
@@ -149,7 +150,7 @@
             android:layout_marginStart="6dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="14dp"
-            android:text="@{data.company + ` / ` + data.position}"
+            android:text="@{data.detailInfo}"
             android:textAppearance="@style/Body3M"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/iv_reviewer_arrow"

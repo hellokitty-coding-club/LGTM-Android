@@ -2,13 +2,14 @@ package com.lgtm.domain.entity.response
 
 import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.constants.MissionStatus
+import com.lgtm.domain.constants.Role
 
 data class MissionDetailVO(
     val currentPeopleNumber: Int,
     val description: String,
     val maxPeopleNumber: Int,
-    val memberProfile: MemberProfileVO,
-    val memberType: String,
+    val memberProfile: ProfileVO,
+    val memberType: Role,
     val missionId: Int,
     val missionRepositoryUrl: String,
     val missionStatus: MissionStatus,

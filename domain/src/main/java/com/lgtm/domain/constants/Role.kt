@@ -8,11 +8,11 @@ enum class Role(val role: String) {
             return role == REVIEWEE.role || role == REVIEWER.role
         }
 
-        fun getRole(role: String): Role {
+        fun getRole(role: String?): Role? {
             return when (role) {
                 REVIEWEE.role -> REVIEWEE
                 REVIEWER.role -> REVIEWER
-                else -> throw IllegalArgumentException("role must be SENIOR or JUNIOR")
+                else -> null
             }
         }
     }

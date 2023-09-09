@@ -24,6 +24,12 @@ fun AppCompatButton.setButtonStringRes(stringRes: Int?) {
     text = this.context.getString(stringRes)
 }
 
+@BindingAdapter("setTextRes")
+fun TextView.setTextRes(stringRes: Int?) {
+    if (stringRes == 0 || stringRes == null) return
+    text = this.context.getString(stringRes)
+}
+
 @BindingAdapter("infoStatusColor")
 fun TextView.setInfoStatusColor(color: Int) {
     setTextColor(ContextCompat.getColor(this.context, color))

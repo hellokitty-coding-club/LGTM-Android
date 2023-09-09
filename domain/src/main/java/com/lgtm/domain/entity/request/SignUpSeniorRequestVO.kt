@@ -3,7 +3,7 @@ package com.lgtm.domain.entity.request
 data class SignUpSeniorRequestVO(
     val githubId: String,
     val githubOauthId: Int,
-    val nickName: String,
+    val nickname: String,
     val deviceToken: String? = null,
     val profileImageUrl: String,
     val introduction: String,

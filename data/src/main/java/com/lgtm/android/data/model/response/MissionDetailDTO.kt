@@ -10,7 +10,7 @@ data class MissionDetailDTO(
     val currentPeopleNumber: Int?,
     val description: String?,
     val maxPeopleNumber: Int?,
-    val memberProfile: MemberProfileDTO?,
+    val memberProfile: ProfileDTO?,
     val memberType: String?,
     val missionId: Int?,
     val missionRepositoryUrl: String?,
@@ -27,13 +27,14 @@ data class MissionDetailDTO(
     @SerializedName("closed")
     val isRecruiting: Boolean?
 ) {
-    fun toVO(role: Role): MissionDetailVO {
+    fun toVO(role: Role?): MissionDetailVO {
+        val memberType: Role = Role.getRole(requireNotNull(memberType)) ?: requireNotNull(role)
         return MissionDetailVO(
             currentPeopleNumber = requireNotNull(currentPeopleNumber),
             description = requireNotNull(description),
             maxPeopleNumber = requireNotNull(maxPeopleNumber),
             memberProfile = requireNotNull(memberProfile).toVO(),
-            memberType = requireNotNull(memberType),
+            memberType = memberType,
             missionId = requireNotNull(missionId),
             missionRepositoryUrl = requireNotNull(missionRepositoryUrl),
             missionStatus = getMissionStatus(missionStatus),
@@ -45,7 +46,7 @@ data class MissionDetailDTO(
             scraped = requireNotNull(scraped),
             techTagList = requireNotNull(techTagList).map { it.toVO() },
             missionDetailStatus = getMissionDetailStatus(
-                role,
+                memberType,
                 requireNotNull(isParticipated),
                 requireNotNull(isRecruiting)
             )

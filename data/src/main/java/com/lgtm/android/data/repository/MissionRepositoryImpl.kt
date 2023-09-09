@@ -46,6 +46,8 @@ class MissionRepositoryImpl @Inject constructor(
         return try {
             val response = missionDataSource.getMissionDetail(missionId)
             val role = getMemberType()
+            Log.d(TAG, "getMissionDetail DTO: $response")
+            Log.d(TAG, "getMissionDetail VO: ${response.data.toVO(role)}")
             Result.success(response.data.toVO(role))
         } catch (e: IllegalArgumentException) {
             Log.e(TAG, "getMissionDetail: ${this.javaClass} ${e.message} / casting 도중 null 값 발생")
@@ -62,7 +64,7 @@ class MissionRepositoryImpl @Inject constructor(
             defaultValue = "",
             isEncrypted = false
         )
-        return Role.getRole(role)
+        return Role.getRole(role) ?: throw IllegalArgumentException("role is not set")
     }
 
 }
