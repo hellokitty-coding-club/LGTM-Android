@@ -171,7 +171,8 @@ class MissionDetailActivity :
 
     private fun setOnClickBottomButton() {
         binding.btnMissionDetail.setOnClickListener {
-            Toast.makeText(this, "다음 화면으로 이동", Toast.LENGTH_SHORT).show()
+            // todo 추후 조건 별 별도의 Activity로 이동
+            lgtmNavigator.navigateToDashboard(this, missionDetailViewModel.getMissionId())
         }
     }
 

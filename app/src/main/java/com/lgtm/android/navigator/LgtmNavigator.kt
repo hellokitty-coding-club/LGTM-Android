@@ -6,6 +6,7 @@ import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
 import com.lgtm.android.create_mission.CreateMissionActivity
 import com.lgtm.android.main.MainActivity
+import com.lgtm.android.manage_mission.DashboardActivity
 import com.lgtm.android.mission_detail.MissionDetailActivity
 import javax.inject.Inject
 
@@ -29,6 +30,13 @@ class LgtmNavigator @Inject constructor(
     override fun navigateToMissionDetail(context: Context, missionId: Int) {
         val intent = Intent(context, MissionDetailActivity::class.java).apply {
             putExtra(MissionDetailActivity.MISSION_ID, missionId)
+        }
+        context.startActivity(intent)
+    }
+
+    override fun navigateToDashboard(context: Context, missionId: Int) {
+        val intent = Intent(context, DashboardActivity::class.java).apply {
+            putExtra(DashboardActivity.MISSION_ID, missionId)
         }
         context.startActivity(intent)
     }

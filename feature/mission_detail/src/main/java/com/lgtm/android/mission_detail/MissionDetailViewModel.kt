@@ -68,4 +68,6 @@ class MissionDetailViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getMissionId() = _missionDetailVO.value?.missionId ?: -1
 }
