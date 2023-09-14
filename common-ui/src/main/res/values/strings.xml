@@ -121,5 +121,6 @@
     <string name="recent_version">최신 버전</string>
     <string name="setting">설정</string>
     <string name="education">학력</string>
+    <string name="participant_list">참가자 목록</string>
 
 </resources>
