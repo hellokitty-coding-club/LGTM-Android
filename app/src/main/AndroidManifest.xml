@@ -51,6 +51,10 @@
         <activity
             android:name=".mission_detail.MissionDetailActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".manage_mission.DashboardActivity"
+            android:exported="false" />
     </application>
 
 
