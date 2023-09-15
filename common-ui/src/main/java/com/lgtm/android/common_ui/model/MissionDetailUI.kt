@@ -5,7 +5,7 @@ import com.lgtm.android.common_ui.constant.MissionStatusUI
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.TechTagVO
 
-data class MissionDetailUiState(
+data class MissionDetailUI(
     val currentPeopleNumber: Int,
     val description: String,
     val maxPeopleNumber: Int,

@@ -3,13 +3,13 @@ package com.lgtm.android.common_ui.model.mapper
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.constant.MissionDetailButtonStatus.Companion.getButtonStatusUI
 import com.lgtm.android.common_ui.constant.MissionStatusUI.Companion.getMissionStatusUI
-import com.lgtm.android.common_ui.model.MissionDetailUiState
+import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.ProfileGlanceUI
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.ProfileVO
 
-fun MissionDetailVO.toUiModel(): MissionDetailUiState = MissionDetailUiState(
+fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,
     description = description,
     maxPeopleNumber = maxPeopleNumber,

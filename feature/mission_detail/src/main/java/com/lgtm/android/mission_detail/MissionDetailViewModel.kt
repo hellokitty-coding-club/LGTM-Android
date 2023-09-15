@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
-import com.lgtm.android.common_ui.model.MissionDetailUiState
+import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
 import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.entity.response.MissionDetailVO
@@ -20,8 +20,8 @@ class MissionDetailViewModel @Inject constructor(
     private val missionUseCase: MissionUseCase
 ) : BaseViewModel() {
 
-    private val _missionDetailUiState: MutableLiveData<MissionDetailUiState> = MutableLiveData()
-    val missionDetailUiState: LiveData<MissionDetailUiState> = _missionDetailUiState
+    private val _missionDetailUiState: MutableLiveData<MissionDetailUI> = MutableLiveData()
+    val missionDetailUiState: LiveData<MissionDetailUI> = _missionDetailUiState
 
     private val _missionDetailVO = MutableLiveData<MissionDetailVO>()
 
