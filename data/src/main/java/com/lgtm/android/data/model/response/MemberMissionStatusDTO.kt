@@ -1,5 +1,6 @@
 package com.lgtm.android.data.model.response
 
+import com.lgtm.domain.constants.ProcessState.Companion.getProcessState
 import com.lgtm.domain.constants.UNKNOWN
 import com.lgtm.domain.entity.response.MemberMissionStatusVO
 
@@ -18,10 +19,10 @@ data class MemberMissionStatusDTO(
             githubId = githubId ?: UNKNOWN,
             githubPrUrl = githubPrUrl ?: UNKNOWN,
             memberId = requireNotNull(memberId),
-            missionFinishedDate = missionFinishedDate ?: UNKNOWN,
             nickname = nickname ?: UNKNOWN,
+            missionFinishedDate = missionFinishedDate ?: UNKNOWN,
             paymentDate = paymentDate ?: UNKNOWN,
-            processStatus = processStatus ?: UNKNOWN,
+            processStatus = getProcessState(processStatus),
             profileImageUrl = profileImageUrl ?: UNKNOWN
         )
     }
