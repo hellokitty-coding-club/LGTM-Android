@@ -83,8 +83,6 @@ class BankAccountFragment :
                 }
 
                 is NetworkState.Failure -> {
-                    navigateToSignInActivity()
-                    requireActivity().finish()
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
                 }
             }
