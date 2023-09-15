@@ -2,6 +2,7 @@ package com.lgtm.domain.usecase
 
 import com.lgtm.domain.constants.ArrowDirection
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.AuthRepository
@@ -78,6 +79,33 @@ class MissionUseCase @Inject constructor(
             Result.failure(e)
         }
     }
+
+    suspend fun fetchDashboardInfo(missionID: Int): Result<DashboardVO> {
+        return try {
+            val dashboardInfo = retrieveDashboardInfo(missionID)
+            val processedInfo = processDashboardInfo(dashboardInfo)
+            Result.success(processedInfo)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    private suspend fun retrieveDashboardInfo(missionID: Int): DashboardVO {
+        return missionRepository.fetchDashboardInfo(missionID).getOrNull()
+            ?: throw java.lang.IllegalArgumentException("${this.javaClass} response is null")
+    }
+
+    private fun processDashboardInfo(dashboardInfo: DashboardVO): DashboardVO {
+        return dashboardInfo.copy(
+            memberInfoList = dashboardInfo.memberInfoList.map { memberInfo ->
+                memberInfo.copy(
+                    missionFinishedDate = memberInfo.missionFinishedDate.ifEmpty { "-" },
+                    paymentDate = memberInfo.paymentDate.ifEmpty { "-" }
+                )
+            }
+        )
+    }
+
 
     companion object {
         // viewType
