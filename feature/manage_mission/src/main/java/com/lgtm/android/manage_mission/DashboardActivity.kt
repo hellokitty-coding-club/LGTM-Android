@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.lgtm.android.common_ui.adapter.ParticipantAdapter
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.manage_mission.databinding.ActivityDashboardBinding
@@ -15,6 +16,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private val dashboardViewModel by viewModels<DashboardViewModel>()
     private var missionId by Delegates.notNull<Int>()
     private lateinit var techTagAdapter: TechTagAdapter
+    private lateinit var participantAdapter: ParticipantAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +40,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private fun initAdapter() {
         techTagAdapter = TechTagAdapter()
         binding.rvTechTag.adapter = techTagAdapter
+        participantAdapter = ParticipantAdapter()
+        binding.rvParticipant.adapter = participantAdapter
     }
 
     private fun observeDashboardInfo() {
         dashboardViewModel.dashboardInfo.observe(this) {
             techTagAdapter.submitList(it.techTagList)
+            participantAdapter.submitList(it.memberInfoList)
         }
     }
 

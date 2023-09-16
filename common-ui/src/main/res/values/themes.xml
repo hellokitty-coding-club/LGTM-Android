@@ -89,6 +89,7 @@
 
     <style name="ProcessState" parent="BlackTagStyle">
         <item name="iconSize">20dp</item>
+        <item name="iconTint">@color/green</item>
     </style>
 
     <style name="BlackTagStyle" parent="Widget.Material3.Button">

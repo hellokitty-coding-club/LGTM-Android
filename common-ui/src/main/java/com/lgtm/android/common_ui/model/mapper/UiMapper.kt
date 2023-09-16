@@ -64,5 +64,5 @@ fun MemberMissionStatusVO.toUiModel() = MemberMissionStatusUI(
     paymentDate = paymentDate,
     processStatus = getProcessStateUI(processStatus),
     profileImageUrl = profileImageUrl,
-    isMissionSubmitted = isMissionSubmitted
+    isMissionSubmitted = isMissionSubmitted,
 )
