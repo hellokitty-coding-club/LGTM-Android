@@ -18,6 +18,15 @@ import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.getDrawableCompat
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
+import com.lgtm.domain.constants.MissionDetailStatus
+import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_MISSION_FINISH
+import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_RECRUITING
+import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_PARTICIPATE_MISSION_FINISH
+import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_PARTICIPATE_RECRUITING
+import com.lgtm.domain.constants.MissionDetailStatus.SENIOR_NOT_PARTICIPATE_MISSION_FINISH
+import com.lgtm.domain.constants.MissionDetailStatus.SENIOR_NOT_PARTICIPATE_RECRUITING
+import com.lgtm.domain.constants.MissionDetailStatus.SENIOR_PARTICIPATE_MISSION_FINISH
+import com.lgtm.domain.constants.MissionDetailStatus.SENIOR_PARTICIPATE_RECRUITING
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
@@ -171,9 +180,33 @@ class MissionDetailActivity :
 
     private fun setOnClickBottomButton() {
         binding.btnMissionDetail.setOnClickListener {
-            // todo 추후 조건 별 별도의 Activity로 이동
-            lgtmNavigator.navigateToDashboard(this, missionDetailViewModel.getMissionId())
+            val missionDetailStatus: MissionDetailStatus =
+                missionDetailViewModel.getMissionDetailStatus() ?: return@setOnClickListener
+            when (missionDetailStatus) {
+                JUNIOR_PARTICIPATE_RECRUITING -> navigateJuniorMyMission()
+                JUNIOR_PARTICIPATE_MISSION_FINISH -> navigateJuniorMyMission()
+                JUNIOR_NOT_PARTICIPATE_RECRUITING -> participateToMission()
+                JUNIOR_NOT_PARTICIPATE_MISSION_FINISH -> {/* Button Disable */ }
+                SENIOR_PARTICIPATE_RECRUITING -> navigateToDashboard()
+                SENIOR_PARTICIPATE_MISSION_FINISH -> navigateToDashboard()
+                SENIOR_NOT_PARTICIPATE_RECRUITING -> {/* Button Disable */ }
+                SENIOR_NOT_PARTICIPATE_MISSION_FINISH -> {/* Button Disable */ }
+            }
         }
+    }
+
+    private fun navigateToDashboard() {
+        lgtmNavigator.navigateToDashboard(this, missionDetailViewModel.getMissionId())
+    }
+
+    private fun navigateJuniorMyMission() {
+        // todo Activity 이동
+        Toast.makeText(this, "주니어 미션 확인 화면으로 이동", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun participateToMission() {
+        // todo bottomSheet 로 확인 누르고. 주니어 미션 확인 화면으로 이동
+        Toast.makeText(this, "미션 참여하기 기능", Toast.LENGTH_SHORT).show()
     }
 
 
