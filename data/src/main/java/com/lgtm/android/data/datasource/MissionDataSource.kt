@@ -1,6 +1,7 @@
 package com.lgtm.android.data.datasource
 
 import com.lgtm.android.data.model.response.BaseDTO
+import com.lgtm.android.data.model.response.DashboardDTO
 import com.lgtm.android.data.model.response.MissionDetailDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.service.MissionService
@@ -16,5 +17,9 @@ class MissionDataSource @Inject constructor(
 
     suspend fun getMissionDetail(missionId: Int): BaseDTO<MissionDetailDTO> {
         return checkResponse(missionService.getMissionDetail(missionId = missionId))
+    }
+
+    suspend fun fetchDashboardInfo(missionId: Int): BaseDTO<DashboardDTO> {
+        return checkResponse(missionService.fetchDashboardInfo(missionId = missionId))
     }
 }

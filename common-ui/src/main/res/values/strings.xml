@@ -98,7 +98,7 @@
 
     <!-- 미션 조회 하단 버튼 -->
     <string name="mission_participate">미션 참여하기</string>
-    <string name="reviewer_cannot_participate">리뷰이는 미션에 참여할 수 없어요.</string>
+    <string name="reviewer_cannot_participate">리뷰어는 미션에 참여할 수 없어요.</string>
     <string name="mission_progress_management">미션 진행 상황 관리</string>
     <string name="mission_recruiting_finished">모집이 마감되었습니다</string>
     <string name="report">신고하기</string>
@@ -121,5 +121,21 @@
     <string name="recent_version">최신 버전</string>
     <string name="setting">설정</string>
     <string name="education">학력</string>
+    <string name="participant_list">참가자 목록</string>
+
+    <!-- 미션 대시보드 -->
+    <string name="waiting_for_payment">입금 대기</string>
+    <string name="waiting_for_payment_message">리뷰이가 입금할 예정이에요.</string>
+    <string name="payment_confirmation">입금 확인</string>
+    <string name="payment_confirmation_message">입금을 확인해 주세요.</string>
+    <string name="mission_progress">미션 수행중</string>
+    <string name="mission_progress_message">리뷰이가 미션을 수행하고 있어요.</string>
+    <string name="code_review">미션 리뷰 작성</string>
+    <string name="code_review_message">미션을 리뷰해주세요.</string>
+    <string name="mission_review_finished">미션 리뷰 완료</string>
+    <string name="mission_review_finished_message">미션이 종료되었습니다.</string>
+    <string name="deposit_date">입금 완료일</string>
+    <string name="mission_submit_date">미션 제출일시</string>
+    <string name="review_mission">미션 리뷰하기</string>
 
 </resources>

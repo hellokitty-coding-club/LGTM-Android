@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
-import com.lgtm.android.common_ui.model.MissionDetailUiState
+import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
 import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.entity.response.MissionDetailVO
@@ -20,8 +20,8 @@ class MissionDetailViewModel @Inject constructor(
     private val missionUseCase: MissionUseCase
 ) : BaseViewModel() {
 
-    private val _missionDetailUiState: MutableLiveData<MissionDetailUiState> = MutableLiveData()
-    val missionDetailUiState: LiveData<MissionDetailUiState> = _missionDetailUiState
+    private val _missionDetailUiState: MutableLiveData<MissionDetailUI> = MutableLiveData()
+    val missionDetailUiState: LiveData<MissionDetailUI> = _missionDetailUiState
 
     private val _missionDetailVO = MutableLiveData<MissionDetailVO>()
 
@@ -35,13 +35,15 @@ class MissionDetailViewModel @Inject constructor(
         _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_RECRUITING ||
                 _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_MISSION_FINISH
 
+    fun getMissionDetailStatus(): MissionDetailStatus? = _missionDetailVO.value?.missionDetailStatus
+
     fun getMissionInfoMessage(): String {
         val missionTitle = _missionDetailUiState.value?.missionTitle ?: ""
         val reviewerNickname = _missionDetailUiState.value?.memberProfile?.nickname ?: ""
         return "\uD83C\uDF31LGTM\uD83C\uDF31\n\n\uD83D\uDCC4미션 제목 : $missionTitle\n🧑🏻‍💻리뷰어 : $reviewerNickname"
     }
 
-    fun getMissionUrl() : String? {
+    fun getMissionUrl(): String? {
         return missionDetailUiState.value?.missionRepositoryUrl
     }
 
@@ -68,4 +70,6 @@ class MissionDetailViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getMissionId() = _missionDetailVO.value?.missionId ?: -1
 }

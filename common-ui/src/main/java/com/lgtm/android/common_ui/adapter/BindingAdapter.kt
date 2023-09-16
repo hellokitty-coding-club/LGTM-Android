@@ -2,6 +2,7 @@ package com.lgtm.android.common_ui.adapter
 
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
@@ -35,11 +36,16 @@ fun TextView.setInfoStatusColor(color: Int) {
     setTextColor(ContextCompat.getColor(this.context, color))
 }
 
-@BindingAdapter("setImageResource")
-fun AppCompatImageView.setImageResource(icon: Int) {
+@BindingAdapter("setImageRes")
+fun AppCompatImageView.setImageRes(icon: Int) {
     Glide.with(this.context)
         .load(icon)
         .into(this)
+}
+
+@BindingAdapter("setImageResOnButton")
+fun MaterialButton.setImageResOnButton(@DrawableRes drawableRes: Int) {
+    setIconResource(drawableRes)
 }
 
 @BindingAdapter("setImageUrl")

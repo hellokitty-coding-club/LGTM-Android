@@ -25,7 +25,7 @@ data class MissionDetailDTO(
     @SerializedName("participated")
     val isParticipated: Boolean?,
     @SerializedName("closed")
-    val isRecruiting: Boolean?
+    val isClosed: Boolean?
 ) {
     fun toVO(role: Role?): MissionDetailVO {
         val memberType: Role = Role.getRole(requireNotNull(memberType)) ?: requireNotNull(role)
@@ -48,7 +48,7 @@ data class MissionDetailDTO(
             missionDetailStatus = getMissionDetailStatus(
                 memberType,
                 requireNotNull(isParticipated),
-                requireNotNull(isRecruiting)
+                requireNotNull(isClosed)
             )
         )
     }
