@@ -1,8 +1,8 @@
-package com.lgtm.domain.entity.response
+package com.lgtm.android.common_ui.model
 
 import com.lgtm.domain.constants.ProcessState
 
-data class MemberMissionStatusVO(
+data class MemberMissionStatusUI(
     val githubId: String,
     val githubPrUrl: String,
     val memberId: Int,
