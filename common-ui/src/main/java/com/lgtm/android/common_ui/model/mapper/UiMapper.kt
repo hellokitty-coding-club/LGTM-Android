@@ -3,11 +3,13 @@ package com.lgtm.android.common_ui.model.mapper
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.constant.MissionDetailButtonStatus.Companion.getButtonStatusUI
 import com.lgtm.android.common_ui.constant.MissionStatusUI.Companion.getMissionStatusUI
+import com.lgtm.android.common_ui.constant.ProcessStateUI.Companion.getProcessStateUI
 import com.lgtm.android.common_ui.model.DashboardUI
 import com.lgtm.android.common_ui.model.MemberMissionStatusUI
 import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.ProfileGlanceUI
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.constants.UNKNOWN
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MemberMissionStatusVO
 import com.lgtm.domain.entity.response.MissionDetailVO
@@ -44,7 +46,7 @@ fun ProfileVO.toUiModel(role: Role): ProfileGlanceUI = ProfileGlanceUI(
     detailInfo = when (role) {
         Role.REVIEWER -> "$company / $position"
         Role.REVIEWEE -> educationalHistory
-    } ?: "unknown"
+    } ?: UNKNOWN
 )
 
 fun DashboardVO.toUiModel() = DashboardUI(
@@ -60,7 +62,7 @@ fun MemberMissionStatusVO.toUiModel() = MemberMissionStatusUI(
     nickname = nickname,
     missionFinishedDate = missionFinishedDate,
     paymentDate = paymentDate,
-    processStatus = processStatus,
+    processStatus = getProcessStateUI(processStatus),
     profileImageUrl = profileImageUrl,
     isMissionSubmitted = isMissionSubmitted
 )

@@ -34,19 +34,9 @@ enum class ProcessStateUI(
     );
 
     companion object {
-
-        val processStateList: List<ProcessState> = listOf(
-            ProcessState.WAITING_FOR_PAYMENT,
-            ProcessState.PAYMENT_CONFIRMATION,
-            ProcessState.MISSION_PROCEEDING,
-            ProcessState.CODE_REVIEW,
-            ProcessState.MISSION_FINISHED
-        )
-
-        fun getProcessState(processState: String?): ProcessStateUI {
-            requireNotNull(processState)
+        fun getProcessStateUI(processState: ProcessState): ProcessStateUI {
             values().forEach {
-                if (it.name == processState) return it
+                if (it.name == processState.name) return it
             }
             throw IllegalStateException("ProcessState not found")
         }

@@ -1,6 +1,6 @@
 package com.lgtm.android.common_ui.model
 
-import com.lgtm.domain.constants.ProcessState
+import com.lgtm.android.common_ui.constant.ProcessStateUI
 
 data class MemberMissionStatusUI(
     val githubId: String,
@@ -9,7 +9,7 @@ data class MemberMissionStatusUI(
     val nickname: String,
     val missionFinishedDate: String,
     val paymentDate: String,
-    val processStatus: ProcessState,
+    val processStatus: ProcessStateUI,
     val profileImageUrl: String,
     val isMissionSubmitted : Boolean
 )
