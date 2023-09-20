@@ -24,3 +24,5 @@ subprojects {
         project.apply("$rootDir/gradle/common.gradle")
     }
 }
+apply(from = file("gradle/projectDependencyGraph.gradle"))
+
