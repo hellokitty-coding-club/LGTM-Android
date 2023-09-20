@@ -2,7 +2,7 @@
 
 **'LGTM'은 SW 마에스트로 14기 프로젝트입니다.**
 
-해당 LGTM-Android 레파지토리는 **[@kxxhyorim](https://github.com/KxxHyoRim)** 1인 개발로 이루어지고 있습니다. (팀 구성 = 백엔드 2명, 안드로이드 1명)
+해당 `LGTM-Android` Repository는 **[@kxxhyorim](https://github.com/KxxHyoRim)** 1인 개발로 이루어지고 있습니다. (팀 구성 = 백엔드 2명, 안드로이드 1명)
 
 ![image](https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/4cff9177-ac15-4ddf-9a74-3a0654c8a502)
 
@@ -42,7 +42,7 @@
 
   - 안드로이드 앱은 유저의 앱 업데이트를 강제하기 어려워서 유연한 변경사항 제공이 어렵다.
   - 새로운 기능 & 수정사항을 모두에게 빠르게 반영하지 못한다.
-  - 클라이언트 코드 변경 없이 UI를 조정할 수 있어서 앱 배포 없이 A/B 테스팅을 유연하게 수행할 수 있다.
+  - 클라이언트 코드 변경 없이 UI를 조정가능.
 
 - **개괄적인 방식**
 
