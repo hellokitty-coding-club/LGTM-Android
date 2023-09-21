@@ -59,7 +59,7 @@ jobs:
         run: |
           git config --local user.email 'action@github.com'
           git config --local user.name 'GitHub Action'
-          git pull origin develop
+          git config pull.rebase false
 
       - name: Commit
         run: |
