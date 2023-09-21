@@ -24,8 +24,7 @@
 
 ## ⛏️ Multi Module Architecutre
 
-<img src="gradle/dependency-graph/project.dot" />
-
+<img src="gradle/dependency-graph/project.dot.png" />
 
 
 ## ⛏️ Clean Architecutre
