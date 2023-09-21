@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: LGTM PR Builder & App Distribution
+name: LGTM PR Builder & Generate Dependency Graph & App Distribution
 
 on:
   pull_request:
@@ -35,6 +35,23 @@ jobs:
 
       - name: Change gradlew permissions
         run: chmod +x ./gradlew
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Generate Dependency Graph
+        run: ./gradlew projectDependencyGraph --stacktrace
+
+      - name: Commit
+        run: |
+          git config --local user.email 'action@github.com'
+          git config --local user.name 'GitHub Action'
+          git diff --quiet && git diff --staged --quiet || git commit -am '[DOCS] Update dependency graph'
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB }}
 
       - name: Touch lgtm properties
         run: touch lgtm.properties
