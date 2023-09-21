@@ -55,6 +55,9 @@ jobs:
       - name: Generate Dependency Graph
         run: ./gradlew projectDependencyGraph --stacktrace
 
+      - name : Pull
+        run : git pull origin develop
+
       - name: Commit
         run: |
           git config --local user.email 'action@github.com'
