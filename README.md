@@ -24,7 +24,7 @@
 
 ## ⛏️ Multi Module Architecutre
 
-![project dot](https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/f5e9f83b-8178-4afe-93e7-ad3733cfe9ab)
+<img src="gradle/dependency-graph/project.dot" />
 
 
 
