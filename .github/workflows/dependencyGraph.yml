@@ -117,7 +117,7 @@ jobs:
           SLACK_COLOR: '#ff0000'
           SLACK_ICON: https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/603efae5-02ba-4065-ba7b-ea36bc88acb6
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: '[LGTM] Dependency graph update has failed❌'
+          SLACK_TITLE: '[LGTM] Dependency graph update has failed ❌'
           MSG_MINIMAL: ref,actions url,event,commit
           SLACK_USERNAME: LGTM-Android
           SLACK_MESSAGE: 'The attempt to update the dependency graph has encountered an issue'
