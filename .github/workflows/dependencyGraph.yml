@@ -1,13 +1,9 @@
-name: LGTM PR Builder & App Distribution
+name: Generate Dependency Graph
 
 on:
   pull_request:
-    branches: [ develop, main ]
-
-defaults:
-  run:
-    shell: bash
-    working-directory: .
+    types:
+      - opened
 
 jobs:
   build:
@@ -19,6 +15,7 @@ jobs:
         with :
           persist-credentials: false
           fetch-depth: 0
+
 
       - name: Gradle cache
         uses: actions/cache@v2
@@ -51,20 +48,54 @@ jobs:
           LGTM_BASE_URL_RELEASE: ${{ secrets.LGTM_BASE_URL_RELEASE }}
         run: echo "LGTM_BASE_URL_RELEASE=\"$LGTM_BASE_URL_RELEASE\"" >> lgtm.properties
 
-      - name: Build debug APK
-        run: ./gradlew assembleDebug --stacktrace
-
-      - name: Upload apk to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1
+      - name: Gradle cache
+        uses: actions/cache@v2
         with:
-          appId: ${{ secrets.FIREBASE_APP_ID }}
-          token: ${{ secrets.FIREBASE_TOKEN }}
-          groups: hello-kitty-coding-club
-          file: app/build/outputs/apk/debug/app-debug.apk
-          releaseNotes: |
-            ${{ github.event.pull_request.title }}
-            ${{ github.event.pull_request.html_url }}
-            ${{ github.event.pull_request.body }}
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+
+      - name: Change gradlew permissions
+        run: chmod +x ./gradlew
+
+      - name: Touch lgtm properties
+        run: touch lgtm.properties
+
+      - name: Access LGTM_BASE_URL_DEBUG
+        env:
+          LGTM_BASE_URL_DEBUG: ${{ secrets.LGTM_BASE_URL_DEBUG }}
+        run: echo "LGTM_BASE_URL_DEBUG=\"$LGTM_BASE_URL_DEBUG\"" >> lgtm.properties
+
+      - name: Access LGTM_BASE_URL_RELEASE
+        env:
+          LGTM_BASE_URL_RELEASE: ${{ secrets.LGTM_BASE_URL_RELEASE }}
+        run: echo "LGTM_BASE_URL_RELEASE=\"$LGTM_BASE_URL_RELEASE\"" >> lgtm.properties
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Generate Dependency Graph
+        run: ./gradlew projectDependencyGraph --stacktrace
+
+      - name: Commit
+        run: |
+          git config --local user.email 'action@github.com'
+          git config --local user.name 'GitHub Action'
+          git diff --quiet && git diff --staged --quiet || git commit -am '[DOCS] Update dependency graph'
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN_GITHUB }}
+          branch: ${{ github.ref }}
 
       - name: On Success!! Congratulations
         if: ${{ success() }}
@@ -73,10 +104,10 @@ jobs:
           SLACK_COLOR: '#53A551'
           SLACK_ICON: https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/603efae5-02ba-4065-ba7b-ea36bc88acb6
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: '[LGTM] PR Check SUCCESS ✅'
+          SLACK_TITLE: '[LGTM] Dependency graph is now up to date ✅'
           MSG_MINIMAL: true
           SLACK_USERNAME: LGTM-Android
-          SLACK_MESSAGE: 'Build and App distribution Success🎉🎉🎉'
+          SLACK_MESSAGE: 'Dependency graph has been updated to its latest state'
 
       - name: On Failed, Notify in Slack
         if: ${{ failure() }}
@@ -87,7 +118,7 @@ jobs:
           SLACK_COLOR: '#ff0000'
           SLACK_ICON: https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/603efae5-02ba-4065-ba7b-ea36bc88acb6
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: '[LGTM] Android Build Fail❌'
+          SLACK_TITLE: '[LGTM] Dependency graph update has failed❌'
           MSG_MINIMAL: ref,actions url,event,commit
           SLACK_USERNAME: LGTM-Android
-          SLACK_MESSAGE: '에러를 확인해주세요'
+          SLACK_MESSAGE: 'The attempt to update the dependency graph has encountered an issue'
