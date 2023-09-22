@@ -94,7 +94,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.TOKEN_GITHUB }}
-          branch: ${{ github.ref }}
+          branch: ${{ github.head_ref }}
 
       - name: On Success!! Congratulations
         if: ${{ success() }}
