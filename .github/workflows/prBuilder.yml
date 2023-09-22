@@ -22,6 +22,18 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
+      - name: Get Last Commit Message
+        id: commit_message
+        run: echo "::set-output name=message::$(git log --format=%B -n 1 HEAD)"
+
+      - name: Check Commit Message
+        id: check_message
+        run: |
+          if [[ "${{ steps.commit_message.outputs.message }}" == "[DOCS] Update dependency graph" ]]; then
+            echo "Last commit message is [DOCS] Update dependency graph. Exiting workflow."
+            exit 0
+          fi
+
       - name: Gradle cache
         uses: actions/cache@v2
         with:
@@ -64,12 +76,6 @@ jobs:
           git config --local user.email 'action@github.com'
           git config --local user.name 'GitHub Action'
           git diff --quiet && git diff --staged --quiet || git commit -am '[DOCS] Update dependency graph'
-
-      - name: Pull Latest Changes
-        run: |
-          git config --local user.email 'action@github.com'
-          git config --local user.name 'GitHub Action'
-          git config pull.rebase false
 
       - name: Push
         uses: ad-m/github-push-action@master
