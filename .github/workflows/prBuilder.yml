@@ -81,7 +81,6 @@ jobs:
         run: |
           git config --local user.email 'action@github.com'
           git config --local user.name 'GitHub Action'
-          git config pull.rebase false
 
       - name: Push
         uses: ad-m/github-push-action@master
