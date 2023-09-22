@@ -137,5 +137,10 @@
     <string name="deposit_date">입금 완료일</string>
     <string name="mission_submit_date">미션 제출일시</string>
     <string name="review_mission">미션 리뷰하기</string>
+    <string name="no">아니요</string>
+    <string name="yes">네</string>
+
+    <!-- dialog -->
+    <string name="want_to_logout">로그아웃 하시겠어요?</string>
 
 </resources>

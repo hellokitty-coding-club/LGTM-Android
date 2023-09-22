@@ -9,7 +9,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.lgtm.android.common_ui.R.*
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentMyPageBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -102,10 +104,21 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     private fun setLogoutOnClickListener() {
-        binding.btnLogout.setOnClickListener {
-            myPageViewModel.clearUserData()
-            moveToSignInActivity()
-        }
+        binding.btnLogout.setOnClickListener { showLgtmDialog() }
+    }
+
+    private fun logout() {
+        myPageViewModel.clearUserData()
+        moveToSignInActivity()
+    }
+
+    private fun showLgtmDialog() {
+        val dialog = LgtmConfirmationDialog(
+            title = this.getString(string.want_to_logout),
+            doAfterConfirm = ::logout,
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GRAY
+        )
+        dialog.show(requireActivity().supportFragmentManager, this.javaClass.name)
     }
 
 
