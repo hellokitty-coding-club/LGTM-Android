@@ -1,4 +1,4 @@
-name: Auto Commit and Push on Pull Request
+name: Generate Dependency Graph
 
 on:
   pull_request:

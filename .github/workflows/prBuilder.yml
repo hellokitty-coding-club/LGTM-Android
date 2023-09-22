@@ -1,7 +1,8 @@
-# This is a basic workflow to help you get started with Actions
+name: LGTM PR Builder & App Distribution
 
-name: LGTM PR Builder & Generate Dependency Graph & App Distribution
-
+on:
+  pull_request:
+    branches: [ develop, main ]
 
 defaults:
   run:
