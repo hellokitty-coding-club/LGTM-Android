@@ -16,7 +16,6 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
 
-
       - name: Gradle cache
         uses: actions/cache@v2
         with:
@@ -95,7 +94,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.TOKEN_GITHUB }}
-          branch: ${{ github.ref }}
+          branch: ${{ github.head_ref }}
 
       - name: On Success!! Congratulations
         if: ${{ success() }}
