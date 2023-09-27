@@ -142,5 +142,6 @@
 
     <!-- dialog -->
     <string name="want_to_logout">로그아웃 하시겠어요?</string>
+    <string name="visit_github">Github 방문</string>
 
 </resources>
