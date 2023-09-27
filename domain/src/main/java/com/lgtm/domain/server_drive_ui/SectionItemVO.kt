@@ -2,6 +2,9 @@ package com.lgtm.domain.server_drive_ui
 
 import com.google.gson.annotations.SerializedName
 import com.lgtm.domain.entity.response.TechTagVO
+import com.lgtm.domain.profile.Profile
+import com.lgtm.domain.profile.ProfileViewType
+import com.lgtm.domain.profile.ProfileViewType.*
 
 data class SectionItemVO(
     // 진행 중인 미션, 추천 미션, 전체 미션
@@ -18,5 +21,6 @@ data class SectionItemVO(
     val scrapCount: Int? = null,
     @SerializedName("scraped")
     val isScraped: Boolean? = null,
-) : SduiContent
+    override val viewType: ProfileViewType = SECTION_ITEM_VO
+) : SduiContent, Profile
 
