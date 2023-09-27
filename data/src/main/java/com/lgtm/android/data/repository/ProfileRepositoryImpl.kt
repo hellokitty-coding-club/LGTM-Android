@@ -8,9 +8,11 @@ import javax.inject.Inject
 class ProfileRepositoryImpl @Inject constructor(
     private val profileDataSource: ProfileDataSource
 ) : ProfileRepository {
-    override suspend fun getProfileInfo(): Result<ProfileVO> {
+    override suspend fun getProfileInfo(
+        userId: Int?
+    ): Result<ProfileVO> {
         return try {
-            val response = profileDataSource.getProfile()
+            val response = profileDataSource.getProfile(userId)
             Result.success(response.data.toVO())
         } catch (e: Exception) {
             Result.failure(e)

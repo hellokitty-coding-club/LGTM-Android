@@ -12,9 +12,11 @@ class ProfileUseCase @Inject constructor(
 
     private val role = authRepository.getMemberType()
 
-    suspend fun getProfileInfo(): Result<ProfileVO> {
+    suspend fun fetchProfileInfo(
+        userId : Int? = null
+    ): Result<ProfileVO> {
         return try {
-            return profileRepository.getProfileInfo()
+            return profileRepository.getProfileInfo(userId)
         } catch (e: Exception) {
             Result.failure(e)
         }
