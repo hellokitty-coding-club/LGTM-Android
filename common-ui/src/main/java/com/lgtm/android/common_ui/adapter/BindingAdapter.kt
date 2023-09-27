@@ -57,12 +57,20 @@ fun AppCompatImageView.setImageUrl(url: String?) {
     }
 }
 
+@BindingAdapter("setCircleProfileImageUrl")
+fun AppCompatImageView.setCircleProfileImageUrl(url: String?) {
+    Glide.with(this.context)
+        .load(url)
+        .error(R.drawable.img_profile_empty)
+        .circleCrop()
+        .into(this)
+}
+
 @BindingAdapter("setProfileImageUrl")
 fun AppCompatImageView.setProfileImageUrl(url: String?) {
     Glide.with(this.context)
         .load(url)
         .error(R.drawable.img_profile_empty)
-        .circleCrop()
         .into(this)
 }
 

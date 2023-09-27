@@ -35,6 +35,7 @@ class ProfileUseCase @Inject constructor(
                     position = response?.position,
                     company = response?.company,
                     careerPeriod = response?.careerPeriod,
+                    memberType = requireNotNull(response?.memberType)
                 ),
                 ThickDivider(),
                 ProfileTitleText("사용 스택"),

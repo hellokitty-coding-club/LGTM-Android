@@ -20,7 +20,13 @@ class ProfileViewModel @Inject constructor(
     private val _profileInfo = MutableLiveData<List<Profile>>()
     val profileInfo: LiveData<List<Profile>> = _profileInfo
 
-    fun fetchProfileInfo(userId: Int) {
+    private var userId: Int = -1
+
+    fun setUserId(userId: Int) {
+        this.userId = userId
+    }
+
+    fun fetchProfileInfo() {
         viewModelScope.launch(lgtmErrorHandler) {
             profileUseCase.fetchProfileInfo(userId)
                 .onSuccess {
