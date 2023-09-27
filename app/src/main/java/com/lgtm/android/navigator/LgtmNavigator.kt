@@ -8,6 +8,7 @@ import com.lgtm.android.create_mission.CreateMissionActivity
 import com.lgtm.android.main.MainActivity
 import com.lgtm.android.manage_mission.DashboardActivity
 import com.lgtm.android.mission_detail.MissionDetailActivity
+import com.lgtm.android.profile.ProfileActivity
 import javax.inject.Inject
 
 class LgtmNavigator @Inject constructor(
@@ -41,4 +42,10 @@ class LgtmNavigator @Inject constructor(
         context.startActivity(intent)
     }
 
+    override fun navigateToProfile(context: Context, userId: Int) {
+        val intent = Intent(context, ProfileActivity::class.java).apply {
+            putExtra(ProfileActivity.EXTRA_USER_ID, userId)
+        }
+        context.startActivity(intent)
+    }
 }

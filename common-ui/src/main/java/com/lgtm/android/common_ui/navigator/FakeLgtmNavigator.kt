@@ -12,4 +12,6 @@ interface FakeLgtmNavigator {
     fun navigateToMissionDetail(context: Context, missionId: Int)
 
     fun navigateToDashboard(context: Context, missionId: Int)
+
+    fun navigateToProfile(context: Context, userId: Int)
 }
