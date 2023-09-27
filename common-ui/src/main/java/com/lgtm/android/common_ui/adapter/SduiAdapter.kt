@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.lgtm.android.common_ui.util.ItemDiffCallback
 import com.lgtm.android.common_ui.viewholder.SduiBaseHolder
 import com.lgtm.android.common_ui.viewholder.SduiItemViewHolder
-import com.lgtm.android.common_ui.viewholder.getViewHolder
+import com.lgtm.android.common_ui.viewholder.getSduiViewHolder
 import com.lgtm.domain.entity.response.SduiItemVO
 import com.lgtm.domain.server_drive_ui.SduiViewType
 
@@ -18,7 +18,7 @@ class SduiAdapter(
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SduiBaseHolder {
-        val viewHolder = getViewHolder(parent, SduiViewType.getViewTypeByOrdinal(viewType))
+        val viewHolder = getSduiViewHolder(parent, SduiViewType.getViewTypeByOrdinal(viewType))
         if (viewType == SduiViewType.ITEM.ordinal)
             return viewHolder.apply {
                 (viewHolder as SduiItemViewHolder).setNavigateToMissionDetail(onMissionClickListener)
