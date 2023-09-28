@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.profile.Profile
+import com.lgtm.domain.profile.ProfileGlance
 import com.lgtm.domain.usecase.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -36,5 +37,10 @@ class ProfileViewModel @Inject constructor(
                     Log.e(TAG, "fetchProfileInfo: $it")
                 }
         }
+    }
+
+    fun getGithubProfileUrl(): String {
+        val gitId = (profileInfo.value?.get(1) as ProfileGlance).githubId
+        return "https://github.com/$gitId"
     }
 }

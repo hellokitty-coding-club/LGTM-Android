@@ -31,6 +31,7 @@
             tools:text="이름" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_github"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

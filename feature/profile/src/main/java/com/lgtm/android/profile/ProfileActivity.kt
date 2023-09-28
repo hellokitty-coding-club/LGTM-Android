@@ -1,5 +1,7 @@
 package com.lgtm.android.profile
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.base.BaseActivity
@@ -41,12 +43,18 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     }
 
     private fun initAdapter() {
-        profileAdapter = ProfileAdapter(::moveToMissionDetail)
+        profileAdapter = ProfileAdapter(::moveToMissionDetail, ::openGithubProfile)
         binding.rvProfile.adapter = profileAdapter
     }
 
     private fun moveToMissionDetail(missionId: Int) {
         lgtmNavigator.navigateToMissionDetail(this, missionId)
+    }
+
+    private fun openGithubProfile(){
+        val url = profileViewModel.getGithubProfileUrl()
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     private fun submitDataWhenDataChanged() {

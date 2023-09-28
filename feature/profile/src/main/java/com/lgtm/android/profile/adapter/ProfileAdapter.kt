@@ -4,26 +4,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.lgtm.android.common_ui.util.ItemDiffCallback
 import com.lgtm.android.common_ui.viewholder.ProfileBaseHolder
+import com.lgtm.android.common_ui.viewholder.ProfileGlanceViewHolder
 import com.lgtm.android.common_ui.viewholder.ProfileMissionViewHolder
 import com.lgtm.android.common_ui.viewholder.getProfileViewHolder
 import com.lgtm.domain.profile.Profile
 import com.lgtm.domain.profile.ProfileViewType
+import com.lgtm.domain.profile.ProfileViewType.PROFILE_GLANCE
+import com.lgtm.domain.profile.ProfileViewType.SECTION_ITEM_VO
 
 
 class ProfileAdapter(
-    private val onMissionClickListener: (Int) -> Unit
+    private val onMissionClickListener: (Int) -> Unit,
+    private val onGithubClickListener: () -> Unit
 ) : ListAdapter<Profile, ProfileBaseHolder>(
-    ItemDiffCallback<Profile>(onContentsTheSame = { old, new -> old == new },
+    ItemDiffCallback<Profile>(
+        onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old == new })
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileBaseHolder {
         val viewHolder =
             getProfileViewHolder(parent, ProfileViewType.getViewTypeByOrdinal(viewType))
-        if (viewType == ProfileViewType.SECTION_ITEM_VO.ordinal)
-            (viewHolder as? ProfileMissionViewHolder)?.setNavigateToMissionDetail(
-                onMissionClickListener
-            )
+        when (viewType) {
+            PROFILE_GLANCE.ordinal ->
+                (viewHolder as? ProfileGlanceViewHolder)?.setOnClickGithubButton(onGithubClickListener)
+            SECTION_ITEM_VO.ordinal ->
+                (viewHolder as? ProfileMissionViewHolder)?.setNavigateToMissionDetail(onMissionClickListener)
+        }
         return viewHolder
     }
 
