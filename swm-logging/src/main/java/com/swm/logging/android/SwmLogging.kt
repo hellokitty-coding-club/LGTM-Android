@@ -26,8 +26,8 @@ object SwmLogging {
     }
 
     private fun checkInitialized() {
-        if (::loggingService.isInitialized.not()) {
-            throw IllegalStateException("SwmLogging needs to be initialized on your Application class")
+        check(::baseUrl.isInitialized) {
+            "The 'baseUrl' property must be initialized. Initialize it by calling the 'init' method on the SwmLogging instance within your Application class."
         }
     }
 
