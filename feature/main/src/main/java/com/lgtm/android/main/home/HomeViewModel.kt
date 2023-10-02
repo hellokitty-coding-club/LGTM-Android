@@ -10,7 +10,6 @@ import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.SduiItemVO
 import com.lgtm.domain.logging.HomeScreenExposureLogging
 import com.lgtm.domain.repository.AuthRepository
-import com.lgtm.domain.server_drive_ui.SectionTitleVO
 import com.lgtm.domain.usecase.MissionUseCase
 import com.swm.logging.android.SwmLogging
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,10 +40,14 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun shotHomeExposureLogging() {
-        val builder = HomeScreenExposureLogging.Builder()
-        val vo = _sduiList.value?.get(0)?.content as SectionTitleVO
-        builder.setTitle(vo.title)
-        SwmLogging.shotExposureLogging(builder.build())
+
+    private suspend fun shotHomeExposureLogging() {
+        val logging = HomeScreenExposureLogging.Builder()
+            .setAge("3")
+            .setTitleName("HomeCard")
+            .build()
+        Log.d(TAG, "shotHomeExposureLogging: $logging")
+        val response = SwmLogging.shotExposureLogging(logging)
+        Log.d(TAG, "shotHomeExposureLogging: $response")
     }
 }

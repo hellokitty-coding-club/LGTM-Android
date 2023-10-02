@@ -8,15 +8,14 @@ interface LoggingService {
 
     @POST("v1/log")
     suspend fun postExposureLogging(
-        @Body exposureLogging: ExposureLogging
-    ): Response<BaseDTO<Data>>
+        @Body exposureLogging: SwmLoggingScheme
+    ): Response<BaseDTO>
 }
 
-data class BaseDTO<T>(
+data class BaseDTO(
     val success: Boolean,
     val responseCode: Int,
     val message: String,
-    val `data`: T
+    val data: String
 )
 
-data class Data(val string: String)
