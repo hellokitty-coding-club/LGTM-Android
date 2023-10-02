@@ -12,10 +12,3 @@ interface LoggingService {
     ): Response<BaseDTO>
 }
 
-data class BaseDTO(
-    val success: Boolean,
-    val responseCode: Int,
-    val message: String,
-    val data: String
-)
-
