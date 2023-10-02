@@ -12,6 +12,7 @@ import com.lgtm.domain.logging.HomeScreenExposureLogging
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.usecase.MissionUseCase
 import com.swm.logging.android.SwmLogging
+import com.swm.logging.android.logging_scheme.ExposureLogging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,7 +34,6 @@ class HomeViewModel @Inject constructor(
             useCase.getHomeMission()
                 .onSuccess {
                     _sduiList.postValue(it.contents)
-                    shotHomeExposureLogging()
                 }.onFailure {
                     Log.e(TAG, "getHomeInfo: ${it.message}")
                 }
@@ -41,13 +41,17 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    private suspend fun shotHomeExposureLogging() {
-        val logging = HomeScreenExposureLogging.Builder()
+    fun shotHomeExposureLogging() {
+        viewModelScope.launch {
+            val scheme = getHomeExposureLoggingScheme()
+            SwmLogging.shotExposureLogging(scheme)
+        }
+    }
+
+    private fun getHomeExposureLoggingScheme(): ExposureLogging {
+        return HomeScreenExposureLogging.Builder()
             .setAge("3")
             .setTitleName("HomeCard")
             .build()
-        Log.d(TAG, "shotHomeExposureLogging: $logging")
-        val response = SwmLogging.shotExposureLogging(logging)
-        Log.d(TAG, "shotHomeExposureLogging: $response")
     }
 }
