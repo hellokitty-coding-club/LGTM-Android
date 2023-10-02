@@ -1,6 +1,7 @@
 package com.swm.logging.android
 
 import com.google.gson.GsonBuilder
+import com.swm.logging.android.logging_scheme.ExposureLogging
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,11 +13,12 @@ import java.util.concurrent.TimeUnit
 object SwmLogging {
 
     private const val AUTHORIZATION = "Authorization"
-
     private lateinit var appVersion: String
     private lateinit var osName: String
     private lateinit var baseUrl: String
     private lateinit var accessToken: String
+    private lateinit var loggingRetrofit: Retrofit
+    private lateinit var loggingService: LoggingService
 
     private val interceptor: Interceptor =
         Interceptor { chain ->
@@ -38,24 +40,6 @@ object SwmLogging {
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }).build()
-
-
-    lateinit var loggingRetrofit: Retrofit
-
-    lateinit var loggingService: LoggingService
-
-    //    var endpoint by Delegates.notNull<String>()
-//    var header by Delegates.notNull<MutableMap<String, String>>()
-//    var requestBody by Delegates´.notNull<MutableMap<String, Any>>()
-//    fun setEndpoint(url: String) {
-//        endpoint = url
-//    }
-//
-//    // 1. Initial Time
-//    fun setMandatoryFields(header: Map<String, String>?) {
-//        header?.forEach { this.header[it.key] = it.value }
-//    }
-
 
     lateinit var test: ExposureLogging
 
@@ -94,24 +78,3 @@ object SwmLogging {
 }
 
 
-abstract class ExposureLogging : SwmLoggingScheme()
-
-abstract class ClickLogging : SwmLoggingScheme()
-
-abstract class SwmLoggingScheme {
-    open lateinit var eventLogName: String
-    open lateinit var screenName: String
-    open var logVersion: Int = 0
-    private var logData: MutableMap<String, Any>? = mutableMapOf()
-    fun setLoggingScheme(
-        evenLogName: String,
-        screenName: String,
-        logVersion: Int,
-        logData: MutableMap<String, Any>?
-    ) {
-        this.eventLogName = evenLogName
-        this.screenName = screenName
-        this.logVersion = logVersion
-        this.logData = logData
-    }
-}

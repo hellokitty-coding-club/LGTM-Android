@@ -1,6 +1,6 @@
 package com.lgtm.domain.logging
 
-import com.swm.logging.android.ExposureLogging
+import com.swm.logging.android.logging_scheme.ExposureLogging
 
 class HomeScreenExposureLogging(
     titleName: String,
