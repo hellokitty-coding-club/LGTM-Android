@@ -17,64 +17,57 @@ object SwmLogging {
     private lateinit var osName: String
     private lateinit var baseUrl: String
     private lateinit var accessToken: String
-    private lateinit var loggingRetrofit: Retrofit
     private lateinit var loggingService: LoggingService
 
-    private val interceptor: Interceptor =
-        Interceptor { chain ->
-            with(chain) {
-                proceed(
-                    request()
-                        .newBuilder()
-                        .addHeader(AUTHORIZATION, accessToken)
-                        .build()
-                )
-            }
-        }
-
-    private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(15, TimeUnit.SECONDS)
-        .writeTimeout(20, TimeUnit.SECONDS)
-        .readTimeout(15, TimeUnit.SECONDS)
-        .addInterceptor(interceptor)
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }).build()
-
-    lateinit var test: ExposureLogging
 
     suspend fun shotExposureLogging(exposureLogging: ExposureLogging): Response<BaseDTO> {
-        test = exposureLogging
-        //check(exposureLogging.getFieldSetStatus()) {"필수 로깅 필드가 누락되었습니다."}
-        val loggingField = exposureLogging
-        return loggingService.postExposureLogging(loggingField)
+        checkInitialized()
+        return loggingService.postExposureLogging(exposureLogging)
     }
 
+    private fun checkInitialized() {
+        if (::loggingService.isInitialized.not()) {
+            throw IllegalStateException("SwmLogging needs to be initialized on your Application class")
+        }
+    }
 
     fun init(appVersion: String, osName: String, endpoint: String, token: String) {
         this.appVersion = appVersion
         this.osName = osName
         this.baseUrl = endpoint
         this.accessToken = token
-        setRetrofit()
         setLoggingService()
     }
 
-    private fun setRetrofit() {
-        this.loggingRetrofit = Retrofit.Builder()
+    private val okHttpClient: OkHttpClient by lazy {
+        OkHttpClient.Builder()
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(interceptor)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }).build()
+    }
+
+    private val interceptor: Interceptor =
+        Interceptor { chain ->
+            with(chain) {
+                proceed(
+                    request().newBuilder().addHeader(AUTHORIZATION, accessToken).build()
+                )
+            }
+        }
+
+    private val loggingRetrofit: Retrofit by lazy {
+        Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addConverterFactory(
-                GsonConverterFactory.create(
-                    GsonBuilder()
-                        .create()
-                )
-            ).build()
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+            .build()
     }
 
     private fun setLoggingService() {
         this.loggingService = loggingRetrofit.create(LoggingService::class.java)
     }
 }
-
-
