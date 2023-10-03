@@ -17,7 +17,8 @@ class LGTMApplication : Application() {
         SwmLogging.init(
             appVersion = BuildConfig.VERSION_NAME,
             osName = ANDROID,
-            endpoint = if (BuildConfig.DEBUG) BuildConfig.LGTM_BASE_URL_DEBUG else BuildConfig.LGTM_BASE_URL_RELEASE,
+            baseUrl = if (BuildConfig.DEBUG) BuildConfig.LGTM_BASE_URL_DEBUG else BuildConfig.LGTM_BASE_URL_RELEASE,
+            endpoint = "v1/log",
             token = getAuthToken()
         )
     }

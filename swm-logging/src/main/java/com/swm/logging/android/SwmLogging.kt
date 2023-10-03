@@ -8,7 +8,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.URLEncoder
 import java.util.concurrent.TimeUnit
+
 
 object SwmLogging {
 
@@ -16,13 +18,14 @@ object SwmLogging {
     private lateinit var appVersion: String
     private lateinit var osName: String
     private lateinit var baseUrl: String
+    private lateinit var endpoint: String
     private lateinit var accessToken: String
     private lateinit var loggingService: LoggingService
 
 
     suspend fun shotExposureLogging(exposureLogging: ExposureLogging): Response<BaseDTO> {
         checkInitialized()
-        return loggingService.postExposureLogging(exposureLogging)
+        return loggingService.postExposureLogging(endpoint, exposureLogging)
     }
 
     private fun checkInitialized() {
@@ -31,10 +34,12 @@ object SwmLogging {
         }
     }
 
-    fun init(appVersion: String, osName: String, endpoint: String, token: String) {
+    fun init(appVersion: String, osName: String, baseUrl: String, endpoint: String, token: String) {
         this.appVersion = appVersion
         this.osName = osName
-        this.baseUrl = endpoint
+        this.baseUrl = baseUrl
+        val encodedUrl = URLEncoder.encode(endpoint, "UTF-8")
+        this.endpoint = encodedUrl
         this.accessToken = token
         setLoggingService()
     }
