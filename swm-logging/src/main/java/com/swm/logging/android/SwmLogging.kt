@@ -22,26 +22,6 @@ object SwmLogging {
     private lateinit var loggingService: LoggingService
 
 
-    suspend fun shotExposureLogging(exposureLogging: ExposureLogging): Response<BaseDTO> {
-        checkInitialized()
-        return loggingService.postExposureLogging(endpoint, exposureLogging)
-    }
-
-    private fun checkInitialized() {
-        check(::baseUrl.isInitialized) {
-            "The 'baseUrl' property must be initialized. Initialize it by calling the 'init' method on the SwmLogging instance within your Application class."
-        }
-    }
-
-    fun init(appVersion: String, osName: String, baseUrl: String, endpoint: String, token: String) {
-        this.appVersion = appVersion
-        this.osName = osName
-        this.baseUrl = baseUrl
-        this.endpoint = endpoint
-        this.accessToken = token
-        setLoggingService()
-    }
-
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -68,6 +48,27 @@ object SwmLogging {
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
+    }
+
+
+    suspend fun shotExposureLogging(exposureLogging: ExposureLogging): Response<BaseDTO> {
+        checkInitialized()
+        return loggingService.postExposureLogging(endpoint, exposureLogging)
+    }
+
+    private fun checkInitialized() {
+        check(::baseUrl.isInitialized) {
+            "The 'baseUrl' property must be initialized. Initialize it by calling the 'init' method on the SwmLogging instance within your Application class."
+        }
+    }
+
+    fun init(appVersion: String, osName: String, baseUrl: String, endpoint: String, token: String) {
+        this.appVersion = appVersion
+        this.osName = osName
+        this.baseUrl = baseUrl
+        this.endpoint = endpoint
+        this.accessToken = token
+        setLoggingService()
     }
 
     private fun setLoggingService() {
