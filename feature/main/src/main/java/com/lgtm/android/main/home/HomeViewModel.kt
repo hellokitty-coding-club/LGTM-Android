@@ -8,11 +8,11 @@ import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.SduiItemVO
-import com.lgtm.domain.logging.HomeScreenExposureLogging
+import com.lgtm.domain.logging.HomeScreenExposureScheme
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.usecase.MissionUseCase
-import com.swm.logging.android.SwmLogging
-import com.swm.logging.android.logging_scheme.ExposureLogging
+import com.swm.logging.android.SWMLogging
+import com.swm.logging.android.logging_scheme.ExposureScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -44,12 +44,12 @@ class HomeViewModel @Inject constructor(
     fun shotHomeExposureLogging() {
         viewModelScope.launch {
             val scheme = getHomeExposureLoggingScheme()
-            SwmLogging.shotExposureLogging(scheme)
+            SWMLogging.shotExposureLogging(scheme)
         }
     }
 
-    private fun getHomeExposureLoggingScheme(): ExposureLogging {
-        return HomeScreenExposureLogging.Builder()
+    private fun getHomeExposureLoggingScheme(): ExposureScheme {
+        return HomeScreenExposureScheme.Builder()
             .setAge("3")
             .setTitleName("HomeCard")
             .build()

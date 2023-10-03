@@ -2,7 +2,7 @@ package com.lgtm.android
 
 import android.app.Application
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
-import com.swm.logging.android.SwmLogging
+import com.swm.logging.android.SWMLogging
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -14,11 +14,11 @@ class LGTMApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        SwmLogging.init(
+        SWMLogging.init(
             appVersion = BuildConfig.VERSION_NAME,
-            osName = ANDROID,
+            osNameAndVersion = "$ANDROID ${android.os.Build.VERSION.SDK_INT}",
             baseUrl = if (BuildConfig.DEBUG) BuildConfig.LGTM_BASE_URL_DEBUG else BuildConfig.LGTM_BASE_URL_RELEASE,
-            endpoint = "v1/log",
+            serverPath = "v1/log",
             token = getAuthToken()
         )
     }

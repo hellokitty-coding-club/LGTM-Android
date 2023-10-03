@@ -1,11 +1,11 @@
 package com.lgtm.domain.logging
 
-import com.swm.logging.android.logging_scheme.ExposureLogging
+import com.swm.logging.android.logging_scheme.ExposureScheme
 
-class HomeScreenExposureLogging(
+class HomeScreenExposureScheme(
     titleName: String,
     age: String
-) : ExposureLogging() {
+) : ExposureScheme() {
 
     init {
         setLoggingScheme(
@@ -32,8 +32,8 @@ class HomeScreenExposureLogging(
             return this
         }
 
-        fun build(): HomeScreenExposureLogging {
-            return HomeScreenExposureLogging(
+        fun build(): HomeScreenExposureScheme {
+            return HomeScreenExposureScheme(
                 titleName, age
             )
         }
