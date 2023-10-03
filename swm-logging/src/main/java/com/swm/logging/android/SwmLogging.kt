@@ -8,7 +8,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URLEncoder
 import java.util.concurrent.TimeUnit
 
 
@@ -38,8 +37,7 @@ object SwmLogging {
         this.appVersion = appVersion
         this.osName = osName
         this.baseUrl = baseUrl
-        val encodedUrl = URLEncoder.encode(endpoint, "UTF-8")
-        this.endpoint = encodedUrl
+        this.endpoint = endpoint
         this.accessToken = token
         setLoggingService()
     }

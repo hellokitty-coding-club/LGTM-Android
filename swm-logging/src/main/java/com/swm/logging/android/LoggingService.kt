@@ -10,7 +10,7 @@ interface LoggingService {
 
     @POST("{loggingEndpoint}")
     suspend fun postExposureLogging(
-        @Path("loggingEndpoint") loggingEndpoint: String,
+        @Path("loggingEndpoint", encoded = true) loggingEndpoint: String,
         @Body exposureLogging: SwmLoggingScheme
     ): Response<BaseDTO>
 }
