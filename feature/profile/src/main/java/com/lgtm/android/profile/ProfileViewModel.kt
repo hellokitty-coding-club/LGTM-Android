@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.profile.Profile
-import com.lgtm.domain.profile.ProfileGlance
-import com.lgtm.domain.profile.ProfileImage
+import com.lgtm.domain.profile.profileViewType.ProfileGlance
+import com.lgtm.domain.profile.profileViewType.ProfileImage
 import com.lgtm.domain.usecase.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

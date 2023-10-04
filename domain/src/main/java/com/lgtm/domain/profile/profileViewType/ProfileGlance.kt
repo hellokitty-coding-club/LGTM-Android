@@ -1,6 +1,8 @@
-package com.lgtm.domain.profile
+package com.lgtm.domain.profile.profileViewType
 
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.profile.Profile
+import com.lgtm.domain.profile.ProfileViewType
 
 data class ProfileGlance(
     // Presentation Layer에서 ProfileGlanceUI 로 매핑
@@ -15,6 +17,6 @@ data class ProfileGlance(
     val company: String?,
     val careerPeriod: Int?,
     val name: String? = "서버 정보 없음",
-    val memberType : Role,
+    val memberType: Role,
     override val viewType: ProfileViewType = ProfileViewType.PROFILE_GLANCE
 ) : Profile

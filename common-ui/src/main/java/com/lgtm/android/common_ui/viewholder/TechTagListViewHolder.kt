@@ -5,7 +5,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.databinding.ItemTechTagListBinding
 import com.lgtm.domain.profile.Profile
-import com.lgtm.domain.profile.TechTagList
+import com.lgtm.domain.profile.profileViewType.TechTagList
 
 class TechTagListViewHolder(
     private val binding: ItemTechTagListBinding

@@ -2,7 +2,7 @@ package com.lgtm.android.common_ui.viewholder
 
 import com.lgtm.android.common_ui.databinding.ItemProfileImageBinding
 import com.lgtm.domain.profile.Profile
-import com.lgtm.domain.profile.ProfileImage
+import com.lgtm.domain.profile.profileViewType.ProfileImage
 
 class BigProfileViewHolder(
     private val binding: ItemProfileImageBinding

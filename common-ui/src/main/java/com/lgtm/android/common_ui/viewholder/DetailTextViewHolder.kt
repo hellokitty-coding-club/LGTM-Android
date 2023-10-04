@@ -3,7 +3,7 @@ package com.lgtm.android.common_ui.viewholder
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.databinding.ItemDetailTextBinding
 import com.lgtm.domain.profile.Profile
-import com.lgtm.domain.profile.ProfileDetailText
+import com.lgtm.domain.profile.profileViewType.ProfileDetailText
 
 class DetailTextViewHolder(
     private val binding: ItemDetailTextBinding

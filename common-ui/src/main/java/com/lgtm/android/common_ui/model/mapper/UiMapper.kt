@@ -14,7 +14,7 @@ import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MemberMissionStatusVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.ProfileVO
-import com.lgtm.domain.profile.ProfileGlance
+import com.lgtm.domain.profile.profileViewType.ProfileGlance
 
 fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,

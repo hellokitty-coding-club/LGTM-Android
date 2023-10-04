@@ -3,14 +3,14 @@ package com.lgtm.domain.usecase
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.ProfileVO
 import com.lgtm.domain.profile.Profile
-import com.lgtm.domain.profile.ProfileDetailText
-import com.lgtm.domain.profile.ProfileGlance
-import com.lgtm.domain.profile.ProfileImage
-import com.lgtm.domain.profile.ProfileTitleText
 import com.lgtm.domain.profile.ProfileTitleTextType
-import com.lgtm.domain.profile.TechTagList
-import com.lgtm.domain.profile.ThickDivider
-import com.lgtm.domain.profile.ThinDivider
+import com.lgtm.domain.profile.profileViewType.ProfileDetailText
+import com.lgtm.domain.profile.profileViewType.ProfileGlance
+import com.lgtm.domain.profile.profileViewType.ProfileImage
+import com.lgtm.domain.profile.profileViewType.ProfileTitleText
+import com.lgtm.domain.profile.profileViewType.TechTagList
+import com.lgtm.domain.profile.profileViewType.ThickDivider
+import com.lgtm.domain.profile.profileViewType.ThinDivider
 import com.lgtm.domain.repository.ProfileRepository
 import javax.inject.Inject
 

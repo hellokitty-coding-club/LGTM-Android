@@ -3,7 +3,7 @@ package com.lgtm.android.common_ui.viewholder
 import com.lgtm.android.common_ui.constant.ProfileTitleTextTypeUI
 import com.lgtm.android.common_ui.databinding.ItemTitleTextBinding
 import com.lgtm.domain.profile.Profile
-import com.lgtm.domain.profile.ProfileTitleText
+import com.lgtm.domain.profile.profileViewType.ProfileTitleText
 
 class TitleTextViewHolder(
     private val binding: ItemTitleTextBinding
