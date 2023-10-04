@@ -17,10 +17,15 @@ import javax.inject.Inject
 class ProfileUseCase @Inject constructor(
     private val profileRepository: ProfileRepository,
 ) {
+
+    private lateinit var role: Role
+
     suspend fun fetchProfileInfo(userId: Int? = null): Result<List<Profile>> {
         return try {
             val response = profileRepository.getProfileInfo(userId).getOrNull()
                 ?: return Result.failure(Exception("response is null"))
+
+            role = response.memberType ?: throw IllegalStateException("memberType is null")
 
             val profileList = when (response.memberType) {
                 Role.REVIEWEE -> getRevieweeProfile(response)
@@ -70,5 +75,12 @@ class ProfileUseCase @Inject constructor(
             ProfileTitleText(ProfileTitleTextType.CONDUCTED_MISSION),
             *response.memberMissionHistory?.toTypedArray() ?: arrayOf()
         )
+    }
+
+    fun getFirstMissionIdx(): Int {
+        return when (role) {
+            Role.REVIEWEE -> 10
+            Role.REVIEWER -> 13
+        }
     }
 }

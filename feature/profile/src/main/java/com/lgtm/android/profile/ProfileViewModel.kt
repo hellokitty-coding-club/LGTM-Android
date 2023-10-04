@@ -31,6 +31,10 @@ class ProfileViewModel @Inject constructor(
         this.userId = userId
     }
 
+    fun getFirstMissionIdx(): Int {
+        return profileUseCase.getFirstMissionIdx()
+    }
+
     fun fetchProfileInfo() {
         viewModelScope.launch(lgtmErrorHandler) {
             profileUseCase.fetchProfileInfo(userId)

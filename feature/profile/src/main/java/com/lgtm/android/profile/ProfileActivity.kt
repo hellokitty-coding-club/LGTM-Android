@@ -5,10 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.ItemDecorationUtil
 import com.lgtm.android.profile.adapter.ProfileAdapter
 import com.lgtm.android.profile.databinding.ActivityProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 
@@ -16,7 +16,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     private val profileViewModel by viewModels<ProfileViewModel>()
     private lateinit var profileAdapter: ProfileAdapter
     private var memberId: Int? = null
-
     override fun initializeViewModel() {
         viewModel = profileViewModel
     }
@@ -62,6 +61,26 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     private fun submitDataWhenDataChanged() {
         profileViewModel.profileInfo.observe(this) {
             profileAdapter.submitList(it)
+            // add Item Decoration
+            addItemDecoration()
+            //             addItemDecoration(
+            //                ItemDecorationUtil.BottomItemDecoration(
+            //                    padding = com.lgtm.android.common_ui.R.dimen.base_guideline,
+            //                    index = profileViewModel.getFirstMissionIdx()
+            //                )
+            //            )
+        }
+    }
+
+    private fun addItemDecoration(){
+        binding.rvProfile.adapter.let {
+            if (it != null) {
+                val itemDecoration = ItemDecorationUtil.BottomItemDecoration(
+                    padding = com.lgtm.android.common_ui.R.dimen.base_guideline,
+                    index = profileViewModel.getFirstMissionIdx()
+                )
+                binding.rvProfile.addItemDecoration(itemDecoration)
+            }
         }
     }
 
