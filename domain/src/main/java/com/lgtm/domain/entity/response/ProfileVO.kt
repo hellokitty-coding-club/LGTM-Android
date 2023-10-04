@@ -4,6 +4,7 @@ import com.lgtm.domain.constants.Role
 import com.lgtm.domain.server_drive_ui.SectionItemVO
 
 data class ProfileVO(
+    val isMyProfile : Boolean,
     val agreeWithEventInfo: Boolean?,
     val githubId: String,
     val introduction: String,

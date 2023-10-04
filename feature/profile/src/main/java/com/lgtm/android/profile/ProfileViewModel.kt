@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.profile.Profile
 import com.lgtm.domain.profile.ProfileGlance
+import com.lgtm.domain.profile.ProfileImage
 import com.lgtm.domain.usecase.ProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,6 +22,9 @@ class ProfileViewModel @Inject constructor(
     private val _profileInfo = MutableLiveData<List<Profile>>()
     val profileInfo: LiveData<List<Profile>> = _profileInfo
 
+    private val _isMyProfile = MutableLiveData<Boolean>()
+    val isMyProfile: LiveData<Boolean> = _isMyProfile
+
     private var userId: Int? = null
 
     fun setUserId(userId: Int?) {
@@ -32,7 +36,7 @@ class ProfileViewModel @Inject constructor(
             profileUseCase.fetchProfileInfo(userId)
                 .onSuccess {
                     _profileInfo.postValue(it)
-                    //_isMyProfile
+                    _isMyProfile.postValue((it[0] as ProfileImage).isMyProfile)
                     Log.d(TAG, "fetchProfileInfo: $it")
                 }.onFailure {
                     Log.e(TAG, "fetchProfileInfo: $it")

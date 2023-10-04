@@ -34,7 +34,7 @@ class ProfileUseCase @Inject constructor(
     }
 
     private fun commonProfileList(response: ProfileVO) = listOf(
-        ProfileImage(response.profileImageUrl),
+        ProfileImage(response.profileImageUrl, response.isMyProfile),
         ProfileGlance(
             memberId = response.memberId,
             profileImage = response.profileImageUrl,
