@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="22dp"
-            android:text="@{data.name}"
+            android:text="@{data.nickname}"
             android:textAppearance="@style/Heading3B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,53 +49,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_nickname_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/nickname"
-            android:textAppearance="@style/Body3R"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_name" />
-
-        <View
-            android:id="@+id/view_divider_nickname"
-            android:layout_width="1dp"
-            android:layout_height="13dp"
-            android:layout_marginStart="7dp"
-            android:background="@color/gray_3"
-            app:layout_constraintBottom_toBottomOf="@id/tv_nickname_title"
-            app:layout_constraintStart_toEndOf="@id/tv_nickname_title"
-            app:layout_constraintTop_toTopOf="@id/tv_nickname_title" />
-
-        <TextView
-            android:id="@+id/tv_nickname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="20dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@{data.nickname}"
-            android:textAppearance="@style/Body3M"
-            app:layout_constraintBottom_toBottomOf="@id/tv_nickname_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/view_divider_nickname"
-            app:layout_constraintTop_toTopOf="@id/tv_nickname_title"
-            tools:text="군침이싹도는루피군침이싹도는루피군침이싹도는루피군침이싹도는루피" />
 
         <TextView
             android:id="@+id/tv_github_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="27dp"
             android:text="@string/github_kr"
             android:textAppearance="@style/Body3R"
-            app:layout_constraintStart_toStartOf="@id/tv_nickname_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_nickname_title" />
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
         <View
             android:id="@+id/view_divider_github"

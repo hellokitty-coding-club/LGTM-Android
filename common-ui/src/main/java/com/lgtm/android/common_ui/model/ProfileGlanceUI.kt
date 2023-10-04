@@ -12,6 +12,5 @@ data class ProfileGlanceUI(
     val githubId: String,
     @StringRes val detailInfoLabel: Int,
     val detailInfo: String,
-    val name: String? = "서버 정보 없음",
     override val viewType: ProfileViewType = ProfileViewType.PROFILE_GLANCE
 ) : Profile
