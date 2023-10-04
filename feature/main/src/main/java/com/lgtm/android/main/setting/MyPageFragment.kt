@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.lgtm.android.common_ui.R.*
+import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.main.R
@@ -37,6 +37,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         setCsCenterOnClickListener()
         setVersionInfoOnClickListener()
         fetchProfileData()
+        setOnProfileClickListener()
     }
 
     override fun onResume() {
@@ -162,4 +163,15 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         clipboard.setPrimaryClip(clip)
         Toast.makeText(requireContext(), "메일 주소가 복사되었습니다", Toast.LENGTH_SHORT).show()
     }
+
+    private fun setOnProfileClickListener() {
+        binding.clProfileGlance.setOnClickListener {
+            navigateToProfile()
+        }
+    }
+
+    private fun navigateToProfile() {
+        lgtmNavigator.navigateToProfile(requireContext())
+    }
+
 }

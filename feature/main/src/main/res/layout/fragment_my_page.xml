@@ -57,6 +57,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tv_my_profile" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_profile_glance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"

@@ -15,7 +15,7 @@ import kotlin.properties.Delegates
 class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_profile) {
     private val profileViewModel by viewModels<ProfileViewModel>()
     private lateinit var profileAdapter: ProfileAdapter
-    private var memberId by Delegates.notNull<Int>()
+    private var memberId: Int? = null
 
     override fun initializeViewModel() {
         viewModel = profileViewModel
@@ -35,12 +35,14 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     }
 
     private fun getExtraData() {
-        memberId = intent.getIntExtra(EXTRA_USER_ID, -1)
+        memberId = intent.getIntExtra(EXTRA_USER_ID, NO_USER_ID)
     }
 
     private fun setUserId() {
-        profileViewModel.setUserId(memberId)
+        if (isUserIdAvailable()) profileViewModel.setUserId(memberId)
     }
+
+    private fun isUserIdAvailable() = (memberId != NO_USER_ID)
 
     private fun initAdapter() {
         profileAdapter = ProfileAdapter(::moveToMissionDetail, ::openGithubProfile)
@@ -51,7 +53,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
         lgtmNavigator.navigateToMissionDetail(this, missionId)
     }
 
-    private fun openGithubProfile(){
+    private fun openGithubProfile() {
         val url = profileViewModel.getGithubProfileUrl()
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
@@ -66,5 +68,6 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
 
     companion object {
         const val EXTRA_USER_ID = "EXTRA_USER_ID"
+        const val NO_USER_ID = -1
     }
 }

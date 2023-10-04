@@ -21,9 +21,9 @@ class ProfileViewModel @Inject constructor(
     private val _profileInfo = MutableLiveData<List<Profile>>()
     val profileInfo: LiveData<List<Profile>> = _profileInfo
 
-    private var userId: Int = -1
+    private var userId: Int? = null
 
-    fun setUserId(userId: Int) {
+    fun setUserId(userId: Int?) {
         this.userId = userId
     }
 

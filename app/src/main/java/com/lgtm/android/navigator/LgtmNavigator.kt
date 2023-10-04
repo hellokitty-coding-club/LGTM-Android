@@ -42,7 +42,7 @@ class LgtmNavigator @Inject constructor(
         context.startActivity(intent)
     }
 
-    override fun navigateToProfile(context: Context, userId: Int) {
+    override fun navigateToProfile(context: Context, userId: Int?) {
         val intent = Intent(context, ProfileActivity::class.java).apply {
             putExtra(ProfileActivity.EXTRA_USER_ID, userId)
         }
