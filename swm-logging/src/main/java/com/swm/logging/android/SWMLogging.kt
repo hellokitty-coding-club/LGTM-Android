@@ -1,6 +1,7 @@
 package com.swm.logging.android
 
 import com.google.gson.GsonBuilder
+import com.swm.logging.android.logging_scheme.ClickScheme
 import com.swm.logging.android.logging_scheme.ExposureScheme
 import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import io.reactivex.rxjava3.core.Observer
@@ -47,6 +48,9 @@ object SWMLogging {
         }
     }
 
+    private var lastLoggedScheme: MutableMap<String, Any>? = null
+
+
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -78,8 +82,18 @@ object SWMLogging {
 
     suspend fun shotExposureLogging(exposureLogging: ExposureScheme): Response<BaseDTO> {
         observable.onNext(exposureLogging)
+        lastLoggedScheme = exposureLogging.getLogData()
+
         checkInitialized()
         return loggingService.postLogging(serverPath, exposureLogging)
+    }
+
+    suspend fun shotClickLogging(clickLogging: ClickScheme): Response<BaseDTO> {
+        observable.onNext(clickLogging)
+        lastLoggedScheme = clickLogging.getLogData()
+
+        checkInitialized()
+        return loggingService.postLogging(serverPath, clickLogging)
     }
 
     private fun checkInitialized() {
@@ -102,7 +116,8 @@ object SWMLogging {
         this.accessToken = token
         this.uuid = UUID.randomUUID()
         setLoggingService()
-        observable.throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(observer)
+        observable.subscribe(observer)
+
     }
 
     private fun setLoggingService() {
@@ -112,5 +127,4 @@ object SWMLogging {
     fun getOsNameAndVersion(): String {
         return OSNameAndVersion
     }
-
 }

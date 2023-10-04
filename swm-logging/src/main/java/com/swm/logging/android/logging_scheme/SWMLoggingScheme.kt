@@ -19,4 +19,8 @@ abstract class SWMLoggingScheme {
         this.logVersion = logVersion
         this.logData = logData
     }
+
+    fun getLogData(): MutableMap<String, Any>? {
+        return logData
+    }
 }
