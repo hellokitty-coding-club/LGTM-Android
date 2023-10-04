@@ -65,7 +65,7 @@ class ProfileUseCase @Inject constructor(
     private fun getReviewerProfile(response: ProfileVO): List<Profile> {
         return commonProfileList(response) + listOf(
             ProfileTitleText(ProfileTitleTextType.CAREER),
-            ProfileDetailText(response.careerPeriod.toString()),
+            ProfileDetailText(response.careerPeriod.toString(), isCareer = true),
             ThinDivider(),
             ProfileTitleText(ProfileTitleTextType.CONDUCTED_MISSION),
             *response.memberMissionHistory?.toTypedArray() ?: arrayOf()
