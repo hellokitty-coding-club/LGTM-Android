@@ -2,6 +2,10 @@ package com.swm.logging.android
 
 import com.google.gson.GsonBuilder
 import com.swm.logging.android.logging_scheme.ExposureScheme
+import com.swm.logging.android.logging_scheme.SWMLoggingScheme
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.subjects.PublishSubject
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -23,7 +27,25 @@ object SWMLogging {
     private lateinit var accessToken: String
     private lateinit var uuid: UUID
     private lateinit var loggingService: LoggingService
+    private val observable = PublishSubject.create<SWMLoggingScheme>() // 발행
+    private val observer = object : Observer<SWMLoggingScheme> { // 구독
+        override fun onSubscribe(d: Disposable) {
+            println("Rx: 구독 시작")
+        }
 
+        override fun onNext(value: SWMLoggingScheme) {
+            // 각 아이템을 받을 때 호출됩니다.
+            println("Rx: 아이템 받음: ${value.eventLogName}")
+        }
+
+        override fun onError(e: Throwable) {
+            println("Rx: 에러 발생: ${e.message}")
+        }
+
+        override fun onComplete() {
+            println("Rx: 스트림 완료")
+        }
+    }
 
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
@@ -55,6 +77,7 @@ object SWMLogging {
 
 
     suspend fun shotExposureLogging(exposureLogging: ExposureScheme): Response<BaseDTO> {
+        observable.onNext(exposureLogging)
         checkInitialized()
         return loggingService.postLogging(serverPath, exposureLogging)
     }
@@ -65,7 +88,13 @@ object SWMLogging {
         }
     }
 
-    fun init(appVersion: String, osNameAndVersion: String, baseUrl: String, serverPath: String, token: String) {
+    fun init(
+        appVersion: String,
+        osNameAndVersion: String,
+        baseUrl: String,
+        serverPath: String,
+        token: String
+    ) {
         this.appVersion = appVersion
         this.OSNameAndVersion = osNameAndVersion
         this.baseUrl = baseUrl
@@ -73,6 +102,7 @@ object SWMLogging {
         this.accessToken = token
         this.uuid = UUID.randomUUID()
         setLoggingService()
+        observable.throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(observer)
     }
 
     private fun setLoggingService() {
