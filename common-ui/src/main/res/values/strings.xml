@@ -143,5 +143,10 @@
     <!-- dialog -->
     <string name="want_to_logout">로그아웃 하시겠어요?</string>
     <string name="visit_github">Github 방문</string>
+    <string name="using_stack">사용 스택</string>
+    <string name="simple_introduction">한 줄 소개</string>
+    <string name="career">경력</string>
+    <string name="conducted_mission">진행한 미션</string>
+    <string name="participated_mission">참여한 미션</string>
 
 </resources>

@@ -1,6 +1,6 @@
 package com.lgtm.domain.profile
 
 data class ProfileTitleText(
-    val title: String,
+    val profileTitleTextType: ProfileTitleTextType,
     override val viewType: ProfileViewType = ProfileViewType.TITLE_TEXT
 ) : Profile

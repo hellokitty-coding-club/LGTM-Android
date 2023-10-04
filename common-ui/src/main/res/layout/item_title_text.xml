@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="data"
-            type="String" />
+            name="stringRes"
+            type="Integer" />
 
     </data>
 
@@ -17,11 +17,11 @@
         android:background="@color/white">
 
         <TextView
+            setTextRes="@{stringRes}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:text="@{data}"
             android:textAppearance="@style/Body1B"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="사용 스택" />

@@ -32,6 +32,7 @@ class ProfileViewModel @Inject constructor(
             profileUseCase.fetchProfileInfo(userId)
                 .onSuccess {
                     _profileInfo.postValue(it)
+                    //_isMyProfile
                     Log.d(TAG, "fetchProfileInfo: $it")
                 }.onFailure {
                     Log.e(TAG, "fetchProfileInfo: $it")
