@@ -23,9 +23,12 @@ class ProfileViewModel @Inject constructor(
     val profileInfo: LiveData<List<Profile>> = _profileInfo
 
     private val _isMyProfile = MutableLiveData<Boolean>()
-    val isMyProfile: LiveData<Boolean> = _isMyProfile
 
     private var userId: Int? = null
+
+    fun isMyProfile(): Boolean {
+        return _isMyProfile.value ?: false
+    }
 
     fun setUserId(userId: Int?) {
         this.userId = userId

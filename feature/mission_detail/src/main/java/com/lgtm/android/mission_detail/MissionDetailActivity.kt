@@ -166,7 +166,7 @@ class MissionDetailActivity :
                 true
             }
 
-            id.edit_mission -> {
+            id.edit_profile -> {
                 Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
                 true
             }
