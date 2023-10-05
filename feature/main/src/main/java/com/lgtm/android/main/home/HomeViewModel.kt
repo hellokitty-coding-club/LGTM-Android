@@ -44,17 +44,13 @@ class HomeViewModel @Inject constructor(
 
 
     fun shotHomeExposureLogging() {
-        viewModelScope.launch {
-            val scheme = getHomeExposureLoggingScheme()
-            SWMLogging.shotExposureLogging(scheme)
-        }
+        val scheme = getHomeExposureLoggingScheme()
+        SWMLogging.logEvent(scheme)
     }
 
     fun shotHomeNotificationClickLogging() {
-        viewModelScope.launch {
-            val scheme = getHomeClickLoggingScheme()
-            SWMLogging.shotClickLogging(scheme)
-        }
+        val scheme = getHomeClickLoggingScheme()
+        SWMLogging.logEvent(scheme)
     }
 
     private fun getHomeClickLoggingScheme(): ClickScheme {

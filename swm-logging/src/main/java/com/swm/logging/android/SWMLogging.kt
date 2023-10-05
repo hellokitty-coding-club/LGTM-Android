@@ -1,12 +1,12 @@
 package com.swm.logging.android
 
 import com.google.gson.GsonBuilder
-import com.swm.logging.android.logging_scheme.ClickScheme
-import com.swm.logging.android.logging_scheme.ExposureScheme
 import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.subjects.PublishSubject
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -35,8 +35,11 @@ object SWMLogging {
         }
 
         override fun onNext(value: SWMLoggingScheme) {
-            // 각 아이템을 받을 때 호출됩니다.
             println("Rx: 아이템 받음: ${value.eventLogName}")
+            runBlocking {
+                val result = async { shotLogging(value) }
+                println("Rx: 로깅 결과: ${result.await()}")
+            }
         }
 
         override fun onError(e: Throwable) {
@@ -47,9 +50,6 @@ object SWMLogging {
             println("Rx: 스트림 완료")
         }
     }
-
-    private var lastLoggedScheme: MutableMap<String, Any>? = null
-
 
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
@@ -79,21 +79,13 @@ object SWMLogging {
             .build()
     }
 
-
-    suspend fun shotExposureLogging(exposureLogging: ExposureScheme): Response<BaseDTO> {
-        observable.onNext(exposureLogging)
-        lastLoggedScheme = exposureLogging.getLogData()
-
-        checkInitialized()
-        return loggingService.postLogging(serverPath, exposureLogging)
+    fun logEvent(swmLoggingScheme: SWMLoggingScheme) {
+        observable.onNext(swmLoggingScheme)
     }
 
-    suspend fun shotClickLogging(clickLogging: ClickScheme): Response<BaseDTO> {
-        observable.onNext(clickLogging)
-        lastLoggedScheme = clickLogging.getLogData()
-
+    suspend fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Response<BaseDTO> {
         checkInitialized()
-        return loggingService.postLogging(serverPath, clickLogging)
+        return loggingService.postLogging(serverPath, swmLoggingScheme)
     }
 
     private fun checkInitialized() {
@@ -116,8 +108,7 @@ object SWMLogging {
         this.accessToken = token
         this.uuid = UUID.randomUUID()
         setLoggingService()
-        observable.subscribe(observer)
-
+        observable.throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(observer)
     }
 
     private fun setLoggingService() {
