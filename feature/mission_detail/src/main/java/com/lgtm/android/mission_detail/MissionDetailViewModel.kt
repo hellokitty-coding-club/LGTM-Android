@@ -47,6 +47,10 @@ class MissionDetailViewModel @Inject constructor(
         return missionDetailUiState.value?.missionRepositoryUrl
     }
 
+    fun getReviewerId(): Int? {
+        return missionDetailUiState.value?.memberProfile?.memberId
+    }
+
     fun setRecommendToEmptyVisibility() {
         _recommendToEmptyVisibility.postValue(
             _missionDetailUiState.value?.recommendTo?.isBlank() ?: true

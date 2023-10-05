@@ -19,7 +19,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_profile_image"
-            setProfileImageUrl="@{data.profileImageUrl}"
+            setCircleProfileImageUrl="@{data.profileImageUrl}"
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_marginStart="20dp"

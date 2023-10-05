@@ -12,7 +12,7 @@ import com.lgtm.android.common_ui.databinding.ItemSduiTitleBinding
 import com.lgtm.android.common_ui.databinding.ItemSduiUnknownBinding
 import com.lgtm.domain.server_drive_ui.SduiViewType
 
-fun getViewHolder(parent: ViewGroup, viewType: SduiViewType): SduiBaseHolder {
+fun getSduiViewHolder(parent: ViewGroup, viewType: SduiViewType): SduiBaseHolder {
 
     val layout = getLayoutByViewType(viewType)
     val binding: ViewDataBinding = DataBindingUtil.inflate(
@@ -36,5 +36,4 @@ private fun getLayoutByViewType(viewType: SduiViewType): Int {
         SduiViewType.EMPTY -> R.layout.item_sdui_empty
         SduiViewType.UNKNOWN -> R.layout.item_sdui_unknown
     }
-
 }

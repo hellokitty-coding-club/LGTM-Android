@@ -9,7 +9,7 @@ class ProfileDataSource @Inject constructor(
     private val profileService: ProfileService
 ) : BaseNetworkDataSource() {
 
-    suspend fun getProfile(): BaseDTO<ProfileDTO> {
-        return checkResponse(profileService.getProfile())
+    suspend fun getProfile(userId : Int?): BaseDTO<ProfileDTO> {
+        return checkResponse(profileService.getProfile(userId))
     }
 }

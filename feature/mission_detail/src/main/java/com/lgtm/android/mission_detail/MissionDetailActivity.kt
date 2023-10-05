@@ -51,6 +51,7 @@ class MissionDetailActivity :
         setMenuButtonClickListener()
         setOnClickBottomButton()
         setOnMissionUrlClickListener()
+        setOnProfileClickListener()
         observeMissionDetailUiState()
         initAdapter()
         setRecyclerViewLayoutManager()
@@ -88,6 +89,12 @@ class MissionDetailActivity :
 
     private fun getExtraData() {
         missionId = intent.getIntExtra(MISSION_ID, defaultValue)
+    }
+
+    private fun setOnProfileClickListener() {
+        binding.clReviewerInfo.setOnClickListener {
+            navigateToProfile()
+        }
     }
 
     private fun setBackButtonClickListener() {
@@ -159,7 +166,7 @@ class MissionDetailActivity :
                 true
             }
 
-            id.edit_mission -> {
+            id.edit_profile -> {
                 Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
                 true
             }
@@ -185,12 +192,17 @@ class MissionDetailActivity :
             when (missionDetailStatus) {
                 JUNIOR_PARTICIPATE_RECRUITING -> navigateJuniorMyMission()
                 JUNIOR_PARTICIPATE_MISSION_FINISH -> navigateJuniorMyMission()
-                JUNIOR_NOT_PARTICIPATE_RECRUITING -> participateToMission()
-                JUNIOR_NOT_PARTICIPATE_MISSION_FINISH -> {/* Button Disable */ }
+                JUNIOR_NOT_PARTICIPATE_RECRUITING -> participateMission()
+                JUNIOR_NOT_PARTICIPATE_MISSION_FINISH -> {/* Button Disable */
+                }
+
                 SENIOR_PARTICIPATE_RECRUITING -> navigateToDashboard()
                 SENIOR_PARTICIPATE_MISSION_FINISH -> navigateToDashboard()
-                SENIOR_NOT_PARTICIPATE_RECRUITING -> {/* Button Disable */ }
-                SENIOR_NOT_PARTICIPATE_MISSION_FINISH -> {/* Button Disable */ }
+                SENIOR_NOT_PARTICIPATE_RECRUITING -> {/* Button Disable */
+                }
+
+                SENIOR_NOT_PARTICIPATE_MISSION_FINISH -> {/* Button Disable */
+                }
             }
         }
     }
@@ -199,12 +211,17 @@ class MissionDetailActivity :
         lgtmNavigator.navigateToDashboard(this, missionDetailViewModel.getMissionId())
     }
 
+    private fun navigateToProfile() {
+        val userId = missionDetailViewModel.getReviewerId() ?: return
+        lgtmNavigator.navigateToProfile(this, userId)
+    }
+
     private fun navigateJuniorMyMission() {
         // todo Activity 이동
         Toast.makeText(this, "주니어 미션 확인 화면으로 이동", Toast.LENGTH_SHORT).show()
     }
 
-    private fun participateToMission() {
+    private fun participateMission() {
         // todo bottomSheet 로 확인 누르고. 주니어 미션 확인 화면으로 이동
         Toast.makeText(this, "미션 참여하기 기능", Toast.LENGTH_SHORT).show()
     }

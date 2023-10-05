@@ -1,6 +1,8 @@
 package com.lgtm.android.common_ui.model
 
 import androidx.annotation.StringRes
+import com.lgtm.domain.profile.Profile
+import com.lgtm.domain.profile.ProfileViewType
 
 
 data class ProfileGlanceUI(
@@ -10,4 +12,5 @@ data class ProfileGlanceUI(
     val githubId: String,
     @StringRes val detailInfoLabel: Int,
     val detailInfo: String,
-)
+    override val viewType: ProfileViewType = ProfileViewType.PROFILE_GLANCE
+) : Profile
