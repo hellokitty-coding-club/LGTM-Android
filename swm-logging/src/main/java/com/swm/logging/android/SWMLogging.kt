@@ -3,10 +3,10 @@ package com.swm.logging.android
 import com.google.gson.GsonBuilder
 import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,10 +36,7 @@ object SWMLogging {
 
         override fun onNext(value: SWMLoggingScheme) {
             println("Rx: 아이템 받음: ${value.eventLogName}")
-            runBlocking {
-                val result = async { shotLogging(value) }
-                println("Rx: 로깅 결과: ${result.await()}")
-            }
+            shotLogging(value)
         }
 
         override fun onError(e: Throwable) {
@@ -83,9 +80,10 @@ object SWMLogging {
         observable.onNext(swmLoggingScheme)
     }
 
-    suspend fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Response<BaseDTO> {
+    private fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Single<Response<BaseDTO>> {
         checkInitialized()
-        return loggingService.postLogging(serverPath, swmLoggingScheme)
+        return Single.fromCallable { loggingService.postLogging(serverPath, swmLoggingScheme) }
+            .subscribeOn(Schedulers.io())
     }
 
     private fun checkInitialized() {
