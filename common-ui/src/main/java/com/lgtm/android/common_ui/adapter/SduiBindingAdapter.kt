@@ -17,10 +17,13 @@ fun View.setTitleLayerBackground(theme: SduiTheme) {
 
 
 @BindingAdapter("setItemLayerBackground")
-fun View.setItemLayerBackground(theme: SduiTheme) {
+fun View.setItemLayerBackground(theme: SduiTheme?) {
+    /** HomeFragment SDUI에서는 SduiTheme으로 배경 Drawable을 설정하는 반면,
+     * ProfileActivity에서는 Stroke가 없는 흰 배경을 기본으로 한다 */
     when (theme) {
         SduiTheme.WHITE -> setBackgroundResource(com.lgtm.android.common_ui.R.drawable.rectangle_white_stroke_1_gray_2_side)
         SduiTheme.GRAY -> setBackgroundResource(com.lgtm.android.common_ui.R.drawable.rectangle_gray_2_stroke_1_gray_3_side)
+        else -> setBackgroundColor(ContextCompat.getColor(this.context, com.lgtm.android.common_ui.R.color.white))
     }
 }
 
