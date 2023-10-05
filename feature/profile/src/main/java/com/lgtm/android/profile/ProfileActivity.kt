@@ -61,27 +61,16 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     private fun submitDataWhenDataChanged() {
         profileViewModel.profileInfo.observe(this) {
             profileAdapter.submitList(it)
-            // add Item Decoration
             addItemDecoration()
-            //             addItemDecoration(
-            //                ItemDecorationUtil.BottomItemDecoration(
-            //                    padding = com.lgtm.android.common_ui.R.dimen.base_guideline,
-            //                    index = profileViewModel.getFirstMissionIdx()
-            //                )
-            //            )
         }
     }
 
     private fun addItemDecoration(){
-        binding.rvProfile.adapter.let {
-            if (it != null) {
-                val itemDecoration = ItemDecorationUtil.BottomItemDecoration(
-                    padding = com.lgtm.android.common_ui.R.dimen.base_guideline,
-                    index = profileViewModel.getFirstMissionIdx()
-                )
-                binding.rvProfile.addItemDecoration(itemDecoration)
-            }
-        }
+        val itemDecoration = ItemDecorationUtil.BottomItemDecoration(
+            padding = com.lgtm.android.common_ui.R.dimen.profile_first_mission_top_margin,
+            index = profileViewModel.getFirstMissionIdx()
+        )
+        binding.rvProfile.addItemDecoration(itemDecoration)
     }
 
 
