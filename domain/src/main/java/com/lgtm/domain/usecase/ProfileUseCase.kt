@@ -19,6 +19,7 @@ class ProfileUseCase @Inject constructor(
 ) {
 
     private lateinit var role: Role
+    // todo : 참여한 미션 없을경우 Empty View 처리
 
     suspend fun fetchProfileInfo(userId: Int? = null): Result<List<Profile>> {
         return try {
