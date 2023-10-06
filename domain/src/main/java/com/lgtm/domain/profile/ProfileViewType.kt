@@ -8,7 +8,8 @@ enum class ProfileViewType {
     TECH_TAG_LIST,
     THIN_DIVIDER,
     DETAIL_TEXT,
-    SECTION_ITEM_VO;
+    SECTION_ITEM_VO,
+    MISSION_EMPTY;
 
     companion object {
         fun getViewTypeByOrdinal(ordinalNum: Int): ProfileViewType {

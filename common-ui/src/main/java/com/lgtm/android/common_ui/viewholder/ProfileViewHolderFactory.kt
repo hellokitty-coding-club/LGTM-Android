@@ -8,6 +8,7 @@ import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.databinding.ItemDetailTextBinding
 import com.lgtm.android.common_ui.databinding.ItemProfileGlanceBinding
 import com.lgtm.android.common_ui.databinding.ItemProfileImageBinding
+import com.lgtm.android.common_ui.databinding.ItemProfileMissionHistoryEmptyBinding
 import com.lgtm.android.common_ui.databinding.ItemSduiItemBinding
 import com.lgtm.android.common_ui.databinding.ItemTechTagListBinding
 import com.lgtm.android.common_ui.databinding.ItemThickDividerBinding
@@ -31,6 +32,7 @@ fun getProfileViewHolder(parent: ViewGroup, viewType: ProfileViewType): ProfileB
         ProfileViewType.THIN_DIVIDER -> ThinDividerViewHolder(binding as ItemThinDividerBinding)
         ProfileViewType.DETAIL_TEXT -> DetailTextViewHolder(binding as ItemDetailTextBinding)
         ProfileViewType.SECTION_ITEM_VO -> ProfileMissionViewHolder(binding as ItemSduiItemBinding)
+        ProfileViewType.MISSION_EMPTY -> ProfileMissionEmptyViewHolder(binding as ItemProfileMissionHistoryEmptyBinding)
     }
 }
 
@@ -44,6 +46,7 @@ private fun getLayoutByViewType(viewType: ProfileViewType): Int {
         ProfileViewType.THIN_DIVIDER -> R.layout.item_thin_divider
         ProfileViewType.DETAIL_TEXT -> R.layout.item_detail_text
         ProfileViewType.SECTION_ITEM_VO -> R.layout.item_sdui_item
+        ProfileViewType.MISSION_EMPTY -> R.layout.item_profile_mission_history_empty
     }
 
 }

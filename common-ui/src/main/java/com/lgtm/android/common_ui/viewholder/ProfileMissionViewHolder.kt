@@ -17,11 +17,4 @@ class ProfileMissionViewHolder(
         binding.data = data as SectionItemVO
         binding.clMission.setOnClickListener { navigateToMissionDetail(data.missionId) }
     }
-
-    fun setPaddingTop() {
-        val paddingInDp = 4
-        val scale: Float = binding.root.resources.displayMetrics.density
-        val paddingInPx = (paddingInDp * scale + 0.5f).toInt()
-        binding.root.setPadding(0, paddingInPx, 0, 0)
-    }
 }

@@ -151,6 +151,7 @@
     <string name="conducted_mission">진행한 미션</string>
     <string name="participated_mission">참여한 미션</string>
     <string name="year">년</string>
+    <string name="mission_empty">미션이 없습니다.</string>
 
 
 </resources>

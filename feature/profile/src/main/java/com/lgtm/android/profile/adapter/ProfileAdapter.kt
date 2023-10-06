@@ -36,16 +36,10 @@ class ProfileAdapter(
 
     override fun onBindViewHolder(holder: ProfileBaseHolder, position: Int) {
         holder.bind(getItem(position))
-        if (position == FIRST_MISSION_IDX)
-            (holder as? ProfileMissionViewHolder)?.setPaddingTop()
     }
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).viewType.ordinal
-    }
-
-    companion object {
-        const val FIRST_MISSION_IDX = 10
     }
 }
 

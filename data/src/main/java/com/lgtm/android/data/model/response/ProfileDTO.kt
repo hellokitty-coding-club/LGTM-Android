@@ -27,7 +27,7 @@ data class ProfileDTO(
             githubId = githubId ?: "unknown",
             introduction = introduction ?: "",
             memberId = memberId ?: 0,
-            memberMissionHistory = memberMissionHistory?.map { it.toVO() },
+            memberMissionHistory = if (memberMissionHistory?.isNotEmpty() == true) memberMissionHistory.map { it.toVO() } else null,
             memberType = Role.getRole(memberType),
             nickname = nickname ?: "",
             profileImageUrl = profileImageUrl ?: "",

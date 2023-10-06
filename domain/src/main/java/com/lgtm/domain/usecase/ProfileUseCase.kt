@@ -7,6 +7,7 @@ import com.lgtm.domain.profile.ProfileTitleTextType
 import com.lgtm.domain.profile.profileViewType.ProfileDetailText
 import com.lgtm.domain.profile.profileViewType.ProfileGlance
 import com.lgtm.domain.profile.profileViewType.ProfileImage
+import com.lgtm.domain.profile.profileViewType.ProfileMissionEmpty
 import com.lgtm.domain.profile.profileViewType.ProfileTitleText
 import com.lgtm.domain.profile.profileViewType.TechTagList
 import com.lgtm.domain.profile.profileViewType.ThickDivider
@@ -19,7 +20,6 @@ class ProfileUseCase @Inject constructor(
 ) {
 
     private lateinit var role: Role
-    // todo : 참여한 미션 없을경우 Empty View 처리
 
     suspend fun fetchProfileInfo(userId: Int? = null): Result<List<Profile>> {
         return try {
@@ -31,7 +31,6 @@ class ProfileUseCase @Inject constructor(
             val profileList = when (response.memberType) {
                 Role.REVIEWEE -> getRevieweeProfile(response)
                 Role.REVIEWER -> getReviewerProfile(response)
-                else -> throw IllegalStateException("memberType is null")
             }
             Result.success(profileList)
         } catch (e: Exception) {
@@ -64,18 +63,21 @@ class ProfileUseCase @Inject constructor(
     private fun getRevieweeProfile(response: ProfileVO): List<Profile> {
         return commonProfileList(response) + listOf(
             ProfileTitleText(ProfileTitleTextType.PARTICIPATED_MISSION),
-            *response.memberMissionHistory?.toTypedArray() ?: arrayOf()
+            *response.memberMissionHistory?.toTypedArray() ?: addEmptyView(),
         )
     }
-
     private fun getReviewerProfile(response: ProfileVO): List<Profile> {
         return commonProfileList(response) + listOf(
             ProfileTitleText(ProfileTitleTextType.CAREER),
             ProfileDetailText(response.careerPeriod.toString(), isCareer = true),
             ThinDivider(),
             ProfileTitleText(ProfileTitleTextType.CONDUCTED_MISSION),
-            *response.memberMissionHistory?.toTypedArray() ?: arrayOf()
+            *response.memberMissionHistory?.toTypedArray() ?: addEmptyView(),
         )
+    }
+
+    private fun addEmptyView(): Array<Profile> {
+        return arrayOf(ProfileMissionEmpty())
     }
 
     fun getFirstMissionIdx(): Int {
