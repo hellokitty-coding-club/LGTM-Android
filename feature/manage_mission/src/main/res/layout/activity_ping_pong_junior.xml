@@ -85,5 +85,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/LGTMButtonLightWhiteTheme"
+            android:layout_width="match_parent"
+            android:text="@{viewModel.pingPongJuniorVO.buttonTitle}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="입금 완료 알리기" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
