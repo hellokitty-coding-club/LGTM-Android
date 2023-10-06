@@ -22,4 +22,8 @@ class MissionDataSource @Inject constructor(
     suspend fun fetchDashboardInfo(missionId: Int): BaseDTO<DashboardDTO> {
         return checkResponse(missionService.fetchDashboardInfo(missionId = missionId))
     }
+
+    suspend fun participateMission(missionId: Int): BaseDTO<Boolean> {
+        return checkResponse(missionService.participateMission(missionId = missionId))
+    }
 }

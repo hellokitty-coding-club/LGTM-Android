@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.lgtm.android.manage_mission.DashboardViewModel" />
+            type="com.lgtm.android.manage_mission.dashboard.DashboardViewModel" />
 
     </data>
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_3"
-        tools:context=".DashboardActivity">
+        tools:context=".dashboard.DashboardActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"

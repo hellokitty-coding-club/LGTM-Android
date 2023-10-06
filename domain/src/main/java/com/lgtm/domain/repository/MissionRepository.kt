@@ -13,4 +13,5 @@ interface MissionRepository {
     suspend fun createMission(postMissionRequestDTO: PostMissionRequestDTO): Result<PostMissionResponseVO>
     suspend fun getMissionDetail(missionId: Int): Result<MissionDetailVO>
     suspend fun fetchDashboardInfo(missionId: Int): Result<DashboardVO>
+    suspend fun participateMission(missionId: Int): Result<Boolean>
 }

@@ -16,6 +16,8 @@ import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
+import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.getDrawableCompat
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
 import com.lgtm.domain.constants.MissionDetailStatus
@@ -55,6 +57,7 @@ class MissionDetailActivity :
         observeMissionDetailUiState()
         initAdapter()
         setRecyclerViewLayoutManager()
+        observeParticipateMissionUiState()
     }
 
     override fun onResume() {
@@ -192,7 +195,7 @@ class MissionDetailActivity :
             when (missionDetailStatus) {
                 JUNIOR_PARTICIPATE_RECRUITING -> navigateJuniorMyMission()
                 JUNIOR_PARTICIPATE_MISSION_FINISH -> navigateJuniorMyMission()
-                JUNIOR_NOT_PARTICIPATE_RECRUITING -> participateMission()
+                JUNIOR_NOT_PARTICIPATE_RECRUITING -> showCheckParticipatingDialog()
                 JUNIOR_NOT_PARTICIPATE_MISSION_FINISH -> {/* Button Disable */
                 }
 
@@ -217,13 +220,40 @@ class MissionDetailActivity :
     }
 
     private fun navigateJuniorMyMission() {
-        // todo Activity 이동
-        Toast.makeText(this, "주니어 미션 확인 화면으로 이동", Toast.LENGTH_SHORT).show()
+        val missionId = missionDetailViewModel.getMissionId()
+        lgtmNavigator.navigateToPingPongJunior(this, missionId)
+    }
+
+    private fun showCheckParticipatingDialog() {
+        val dialog = LgtmConfirmationDialog(
+            title = getString(string.do_you_want_to_participate_mission),
+            description = getString(string.cannot_cancle_after_participate_mission),
+            doAfterConfirm = ::participateMission,
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GREEN
+        )
+        dialog.show(supportFragmentManager, this.javaClass.name)
     }
 
     private fun participateMission() {
-        // todo bottomSheet 로 확인 누르고. 주니어 미션 확인 화면으로 이동
-        Toast.makeText(this, "미션 참여하기 기능", Toast.LENGTH_SHORT).show()
+        missionDetailViewModel.participateMission()
+    }
+
+    private fun observeParticipateMissionUiState() {
+        missionDetailViewModel.participateMissionUiState.observe(this) {
+            when (it) {
+                is NetworkState.Init -> {
+                    // no-op
+                }
+
+                is NetworkState.Success -> {
+                    navigateJuniorMyMission()
+                }
+
+                is NetworkState.Failure -> {
+                    Toast.makeText(this, "${it.msg}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 
