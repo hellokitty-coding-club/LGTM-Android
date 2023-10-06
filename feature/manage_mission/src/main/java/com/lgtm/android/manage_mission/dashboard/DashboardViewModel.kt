@@ -1,4 +1,4 @@
-package com.lgtm.android.manage_mission
+package com.lgtm.android.manage_mission.dashboard
 
 import android.content.ContentValues.TAG
 import android.util.Log

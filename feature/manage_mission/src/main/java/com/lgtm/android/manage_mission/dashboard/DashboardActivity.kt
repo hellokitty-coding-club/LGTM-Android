@@ -1,4 +1,4 @@
-package com.lgtm.android.manage_mission
+package com.lgtm.android.manage_mission.dashboard
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,6 +7,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.lgtm.android.common_ui.adapter.ParticipantAdapter
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityDashboardBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
