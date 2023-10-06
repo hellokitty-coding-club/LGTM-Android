@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.domain.constants.ProcessState
+import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,4 +40,14 @@ class PingPongJuniorViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getRole(): Role {
+        return Role.REVIEWEE
+    }
+
+    fun getMissionStatus(): ProcessState {
+        return pingPongJuniorVO.value?.processStatus
+            ?: throw IllegalArgumentException("processStatus is null")
+    }
+
 }

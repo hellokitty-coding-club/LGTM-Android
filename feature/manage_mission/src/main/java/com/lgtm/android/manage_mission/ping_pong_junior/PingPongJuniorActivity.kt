@@ -8,6 +8,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.manage_mission.ProcessStatusFragment
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityPingPongJuniorBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +29,17 @@ class PingPongJuniorActivity :
         setBackButtonClickListener()
     }
 
+    private fun setFcvMissionStatusFragment() {
+        val role = pingPongJuniorViewModel.getRole()
+        val missionStatus = pingPongJuniorViewModel.getMissionStatus()
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.fcv_mission_status,
+                ProcessStatusFragment.newInstance(role, missionStatus)
+            )
+            .commit()
+    }
+
     private fun setupViewModel() {
         binding.viewModel = pingPongJuniorViewModel
     }
@@ -37,9 +49,10 @@ class PingPongJuniorActivity :
         binding.rvTechTag.adapter = techTagAdapter
     }
 
-    private fun observeMissionStatusInfo(){
-        pingPongJuniorViewModel.pingPongJuniorVO.observe(this){
+    private fun observeMissionStatusInfo() {
+        pingPongJuniorViewModel.pingPongJuniorVO.observe(this) {
             techTagAdapter.submitList(it.techTagList)
+            setFcvMissionStatusFragment()
         }
     }
 
@@ -56,6 +69,7 @@ class PingPongJuniorActivity :
             finish()
         }
     }
+
     override fun initializeViewModel() {
         viewModel = pingPongJuniorViewModel
     }
@@ -78,7 +92,7 @@ class PingPongJuniorActivity :
                 }
 
                 is NetworkState.Success -> {
-
+                    // do nothing
                 }
 
                 is NetworkState.Failure -> {
