@@ -142,6 +142,8 @@
 
     <!-- dialog -->
     <string name="want_to_logout">로그아웃 하시겠어요?</string>
+    <string name="cannot_cancle_after_participate_mission">참여한 미션은 취소가 불가능해요</string>
+    <string name="do_you_want_to_participate_mission">미션에 참여하시겠어요?</string>
 
     <!-- Profile -->
     <string name="visit_github">Github 방문</string>
