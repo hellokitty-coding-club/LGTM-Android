@@ -4,6 +4,7 @@ import com.lgtm.domain.constants.ArrowDirection
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
+import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.MissionRepository
@@ -109,6 +110,14 @@ class MissionUseCase @Inject constructor(
     suspend fun participateMission(missionID: Int) : Result<Boolean> {
         return try {
             missionRepository.participateMission(missionID)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun fetchJuniorMissionStatus(missionID: Int) : Result<PingPongJuniorVO> {
+        return try {
+            missionRepository.fetchJuniorMissionStatus(missionID)
         } catch (e: Exception) {
             Result.failure(e)
         }

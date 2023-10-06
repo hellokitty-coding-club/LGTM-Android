@@ -4,6 +4,7 @@ import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
+import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.entity.response.PostMissionResponseVO
 import com.lgtm.domain.entity.response.SduiVO
 
@@ -14,4 +15,5 @@ interface MissionRepository {
     suspend fun getMissionDetail(missionId: Int): Result<MissionDetailVO>
     suspend fun fetchDashboardInfo(missionId: Int): Result<DashboardVO>
     suspend fun participateMission(missionId: Int): Result<Boolean>
+    suspend fun fetchJuniorMissionStatus(missionId: Int): Result<PingPongJuniorVO>
 }
