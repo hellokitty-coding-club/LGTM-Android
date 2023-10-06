@@ -18,6 +18,9 @@ class PingPongJuniorViewModel @Inject constructor(
     private val missionUseCase: MissionUseCase
 ) : BaseViewModel() {
 
+    private val _pingPongJuniorVO = MutableLiveData<PingPongJuniorVO>()
+    val pingPongJuniorVO: LiveData<PingPongJuniorVO> = _pingPongJuniorVO
+
     private val _fetchMissionStatusState: MutableLiveData<NetworkState<PingPongJuniorVO>> =
         MutableLiveData(NetworkState.Init)
     val fetchMissionStatusState: LiveData<NetworkState<PingPongJuniorVO>> = _fetchMissionStatusState
@@ -26,6 +29,7 @@ class PingPongJuniorViewModel @Inject constructor(
         viewModelScope.launch {
             missionUseCase.fetchJuniorMissionStatus(missionID = missionID)
                 .onSuccess {
+                    _pingPongJuniorVO.postValue(it)
                     _fetchMissionStatusState.postValue(NetworkState.Success(it))
                     Log.d(TAG, "fetchJuniorMissionStatus: $it")
                 }.onFailure {
