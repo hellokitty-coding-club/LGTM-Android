@@ -220,7 +220,8 @@ class MissionDetailActivity :
     }
 
     private fun navigateJuniorMyMission() {
-        Toast.makeText(this, "주니어 미션 확인 화면으로 이동", Toast.LENGTH_SHORT).show()
+        val missionId = missionDetailViewModel.getMissionId()
+        lgtmNavigator.navigateToPingPongJunior(this, missionId)
     }
 
     private fun showCheckParticipatingDialog() {
@@ -245,7 +246,6 @@ class MissionDetailActivity :
                 }
 
                 is NetworkState.Success -> {
-                    Toast.makeText(this, "미션 참여 성공", Toast.LENGTH_SHORT).show()
                     navigateJuniorMyMission()
                 }
 
