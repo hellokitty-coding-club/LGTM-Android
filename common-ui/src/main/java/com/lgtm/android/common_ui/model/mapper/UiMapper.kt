@@ -14,6 +14,7 @@ import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MemberMissionStatusVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.ProfileVO
+import com.lgtm.domain.profile.profileViewType.ProfileGlance
 
 fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,
@@ -44,6 +45,21 @@ fun ProfileVO.toUiModel(role: Role): ProfileGlanceUI = ProfileGlanceUI(
         Role.REVIEWEE -> R.string.education
     },
     detailInfo = when (role) {
+        Role.REVIEWER -> "$company / $position"
+        Role.REVIEWEE -> educationalHistory
+    } ?: UNKNOWN
+)
+
+fun ProfileGlance.toUiModel(): ProfileGlanceUI = ProfileGlanceUI(
+    memberId = memberId,
+    profileImage = profileImage,
+    nickname = nickname,
+    githubId = githubId,
+    detailInfoLabel = when (memberType) {
+        Role.REVIEWER -> R.string.company_slash_position
+        Role.REVIEWEE -> R.string.education
+    },
+    detailInfo = when (memberType) {
         Role.REVIEWER -> "$company / $position"
         Role.REVIEWEE -> educationalHistory
     } ?: UNKNOWN

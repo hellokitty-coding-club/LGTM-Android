@@ -5,6 +5,8 @@ import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.ProfileVO
 
 data class ProfileDTO(
+    @SerializedName("myProfile")
+    val isMyProfile: Boolean?,
     val agreeWithEventInfo: Boolean?,
     val githubId: String?,
     val introduction: String?,
@@ -25,7 +27,7 @@ data class ProfileDTO(
             githubId = githubId ?: "unknown",
             introduction = introduction ?: "",
             memberId = memberId ?: 0,
-            memberMissionHistory = memberMissionHistory?.map { it.toVO() },
+            memberMissionHistory = if (memberMissionHistory?.isNotEmpty() == true) memberMissionHistory.map { it.toVO() } else null,
             memberType = Role.getRole(memberType),
             nickname = nickname ?: "",
             profileImageUrl = profileImageUrl ?: "",
@@ -33,7 +35,8 @@ data class ProfileDTO(
             educationalHistory = memberDetailInfo?.educationalHistory,
             position = position ?: memberDetailInfo?.position,
             company = company ?: memberDetailInfo?.companyInfo,
-            careerPeriod = memberDetailInfo?.careerPeriod
+            careerPeriod = memberDetailInfo?.careerPeriod,
+            isMyProfile = isMyProfile ?: false
         )
     }
 }

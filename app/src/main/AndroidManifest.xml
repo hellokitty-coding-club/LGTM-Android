@@ -55,6 +55,11 @@
         <activity
             android:name=".manage_mission.DashboardActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".profile.ProfileActivity"
+            android:exported="false" />
+
     </application>
 
 
