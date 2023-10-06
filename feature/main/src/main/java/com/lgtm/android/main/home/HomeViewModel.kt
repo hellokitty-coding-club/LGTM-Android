@@ -8,8 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.SduiItemVO
+import com.lgtm.domain.logging.HomeScreenClickScheme
+import com.lgtm.domain.logging.HomeScreenExposureScheme
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.usecase.MissionUseCase
+import com.swm.logging.android.SWMLogging
+import com.swm.logging.android.logging_scheme.ClickScheme
+import com.swm.logging.android.logging_scheme.ExposureScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,5 +40,30 @@ class HomeViewModel @Inject constructor(
                     Log.e(TAG, "getHomeInfo: ${it.message}")
                 }
         }
+    }
+
+
+    fun shotHomeExposureLogging() {
+        val scheme = getHomeExposureLoggingScheme()
+        SWMLogging.logEvent(scheme)
+    }
+
+    fun shotHomeNotificationClickLogging() {
+        val scheme = getHomeClickLoggingScheme()
+        SWMLogging.logEvent(scheme)
+    }
+
+    private fun getHomeClickLoggingScheme(): ClickScheme {
+        return HomeScreenClickScheme.Builder()
+            .setAge("-1")
+            .setTitleName("HomeCard")
+            .build()
+    }
+
+    private fun getHomeExposureLoggingScheme(): ExposureScheme {
+        return HomeScreenExposureScheme.Builder()
+            .setAge("3")
+            .setTitleName("HomeCard")
+            .build()
     }
 }
