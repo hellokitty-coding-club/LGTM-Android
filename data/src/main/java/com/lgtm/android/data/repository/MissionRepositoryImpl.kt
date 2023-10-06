@@ -79,4 +79,17 @@ class MissionRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun participateMission(missionId: Int): Result<Boolean> {
+        return try {
+            val response = missionDataSource.participateMission(missionId)
+            Result.success(response.data)
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "participateMission: ${this.javaClass} ${e.message} / casting 도중 null 값 발생")
+            Result.failure(e)
+        } catch (e: Exception) {
+            Log.e(TAG, "participateMission: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
+
 }

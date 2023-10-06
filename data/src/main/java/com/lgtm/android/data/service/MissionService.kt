@@ -32,5 +32,10 @@ interface MissionService {
     suspend fun fetchDashboardInfo(
         @Path("missionId") missionId: Int
     ): Response<BaseDTO<DashboardDTO>>
+
+    @POST("/v1/mission/{missionId}")
+    suspend fun participateMission(
+        @Path("missionId") missionId: Int
+    ): Response<BaseDTO<Boolean>>
 }
 

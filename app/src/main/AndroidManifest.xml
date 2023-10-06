@@ -53,11 +53,15 @@
             android:exported="false" />
 
         <activity
-            android:name=".manage_mission.DashboardActivity"
+            android:name=".manage_mission.dashboard.DashboardActivity"
             android:exported="false" />
 
         <activity
             android:name=".profile.ProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".manage_mission.ping_pong_junior.PingPongJuniorActivity"
             android:exported="false" />
 
     </application>

@@ -106,6 +106,14 @@ class MissionUseCase @Inject constructor(
         )
     }
 
+    suspend fun participateMission(missionID: Int) : Result<Boolean> {
+        return try {
+            missionRepository.participateMission(missionID)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
 
     companion object {
         // viewType

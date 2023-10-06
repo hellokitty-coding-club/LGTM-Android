@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
+import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.usecase.MissionUseCase
@@ -30,6 +31,10 @@ class MissionDetailViewModel @Inject constructor(
 
     private val _notRecommendToEmptyVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
     val notRecommendToEmptyVisibility: LiveData<Boolean> = _notRecommendToEmptyVisibility
+
+    private val _participateMissionUiState: MutableLiveData<NetworkState<Boolean>> =
+        MutableLiveData(NetworkState.Init)
+    val participateMissionUiState: LiveData<NetworkState<Boolean>> = _participateMissionUiState
 
     fun isMyMission() =
         _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_RECRUITING ||
@@ -71,6 +76,18 @@ class MissionDetailViewModel @Inject constructor(
                     _missionDetailUiState.postValue(it.toUiModel())
                 }.onFailure {
                     Log.e(TAG, "getMissionDetail: $it")
+                }
+        }
+    }
+
+    fun participateMission() {
+        val missionId = _missionDetailVO.value?.missionId ?: return
+        viewModelScope.launch(lgtmErrorHandler) {
+            missionUseCase.participateMission(missionId)
+                .onSuccess {
+                    _participateMissionUiState.postValue(NetworkState.Success(it))
+                }.onFailure {
+                    _participateMissionUiState.postValue(NetworkState.Failure(it.message))
                 }
         }
     }
