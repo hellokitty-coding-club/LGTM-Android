@@ -1,17 +1,24 @@
 package com.lgtm.android.data.model.response
 
+import com.google.gson.annotations.SerializedName
 import com.lgtm.domain.entity.response.MissionHistoryVO
-import java.time.LocalDateTime
 
 data class MissionHistoryDTO(
-    val dateTime: String?,
-    val status: String?
+    @SerializedName("CODE_REVIEW")
+    val codeReviewDate: String?,
+    @SerializedName("PAYMENT_CONFIRMATION")
+    val paymentConfirmationDate: String?,
+    @SerializedName("WAITING_FOR_PAYMENT")
+    val waitingForPaymentDate: String?,
+    @SerializedName("MISSION_PROCEEDING")
+    val missionProceedingDate: String?
 ) {
     fun toVO(): MissionHistoryVO {
         return MissionHistoryVO(
-            dateTime = LocalDateTime.parse(dateTime)
-                ?: throw NullPointerException("dateTime is null"),
-            status = status ?: throw NullPointerException("status is null")
+            paymentConfirmationDate = paymentConfirmationDate,
+            codeReviewDate = codeReviewDate,
+            waitingForPaymentDate = waitingForPaymentDate,
+            missionProceedingDate = missionProceedingDate
         )
     }
 }

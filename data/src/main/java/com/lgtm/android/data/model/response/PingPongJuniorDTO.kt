@@ -6,7 +6,7 @@ import com.lgtm.domain.entity.response.PingPongJuniorVO
 data class PingPongJuniorDTO(
     val accountInfo: AccountInfoDTO?,
     val buttonTitle: String?,
-    val missionHistory: List<MissionHistoryDTO>?,
+    val missionHistory: MissionHistoryDTO?,
     val missionName: String?,
     val processStatus: String?,
     val reviewId: Int?,
@@ -17,8 +17,7 @@ data class PingPongJuniorDTO(
         return PingPongJuniorVO(
             accountInfo = accountInfo?.toVO() ?: throw NullPointerException("accountInfo is null"),
             buttonTitle = buttonTitle ?: throw NullPointerException("buttonTitle is null"),
-            missionHistory = missionHistory?.map { it.toVO() }
-                ?: throw NullPointerException("missionHistory is null"),
+            missionHistory = missionHistory?.toVO() ?: throw NullPointerException("missionHistory is null"),
             missionName = missionName ?: throw NullPointerException("missionName is null"),
             processStatus = ProcessState.getProcessState(processStatus),
             reviewId = reviewId,
