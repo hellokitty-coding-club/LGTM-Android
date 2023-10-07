@@ -22,6 +22,7 @@
             android:layout_height="28dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="19dp"
+            android:elevation="1dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             custom:indicatingState="WAITING_FOR_PAYMENT"
@@ -42,10 +43,11 @@
             android:layout_width="2dp"
             android:layout_height="0dp"
             android:layout_marginStart="36dp"
+            android:layout_marginTop="6dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
-            app:layout_constraintBottom_toTopOf="@id/iv_payment_confirm"
+            app:layout_constraintBottom_toBottomOf="@id/iv_payment_confirm"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_waiting_for_payment" />
+            app:layout_constraintTop_toTopOf="@id/iv_waiting_for_payment" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
             android:id="@+id/iv_payment_confirm"
@@ -74,9 +76,9 @@
             android:layout_height="0dp"
             android:layout_marginStart="36dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
-            app:layout_constraintBottom_toTopOf="@id/iv_mission_progress"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mission_progress"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_payment_confirm" />
+            app:layout_constraintTop_toTopOf="@id/iv_payment_confirm" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
             android:id="@+id/iv_mission_progress"
@@ -106,9 +108,9 @@
             android:layout_height="0dp"
             android:layout_marginStart="36dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
-            app:layout_constraintBottom_toTopOf="@id/iv_mission_code_review"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mission_code_review"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_mission_progress" />
+            app:layout_constraintTop_toTopOf="@id/iv_mission_progress" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
             android:id="@+id/iv_mission_code_review"
@@ -138,10 +140,11 @@
             android:layout_width="2dp"
             android:layout_height="0dp"
             android:layout_marginStart="36dp"
+            android:layout_marginBottom="6dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
-            app:layout_constraintBottom_toTopOf="@id/iv_mission_review_finished"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mission_review_finished"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_mission_code_review" />
+            app:layout_constraintTop_toTopOf="@id/iv_mission_code_review" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
             android:id="@+id/iv_mission_review_finished"
