@@ -1,8 +1,9 @@
-package com.lgtm.android.manage_mission
+package com.lgtm.android.manage_mission.ping_pong_common
 
 import android.os.Bundle
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.FragmentProcessStatusBinding
 import com.lgtm.android.manage_mission.ping_pong_junior.PingPongJuniorViewModel
 import com.lgtm.domain.constants.ProcessState

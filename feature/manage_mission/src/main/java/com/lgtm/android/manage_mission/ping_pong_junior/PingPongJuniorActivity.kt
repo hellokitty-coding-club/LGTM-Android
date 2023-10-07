@@ -8,9 +8,9 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.NetworkState
-import com.lgtm.android.manage_mission.ProcessStatusFragment
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityPingPongJuniorBinding
+import com.lgtm.android.manage_mission.ping_pong_common.ProcessStatusFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
