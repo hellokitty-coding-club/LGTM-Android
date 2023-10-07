@@ -1,6 +1,9 @@
 package com.lgtm.android.manage_mission.ping_pong_common
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.manage_mission.R
@@ -24,6 +27,23 @@ class ProcessStatusFragment :
         arguments?.let {
             role = it.getSerializable(ROLE) as Role
             missionStatus = it.getSerializable(MISSION_STATUS) as ProcessState
+        }
+        Log.d(TAG, "onCreate: $role , $missionStatus")
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setCurrentState()
+    }
+
+    private fun setCurrentState() {
+        val missionStatus = requireNotNull(missionStatus)
+        binding.apply {
+            ivWaitingForPayment.setCurrentState(missionStatus)
+            ivPaymentConfirm.setCurrentState(missionStatus)
+            ivMissionProgress.setCurrentState(missionStatus)
+            ivMissionCodeReview.setCurrentState(missionStatus)
+            ivMissionReviewFinished.setCurrentState(missionStatus)
         }
     }
 

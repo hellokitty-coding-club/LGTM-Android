@@ -1,21 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.lgtm.domain.constants.ProcessState" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/red"
-        tools:context=".ProcessStatusFragment">
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white_radius_20"
+        tools:context=".ping_pong_common.ProcessStatusFragment">
+
+        <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
+            android:id="@+id/iv_waiting_for_payment"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="19dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            custom:indicatingState="WAITING_FOR_PAYMENT"
+            tools:background="@drawable/oval_black_and_green_diameter_28" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="test" />
+            android:id="@+id/tv_waiting_for_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="66dp"
+            android:text="@string/waiting_for_payment"
+            android:textAppearance="@style/Body1B"
+            app:layout_constraintBottom_toBottomOf="@id/iv_waiting_for_payment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_waiting_for_payment" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/line_vertical_gray_3_dotted"
+            app:layout_constraintBottom_toTopOf="@id/iv_payment_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_waiting_for_payment" />
+
+        <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
+            android:id="@+id/iv_payment_confirm"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="34dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
+            app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
+            app:layout_constraintTop_toBottomOf="@id/iv_waiting_for_payment"
+            custom:indicatingState="PAYMENT_CONFIRMATION"
+            tools:background="@drawable/oval_gray_3_diameter_16"
+            tools:layout_height="16dp"
+            tools:layout_width="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_confirmation"
+            android:textAppearance="@style/Body1B"
+            app:layout_constraintBottom_toBottomOf="@id/iv_payment_confirm"
+            app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment"
+            app:layout_constraintTop_toTopOf="@id/iv_payment_confirm" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/line_vertical_gray_3_dotted"
+            app:layout_constraintBottom_toTopOf="@id/iv_mission_progress"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_payment_confirm" />
+
+        <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
+            android:id="@+id/iv_mission_progress"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="34dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
+            app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
+            app:layout_constraintTop_toBottomOf="@id/iv_payment_confirm"
+            custom:indicatingState="MISSION_PROCEEDING"
+            tools:background="@drawable/oval_gray_3_diameter_16"
+            tools:layout_height="16dp"
+            tools:layout_width="16dp" />
+
+        <TextView
+            android:id="@+id/tv_mission_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mission_progress"
+            android:textAppearance="@style/Body1B"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mission_progress"
+            app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment"
+            app:layout_constraintTop_toTopOf="@id/iv_mission_progress" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/line_vertical_gray_3_dotted"
+            app:layout_constraintBottom_toTopOf="@id/iv_mission_code_review"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_mission_progress" />
+
+        <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
+            android:id="@+id/iv_mission_code_review"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="34dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
+            app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
+            app:layout_constraintTop_toBottomOf="@id/iv_mission_progress"
+            custom:indicatingState="MISSION_FINISHED"
+            tools:background="@drawable/oval_gray_3_diameter_16"
+            tools:layout_height="16dp"
+            tools:layout_width="16dp" />
+
+        <TextView
+            android:id="@+id/tv_mission_code_review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/code_review"
+            android:textAppearance="@style/Body1B"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mission_code_review"
+            app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment"
+            app:layout_constraintTop_toTopOf="@id/iv_mission_code_review" />
+
+        <!-- 코드 리뷰 완료 -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/line_vertical_gray_3_dotted"
+            app:layout_constraintBottom_toTopOf="@id/iv_mission_review_finished"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_mission_code_review" />
+
+        <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
+            android:id="@+id/iv_mission_review_finished"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="34dp"
+            app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
+            app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
+            app:layout_constraintTop_toBottomOf="@id/iv_mission_code_review"
+            custom:indicatingState="MISSION_FINISHED"
+            tools:background="@drawable/oval_gray_3_diameter_16"
+            tools:layout_height="16dp"
+            tools:layout_width="16dp" />
+
+        <TextView
+            android:id="@+id/tv_mission_review_finished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mission_review_finished"
+            android:textAppearance="@style/Body1B"
+            app:layout_constraintBottom_toBottomOf="@id/iv_mission_review_finished"
+            app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment"
+            app:layout_constraintTop_toTopOf="@id/iv_mission_review_finished" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
