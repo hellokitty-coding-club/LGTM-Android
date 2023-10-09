@@ -25,8 +25,8 @@ enum class ProcessState(val order: Int) {
             throw IllegalStateException("ProcessState not found")
         }
 
-        fun ProcessState.isPast(targetState: ProcessState) = this.order > targetState.order
-        fun ProcessState.isSame(targetState: ProcessState) = this.order == targetState.order
-        fun ProcessState.isFuture(targetState: ProcessState) = this.order < targetState.order
+        fun ProcessState.isPastThan(targetState: ProcessState) = this.order < targetState.order
+        fun ProcessState.isSameWith(targetState: ProcessState) = this.order == targetState.order
+        fun ProcessState.isFuture(targetState: ProcessState) = this.order > targetState.order
     }
 }

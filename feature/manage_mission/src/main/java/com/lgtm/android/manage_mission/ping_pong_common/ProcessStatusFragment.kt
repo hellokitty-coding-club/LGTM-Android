@@ -48,6 +48,10 @@ class ProcessStatusFragment :
             ivMissionProgress.setCurrentState(missionStatus)
             ivMissionCodeReview.setCurrentState(missionStatus)
             ivMissionReviewFinished.setCurrentState(missionStatus)
+            ivPaymentConfirmLine.setCurrentState(missionStatus)
+            ivMissionProgressLine.setCurrentState(missionStatus)
+            ivMissionCodeReviewLine.setCurrentState(missionStatus)
+            ivMissionReviewFinishedLine.setCurrentState(missionStatus)
         }
     }
 

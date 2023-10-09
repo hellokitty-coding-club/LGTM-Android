@@ -39,7 +39,7 @@
             android:id="@+id/iv_past"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/oval_gray_3_diameter_16"
+            android:background="@drawable/oval_black_diameter_16"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

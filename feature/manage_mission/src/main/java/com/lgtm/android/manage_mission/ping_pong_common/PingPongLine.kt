@@ -6,21 +6,20 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.lgtm.android.common_ui.R.styleable
 import com.lgtm.android.common_ui.R.styleable.PingPong_indicatingState
-import com.lgtm.android.manage_mission.databinding.LayoutPingPongCircleBinding
+import com.lgtm.android.manage_mission.databinding.LayoutPingPongLineBinding
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.ProcessState.Companion.isPastThan
 import com.lgtm.domain.constants.ProcessState.Companion.isSameWith
 
-class PingPongCircle @JvmOverloads constructor(
+class PingPongLine @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding: LayoutPingPongCircleBinding by lazy {
-        LayoutPingPongCircleBinding.inflate(LayoutInflater.from(context), this, false)
+    private val binding: LayoutPingPongLineBinding by lazy {
+        LayoutPingPongLineBinding.inflate(LayoutInflater.from(context), this, false)
     }
-
 
     private val indicatingState: ProcessState
     private lateinit var currentState: ProcessState
@@ -43,12 +42,10 @@ class PingPongCircle @JvmOverloads constructor(
 
     private fun setCircle() {
         addView(binding.root)
-        if (indicatingState.isPastThan(currentState)) {
-            binding.ivPast.visibility = VISIBLE
-        } else if (indicatingState.isSameWith(currentState)) {
-            binding.ivCurrent.visibility = VISIBLE
+        if (indicatingState.isPastThan(currentState) || indicatingState.isSameWith(currentState)) {
+            binding.ivLinePast.visibility = VISIBLE
         } else {
-            binding.ivFuture.visibility = VISIBLE
+            binding.ivLineFuture.visibility = VISIBLE
         }
     }
 }
