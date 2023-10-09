@@ -10,7 +10,6 @@ import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityPingPongJuniorBinding
-import com.lgtm.android.manage_mission.ping_pong_common.ProcessStatusFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,18 +28,6 @@ class PingPongJuniorActivity :
         setBackButtonClickListener()
     }
 
-    private fun setFcvMissionStatusFragment() {
-        val role = pingPongJuniorViewModel.getRole()
-        val missionStatus = pingPongJuniorViewModel.getMissionStatus()
-        val missionHistory = pingPongJuniorViewModel.getMissionHistory()
-        supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.fcv_mission_status,
-                ProcessStatusFragment.newInstance(role, missionStatus, missionHistory)
-            )
-            .commit()
-    }
-
     private fun setupViewModel() {
         binding.viewModel = pingPongJuniorViewModel
     }
@@ -53,8 +40,16 @@ class PingPongJuniorActivity :
     private fun observeMissionStatusInfo() {
         pingPongJuniorViewModel.pingPongJuniorVO.observe(this) {
             techTagAdapter.submitList(it.techTagList)
-            setFcvMissionStatusFragment()
+            setMissionProcessData()
         }
+    }
+
+    private fun setMissionProcessData(){
+        binding.missionStatus.setData(
+            role = pingPongJuniorViewModel.getRole(),
+            missionStatus = pingPongJuniorViewModel.getMissionStatus(),
+            missionHistory = pingPongJuniorViewModel.getMissionHistory()
+        )
     }
 
     private fun setRecyclerViewLayoutManager() {
