@@ -11,14 +11,20 @@ data class MissionHistoryDTO(
     @SerializedName("WAITING_FOR_PAYMENT")
     val waitingForPaymentDate: String?,
     @SerializedName("MISSION_PROCEEDING")
-    val missionProceedingDate: String?
+    val missionProceedingDate: String?,
+    @SerializedName("MISSION_FINISHED")
+    val missionFinishedDate: String?,
+    @SerializedName("FEEDBACK_REVIEWED")
+    val feedbackReviewedDate: String?
 ) {
     fun toVO(): MissionHistoryVO {
         return MissionHistoryVO(
             paymentConfirmationDate = paymentConfirmationDate,
             codeReviewDate = codeReviewDate,
             waitingForPaymentDate = waitingForPaymentDate,
-            missionProceedingDate = missionProceedingDate
+            missionProceedingDate = missionProceedingDate,
+            missionFinishedDate = missionFinishedDate,
+            feedbackReviewedDate = feedbackReviewedDate
         )
     }
 }

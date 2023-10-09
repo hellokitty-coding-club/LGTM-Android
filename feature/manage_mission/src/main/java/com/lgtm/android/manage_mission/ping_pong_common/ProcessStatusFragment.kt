@@ -11,6 +11,7 @@ import com.lgtm.android.manage_mission.databinding.FragmentProcessStatusBinding
 import com.lgtm.android.manage_mission.ping_pong_junior.PingPongJuniorViewModel
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.response.MissionHistoryVO
 import dagger.hilt.android.AndroidEntryPoint
 
 @Suppress("DEPRECATION")
@@ -21,18 +22,21 @@ class ProcessStatusFragment :
     private val missionStatusViewModel by activityViewModels<PingPongJuniorViewModel>()
     private var role: Role? = null
     private var missionStatus: ProcessState? = null
+    private var missionHistory : MissionHistoryVO? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             role = it.getSerializable(ROLE) as Role
             missionStatus = it.getSerializable(MISSION_STATUS) as ProcessState
+            missionHistory = it.getSerializable(MISSION_HISTORY) as MissionHistoryVO
         }
-        Log.d(TAG, "onCreate: $role , $missionStatus")
+        Log.d(TAG, "onCreate: $role , $missionStatus, $missionHistory")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.missionHistory = missionHistory
         setCurrentState()
     }
 
@@ -53,11 +57,12 @@ class ProcessStatusFragment :
 
     companion object {
         @JvmStatic
-        fun newInstance(role: Role, missionStatus: ProcessState) =
+        fun newInstance(role: Role, missionStatus: ProcessState, missionHistoryVO: MissionHistoryVO) =
             ProcessStatusFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ROLE, role)
                     putSerializable(MISSION_STATUS, missionStatus)
+                    putSerializable(MISSION_HISTORY, missionHistoryVO)
                 }
             }
     }
@@ -66,3 +71,4 @@ class ProcessStatusFragment :
 
 private const val ROLE = "ROLE"
 private const val MISSION_STATUS = "MISSION_STATUS"
+private const val MISSION_HISTORY = "MISSION_HISTORY"

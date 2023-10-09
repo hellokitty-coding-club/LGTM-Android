@@ -32,10 +32,11 @@ class PingPongJuniorActivity :
     private fun setFcvMissionStatusFragment() {
         val role = pingPongJuniorViewModel.getRole()
         val missionStatus = pingPongJuniorViewModel.getMissionStatus()
+        val missionHistory = pingPongJuniorViewModel.getMissionHistory()
         supportFragmentManager.beginTransaction()
             .replace(
                 R.id.fcv_mission_status,
-                ProcessStatusFragment.newInstance(role, missionStatus)
+                ProcessStatusFragment.newInstance(role, missionStatus, missionHistory)
             )
             .commit()
     }

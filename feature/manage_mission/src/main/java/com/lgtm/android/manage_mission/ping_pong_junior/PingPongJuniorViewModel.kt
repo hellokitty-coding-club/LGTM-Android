@@ -9,6 +9,7 @@ import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.entity.response.MissionHistoryVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,4 +51,8 @@ class PingPongJuniorViewModel @Inject constructor(
             ?: throw IllegalArgumentException("processStatus is null")
     }
 
+    fun getMissionHistory() : MissionHistoryVO {
+        return pingPongJuniorVO.value?.missionHistory
+            ?: throw IllegalArgumentException("missionHistory is null")
+    }
 }
