@@ -38,7 +38,7 @@ class PingPongJuniorActivity :
     }
 
     private fun observeMissionStatusInfo() {
-        pingPongJuniorViewModel.pingPongJuniorVO.observe(this) {
+        pingPongJuniorViewModel.pingPongJuniorUI.observe(this) {
             techTagAdapter.submitList(it.techTagList)
             setMissionProcessData()
         }

@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.lgtm.android.common_ui.model.MissionHistoryUI
 import com.lgtm.android.manage_mission.databinding.LayoutProcessStatusBinding
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
-import com.lgtm.domain.entity.response.MissionHistoryVO
 
 
 class ProcessStatusLayout @JvmOverloads constructor(
@@ -22,13 +22,13 @@ class ProcessStatusLayout @JvmOverloads constructor(
 
     private var role: Role? = null
     private var missionStatus: ProcessState? = null
-    private var missionHistory: MissionHistoryVO? = null
+    private var missionHistory: MissionHistoryUI? = null
 
     init {
         addView(binding.root)
     }
 
-    fun setData(role: Role, missionStatus: ProcessState, missionHistory: MissionHistoryVO) {
+    fun setData(role: Role, missionStatus: ProcessState, missionHistory: MissionHistoryUI) {
         this.role = role
         this.missionStatus = missionStatus
         this.missionHistory = missionHistory
@@ -52,8 +52,3 @@ class ProcessStatusLayout @JvmOverloads constructor(
         }
     }
 }
-
-
-private const val ROLE = "ROLE"
-private const val MISSION_STATUS = "MISSION_STATUS"
-private const val MISSION_HISTORY = "MISSION_HISTORY"

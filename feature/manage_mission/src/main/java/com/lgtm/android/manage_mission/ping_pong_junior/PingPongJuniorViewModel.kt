@@ -6,10 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
+import com.lgtm.android.common_ui.model.MissionHistoryUI
+import com.lgtm.android.common_ui.model.PingPongJuniorUI
+import com.lgtm.android.common_ui.model.mapper.toUiModel
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
-import com.lgtm.domain.entity.response.MissionHistoryVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,8 +23,8 @@ class PingPongJuniorViewModel @Inject constructor(
     private val missionUseCase: MissionUseCase
 ) : BaseViewModel() {
 
-    private val _pingPongJuniorVO = MutableLiveData<PingPongJuniorVO>()
-    val pingPongJuniorVO: LiveData<PingPongJuniorVO> = _pingPongJuniorVO
+    private val _pingPongJuniorUI = MutableLiveData<PingPongJuniorUI>()
+    val pingPongJuniorUI: LiveData<PingPongJuniorUI> = _pingPongJuniorUI
 
     private val _fetchMissionStatusState: MutableLiveData<NetworkState<PingPongJuniorVO>> =
         MutableLiveData(NetworkState.Init)
@@ -32,7 +34,7 @@ class PingPongJuniorViewModel @Inject constructor(
         viewModelScope.launch {
             missionUseCase.fetchJuniorMissionStatus(missionID = missionID)
                 .onSuccess {
-                    _pingPongJuniorVO.postValue(it)
+                    _pingPongJuniorUI.postValue(it.toUiModel(getRole()))
                     _fetchMissionStatusState.postValue(NetworkState.Success(it))
                     Log.d(TAG, "fetchJuniorMissionStatus: $it")
                 }.onFailure {
@@ -47,12 +49,12 @@ class PingPongJuniorViewModel @Inject constructor(
     }
 
     fun getMissionStatus(): ProcessState {
-        return pingPongJuniorVO.value?.processStatus
+        return pingPongJuniorUI.value?.processStatus
             ?: throw IllegalArgumentException("processStatus is null")
     }
 
-    fun getMissionHistory() : MissionHistoryVO {
-        return pingPongJuniorVO.value?.missionHistory
+    fun getMissionHistory(): MissionHistoryUI {
+        return pingPongJuniorUI.value?.missionHistory
             ?: throw IllegalArgumentException("missionHistory is null")
     }
 }

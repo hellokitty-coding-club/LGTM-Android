@@ -64,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="18dp"
-                android:text="@{viewModel.pingPongJuniorVO.missionName}"
                 android:textAppearance="@style/Body2"
                 app:layout_constraintTop_toBottomOf="@id/cl_header_inner"
                 tools:text="미션 제목이 여기 들어갑니다. 길게되어도 여기서는 다 보여줄거임" />
@@ -118,7 +117,7 @@
             android:id="@+id/btn_next"
             style="@style/LGTMButtonLightWhiteTheme"
             android:layout_width="match_parent"
-            android:text="@{viewModel.pingPongJuniorVO.buttonTitle}"
+            android:text="@{viewModel.pingPongJuniorUI.buttonTitle}"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="입금 완료 알리기" />
 

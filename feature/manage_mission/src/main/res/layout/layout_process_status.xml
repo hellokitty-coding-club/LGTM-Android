@@ -10,7 +10,7 @@
 
         <variable
             name="missionHistory"
-            type="com.lgtm.domain.entity.response.MissionHistoryVO" />
+            type="com.lgtm.android.common_ui.model.MissionHistoryUI" />
 
     </data>
 
@@ -45,11 +45,16 @@
 
         <TextView
             android:id="@+id/tv_waiting_for_payment_detail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:layout_marginEnd="24dp"
+            android:maxLines="2"
+            android:text="@{missionHistory.waitingForPaymentDetail}"
             android:textAppearance="@style/Body3R"
             android:textColor="@color/gray_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment"
             app:layout_constraintTop_toBottomOf="@id/tv_waiting_for_payment"
             tools:text="리뷰어에게 참여비를 입금한 후, 완료 버튼을 누르세요." />
@@ -105,11 +110,17 @@
 
         <TextView
             android:id="@+id/tv_payment_confirm_detail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:layout_marginEnd="24dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{missionHistory.paymentConfirmationDetail}"
             android:textAppearance="@style/Body3R"
             android:textColor="@color/gray_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_payment_confirm"
             app:layout_constraintTop_toBottomOf="@id/tv_payment_confirm"
             tools:text="리뷰어가 보낸 입금 내역을 확인하고 있어요." />
@@ -166,10 +177,15 @@
 
         <TextView
             android:id="@+id/tv_mission_progress_detail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:layout_marginEnd="24dp"
+            android:maxLines="2"
+            android:text="@{missionHistory.missionProceedingDetail}"
             android:textAppearance="@style/Body3R"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_mission_progress"
             app:layout_constraintTop_toBottomOf="@id/tv_mission_progress"
             tools:text="미션 제출 후, 리뷰 요청 버튼을 누르세요."
@@ -224,13 +240,17 @@
             app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment"
             app:layout_constraintTop_toTopOf="@id/iv_mission_code_review" />
 
-        <!-- detail -->
         <TextView
             android:id="@+id/tv_mission_code_review_detail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:layout_marginEnd="24dp"
+            android:maxLines="2"
+            android:text="@{missionHistory.codeReviewDetail}"
             android:textAppearance="@style/Body3R"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_mission_code_review"
             app:layout_constraintTop_toBottomOf="@id/tv_mission_code_review"
             tools:text="리뷰어가 제출된 미션을 확인중이에요."
@@ -290,14 +310,18 @@
 
         <TextView
             android:id="@+id/tv_mission_review_finished_detail"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="24dp"
             android:gravity="center"
+            android:maxLines="2"
             android:text="@{missionHistory.feedbackReviewedDate}"
             android:textAppearance="@style/Body3M"
             android:textColor="@color/gray_5"
             app:layout_constraintBottom_toBottomOf="@id/tv_mission_review_finished"
-            app:layout_constraintEnd_toEndOf="@id/tv_waiting_for_payment_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintTop_toTopOf="@id/tv_mission_review_finished"
             tools:text="2023.10.09" />
