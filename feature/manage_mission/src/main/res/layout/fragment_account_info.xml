@@ -40,6 +40,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_deposit_info" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_account_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"

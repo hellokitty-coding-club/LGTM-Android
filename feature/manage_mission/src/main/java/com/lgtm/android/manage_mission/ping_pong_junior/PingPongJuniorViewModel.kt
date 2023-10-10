@@ -57,4 +57,9 @@ class PingPongJuniorViewModel @Inject constructor(
         return pingPongJuniorUI.value?.missionHistoryUI
             ?: throw IllegalArgumentException("missionHistory is null")
     }
+
+    fun getAccountInfo(): String {
+        return pingPongJuniorUI.value?.accountInfoUI?.accountInfo
+            ?: throw IllegalArgumentException("accountInfo is null")
+    }
 }

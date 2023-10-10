@@ -160,6 +160,7 @@
     <string name="deposit_info">입금 정보</string>
     <string name="account_info">계좌 정보</string>
     <string name="account_holder">예금주</string>
+    <string name="copied">복사되었습니다.</string>
 
 
 </resources>
