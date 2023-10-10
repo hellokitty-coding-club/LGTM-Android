@@ -16,4 +16,5 @@ interface MissionRepository {
     suspend fun fetchDashboardInfo(missionId: Int): Result<DashboardVO>
     suspend fun participateMission(missionId: Int): Result<Boolean>
     suspend fun fetchJuniorMissionStatus(missionId: Int): Result<PingPongJuniorVO>
+    suspend fun confirmJuniorPayment(missionId: Int): Result<Boolean>
 }

@@ -7,6 +7,7 @@ import com.lgtm.android.data.model.response.PingPongJuniorDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.service.MissionService
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
+import com.lgtm.domain.entity.response.JuniorPaymentConfirmDTO
 import javax.inject.Inject
 
 class MissionDataSource @Inject constructor(
@@ -30,5 +31,9 @@ class MissionDataSource @Inject constructor(
 
     suspend fun fetchJuniorMissionStatus(missionId: Int): BaseDTO<PingPongJuniorDTO> {
         return checkResponse(missionService.fetchJuniorMissionStatus(missionId = missionId))
+    }
+
+    suspend fun confirmJuniorPayment(missionId: Int): BaseDTO<JuniorPaymentConfirmDTO> {
+        return checkResponse(missionService.confirmJuniorPayment(missionId = missionId))
     }
 }
