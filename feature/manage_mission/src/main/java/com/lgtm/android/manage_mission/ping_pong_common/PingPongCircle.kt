@@ -42,6 +42,9 @@ class PingPongCircle @JvmOverloads constructor(
     }
 
     private fun setCircle() {
+        if (parent != null) {
+            removeView(binding.root)
+        }
         addView(binding.root)
         if (indicatingState.isPastThan(currentState)) {
             binding.ivPast.visibility = VISIBLE

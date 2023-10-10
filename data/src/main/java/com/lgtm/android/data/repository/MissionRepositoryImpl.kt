@@ -96,7 +96,7 @@ class MissionRepositoryImpl @Inject constructor(
     override suspend fun fetchJuniorMissionStatus(missionId: Int): Result<PingPongJuniorVO> {
         return try {
             val response = missionDataSource.fetchJuniorMissionStatus(missionId)
-            Result.success(response.data.toVO() )
+            Result.success(response.data.toVO())
         } catch (e: IllegalArgumentException) {
             Log.e(
                 TAG,
@@ -109,4 +109,13 @@ class MissionRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun confirmJuniorPayment(missionId: Int): Result<Boolean> {
+        return try {
+            val response = missionDataSource.confirmJuniorPayment(missionId)
+            Result.success(response.data.status != null)
+        } catch (e: Exception) {
+            Log.e(TAG, "confirmJuniorPayment: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
 }
