@@ -4,6 +4,7 @@ import com.lgtm.domain.constants.ArrowDirection
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
+import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.MissionRepository
@@ -11,6 +12,8 @@ import com.lgtm.domain.server_drive_ui.SduiContent
 import com.lgtm.domain.server_drive_ui.SduiEmptyUiState
 import com.lgtm.domain.server_drive_ui.SduiViewType
 import com.lgtm.domain.server_drive_ui.SectionEmptyVO
+import com.lgtm.domain.util.dotStyleFormatter
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 class MissionUseCase @Inject constructor(
@@ -106,12 +109,47 @@ class MissionUseCase @Inject constructor(
         )
     }
 
-    suspend fun participateMission(missionID: Int) : Result<Boolean> {
+    suspend fun participateMission(missionID: Int): Result<Boolean> {
         return try {
             missionRepository.participateMission(missionID)
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    suspend fun fetchJuniorMissionStatus(missionID: Int): Result<PingPongJuniorVO> {
+        return try {
+            val response = missionRepository.fetchJuniorMissionStatus(missionID)
+                .getOrElse { throw NoSuchElementException("Response is null") }
+            val missionHistoryVO = response.missionHistory
+            val waitingForPaymentDate = convertTimestampToCustomFormat(missionHistoryVO.waitingForPaymentDate)
+            val paymentConfirmationDate = convertTimestampToCustomFormat(missionHistoryVO.paymentConfirmationDate)
+            val missionProceedingDate = convertTimestampToCustomFormat(missionHistoryVO.missionProceedingDate)
+            val codeReviewDate = convertTimestampToCustomFormat(missionHistoryVO.codeReviewDate)
+            val missionFinishedDate = convertTimestampToCustomFormat(missionHistoryVO.missionFinishedDate)
+            val feedbackReviewedDate = convertTimestampToCustomFormat(missionHistoryVO.feedbackReviewedDate)
+
+            Result.success(
+                response.copy(
+                    missionHistory = missionHistoryVO.copy(
+                        waitingForPaymentDate = waitingForPaymentDate,
+                        paymentConfirmationDate = paymentConfirmationDate,
+                        missionProceedingDate = missionProceedingDate,
+                        codeReviewDate = codeReviewDate,
+                        missionFinishedDate = missionFinishedDate,
+                        feedbackReviewedDate = feedbackReviewedDate
+                    )
+                )
+            )
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    private fun convertTimestampToCustomFormat(timestamp: String?): String {
+        if (timestamp == null) return "-"
+        val localDateTime = LocalDateTime.parse(timestamp)
+        return localDateTime.format(dotStyleFormatter)
     }
 
 

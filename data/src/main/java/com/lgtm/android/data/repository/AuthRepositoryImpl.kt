@@ -3,7 +3,6 @@ package com.lgtm.android.data.repository
 import com.lgtm.android.data.datasource.AuthDataSource
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource.Companion.PreferenceKey
-import com.lgtm.android.data.model.request.DeviceTokenRequest
 import com.lgtm.android.data.model.request.SignUpJuniorRequestDTO
 import com.lgtm.android.data.model.request.SignUpSeniorRequestDTO
 import com.lgtm.domain.constants.Role
@@ -140,7 +139,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun patchDeviceToken(token: String?): Result<Boolean> {
         return try {
-            val response = authDataSource.patchDeviceToken(DeviceTokenRequest(deviceToken = token))
+            val response = authDataSource.patchDeviceToken(token)
             Result.success(response.data)
         } catch (e: Exception) {
             Result.failure(e)

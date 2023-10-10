@@ -1,6 +1,5 @@
 package com.lgtm.android.data.datasource
 
-import com.lgtm.android.data.model.request.DeviceTokenRequest
 import com.lgtm.android.data.model.request.SignUpJuniorRequestDTO
 import com.lgtm.android.data.model.request.SignUpSeniorRequestDTO
 import com.lgtm.android.data.model.response.BaseDTO
@@ -20,7 +19,7 @@ class AuthDataSource @Inject constructor(
         return checkResponse(authService.signUpSenior(signUpSeniorRequest))
     }
 
-    suspend fun patchDeviceToken(deviceToken: DeviceTokenRequest): BaseDTO<Boolean> {
+    suspend fun patchDeviceToken(deviceToken: String?): BaseDTO<Boolean> {
         return checkResponse(authService.patchDeviceToken(deviceToken))
     }
 }

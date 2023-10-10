@@ -3,6 +3,7 @@ package com.lgtm.android.data.service
 import com.lgtm.android.data.model.response.BaseDTO
 import com.lgtm.android.data.model.response.DashboardDTO
 import com.lgtm.android.data.model.response.MissionDetailDTO
+import com.lgtm.android.data.model.response.PingPongJuniorDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.model.response.SduiDTO
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
@@ -37,5 +38,10 @@ interface MissionService {
     suspend fun participateMission(
         @Path("missionId") missionId: Int
     ): Response<BaseDTO<Boolean>>
+
+    @GET("/v1/mission/{missionId}/junior")
+    suspend fun fetchJuniorMissionStatus(
+        @Path("missionId") missionId: Int
+    ): Response<BaseDTO<PingPongJuniorDTO>>
 }
 

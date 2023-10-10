@@ -14,7 +14,7 @@ enum class ProcessState(val order: Int) {
             values().forEach {
                 if (it.name == processState) return it
             }
-            throw IllegalStateException("ProcessState not found")
+            throw IllegalStateException("Input Data '$processState' is not valid ProcessState")
         }
 
         fun isMissionSubmitted(processState: String?): Boolean {
@@ -24,5 +24,9 @@ enum class ProcessState(val order: Int) {
             }
             throw IllegalStateException("ProcessState not found")
         }
+
+        fun ProcessState.isPastThan(targetState: ProcessState) = this.order < targetState.order
+        fun ProcessState.isSameWith(targetState: ProcessState) = this.order == targetState.order
+        fun ProcessState.isFuture(targetState: ProcessState) = this.order > targetState.order
     }
 }
