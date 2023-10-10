@@ -56,7 +56,6 @@
                 android:text="@{viewModel.pingPongJuniorUI.accountInfoUI.accountInfo}"
                 android:textAppearance="@style/Body2"
                 android:textColor="@color/gray_5"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/iv_clip"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,10 +66,11 @@
             <View
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginTop="2dp"
                 android:background="@color/gray_5"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/tv_account_info_value"
-                app:layout_constraintStart_toStartOf="@id/tv_account_info_value" />
+                app:layout_constraintStart_toStartOf="@id/tv_account_info_value"
+                app:layout_constraintTop_toBottomOf="@id/tv_account_info_value" />
 
 
             <androidx.appcompat.widget.AppCompatImageView
