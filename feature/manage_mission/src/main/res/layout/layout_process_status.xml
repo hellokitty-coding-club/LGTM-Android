@@ -10,7 +10,7 @@
 
         <variable
             name="missionHistory"
-            type="com.lgtm.android.common_ui.model.MissionHistoryUI" />
+            type="com.lgtm.android.common_ui.model.MissionProcessInfoUI" />
 
     </data>
 

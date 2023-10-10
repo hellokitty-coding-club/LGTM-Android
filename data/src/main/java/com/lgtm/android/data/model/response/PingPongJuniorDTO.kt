@@ -1,12 +1,14 @@
 package com.lgtm.android.data.model.response
 
+import com.google.gson.annotations.SerializedName
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.entity.response.PingPongJuniorVO
 
 data class PingPongJuniorDTO(
     val accountInfo: AccountInfoDTO?,
     val buttonTitle: String?,
-    val missionHistory: MissionHistoryDTO?,
+    @SerializedName("missionHistory")
+    val missionProcessInfo: MissionProcessInfoDTO?,
     val missionName: String?,
     val processStatus: String?,
     val reviewId: Int?,
@@ -17,7 +19,7 @@ data class PingPongJuniorDTO(
         return PingPongJuniorVO(
             accountInfo = accountInfo?.toVO() ?: throw NullPointerException("accountInfo is null"),
             buttonTitle = buttonTitle ?: throw NullPointerException("buttonTitle is null"),
-            missionHistory = missionHistory?.toVO() ?: throw NullPointerException("missionHistory is null"),
+            missionProcessInfoVO = missionProcessInfo?.toVO() ?: throw NullPointerException("missionHistory is null"),
             missionName = missionName ?: throw NullPointerException("missionName is null"),
             processStatus = ProcessState.getProcessState(processStatus),
             reviewId = reviewId,
