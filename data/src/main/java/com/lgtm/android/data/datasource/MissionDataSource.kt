@@ -3,6 +3,7 @@ package com.lgtm.android.data.datasource
 import com.lgtm.android.data.model.response.BaseDTO
 import com.lgtm.android.data.model.response.DashboardDTO
 import com.lgtm.android.data.model.response.MissionDetailDTO
+import com.lgtm.android.data.model.response.PingPongJuniorDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.service.MissionService
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
@@ -25,5 +26,9 @@ class MissionDataSource @Inject constructor(
 
     suspend fun participateMission(missionId: Int): BaseDTO<Boolean> {
         return checkResponse(missionService.participateMission(missionId = missionId))
+    }
+
+    suspend fun fetchJuniorMissionStatus(missionId: Int): BaseDTO<PingPongJuniorDTO> {
+        return checkResponse(missionService.fetchJuniorMissionStatus(missionId = missionId))
     }
 }

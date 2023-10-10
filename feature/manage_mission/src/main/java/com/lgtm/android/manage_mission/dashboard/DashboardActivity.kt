@@ -10,18 +10,16 @@ import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityDashboardBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activity_dashboard) {
     private val dashboardViewModel by viewModels<DashboardViewModel>()
-    private var missionId by Delegates.notNull<Int>()
+    private val missionId by lazy { intent.getIntExtra(MISSION_ID, defaultValue) }
     private lateinit var techTagAdapter: TechTagAdapter
     private lateinit var participantAdapter: ParticipantAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getExtraData()
         setupViewModel()
         observeDashboardInfo()
         initAdapter()
@@ -63,9 +61,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         viewModel = dashboardViewModel
     }
 
-    private fun getExtraData() {
-        missionId = intent.getIntExtra(MISSION_ID, defaultValue)
-    }
 
     private fun setBackButtonClickListener() {
         binding.ivBack.setOnClickListener {

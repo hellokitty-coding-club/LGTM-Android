@@ -8,8 +8,8 @@ import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.NetworkState
-import com.lgtm.android.common_ui.util.dotStyleFormatter
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep5Binding
+import com.lgtm.domain.util.dotStyleFormatter
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.util.Calendar

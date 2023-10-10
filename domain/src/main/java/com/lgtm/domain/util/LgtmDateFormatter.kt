@@ -1,4 +1,4 @@
-package com.lgtm.android.common_ui.util
+package com.lgtm.domain.util
 
 import java.time.format.DateTimeFormatter
 

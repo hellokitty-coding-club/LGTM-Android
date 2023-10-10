@@ -10,6 +10,7 @@ import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
+import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.entity.response.PostMissionResponseVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.MissionRepository
@@ -88,6 +89,22 @@ class MissionRepositoryImpl @Inject constructor(
             Result.failure(e)
         } catch (e: Exception) {
             Log.e(TAG, "participateMission: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun fetchJuniorMissionStatus(missionId: Int): Result<PingPongJuniorVO> {
+        return try {
+            val response = missionDataSource.fetchJuniorMissionStatus(missionId)
+            Result.success(response.data.toVO() )
+        } catch (e: IllegalArgumentException) {
+            Log.e(
+                TAG,
+                "fetchJuniorMissionStatus: ${this.javaClass} ${e.message} / casting 도중 null 값 발생"
+            )
+            Result.failure(e)
+        } catch (e: Exception) {
+            Log.e(TAG, "fetchJuniorMissionStatus: ${this.javaClass} ${e.message}")
             Result.failure(e)
         }
     }
