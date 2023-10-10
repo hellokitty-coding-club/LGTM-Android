@@ -300,7 +300,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="18dp"
-                        android:text="@string/account_info"
+                        android:text="@string/user_info"
                         android:textAppearance="@style/Body1M"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

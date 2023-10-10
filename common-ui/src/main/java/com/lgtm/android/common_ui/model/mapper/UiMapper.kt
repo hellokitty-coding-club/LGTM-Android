@@ -8,6 +8,7 @@ import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.constant.MissionDetailButtonStatus.Companion.getButtonStatusUI
 import com.lgtm.android.common_ui.constant.MissionStatusUI.Companion.getMissionStatusUI
 import com.lgtm.android.common_ui.constant.ProcessStateUI.Companion.getProcessStateUI
+import com.lgtm.android.common_ui.model.AccountInfoUI
 import com.lgtm.android.common_ui.model.DashboardUI
 import com.lgtm.android.common_ui.model.MemberMissionStatusUI
 import com.lgtm.android.common_ui.model.MissionDetailUI
@@ -17,6 +18,7 @@ import com.lgtm.android.common_ui.model.ProfileGlanceUI
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.constants.UNKNOWN
+import com.lgtm.domain.entity.response.AccountInfoVO
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MemberMissionStatusVO
 import com.lgtm.domain.entity.response.MissionDetailVO
@@ -96,58 +98,66 @@ fun PingPongJuniorVO.toUiModel(role: Role) = PingPongJuniorUI(
     missionName = missionName,
     techTagList = techTagList,
     processStatus = processStatus,
-    accountInfo = accountInfo,
-    missionHistory = missionHistory.toUiModel(role, processStatus),
+    accountInfoUI = accountInfo.toUiModel(),
+    missionHistoryUI = missionHistory.toUiModel(role, processStatus),
     reviewId = reviewId,
     pullRequestUrl = pullRequestUrl,
     buttonTitle = buttonTitle
 )
+
+fun AccountInfoVO.toUiModel() = AccountInfoUI(
+    accountInfo = "$bankName $accountNumber",
+    price = price,
+    sendTo = sendTo
+)
+
+fun createRedSpannableText(text: String, redTextStart: Int, redTextEnd: Int): SpannableString {
+    val spannableText = SpannableString(text)
+    spannableText.setSpan(
+        ForegroundColorSpan(Color.RED),
+        redTextStart,
+        redTextEnd,
+        Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+    )
+    return spannableText
+}
 fun MissionHistoryVO.toUiModel(
     role: Role,
     processStatus: ProcessState
 ): MissionHistoryUI {
-    fun createSpannableText(text: String, redTextStart: Int, redTextEnd: Int): SpannableString {
-        val spannableText = SpannableString(text)
-        spannableText.setSpan(
-            ForegroundColorSpan(Color.RED),
-            redTextStart,
-            redTextEnd,
-            Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-        )
-        return spannableText
-    }
 
-    val juniorWaitingForPaymentDetail = createSpannableText(
+
+    val juniorWaitingForPaymentDetail = createRedSpannableText(
         "리뷰어에게 참여비를 입금한 후, 완료 버튼을 누르세요.",
         18,
         29
     )
 
-    val juniorPaymentConfirmationDateDetail = createSpannableText(
+    val juniorPaymentConfirmationDateDetail = createRedSpannableText(
         "리뷰어가 입금 내역을 확인하고 있어요.",
         0,
         20
     )
 
-    val seniorPaymentConfirmationDateDetail = createSpannableText(
+    val seniorPaymentConfirmationDateDetail = createRedSpannableText(
         "입금자명: 김하나",
         0,
         0
     )
 
-    val juniorMissionProceedingDetail = createSpannableText(
+    val juniorMissionProceedingDetail = createRedSpannableText(
         "미션 제출 후, 리뷰 요청 버튼을 누르세요.",
         0,
         23
     )
 
-    val juniorCodeReviewDetail = createSpannableText(
+    val juniorCodeReviewDetail = createRedSpannableText(
         "리뷰어가 제출된 미션을 확인중이에요.",
         5,
         15
     )
 
-    val seniorCodeReviewDetail = createSpannableText(
+    val seniorCodeReviewDetail = createRedSpannableText(
         "깃허브에서 리뷰 작성후, 완료 버튼을 누르세요.",
         6,
         25

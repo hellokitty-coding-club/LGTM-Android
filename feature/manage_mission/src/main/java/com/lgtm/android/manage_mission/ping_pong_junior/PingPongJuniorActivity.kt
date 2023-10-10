@@ -10,6 +10,7 @@ import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityPingPongJuniorBinding
+import com.lgtm.domain.constants.ProcessState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,7 +45,7 @@ class PingPongJuniorActivity :
         }
     }
 
-    private fun setMissionProcessData(){
+    private fun setMissionProcessData() {
         binding.missionStatus.setData(
             role = pingPongJuniorViewModel.getRole(),
             missionStatus = pingPongJuniorViewModel.getMissionStatus(),
@@ -88,7 +89,15 @@ class PingPongJuniorActivity :
                 }
 
                 is NetworkState.Success -> {
-                    // do nothing
+                    when (it.data.processStatus) {
+                        ProcessState.WAITING_FOR_PAYMENT -> {
+                            setDepositInfo()
+                        }
+
+                        else -> {
+                            // do nothing
+                        }
+                    }
                 }
 
                 is NetworkState.Failure -> {
@@ -96,6 +105,15 @@ class PingPongJuniorActivity :
                 }
             }
         }
+    }
+
+    private fun setDepositInfo() {
+        supportFragmentManager.beginTransaction()
+            .replace(
+                R.id.fcv_detail_info,
+                AccountInfoFragment()
+            )
+            .commit()
     }
 
     companion object {

@@ -54,7 +54,7 @@ class PingPongJuniorViewModel @Inject constructor(
     }
 
     fun getMissionHistory(): MissionHistoryUI {
-        return pingPongJuniorUI.value?.missionHistory
+        return pingPongJuniorUI.value?.missionHistoryUI
             ?: throw IllegalArgumentException("missionHistory is null")
     }
 }

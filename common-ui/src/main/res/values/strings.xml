@@ -110,7 +110,7 @@
     <string name="terms_and_policies">약관 및 정책</string>
     <string name="service_guidelines">서비스 이용방법</string>
     <string name="privacy_policy">개인정보 처리 방침</string>
-    <string name="account_info">계정 정보</string>
+    <string name="user_info">계정 정보</string>
     <string name="logout">로그아웃</string>
     <string name="cs_center">고객센터</string>
     <string name="version_info">버전 정보</string>
@@ -155,6 +155,11 @@
     <string name="year">년</string>
     <string name="mission_empty">미션이 없습니다.</string>
     <string name="ongoing_mission">진행중인 미션</string>
+
+    <!-- pingpong-->
+    <string name="deposit_info">입금 정보</string>
+    <string name="account_info">계좌 정보</string>
+    <string name="account_holder">예금주</string>
 
 
 </resources>
