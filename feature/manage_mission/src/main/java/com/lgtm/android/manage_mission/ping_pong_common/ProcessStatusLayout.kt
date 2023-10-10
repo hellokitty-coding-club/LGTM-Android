@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.lgtm.android.common_ui.model.MissionHistoryUI
+import com.lgtm.android.common_ui.util.getString
 import com.lgtm.android.manage_mission.databinding.LayoutProcessStatusBinding
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
@@ -49,6 +50,11 @@ class ProcessStatusLayout @JvmOverloads constructor(
             ivMissionProgressLine.setCurrentState(missionStatus)
             ivMissionCodeReviewLine.setCurrentState(missionStatus)
             ivMissionReviewFinishedLine.setCurrentState(missionStatus)
+        }
+        if (missionStatus == ProcessState.MISSION_FINISHED && role == Role.REVIEWEE) {
+            val string =
+                getString(com.lgtm.android.common_ui.R.string.mission_review_finished) + "🎉"
+            binding.tvMissionReviewFinished.text = string
         }
     }
 }
