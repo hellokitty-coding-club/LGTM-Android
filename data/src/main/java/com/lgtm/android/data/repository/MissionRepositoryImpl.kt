@@ -138,4 +138,16 @@ class MissionRepositoryImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+    override suspend fun confirmDepositCompleted(missionId: Int, juniorId: Int): Result<Boolean> {
+        return try {
+            val response = missionDataSource.confirmDepositCompleted(
+                missionId = missionId, juniorId = juniorId
+            )
+            Result.success(response.data.status != null)
+        } catch (e: Exception) {
+            Log.e(TAG, "confirmDepositCompleted: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
 }

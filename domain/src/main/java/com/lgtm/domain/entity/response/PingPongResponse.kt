@@ -1,6 +1,6 @@
 package com.lgtm.domain.entity.response
 
-data class JuniorPaymentConfirmDTO(
+data class PingPongResponse(
     val dateTime: String?,
     val status: String?
 )

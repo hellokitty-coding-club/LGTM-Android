@@ -8,7 +8,7 @@ import com.lgtm.android.data.model.response.PingPongSeniorDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.model.response.SduiDTO
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
-import com.lgtm.domain.entity.response.JuniorPaymentConfirmDTO
+import com.lgtm.domain.entity.response.PingPongResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -49,7 +49,7 @@ interface MissionService {
     @POST("/v1/mission/{missionId}/payment") //주니어 입금 확인 요쳥
     suspend fun confirmJuniorPayment(
         @Path("missionId") missionId: Int
-    ): Response<BaseDTO<JuniorPaymentConfirmDTO>>
+    ): Response<BaseDTO<PingPongResponse>>
 
 
     /** 시니어 미션 참가자 별 상세 조회 */
@@ -58,6 +58,13 @@ interface MissionService {
         @Path("missionId") missionId: Int,
         @Path("juniorId") juniorId: Int
     ): Response<BaseDTO<PingPongSeniorDTO>>
+
+    /** 시니어 입금 확인 완료 */
+    @POST("/v1/mission/{missionId}/confirm/{juniorId}")
+    suspend fun confirmDepositCompleted(
+        @Path("missionId") missionId: Int,
+        @Path("juniorId") juniorId: Int
+    ): Response<BaseDTO<PingPongResponse>>
 
 }
 
