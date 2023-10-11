@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/gray_3"
+        android:background="@color/gray_2"
         tools:context=".ping_pong_junior.PingPongJuniorActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -118,7 +118,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"
-            style="@style/LGTMButtonLightWhiteTheme"
+            style="@style/LGTMButtonGrayTheme"
             android:layout_width="match_parent"
             android:text="@{viewModel.pingPongJuniorUI.buttonTitle}"
             app:layout_constraintBottom_toBottomOf="parent"
