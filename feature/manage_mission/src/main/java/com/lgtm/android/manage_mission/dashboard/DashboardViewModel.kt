@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.DashboardUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
+import com.lgtm.domain.constants.Role
 import com.lgtm.domain.usecase.MissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -30,6 +31,7 @@ class DashboardViewModel @Inject constructor(
                     Log.e(TAG, "fetchMissionInfo: $it")
                 }
         }
-
     }
+
+    fun getRole() = Role.REVIEWER
 }
