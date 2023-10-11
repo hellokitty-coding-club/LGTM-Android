@@ -33,6 +33,9 @@ class PingPongSeniorFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = dashboardViewModel
+
         onCloseClickListener()
         fetchSeniorMissionStatus()
         observeMissionProcessData()

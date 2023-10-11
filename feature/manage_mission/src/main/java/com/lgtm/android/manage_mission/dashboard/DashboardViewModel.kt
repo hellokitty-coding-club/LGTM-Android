@@ -39,7 +39,7 @@ class DashboardViewModel @Inject constructor(
     }
 
     private val _pingPongSeniorVO = MutableLiveData<PingPongSeniorUI>()
-    private val pingPongSeniorUI: LiveData<PingPongSeniorUI> = _pingPongSeniorVO
+    val pingPongSeniorUI: LiveData<PingPongSeniorUI> = _pingPongSeniorVO
 
     private val _pingPongSeniorState =
         MutableLiveData<NetworkState<PingPongSeniorVO>>(NetworkState.Init)

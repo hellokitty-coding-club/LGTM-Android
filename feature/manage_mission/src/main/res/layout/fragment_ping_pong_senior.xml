@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.manage_mission.dashboard.DashboardViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="nickname"
+                android:text="@{viewModel.pingPongSeniorUI.nickname}"
                 android:textAppearance="@style/Body2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +51,9 @@
                 android:id="@+id/tv_github_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:layout_marginBottom="20dp"
-                android:text="\@github_id"
+                android:text="@{`@` + viewModel.pingPongSeniorUI.githubId}"
                 android:textAppearance="@style/Body3R"
                 android:textColor="@color/gray_5"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -71,14 +76,14 @@
                 android:id="@+id/mission_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent">
-            </com.lgtm.android.manage_mission.ping_pong_common.ProcessStatusLayout>
+                app:layout_constraintTop_toTopOf="parent"></com.lgtm.android.manage_mission.ping_pong_common.ProcessStatusLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 style="@style/LGTMButtonLightWhiteTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="19dp"
+                android:text="@{viewModel.pingPongSeniorUI.buttonTitle}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
