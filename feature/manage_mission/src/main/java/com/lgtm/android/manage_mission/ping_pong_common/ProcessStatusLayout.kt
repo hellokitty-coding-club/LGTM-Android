@@ -25,16 +25,21 @@ class ProcessStatusLayout @JvmOverloads constructor(
     private var missionStatus: ProcessState? = null
     private var missionHistory: MissionProcessInfoUI? = null
 
-    init {
-        addView(binding.root)
-    }
 
     fun setData(role: Role, missionStatus: ProcessState, missionHistory: MissionProcessInfoUI) {
+        refreshLayout()
         this.role = role
         this.missionStatus = missionStatus
         this.missionHistory = missionHistory
         binding.missionHistory = missionHistory
         setCurrentState()
+    }
+
+    private fun refreshLayout() {
+        if (parent != null) {
+            removeView(binding.root)
+        }
+        addView(binding.root)
     }
 
 
