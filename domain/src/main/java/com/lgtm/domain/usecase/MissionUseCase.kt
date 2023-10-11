@@ -4,7 +4,9 @@ import com.lgtm.domain.constants.ArrowDirection
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
+import com.lgtm.domain.entity.response.MissionProcessInfoVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
+import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.MissionRepository
@@ -121,26 +123,8 @@ class MissionUseCase @Inject constructor(
         return try {
             val response = missionRepository.fetchJuniorMissionStatus(missionID)
                 .getOrElse { throw NoSuchElementException("Response is null") }
-            val missionHistoryVO = response.missionProcessInfoVO
-            val waitingForPaymentDate = convertTimestampToCustomFormat(missionHistoryVO.waitingForPaymentDate)
-            val paymentConfirmationDate = convertTimestampToCustomFormat(missionHistoryVO.paymentConfirmationDate)
-            val missionProceedingDate = convertTimestampToCustomFormat(missionHistoryVO.missionProceedingDate)
-            val codeReviewDate = convertTimestampToCustomFormat(missionHistoryVO.codeReviewDate)
-            val missionFinishedDate = convertTimestampToCustomFormat(missionHistoryVO.missionFinishedDate)
-            val feedbackReviewedDate = convertTimestampToCustomFormat(missionHistoryVO.feedbackReviewedDate)
-
-            Result.success(
-                response.copy(
-                    missionProcessInfoVO = missionHistoryVO.copy(
-                        waitingForPaymentDate = waitingForPaymentDate,
-                        paymentConfirmationDate = paymentConfirmationDate,
-                        missionProceedingDate = missionProceedingDate,
-                        codeReviewDate = codeReviewDate,
-                        missionFinishedDate = missionFinishedDate,
-                        feedbackReviewedDate = feedbackReviewedDate
-                    )
-                )
-            )
+            val formattedTimeStamp = formattingTimestamps(response.missionProcessInfo)
+            Result.success(response.copy(missionProcessInfo = formattedTimeStamp))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -158,6 +142,30 @@ class MissionUseCase @Inject constructor(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    suspend fun fetchSeniorMissionStatus(missionId: Int, juniorId: Int): Result<PingPongSeniorVO> {
+        return try {
+            val response = missionRepository.fetchSeniorMissionStatus(
+                missionId = missionId,
+                juniorId = juniorId
+            ).getOrElse { throw NoSuchElementException("Response is null") }
+            val formattedTimeStamp = formattingTimestamps(response.missionProcessInfo)
+            Result.success(response.copy(missionProcessInfo = formattedTimeStamp))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    private fun formattingTimestamps(missionProcessInfo: MissionProcessInfoVO): MissionProcessInfoVO {
+        return missionProcessInfo.copy(
+            waitingForPaymentDate = convertTimestampToCustomFormat(missionProcessInfo.waitingForPaymentDate),
+            paymentConfirmationDate = convertTimestampToCustomFormat(missionProcessInfo.paymentConfirmationDate),
+            missionProceedingDate = convertTimestampToCustomFormat(missionProcessInfo.missionProceedingDate),
+            codeReviewDate = convertTimestampToCustomFormat(missionProcessInfo.codeReviewDate),
+            missionFinishedDate = convertTimestampToCustomFormat(missionProcessInfo.missionFinishedDate),
+            feedbackReviewedDate = convertTimestampToCustomFormat(missionProcessInfo.feedbackReviewedDate)
+        )
     }
 
     companion object {

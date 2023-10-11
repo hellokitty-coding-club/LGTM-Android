@@ -7,7 +7,7 @@ data class PingPongJuniorVO(
     val techTagList: List<TechTagVO>,
     val processStatus: ProcessState,
     val accountInfo: AccountInfoVO,
-    val missionProcessInfoVO: MissionProcessInfoVO,
+    val missionProcessInfo: MissionProcessInfoVO,
     val reviewId: Int?, // 후기 작성이 완료되었을 경우에만 값이 존재함
     val pullRequestUrl: String?, // PR 제출 이후에만 값이 존재함
     val buttonTitle: String

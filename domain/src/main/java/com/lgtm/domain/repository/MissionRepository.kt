@@ -5,6 +5,7 @@ import com.lgtm.domain.entity.request.PostMissionRequestDTO
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
+import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.PostMissionResponseVO
 import com.lgtm.domain.entity.response.SduiVO
 
@@ -17,4 +18,8 @@ interface MissionRepository {
     suspend fun participateMission(missionId: Int): Result<Boolean>
     suspend fun fetchJuniorMissionStatus(missionId: Int): Result<PingPongJuniorVO>
     suspend fun confirmJuniorPayment(missionId: Int): Result<Boolean>
+
+    suspend fun fetchSeniorMissionStatus(
+        missionId: Int, juniorId: Int
+    ): Result<PingPongSeniorVO>
 }

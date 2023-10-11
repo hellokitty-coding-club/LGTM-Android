@@ -20,12 +20,14 @@
     </style>
 
     <style name="LgtmBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/LGTMModalStyle</item>
+        <item name="bottomSheetStyle">@style/LGTMWhiteModalStyle</item>
     </style>
 
-    <style name="LGTMModalStyle" parent="Widget.Design.BottomSheet.Modal">
+    <style name="LGTMWhiteModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rectangle_bottom_sheet</item>
+        <item name="backgroundTint">@android:color/transparent</item>
     </style>
+
 
     <style name="LGTMButton" parent="Theme.AppCompat">
         <item name="android:textAlignment">center</item>

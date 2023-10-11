@@ -9,6 +9,7 @@ import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityDashboardBinding
+import com.lgtm.android.manage_mission.ping_pong_senior.PingPongSeniorFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,8 +40,13 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private fun initAdapter() {
         techTagAdapter = TechTagAdapter()
         binding.rvTechTag.adapter = techTagAdapter
-        participantAdapter = ParticipantAdapter()
+        participantAdapter = ParticipantAdapter(::showPingPongSenior)
         binding.rvParticipant.adapter = participantAdapter
+    }
+
+    private fun showPingPongSenior(memberId: Int) {
+        val bottomSheetDialog = PingPongSeniorFragment(juniorId = memberId, missionId = missionId)
+        bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
     }
 
     private fun observeDashboardInfo() {
