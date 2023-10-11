@@ -9,7 +9,9 @@ import com.lgtm.android.common_ui.model.MemberMissionStatusUI
 import com.lgtm.android.common_ui.util.ItemDiffCallback
 
 
-class ParticipantAdapter : ListAdapter<MemberMissionStatusUI, ParticipantViewHolder>(
+class ParticipantAdapter(
+    private val onProcessStateClickListener: (Int) -> Unit
+) : ListAdapter<MemberMissionStatusUI, ParticipantViewHolder>(
     ItemDiffCallback<MemberMissionStatusUI>(onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.memberId == new.memberId })
 ) {
@@ -17,7 +19,7 @@ class ParticipantAdapter : ListAdapter<MemberMissionStatusUI, ParticipantViewHol
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParticipantViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemDashboardParticipantBinding.inflate(layoutInflater, parent, false)
-        return ParticipantViewHolder(binding)
+        return ParticipantViewHolder(binding, onProcessStateClickListener)
     }
 
     override fun onBindViewHolder(holder: ParticipantViewHolder, position: Int) {
@@ -26,9 +28,11 @@ class ParticipantAdapter : ListAdapter<MemberMissionStatusUI, ParticipantViewHol
 }
 
 class ParticipantViewHolder(
-    private val binding: ItemDashboardParticipantBinding
+    private val binding: ItemDashboardParticipantBinding,
+    private val onProcessStateClickListener: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(item: MemberMissionStatusUI) {
         binding.data = item
+        binding.clProgress.setOnClickListener { onProcessStateClickListener(item.memberId) }
     }
 }
