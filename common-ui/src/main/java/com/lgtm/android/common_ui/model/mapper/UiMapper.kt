@@ -137,7 +137,7 @@ fun MissionProcessInfoVO.toUiModel(
     val juniorPaymentConfirmationDateDetail = createRedSpannableText(
         "리뷰어가 입금 내역을 확인하고 있어요.",
         0,
-        20
+        0
     )
 
     val seniorPaymentConfirmationDateDetail = createRedSpannableText(
