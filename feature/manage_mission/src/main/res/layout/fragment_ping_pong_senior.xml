@@ -62,8 +62,8 @@
             android:id="@+id/cl_process_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:background="@drawable/rectangle_white_radius_top_20"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_profile"
             app:layout_constraintVertical_bias="0">
 
@@ -71,21 +71,19 @@
                 android:id="@+id/mission_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
             </com.lgtm.android.manage_mission.ping_pong_common.ProcessStatusLayout>
 
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/LGTMButtonLightWhiteTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mission_status" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/LGTMButtonLightWhiteTheme"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_process_state" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
