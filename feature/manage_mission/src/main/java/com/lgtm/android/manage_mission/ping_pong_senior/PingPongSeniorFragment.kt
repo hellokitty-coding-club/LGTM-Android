@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.manage_mission.dashboard.DashboardViewModel
@@ -39,6 +41,14 @@ class PingPongSeniorFragment(
         onCloseClickListener()
         fetchSeniorMissionStatus()
         observeMissionProcessData()
+        setBottomSheetBehavior()
+    }
+
+    private fun setBottomSheetBehavior(){
+        (dialog as BottomSheetDialog).behavior.apply {
+            state = BottomSheetBehavior.STATE_EXPANDED
+            skipCollapsed = true
+        }
     }
 
     private fun fetchSeniorMissionStatus() {
