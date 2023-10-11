@@ -79,6 +79,7 @@
                 app:layout_constraintTop_toTopOf="parent"></com.lgtm.android.manage_mission.ping_pong_common.ProcessStatusLayout>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next"
                 style="@style/LGTMButtonLightWhiteTheme"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
