@@ -17,9 +17,10 @@ data class PingPongJuniorDTO(
 ) {
     fun toVO(): PingPongJuniorVO {
         return PingPongJuniorVO(
-            accountInfo = accountInfo?.toVO() ?: throw NullPointerException("accountInfo is null"),
+            accountInfo = accountInfo?.toVO(),
             buttonTitle = buttonTitle ?: throw NullPointerException("buttonTitle is null"),
-            missionProcessInfo = missionProcessInfo?.toVO() ?: throw NullPointerException("missionHistory is null"),
+            missionProcessInfo = missionProcessInfo?.toVO()
+                ?: throw NullPointerException("missionHistory is null"),
             missionName = missionName ?: throw NullPointerException("missionName is null"),
             processStatus = ProcessState.getProcessState(processStatus),
             reviewId = reviewId,

@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.lgtm.android.common_ui.R.string.deposit_confirm_completed
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.manage_mission.dashboard.DashboardViewModel
@@ -46,6 +47,7 @@ class PingPongSeniorFragment(
         fetchSeniorMissionStatus()
         observeMissionProcessData()
         setBottomSheetBehavior()
+        observeConfirmDepositStatus()
     }
 
     private fun setBottomSheetBehavior() {
@@ -86,7 +88,9 @@ class PingPongSeniorFragment(
     private fun setBottomButtonClickListener() {
         binding.btnNext.setOnClickListener {
             when (dashboardViewModel.getMissionStatus()) {
-                ProcessState.WAITING_FOR_PAYMENT -> {/* disable */ }
+                ProcessState.WAITING_FOR_PAYMENT -> {/* disable */
+                }
+
                 ProcessState.PAYMENT_CONFIRMATION -> showCheckDepositDialog()
                 ProcessState.MISSION_PROCEEDING -> {} // showSubmitMissionDialog()
                 ProcessState.CODE_REVIEW -> {/* visibility gone */
@@ -115,7 +119,27 @@ class PingPongSeniorFragment(
 
     private fun confirmDepositCompleted() {
         Log.d(TAG, "confirmDepositCompleted: clicked")
-        // dashboardViewModel.confirmDepositCompleted(missionId = missionId, juniorId = juniorId)
+        dashboardViewModel.confirmDepositCompleted(missionId = missionId, juniorId = juniorId)
+    }
+
+    private fun observeConfirmDepositStatus() {
+        dashboardViewModel.confirmDepositStatus.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkState.Init -> {}
+                is NetworkState.Success -> {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(deposit_confirm_completed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    fetchSeniorMissionStatus()
+                }
+
+                is NetworkState.Failure -> {
+                    Toast.makeText(requireContext(), "${it.msg}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun setMissionProcessData() {

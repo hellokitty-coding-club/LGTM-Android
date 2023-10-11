@@ -100,7 +100,7 @@ fun PingPongJuniorVO.toUiModel(role: Role) = PingPongJuniorUI(
     missionName = missionName,
     techTagList = techTagList,
     processStatus = processStatus,
-    accountInfoUI = accountInfo.toUiModel(),
+    accountInfoUI = accountInfo?.toUiModel(),
     missionProcessInfoUI = missionProcessInfo.toUiModel(role, processStatus),
     reviewId = reviewId,
     pullRequestUrl = pullRequestUrl,
@@ -126,7 +126,8 @@ fun createRedSpannableText(text: String, redTextStart: Int, redTextEnd: Int): Sp
 
 fun MissionProcessInfoVO.toUiModel(
     role: Role,
-    processStatus: ProcessState
+    processStatus: ProcessState,
+    depositorName: String? = null,
 ): MissionProcessInfoUI {
 
 
@@ -143,7 +144,7 @@ fun MissionProcessInfoVO.toUiModel(
     )
 
     val seniorPaymentConfirmationDateDetail = createRedSpannableText(
-        "입금자명: 김하나",
+        "입금자명: $depositorName",
         0,
         0
     )
@@ -203,7 +204,7 @@ fun PingPongSeniorVO.toUiModel(role: Role) = PingPongSeniorUI(
     feedbackId = feedbackId,
     githubId = githubId,
     memberId = memberId,
-    missionProcessInfo = missionProcessInfo.toUiModel(role, processState),
+    missionProcessInfo = missionProcessInfo.toUiModel(role, processState, depositorName),
     nickname = nickname,
     processState = processState
 )

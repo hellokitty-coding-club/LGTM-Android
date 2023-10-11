@@ -9,5 +9,6 @@ data class PingPongSeniorVO(
     val memberId: Int,
     val missionProcessInfo: MissionProcessInfoVO,
     val nickname: String,
-    val processState: ProcessState
+    val processState: ProcessState,
+    val depositorName: String?,
 )
