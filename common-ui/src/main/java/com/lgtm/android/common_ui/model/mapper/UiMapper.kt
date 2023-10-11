@@ -14,6 +14,7 @@ import com.lgtm.android.common_ui.model.MemberMissionStatusUI
 import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.MissionProcessInfoUI
 import com.lgtm.android.common_ui.model.PingPongJuniorUI
+import com.lgtm.android.common_ui.model.PingPongSeniorUI
 import com.lgtm.android.common_ui.model.ProfileGlanceUI
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
@@ -24,6 +25,7 @@ import com.lgtm.domain.entity.response.MemberMissionStatusVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.MissionProcessInfoVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
+import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.ProfileVO
 import com.lgtm.domain.profile.profileViewType.ProfileGlance
 
@@ -99,7 +101,7 @@ fun PingPongJuniorVO.toUiModel(role: Role) = PingPongJuniorUI(
     techTagList = techTagList,
     processStatus = processStatus,
     accountInfoUI = accountInfo.toUiModel(),
-    missionProcessInfoUI = missionProcessInfoVO.toUiModel(role, processStatus),
+    missionProcessInfoUI = missionProcessInfo.toUiModel(role, processStatus),
     reviewId = reviewId,
     pullRequestUrl = pullRequestUrl,
     buttonTitle = buttonTitle
@@ -195,3 +197,14 @@ fun MissionProcessInfoVO.toUiModel(
         codeReviewDetail = codeReviewDetail,
     )
 }
+
+fun PingPongSeniorVO.toUiModel(role: Role) = PingPongSeniorUI(
+    buttonTitle = buttonTitle,
+    feedbackId = feedbackId,
+    githubId = githubId,
+    memberId = memberId,
+    missionProcessInfo = missionProcessInfo.toUiModel(role, processState),
+    nickname = nickname,
+    processState = processState
+)
+

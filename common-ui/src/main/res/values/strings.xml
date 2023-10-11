@@ -163,5 +163,7 @@
     <string name="deposit_dialog_title">예금주명 \'%s\'님으로 입금하셨나요?</string>
     <string name="deposit_dialog_description">버튼을 눌러, 리뷰이에게 입금했음을 알려주세요</string>
     <string name="copied">복사되었습니다.</string>
+    <string name="confirmed_deposit_data_title">입급자명과 금액을 확인했나요?</string>
+    <string name="confirmed_deposit_data_description">확인 후에는 되돌릴 수 없어요.</string>
 
 </resources>

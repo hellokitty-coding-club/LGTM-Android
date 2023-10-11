@@ -11,6 +11,7 @@ import com.lgtm.domain.entity.request.PostMissionRequestDTO
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
+import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.PostMissionResponseVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.MissionRepository
@@ -115,6 +116,25 @@ class MissionRepositoryImpl @Inject constructor(
             Result.success(response.data.status != null)
         } catch (e: Exception) {
             Log.e(TAG, "confirmJuniorPayment: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun fetchSeniorMissionStatus(
+        missionId: Int,
+        juniorId: Int
+    ): Result<PingPongSeniorVO> {
+        return try {
+            val response = missionDataSource.fetchSeniorMissionStatus(
+                missionId = missionId,
+                juniorId = juniorId
+            )
+            Result.success(response.data.toVO())
+        } catch (e: IllegalArgumentException) {
+            Log.e(TAG, "fetchSeniorMissionStatus: ${this.javaClass} ${e.message} / casting 도중 null 값 발생")
+            Result.failure(e)
+        } catch (e: Exception) {
+            Log.e(TAG, "fetchSeniorMissionStatus: ${this.javaClass} ${e.message}")
             Result.failure(e)
         }
     }
