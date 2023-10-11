@@ -2,7 +2,7 @@ package com.lgtm.domain.entity.response
 
 import java.io.Serializable
 
-data class MissionHistoryVO(
+data class MissionProcessInfoVO(
     val waitingForPaymentDate: String?,
     val paymentConfirmationDate: String?,
     val missionProceedingDate: String?,

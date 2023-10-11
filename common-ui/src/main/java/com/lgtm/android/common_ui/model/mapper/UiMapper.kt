@@ -12,7 +12,7 @@ import com.lgtm.android.common_ui.model.AccountInfoUI
 import com.lgtm.android.common_ui.model.DashboardUI
 import com.lgtm.android.common_ui.model.MemberMissionStatusUI
 import com.lgtm.android.common_ui.model.MissionDetailUI
-import com.lgtm.android.common_ui.model.MissionHistoryUI
+import com.lgtm.android.common_ui.model.MissionProcessInfoUI
 import com.lgtm.android.common_ui.model.PingPongJuniorUI
 import com.lgtm.android.common_ui.model.ProfileGlanceUI
 import com.lgtm.domain.constants.ProcessState
@@ -22,7 +22,7 @@ import com.lgtm.domain.entity.response.AccountInfoVO
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MemberMissionStatusVO
 import com.lgtm.domain.entity.response.MissionDetailVO
-import com.lgtm.domain.entity.response.MissionHistoryVO
+import com.lgtm.domain.entity.response.MissionProcessInfoVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.entity.response.ProfileVO
 import com.lgtm.domain.profile.profileViewType.ProfileGlance
@@ -99,7 +99,7 @@ fun PingPongJuniorVO.toUiModel(role: Role) = PingPongJuniorUI(
     techTagList = techTagList,
     processStatus = processStatus,
     accountInfoUI = accountInfo.toUiModel(),
-    missionHistoryUI = missionHistory.toUiModel(role, processStatus),
+    missionProcessInfoUI = missionProcessInfoVO.toUiModel(role, processStatus),
     reviewId = reviewId,
     pullRequestUrl = pullRequestUrl,
     buttonTitle = buttonTitle
@@ -121,10 +121,11 @@ fun createRedSpannableText(text: String, redTextStart: Int, redTextEnd: Int): Sp
     )
     return spannableText
 }
-fun MissionHistoryVO.toUiModel(
+
+fun MissionProcessInfoVO.toUiModel(
     role: Role,
     processStatus: ProcessState
-): MissionHistoryUI {
+): MissionProcessInfoUI {
 
 
     val juniorWaitingForPaymentDetail = createRedSpannableText(
@@ -136,7 +137,7 @@ fun MissionHistoryVO.toUiModel(
     val juniorPaymentConfirmationDateDetail = createRedSpannableText(
         "리뷰어가 입금 내역을 확인하고 있어요.",
         0,
-        20
+        0
     )
 
     val seniorPaymentConfirmationDateDetail = createRedSpannableText(
@@ -181,7 +182,7 @@ fun MissionHistoryVO.toUiModel(
         else if (role == Role.REVIEWER && processStatus == ProcessState.CODE_REVIEW) seniorCodeReviewDetail
         else null
 
-    return MissionHistoryUI(
+    return MissionProcessInfoUI(
         waitingForPaymentDate = waitingForPaymentDate,
         paymentConfirmationDate = paymentConfirmationDate,
         missionProceedingDate = missionProceedingDate,

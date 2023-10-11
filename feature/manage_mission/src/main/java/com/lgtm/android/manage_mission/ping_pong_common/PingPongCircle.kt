@@ -42,13 +42,22 @@ class PingPongCircle @JvmOverloads constructor(
     }
 
     private fun setCircle() {
+        if (parent != null) {
+            removeView(binding.root)
+        }
         addView(binding.root)
         if (indicatingState.isPastThan(currentState)) {
             binding.ivPast.visibility = VISIBLE
+            binding.ivCurrent.visibility = GONE
+            binding.ivFuture.visibility = GONE
         } else if (indicatingState.isSameWith(currentState)) {
             binding.ivCurrent.visibility = VISIBLE
+            binding.ivPast.visibility = GONE
+            binding.ivFuture.visibility = GONE
         } else {
             binding.ivFuture.visibility = VISIBLE
+            binding.ivPast.visibility = GONE
+            binding.ivCurrent.visibility = GONE
         }
     }
 }

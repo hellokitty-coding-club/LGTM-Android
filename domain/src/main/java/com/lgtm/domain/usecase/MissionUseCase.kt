@@ -121,7 +121,7 @@ class MissionUseCase @Inject constructor(
         return try {
             val response = missionRepository.fetchJuniorMissionStatus(missionID)
                 .getOrElse { throw NoSuchElementException("Response is null") }
-            val missionHistoryVO = response.missionHistory
+            val missionHistoryVO = response.missionProcessInfoVO
             val waitingForPaymentDate = convertTimestampToCustomFormat(missionHistoryVO.waitingForPaymentDate)
             val paymentConfirmationDate = convertTimestampToCustomFormat(missionHistoryVO.paymentConfirmationDate)
             val missionProceedingDate = convertTimestampToCustomFormat(missionHistoryVO.missionProceedingDate)
@@ -131,7 +131,7 @@ class MissionUseCase @Inject constructor(
 
             Result.success(
                 response.copy(
-                    missionHistory = missionHistoryVO.copy(
+                    missionProcessInfoVO = missionHistoryVO.copy(
                         waitingForPaymentDate = waitingForPaymentDate,
                         paymentConfirmationDate = paymentConfirmationDate,
                         missionProceedingDate = missionProceedingDate,
@@ -152,6 +152,13 @@ class MissionUseCase @Inject constructor(
         return localDateTime.format(dotStyleFormatter)
     }
 
+    suspend fun confirmJuniorPayment(missionID: Int): Result<Boolean> {
+        return try {
+            missionRepository.confirmJuniorPayment(missionID)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
     companion object {
         // viewType

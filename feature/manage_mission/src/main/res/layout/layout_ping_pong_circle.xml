@@ -14,8 +14,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_current"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="@drawable/oval_black_and_green_diameter_28"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,8 +26,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_future"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:background="@drawable/oval_gray_3_diameter_16"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,8 +37,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_past"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:background="@drawable/oval_black_diameter_16"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

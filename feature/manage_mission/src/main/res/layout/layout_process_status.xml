@@ -10,7 +10,7 @@
 
         <variable
             name="missionHistory"
-            type="com.lgtm.android.common_ui.model.MissionHistoryUI" />
+            type="com.lgtm.android.common_ui.model.MissionProcessInfoUI" />
 
     </data>
 
@@ -76,7 +76,7 @@
             android:id="@+id/iv_payment_confirm_line"
             android:layout_width="2dp"
             android:layout_height="0dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="37dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
             app:layout_constraintBottom_toBottomOf="@id/iv_payment_confirm"
@@ -89,6 +89,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginTop="34dp"
+            android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
             app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
             app:layout_constraintTop_toBottomOf="@id/iv_waiting_for_payment"
@@ -144,7 +145,7 @@
             android:id="@+id/iv_mission_progress_line"
             android:layout_width="2dp"
             android:layout_height="0dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="37dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
             app:layout_constraintBottom_toBottomOf="@id/iv_mission_progress"
             app:layout_constraintStart_toStartOf="parent"
@@ -156,6 +157,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginTop="34dp"
+            android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
             app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
             app:layout_constraintTop_toBottomOf="@id/iv_payment_confirm"
@@ -209,7 +211,7 @@
             android:id="@+id/iv_mission_code_review_line"
             android:layout_width="2dp"
             android:layout_height="0dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="37dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
             app:layout_constraintBottom_toBottomOf="@id/iv_mission_code_review"
             app:layout_constraintStart_toStartOf="parent"
@@ -221,6 +223,7 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_marginTop="34dp"
+            android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
             app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
             app:layout_constraintTop_toBottomOf="@id/iv_mission_progress"
@@ -274,7 +277,7 @@
             android:id="@+id/iv_mission_review_finished_line"
             android:layout_width="2dp"
             android:layout_height="0dp"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="37dp"
             android:layout_marginBottom="6dp"
             android:background="@drawable/line_vertical_gray_3_dotted"
             app:layout_constraintBottom_toBottomOf="@id/iv_mission_review_finished"
@@ -288,6 +291,7 @@
             android:layout_height="28dp"
             android:layout_marginTop="34dp"
             android:layout_marginBottom="25dp"
+            android:elevation="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
             app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
