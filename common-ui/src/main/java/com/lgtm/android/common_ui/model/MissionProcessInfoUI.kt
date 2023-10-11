@@ -13,5 +13,6 @@ data class MissionProcessInfoUI(
     val codeReviewDate: String?,
     val codeReviewDetail: SpannableString? = null,
     val missionFinishedDate: String?,
-    val feedbackReviewedDate: String?
+    val feedbackReviewedDate: String?,
+    val depositorName: String? = null,
 ) : Serializable
