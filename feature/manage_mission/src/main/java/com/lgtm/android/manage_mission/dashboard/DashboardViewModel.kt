@@ -70,4 +70,21 @@ class DashboardViewModel @Inject constructor(
         return pingPongSeniorUI.value?.missionProcessInfo
             ?: throw IllegalStateException("missionProcessInfo is null")
     }
+
+    private val _confirmDepositStatus = MutableLiveData<NetworkState<Boolean>>(NetworkState.Init)
+    val confirmDepositStatus: LiveData<NetworkState<Boolean>> = _confirmDepositStatus
+    fun confirmDepositCompleted(missionId: Int, juniorId: Int) {
+        viewModelScope.launch(lgtmErrorHandler) {
+            missionUseCase.confirmDepositCompleted(
+                missionId = missionId,
+                juniorId = juniorId
+            ).onSuccess {
+                _confirmDepositStatus.postValue(NetworkState.Success(it))
+                Log.d(TAG, "confirmDepositCompleted: $it")
+            }.onFailure {
+                Log.e(TAG, "confirmDepositCompleted: $it")
+            }
+        }
+
+    }
 }

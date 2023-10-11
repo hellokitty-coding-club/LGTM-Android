@@ -13,7 +13,9 @@ data class PingPongSeniorDTO(
     @SerializedName("missionHistory")
     val missionProcessInfo: MissionProcessInfoDTO?,
     val nickname: String?,
-    val status: String?
+    val status: String?,
+    @SerializedName("realName")
+    val depositorName: String?,
 ){
     fun toVO() : PingPongSeniorVO {
         return PingPongSeniorVO(
@@ -23,7 +25,8 @@ data class PingPongSeniorDTO(
             memberId = memberId ?: throw NullPointerException("memberId is null"),
             missionProcessInfo = missionProcessInfo?.toVO() ?: throw NullPointerException("missionHistory is null"),
             nickname = nickname ?: UNKNOWN,
-            processState = ProcessState.getProcessState(status)
+            processState = ProcessState.getProcessState(status),
+            depositorName = depositorName
         )
     }
 }

@@ -22,4 +22,7 @@ interface MissionRepository {
     suspend fun fetchSeniorMissionStatus(
         missionId: Int, juniorId: Int
     ): Result<PingPongSeniorVO>
+
+    suspend fun confirmDepositCompleted(missionId: Int, juniorId: Int): Result<Boolean>
+
 }

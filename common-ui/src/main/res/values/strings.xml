@@ -165,5 +165,6 @@
     <string name="copied">복사되었습니다.</string>
     <string name="confirmed_deposit_data_title">입급자명과 금액을 확인했나요?</string>
     <string name="confirmed_deposit_data_description">확인 후에는 되돌릴 수 없어요.</string>
+    <string name="deposit_confirm_completed">입금 확인이 완료되었습니다.</string>
 
 </resources>
