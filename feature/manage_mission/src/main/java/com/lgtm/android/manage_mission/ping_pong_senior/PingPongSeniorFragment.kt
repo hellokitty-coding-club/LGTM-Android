@@ -1,20 +1,21 @@
 package com.lgtm.android.manage_mission.ping_pong_senior
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.manage_mission.dashboard.DashboardViewModel
 import com.lgtm.android.manage_mission.databinding.FragmentPingPongSeniorBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PingPongSeniorFragment(
-    private val juniorId: Int
+    private val juniorId: Int,
+    private val missionId: Int
 ) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentPingPongSeniorBinding? = null
@@ -32,9 +33,15 @@ class PingPongSeniorFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated: juniorId = $juniorId")
         onCloseClickListener()
+        fetchSeniorMissionStatus()
+        observeMissionProcessData()
     }
+
+    private fun fetchSeniorMissionStatus() {
+        dashboardViewModel.fetchSeniorMissionStatus(missionId = missionId, juniorId = juniorId)
+    }
+
 
     private fun onCloseClickListener() {
         binding.ivClose.setOnClickListener {
@@ -42,12 +49,24 @@ class PingPongSeniorFragment(
         }
     }
 
+    private fun observeMissionProcessData() {
+        dashboardViewModel.pingPongSeniorState.observe(viewLifecycleOwner) {
+            when (it) {
+                is NetworkState.Init -> {}
+                is NetworkState.Success -> setMissionProcessData()
+                is NetworkState.Failure -> {
+                    Toast.makeText(requireContext(), "${it.msg}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
     private fun setMissionProcessData() {
-//        binding.missionStatus.setData(
-//            role = dashboardViewModel.getRole(),
-//            missionStatus = dashboardViewModel.getMissionStatus(),
-//            missionHistory = dashboardViewModel.getMissionHistory()
-//        )
+        binding.missionStatus.setData(
+            role = dashboardViewModel.getRole(),
+            missionStatus = dashboardViewModel.getMissionStatus(),
+            missionHistory = dashboardViewModel.getMissionProcessInfo()
+        )
     }
 
     override fun onDestroy() {

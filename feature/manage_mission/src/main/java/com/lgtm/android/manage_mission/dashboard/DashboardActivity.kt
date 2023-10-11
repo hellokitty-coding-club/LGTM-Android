@@ -44,8 +44,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         binding.rvParticipant.adapter = participantAdapter
     }
 
-    private fun showPingPongSenior(memberId : Int){
-        val bottomSheetDialog = PingPongSeniorFragment(memberId)
+    private fun showPingPongSenior(memberId: Int) {
+        val bottomSheetDialog = PingPongSeniorFragment(juniorId = memberId, missionId = missionId)
         bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
     }
 

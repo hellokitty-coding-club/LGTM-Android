@@ -5,6 +5,7 @@ import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
+import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.SduiVO
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.MissionRepository
@@ -122,12 +123,17 @@ class MissionUseCase @Inject constructor(
             val response = missionRepository.fetchJuniorMissionStatus(missionID)
                 .getOrElse { throw NoSuchElementException("Response is null") }
             val missionHistoryVO = response.missionProcessInfoVO
-            val waitingForPaymentDate = convertTimestampToCustomFormat(missionHistoryVO.waitingForPaymentDate)
-            val paymentConfirmationDate = convertTimestampToCustomFormat(missionHistoryVO.paymentConfirmationDate)
-            val missionProceedingDate = convertTimestampToCustomFormat(missionHistoryVO.missionProceedingDate)
+            val waitingForPaymentDate =
+                convertTimestampToCustomFormat(missionHistoryVO.waitingForPaymentDate)
+            val paymentConfirmationDate =
+                convertTimestampToCustomFormat(missionHistoryVO.paymentConfirmationDate)
+            val missionProceedingDate =
+                convertTimestampToCustomFormat(missionHistoryVO.missionProceedingDate)
             val codeReviewDate = convertTimestampToCustomFormat(missionHistoryVO.codeReviewDate)
-            val missionFinishedDate = convertTimestampToCustomFormat(missionHistoryVO.missionFinishedDate)
-            val feedbackReviewedDate = convertTimestampToCustomFormat(missionHistoryVO.feedbackReviewedDate)
+            val missionFinishedDate =
+                convertTimestampToCustomFormat(missionHistoryVO.missionFinishedDate)
+            val feedbackReviewedDate =
+                convertTimestampToCustomFormat(missionHistoryVO.feedbackReviewedDate)
 
             Result.success(
                 response.copy(
@@ -155,6 +161,14 @@ class MissionUseCase @Inject constructor(
     suspend fun confirmJuniorPayment(missionID: Int): Result<Boolean> {
         return try {
             missionRepository.confirmJuniorPayment(missionID)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun fetchSeniorMissionStatus(missionId: Int, juniorId: Int): Result<PingPongSeniorVO> {
+        return try {
+            missionRepository.fetchSeniorMissionStatus(missionId = missionId, juniorId = juniorId)
         } catch (e: Exception) {
             Result.failure(e)
         }
