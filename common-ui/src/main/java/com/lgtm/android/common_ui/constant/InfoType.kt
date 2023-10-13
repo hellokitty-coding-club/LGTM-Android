@@ -27,6 +27,7 @@ enum class InfoType(
     ),
     GITHUB_URL_ONLY(R.color.red, R.string.github_url_only, true, R.drawable.ic_info_red),
     DUPLICATE_NICKNAME(R.color.red, R.string.duplicate_nickname, true, R.drawable.ic_info_red),
-    CAN_USE(R.color.blue, R.string.can_use, true, R.drawable.ic_info_blue)
+    CAN_USE(R.color.blue, R.string.can_use, true, R.drawable.ic_info_blue),
+    PROPER_URL(R.color.blue, R.string.proper_url, true, R.drawable.ic_info_blue)
 }
 

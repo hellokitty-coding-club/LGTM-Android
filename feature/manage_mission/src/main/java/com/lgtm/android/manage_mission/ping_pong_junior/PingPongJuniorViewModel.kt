@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.lgtm.android.common_ui.base.BaseViewModel
+import com.lgtm.android.common_ui.constant.InfoType
+import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.model.MissionProcessInfoUI
 import com.lgtm.android.common_ui.model.PingPongJuniorUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
@@ -71,16 +73,17 @@ class PingPongJuniorViewModel @Inject constructor(
             ?: throw IllegalArgumentException("accountHolder is null")
     }
 
-    private val _confirmJuniorPaymentState: MutableLiveData<NetworkState<Boolean>> = MutableLiveData(NetworkState.Init)
+    private val _confirmJuniorPaymentState: MutableLiveData<NetworkState<Boolean>> =
+        MutableLiveData(NetworkState.Init)
     val confirmJuniorPaymentState: LiveData<NetworkState<Boolean>> = _confirmJuniorPaymentState
-    fun confirmJuniorPayment(){
+    fun confirmJuniorPayment() {
         viewModelScope.launch {
-                missionUseCase.confirmJuniorPayment(missionID)
+            missionUseCase.confirmJuniorPayment(missionID)
                 .onSuccess {
                     _confirmJuniorPaymentState.postValue(NetworkState.Success(it))
                     Log.d(TAG, "confirmJuniorPayment: $it")
                 }.onFailure {
-                        _confirmJuniorPaymentState.postValue(NetworkState.Failure(it.message))
+                    _confirmJuniorPaymentState.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "confirmJuniorPayment: $it")
                 }
         }
@@ -88,5 +91,40 @@ class PingPongJuniorViewModel @Inject constructor(
 
     fun setMissionId(missionID: Int) {
         this.missionID = missionID
+    }
+
+
+    val pullRequestUrlEditTextData = MutableLiveData(
+        EditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.NONE),
+            maxLength = 1000,
+            hint = "Pull Request URL을 입력하세요."
+        )
+    )
+
+    val pullRequestUrl: LiveData<String> = pullRequestUrlEditTextData.value?.text ?: MutableLiveData("")
+
+    fun updateMissionTitleInfoStatus() {
+        pullRequestUrlEditTextData.value?.infoStatus?.value =
+            if (this.pullRequestUrl.value?.isEmpty() == true)
+                InfoType.NONE
+            else if (isGithubPrUrl(pullRequestUrl.value?.trim() ?: ""))
+                InfoType.PROPER_URL
+            else InfoType.GITHUB_URL_ONLY
+    }
+
+    private fun isGithubPrUrl(url: String): Boolean {
+        val regex = Regex("(https://)?github.com/.*pull/\\d+")
+        return regex.matches(url)
+    }
+
+    private val _isValidUrl = MutableLiveData(false)
+    val isValidUrl: LiveData<Boolean> = _isValidUrl
+
+    fun setIsValidUrl() {
+        _isValidUrl.value =
+            pullRequestUrlEditTextData.value?.infoStatus?.value == InfoType.PROPER_URL
+                    && pullRequestUrlEditTextData.value?.text?.value?.isNotBlank() == true
     }
 }
