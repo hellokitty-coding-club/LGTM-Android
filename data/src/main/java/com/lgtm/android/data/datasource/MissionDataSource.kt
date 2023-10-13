@@ -1,5 +1,6 @@
 package com.lgtm.android.data.datasource
 
+import com.lgtm.android.data.model.request.GithubPrUrlRequest
 import com.lgtm.android.data.model.response.BaseDTO
 import com.lgtm.android.data.model.response.DashboardDTO
 import com.lgtm.android.data.model.response.MissionDetailDTO
@@ -55,6 +56,15 @@ class MissionDataSource @Inject constructor(
             missionService.confirmDepositCompleted(
                 missionId = missionId,
                 juniorId = juniorId
+            )
+        )
+    }
+
+    suspend fun submitPullRequest(missionId: Int, githubPrUrl: String): BaseDTO<PingPongResponse> {
+        return checkResponse(
+            missionService.submitPullRequest(
+                missionId = missionId,
+                githubPrUrl = GithubPrUrlRequest(githubPrUrl = githubPrUrl)
             )
         )
     }

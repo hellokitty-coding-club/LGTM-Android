@@ -3,8 +3,12 @@ package com.lgtm.android.manage_mission.ping_pong_junior
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
@@ -33,7 +37,7 @@ class PingPongJuniorActivity :
         observeConfirmJuniorPaymentState()
     }
 
-    private fun setExtraDataToViewModel(){
+    private fun setExtraDataToViewModel() {
         pingPongJuniorViewModel.setMissionId(missionId)
     }
 
@@ -122,13 +126,18 @@ class PingPongJuniorActivity :
     }
 
     private fun setBottomButtonState() {
-        binding.btnNext.isEnabled = when (pingPongJuniorViewModel.getMissionStatus()) {
-            ProcessState.WAITING_FOR_PAYMENT -> true
-            ProcessState.PAYMENT_CONFIRMATION -> false
-            ProcessState.MISSION_PROCEEDING -> false // 추후 github PR이 올라오면 true로 변경
-            ProcessState.CODE_REVIEW -> false
-            ProcessState.MISSION_FINISHED -> true
-            ProcessState.FEEDBACK_REVIEWED -> true
+        when (pingPongJuniorViewModel.getMissionStatus()) {
+            ProcessState.WAITING_FOR_PAYMENT -> binding.btnNext.isEnabled = true
+            ProcessState.PAYMENT_CONFIRMATION -> binding.btnNext.isEnabled = false
+            ProcessState.MISSION_PROCEEDING -> {
+                pingPongJuniorViewModel.isValidUrl.observe(this) {
+                    binding.btnNext.isEnabled = it
+                }
+            }
+
+            ProcessState.CODE_REVIEW -> binding.btnNext.isEnabled = false
+            ProcessState.MISSION_FINISHED -> binding.btnNext.isEnabled = true
+            ProcessState.FEEDBACK_REVIEWED -> binding.btnNext.isEnabled = true
         }
     }
 
@@ -139,7 +148,7 @@ class PingPongJuniorActivity :
                 ProcessState.PAYMENT_CONFIRMATION -> {/* disable */
                 }
 
-                ProcessState.MISSION_PROCEEDING -> {} // showSubmitMissionDialog()
+                ProcessState.MISSION_PROCEEDING -> showSubmitMissionDialog()
                 ProcessState.CODE_REVIEW -> {/* visibility gone */
                 }
 
@@ -154,10 +163,10 @@ class PingPongJuniorActivity :
 
     private fun showCheckDepositDialog() {
         val title = getString(
-            com.lgtm.android.common_ui.R.string.deposit_dialog_title,
+            string.deposit_dialog_title,
             pingPongJuniorViewModel.getAccountHolder()
         )
-        val description = getString(com.lgtm.android.common_ui.R.string.deposit_dialog_description)
+        val description = getString(string.deposit_dialog_description)
         val dialog = LgtmConfirmationDialog(
             title = title,
             description = description,
@@ -168,18 +177,35 @@ class PingPongJuniorActivity :
     }
 
     private fun postJuniorDepositRequest() {
-         pingPongJuniorViewModel.confirmJuniorPayment()
+        pingPongJuniorViewModel.confirmJuniorPayment()
     }
 
-    private fun observeConfirmJuniorPaymentState(){
-        pingPongJuniorViewModel.confirmJuniorPaymentState.observe(this){
-            when (it){
+    private fun showSubmitMissionDialog() {
+        val title = getString(string.want_to_request_code_review)
+        val description = getString(string.review_request_noti_will_be_sent)
+        val dialog = LgtmConfirmationDialog(
+            title = title,
+            description = description,
+            doAfterConfirm = ::postRequestCodeReview,
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GREEN
+        )
+        dialog.show(supportFragmentManager, this.javaClass.name)
+    }
+
+    private fun postRequestCodeReview() {
+        pingPongJuniorViewModel.requestCodeReview()
+    }
+
+
+    private fun observeConfirmJuniorPaymentState() {
+        pingPongJuniorViewModel.moveToNextProcessState.observe(this) {
+            when (it) {
                 is NetworkState.Init -> {
                     // do nothing
                 }
 
                 is NetworkState.Success -> {
-                    Toast.makeText(this, "입금 확인 요청이 전송되었습니다.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "완료되었습니다.", Toast.LENGTH_SHORT).show()
                     fetchJuniorMissionStatus()
                 }
 
@@ -191,21 +217,24 @@ class PingPongJuniorActivity :
     }
 
     private fun setDepositInfo() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_detail_info, AccountInfoFragment())
-            .commit()
+        setFragmentWith<AccountInfoFragment>()
     }
 
     private fun setSubmittingMission() {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.fcv_detail_info, SubmittingMissionFragment()())
-//            .commit()
+        setFragmentWith<SubmittingMissionFragment>()
     }
 
     private fun setSubmittedMission() {
 //        supportFragmentManager.beginTransaction()
 //            .replace(R.id.fcv_detail_info, SubmittedMissionFragment()())
 //            .commit()
+    }
+
+
+    private inline fun <reified T : Fragment> setFragmentWith() {
+        supportFragmentManager.commit {
+            replace<T>(containerViewId = R.id.fcv_detail_info)
+        }
     }
 
     companion object {
