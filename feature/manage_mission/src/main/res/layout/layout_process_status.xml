@@ -216,7 +216,7 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_mission_code_review"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_mission_progress"
-            custom:indicatingState="MISSION_FINISHED" />
+            custom:indicatingState="CODE_REVIEW" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongCircle
             android:id="@+id/iv_mission_code_review"
@@ -227,7 +227,7 @@
             app:layout_constraintEnd_toEndOf="@id/iv_waiting_for_payment"
             app:layout_constraintStart_toStartOf="@id/iv_waiting_for_payment"
             app:layout_constraintTop_toBottomOf="@id/iv_mission_progress"
-            custom:indicatingState="MISSION_FINISHED"
+            custom:indicatingState="CODE_REVIEW"
             tools:background="@drawable/oval_gray_3_diameter_16"
             tools:layout_height="16dp"
             tools:layout_marginTop="45dp"

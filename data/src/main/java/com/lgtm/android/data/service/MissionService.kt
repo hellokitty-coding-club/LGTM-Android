@@ -1,5 +1,6 @@
 package com.lgtm.android.data.service
 
+import com.lgtm.android.data.model.request.GithubPrUrlRequest
 import com.lgtm.android.data.model.response.BaseDTO
 import com.lgtm.android.data.model.response.DashboardDTO
 import com.lgtm.android.data.model.response.MissionDetailDTO
@@ -31,40 +32,47 @@ interface MissionService {
         @Query("missionId") missionId: Int
     ): Response<BaseDTO<MissionDetailDTO>>
 
-    @GET("/v1/mission/{missionId}/senior")
+    @GET("v1/mission/{missionId}/senior")
     suspend fun fetchDashboardInfo(
         @Path("missionId") missionId: Int
     ): Response<BaseDTO<DashboardDTO>>
 
-    @POST("/v1/mission/{missionId}")
+    @POST("v1/mission/{missionId}")
     suspend fun participateMission(
         @Path("missionId") missionId: Int
     ): Response<BaseDTO<Boolean>>
 
-    @GET("/v1/mission/{missionId}/junior")
+    @GET("v1/mission/{missionId}/junior")
     suspend fun fetchJuniorMissionStatus(
         @Path("missionId") missionId: Int
     ): Response<BaseDTO<PingPongJuniorDTO>>
 
-    @POST("/v1/mission/{missionId}/payment") //주니어 입금 확인 요쳥
+    @POST("v1/mission/{missionId}/payment") //주니어 입금 확인 요쳥
     suspend fun confirmJuniorPayment(
         @Path("missionId") missionId: Int
     ): Response<BaseDTO<PingPongResponse>>
 
 
     /** 시니어 미션 참가자 별 상세 조회 */
-    @GET("/v1/mission/{missionId}/senior/{juniorId}")
+    @GET("v1/mission/{missionId}/senior/{juniorId}")
     suspend fun fetchSeniorMissionDetail(
         @Path("missionId") missionId: Int,
         @Path("juniorId") juniorId: Int
     ): Response<BaseDTO<PingPongSeniorDTO>>
 
     /** 시니어 입금 확인 완료 */
-    @POST("/v1/mission/{missionId}/confirm/{juniorId}")
+    @POST("v1/mission/{missionId}/confirm/{juniorId}")
     suspend fun confirmDepositCompleted(
         @Path("missionId") missionId: Int,
         @Path("juniorId") juniorId: Int
     ): Response<BaseDTO<PingPongResponse>>
 
+
+    /** 주니어 PR URL 제출(코드리뷰 요청) */
+    @POST("v1/mission/{missionId}/pr")
+    suspend fun submitPullRequest(
+        @Path("missionId") missionId: Int,
+        @Body githubPrUrl: GithubPrUrlRequest
+    ): Response<BaseDTO<PingPongResponse>>
 }
 

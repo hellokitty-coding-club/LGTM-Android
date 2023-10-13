@@ -176,6 +176,13 @@ class MissionUseCase @Inject constructor(
         }
     }
 
+    suspend fun submitPullRequest(missionId: Int, githubPrUrl: String) : Result<Boolean> {
+        return try {
+            missionRepository.submitPullRequest(missionId, githubPrUrl)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
     companion object {
         // viewType

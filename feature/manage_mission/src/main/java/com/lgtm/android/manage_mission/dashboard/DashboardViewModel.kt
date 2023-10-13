@@ -10,6 +10,7 @@ import com.lgtm.android.common_ui.model.DashboardUI
 import com.lgtm.android.common_ui.model.MissionProcessInfoUI
 import com.lgtm.android.common_ui.model.PingPongSeniorUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
+import com.lgtm.android.common_ui.util.Event
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
@@ -71,20 +72,20 @@ class DashboardViewModel @Inject constructor(
             ?: throw IllegalStateException("missionProcessInfo is null")
     }
 
-    private val _confirmDepositStatus = MutableLiveData<NetworkState<Boolean>>(NetworkState.Init)
-    val confirmDepositStatus: LiveData<NetworkState<Boolean>> = _confirmDepositStatus
+    private val _confirmDepositStatus = MutableLiveData<Event<NetworkState<String>>>()
+    val confirmDepositStatus: LiveData<Event<NetworkState<String>>> = _confirmDepositStatus
     fun confirmDepositCompleted(missionId: Int, juniorId: Int) {
         viewModelScope.launch(lgtmErrorHandler) {
             missionUseCase.confirmDepositCompleted(
                 missionId = missionId,
                 juniorId = juniorId
             ).onSuccess {
-                _confirmDepositStatus.postValue(NetworkState.Success(it))
+                _confirmDepositStatus.postValue(Event(NetworkState.Success("")))
                 Log.d(TAG, "confirmDepositCompleted: $it")
             }.onFailure {
+                _confirmDepositStatus.postValue(Event(NetworkState.Failure(it.message)))
                 Log.e(TAG, "confirmDepositCompleted: $it")
             }
         }
-
     }
 }

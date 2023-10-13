@@ -53,13 +53,13 @@ fun ProfileVO.toUiModel(role: Role): ProfileGlanceUI = ProfileGlanceUI(
     profileImage = profileImageUrl,
     nickname = nickname,
     githubId = githubId,
-    detailInfoLabel = when (role) {
-        Role.REVIEWER -> R.string.company_slash_position
-        Role.REVIEWEE -> R.string.education
+    detailInfoLabel = when (company == null) {
+        false -> R.string.company_slash_position
+        true -> R.string.education
     },
-    detailInfo = when (role) {
-        Role.REVIEWER -> "$company / $position"
-        Role.REVIEWEE -> educationalHistory
+    detailInfo = when (company == null) {
+        false -> "$company / $position"
+        true -> educationalHistory
     } ?: UNKNOWN
 )
 
@@ -68,13 +68,13 @@ fun ProfileGlance.toUiModel(): ProfileGlanceUI = ProfileGlanceUI(
     profileImage = profileImage,
     nickname = nickname,
     githubId = githubId,
-    detailInfoLabel = when (memberType) {
-        Role.REVIEWER -> R.string.company_slash_position
-        Role.REVIEWEE -> R.string.education
+    detailInfoLabel = when (company == null) {
+        false -> R.string.company_slash_position
+        true -> R.string.education
     },
-    detailInfo = when (memberType) {
-        Role.REVIEWER -> "$company / $position"
-        Role.REVIEWEE -> educationalHistory
+    detailInfo = when (company == null) {
+        false -> "$company / $position"
+        true -> educationalHistory
     } ?: UNKNOWN
 )
 

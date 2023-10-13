@@ -166,5 +166,11 @@
     <string name="confirmed_deposit_data_title">입급자명과 금액을 확인했나요?</string>
     <string name="confirmed_deposit_data_description">확인 후에는 되돌릴 수 없어요.</string>
     <string name="deposit_confirm_completed">입금 확인이 완료되었습니다.</string>
+    <string name="submitting_mission">미션 제출하기</string>
+    <string name="enter_pull_request_url">Pull Request URL을 입력하세요.</string>
+    <string name="proper_url">올바른 링크입니다.</string>
+    <string name="want_to_request_code_review">미션 리뷰를 요청하시겠어요?</string>
+    <string name="review_request_noti_will_be_sent">리뷰어에게 리뷰요청 알림이 전달됩니다.</string>
+
 
 </resources>
