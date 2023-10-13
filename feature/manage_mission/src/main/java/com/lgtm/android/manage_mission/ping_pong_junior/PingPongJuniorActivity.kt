@@ -3,6 +3,9 @@ package com.lgtm.android.manage_mission.ping_pong_junior
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.lgtm.android.common_ui.R.string
@@ -214,21 +217,24 @@ class PingPongJuniorActivity :
     }
 
     private fun setDepositInfo() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_detail_info, AccountInfoFragment())
-            .commit()
+        setFragmentWith<AccountInfoFragment>()
     }
 
     private fun setSubmittingMission() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fcv_detail_info, SubmittingMissionFragment())
-            .commit()
+        setFragmentWith<SubmittingMissionFragment>()
     }
 
     private fun setSubmittedMission() {
 //        supportFragmentManager.beginTransaction()
 //            .replace(R.id.fcv_detail_info, SubmittedMissionFragment()())
 //            .commit()
+    }
+
+
+    private inline fun <reified T : Fragment> setFragmentWith() {
+        supportFragmentManager.commit {
+            replace<T>(containerViewId = R.id.fcv_detail_info)
+        }
     }
 
     companion object {
