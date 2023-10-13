@@ -116,7 +116,6 @@ class PingPongJuniorViewModel @Inject constructor(
     }
 
     private fun isGithubPrUrl(url: String): Boolean {
-        return true
         val regex = Regex("(https://)?github.com/.*pull/\\d+")
         return regex.matches(url)
     }
@@ -133,7 +132,7 @@ class PingPongJuniorViewModel @Inject constructor(
     fun requestCodeReview() {
         viewModelScope.launch {
             val pullRequestUrl = pullRequestUrl.value ?: return@launch
-            missionUseCase.submitPullRequest(missionID, pullRequestUrl)
+            missionUseCase.submitPullRequest(missionId = missionID, githubPrUrl = pullRequestUrl)
                 .onSuccess {
                     _moveToNextProcessState.postValue(NetworkState.Success(it))
                 }.onFailure {
