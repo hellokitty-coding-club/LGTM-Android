@@ -169,5 +169,8 @@
     <string name="submitting_mission">미션 제출하기</string>
     <string name="enter_pull_request_url">Pull Request URL을 입력하세요.</string>
     <string name="proper_url">올바른 링크입니다.</string>
+    <string name="want_to_request_code_review">미션 리뷰를 요청하시겠어요?</string>
+    <string name="review_request_noti_will_be_sent">리뷰어에게 리뷰요청 알림이 전달됩니다.</string>
+
 
 </resources>

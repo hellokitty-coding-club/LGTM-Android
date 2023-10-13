@@ -150,4 +150,16 @@ class MissionRepositoryImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+    override suspend fun submitPullRequest(missionId: Int, githubPrUrl: String): Result<Boolean> {
+        return try {
+            val response = missionDataSource.submitPullRequest(
+                missionId = missionId, githubPrUrl = githubPrUrl
+            )
+            Result.success(response.data.status != null)
+        } catch (e: Exception) {
+            Log.e(TAG, "submitPullRequest: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
 }

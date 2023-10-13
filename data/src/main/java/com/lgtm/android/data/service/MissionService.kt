@@ -1,5 +1,6 @@
 package com.lgtm.android.data.service
 
+import com.lgtm.android.data.model.request.GithubPrUrlRequest
 import com.lgtm.android.data.model.response.BaseDTO
 import com.lgtm.android.data.model.response.DashboardDTO
 import com.lgtm.android.data.model.response.MissionDetailDTO
@@ -66,5 +67,12 @@ interface MissionService {
         @Path("juniorId") juniorId: Int
     ): Response<BaseDTO<PingPongResponse>>
 
+
+    /** 주니어 PR URL 제출(코드리뷰 요청) */
+    @POST("/v1/mission/{missionId}/pr")
+    suspend fun submitPullRequest(
+        @Path("missionId") missionId: Int,
+        @Body githubPrUrl: GithubPrUrlRequest
+    ): Response<BaseDTO<PingPongResponse>>
 }
 

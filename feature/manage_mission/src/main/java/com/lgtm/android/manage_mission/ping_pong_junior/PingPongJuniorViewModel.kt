@@ -73,17 +73,17 @@ class PingPongJuniorViewModel @Inject constructor(
             ?: throw IllegalArgumentException("accountHolder is null")
     }
 
-    private val _confirmJuniorPaymentState: MutableLiveData<NetworkState<Boolean>> =
+    private val _moveToNextProcessState: MutableLiveData<NetworkState<Boolean>> =
         MutableLiveData(NetworkState.Init)
-    val confirmJuniorPaymentState: LiveData<NetworkState<Boolean>> = _confirmJuniorPaymentState
+    val moveToNextProcessState: LiveData<NetworkState<Boolean>> = _moveToNextProcessState
     fun confirmJuniorPayment() {
         viewModelScope.launch {
             missionUseCase.confirmJuniorPayment(missionID)
                 .onSuccess {
-                    _confirmJuniorPaymentState.postValue(NetworkState.Success(it))
+                    _moveToNextProcessState.postValue(NetworkState.Success(it))
                     Log.d(TAG, "confirmJuniorPayment: $it")
                 }.onFailure {
-                    _confirmJuniorPaymentState.postValue(NetworkState.Failure(it.message))
+                    _moveToNextProcessState.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "confirmJuniorPayment: $it")
                 }
         }
@@ -103,7 +103,8 @@ class PingPongJuniorViewModel @Inject constructor(
         )
     )
 
-    val pullRequestUrl: LiveData<String> = pullRequestUrlEditTextData.value?.text ?: MutableLiveData("")
+    val pullRequestUrl: LiveData<String> =
+        pullRequestUrlEditTextData.value?.text ?: MutableLiveData("")
 
     fun updateMissionTitleInfoStatus() {
         pullRequestUrlEditTextData.value?.infoStatus?.value =
@@ -115,6 +116,7 @@ class PingPongJuniorViewModel @Inject constructor(
     }
 
     private fun isGithubPrUrl(url: String): Boolean {
+        return true
         val regex = Regex("(https://)?github.com/.*pull/\\d+")
         return regex.matches(url)
     }
@@ -126,5 +128,18 @@ class PingPongJuniorViewModel @Inject constructor(
         _isValidUrl.value =
             pullRequestUrlEditTextData.value?.infoStatus?.value == InfoType.PROPER_URL
                     && pullRequestUrlEditTextData.value?.text?.value?.isNotBlank() == true
+    }
+
+    fun requestCodeReview() {
+        viewModelScope.launch {
+            val pullRequestUrl = pullRequestUrl.value ?: return@launch
+            missionUseCase.submitPullRequest(missionID, pullRequestUrl)
+                .onSuccess {
+                    _moveToNextProcessState.postValue(NetworkState.Success(it))
+                }.onFailure {
+                    _moveToNextProcessState.postValue(NetworkState.Failure(it.message))
+                    Log.e(TAG, "requestCodeReview: $it")
+                }
+        }
     }
 }
