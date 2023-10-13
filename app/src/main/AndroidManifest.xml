@@ -62,9 +62,8 @@
 
         <activity
             android:name=".manage_mission.ping_pong_junior.PingPongJuniorActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
-
-
 </manifest>

@@ -33,7 +33,7 @@ class PingPongJuniorActivity :
         observeConfirmJuniorPaymentState()
     }
 
-    private fun setExtraDataToViewModel(){
+    private fun setExtraDataToViewModel() {
         pingPongJuniorViewModel.setMissionId(missionId)
     }
 
@@ -122,13 +122,18 @@ class PingPongJuniorActivity :
     }
 
     private fun setBottomButtonState() {
-        binding.btnNext.isEnabled = when (pingPongJuniorViewModel.getMissionStatus()) {
-            ProcessState.WAITING_FOR_PAYMENT -> true
-            ProcessState.PAYMENT_CONFIRMATION -> false
-            ProcessState.MISSION_PROCEEDING -> false // 추후 github PR이 올라오면 true로 변경
-            ProcessState.CODE_REVIEW -> false
-            ProcessState.MISSION_FINISHED -> true
-            ProcessState.FEEDBACK_REVIEWED -> true
+        when (pingPongJuniorViewModel.getMissionStatus()) {
+            ProcessState.WAITING_FOR_PAYMENT -> binding.btnNext.isEnabled = true
+            ProcessState.PAYMENT_CONFIRMATION -> binding.btnNext.isEnabled = false
+            ProcessState.MISSION_PROCEEDING -> {
+                pingPongJuniorViewModel.isValidUrl.observe(this) {
+                    binding.btnNext.isEnabled = it
+                }
+            }
+
+            ProcessState.CODE_REVIEW -> binding.btnNext.isEnabled = false
+            ProcessState.MISSION_FINISHED -> binding.btnNext.isEnabled = true
+            ProcessState.FEEDBACK_REVIEWED -> binding.btnNext.isEnabled = true
         }
     }
 
@@ -168,12 +173,12 @@ class PingPongJuniorActivity :
     }
 
     private fun postJuniorDepositRequest() {
-         pingPongJuniorViewModel.confirmJuniorPayment()
+        pingPongJuniorViewModel.confirmJuniorPayment()
     }
 
-    private fun observeConfirmJuniorPaymentState(){
-        pingPongJuniorViewModel.confirmJuniorPaymentState.observe(this){
-            when (it){
+    private fun observeConfirmJuniorPaymentState() {
+        pingPongJuniorViewModel.confirmJuniorPaymentState.observe(this) {
+            when (it) {
                 is NetworkState.Init -> {
                     // do nothing
                 }
@@ -197,9 +202,9 @@ class PingPongJuniorActivity :
     }
 
     private fun setSubmittingMission() {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.fcv_detail_info, SubmittingMissionFragment()())
-//            .commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fcv_detail_info, SubmittingMissionFragment())
+            .commit()
     }
 
     private fun setSubmittedMission() {
