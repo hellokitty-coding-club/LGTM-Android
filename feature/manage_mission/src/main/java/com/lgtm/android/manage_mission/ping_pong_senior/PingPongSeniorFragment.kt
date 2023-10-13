@@ -13,6 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lgtm.android.common_ui.R.string.deposit_confirm_completed
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
+import com.lgtm.android.common_ui.util.EventObserver
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.manage_mission.dashboard.DashboardViewModel
 import com.lgtm.android.manage_mission.databinding.FragmentPingPongSeniorBinding
@@ -123,23 +124,27 @@ class PingPongSeniorFragment(
     }
 
     private fun observeConfirmDepositStatus() {
-        dashboardViewModel.confirmDepositStatus.observe(viewLifecycleOwner) {
-            when (it) {
-                is NetworkState.Init -> {}
-                is NetworkState.Success -> {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(deposit_confirm_completed),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    fetchSeniorMissionStatus()
-                }
+        dashboardViewModel.confirmDepositStatus.observe(
+            viewLifecycleOwner,
+            EventObserver { networkState ->
+                when (networkState) {
+                    is NetworkState.Init -> return@EventObserver
+                    is NetworkState.Success -> {
+                        showDepositCompletedToast()
+                        fetchSeniorMissionStatus()
+                    }
 
-                is NetworkState.Failure -> {
-                    Toast.makeText(requireContext(), "${it.msg}", Toast.LENGTH_SHORT).show()
+                    is NetworkState.Failure -> {
+                        Toast.makeText(requireContext(), "${networkState.msg}", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-        }
+        )
+    }
+
+    private fun showDepositCompletedToast() {
+        Toast.makeText(requireContext(), getString(deposit_confirm_completed), Toast.LENGTH_SHORT)
+            .show()
     }
 
     private fun setMissionProcessData() {
