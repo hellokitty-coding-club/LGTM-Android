@@ -200,3 +200,6 @@ fabric.properties
 /captures
 .cxx
 
+/app/release/output-metadata.json
+/LgtmKeyStore
+/private_key.pepk
