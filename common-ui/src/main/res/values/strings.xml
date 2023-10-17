@@ -171,6 +171,7 @@
     <string name="proper_url">올바른 링크입니다.</string>
     <string name="want_to_request_code_review">미션 리뷰를 요청하시겠어요?</string>
     <string name="review_request_noti_will_be_sent">리뷰어에게 리뷰요청 알림이 전달됩니다.</string>
+    <string name="submitted_mission">제출한 미션</string>
 
 
 </resources>
