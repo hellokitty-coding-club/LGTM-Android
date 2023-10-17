@@ -94,7 +94,8 @@ class PingPongSeniorFragment(
 
                 ProcessState.PAYMENT_CONFIRMATION -> showCheckDepositDialog()
                 ProcessState.MISSION_PROCEEDING -> {} // showSubmitMissionDialog()
-                ProcessState.CODE_REVIEW -> {/* visibility gone */
+                ProcessState.CODE_REVIEW -> {
+                    showCheckReviewDialog()
                 }
 
                 ProcessState.MISSION_FINISHED -> {/* 추후 후기 작성하기 기능 추가*/
@@ -118,9 +119,26 @@ class PingPongSeniorFragment(
         ).show(childFragmentManager, this.javaClass.name)
     }
 
+    private fun showCheckReviewDialog() {
+        val title = getString(com.lgtm.android.common_ui.R.string.completed_review_code_for_sure)
+        val description =
+            getString(com.lgtm.android.common_ui.R.string.confirmed_deposit_data_description)
+        LgtmConfirmationDialog(
+            title = title,
+            description = description,
+            doAfterConfirm = ::codeReviewCompleted,
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GREEN
+        ).show(childFragmentManager, this.javaClass.name)
+    }
+
     private fun confirmDepositCompleted() {
         Log.d(TAG, "confirmDepositCompleted: clicked")
         dashboardViewModel.confirmDepositCompleted(missionId = missionId, juniorId = juniorId)
+    }
+
+    private fun codeReviewCompleted() {
+//        Log.d(TAG, "codeReviewCompleted: clicked")
+//        dashboardViewModel.codeReviewCompleted(missionId = missionId, juniorId = juniorId)
     }
 
     private fun observeConfirmDepositStatus() {
