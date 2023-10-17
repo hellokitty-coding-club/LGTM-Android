@@ -1,6 +1,7 @@
 package com.lgtm.android.manage_mission.ping_pong_senior
 
 import android.content.ContentValues.TAG
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,7 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PingPongSeniorFragment(
     private val juniorId: Int,
-    private val missionId: Int
+    private val missionId: Int,
+    private val onDismissListener: OnBottomSheetDismiss
 ) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentPingPongSeniorBinding? = null
@@ -211,6 +213,11 @@ class PingPongSeniorFragment(
             ProcessState.MISSION_FINISHED -> false
             ProcessState.FEEDBACK_REVIEWED -> true
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        onDismissListener.onBottomSheetDismiss()
     }
 
     override fun onDestroy() {
