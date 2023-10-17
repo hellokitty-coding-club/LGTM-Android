@@ -1,6 +1,7 @@
 package com.lgtm.android.manage_mission.ping_pong_senior
 
 import android.content.ContentValues.TAG
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.R.string.deposit_confirm_completed
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.EventObserver
@@ -23,7 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PingPongSeniorFragment(
     private val juniorId: Int,
-    private val missionId: Int
+    private val missionId: Int,
+    private val onDismissListener: OnBottomSheetDismiss
 ) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentPingPongSeniorBinding? = null
@@ -49,6 +52,7 @@ class PingPongSeniorFragment(
         observeMissionProcessData()
         setBottomSheetBehavior()
         observeConfirmDepositStatus()
+        observeCodeReviewStatus()
     }
 
     private fun setBottomSheetBehavior() {
@@ -94,7 +98,8 @@ class PingPongSeniorFragment(
 
                 ProcessState.PAYMENT_CONFIRMATION -> showCheckDepositDialog()
                 ProcessState.MISSION_PROCEEDING -> {} // showSubmitMissionDialog()
-                ProcessState.CODE_REVIEW -> {/* visibility gone */
+                ProcessState.CODE_REVIEW -> {
+                    showCheckReviewDialog()
                 }
 
                 ProcessState.MISSION_FINISHED -> {/* 추후 후기 작성하기 기능 추가*/
@@ -107,9 +112,9 @@ class PingPongSeniorFragment(
     }
 
     private fun showCheckDepositDialog() {
-        val title = getString(com.lgtm.android.common_ui.R.string.confirmed_deposit_data_title)
+        val title = getString(string.confirmed_deposit_data_title)
         val description =
-            getString(com.lgtm.android.common_ui.R.string.confirmed_deposit_data_description)
+            getString(string.confirmed_deposit_data_description)
         LgtmConfirmationDialog(
             title = title,
             description = description,
@@ -118,9 +123,26 @@ class PingPongSeniorFragment(
         ).show(childFragmentManager, this.javaClass.name)
     }
 
+    private fun showCheckReviewDialog() {
+        val title = getString(string.completed_review_code_for_sure)
+        val description =
+            getString(string.confirmed_deposit_data_description)
+        LgtmConfirmationDialog(
+            title = title,
+            description = description,
+            doAfterConfirm = ::codeReviewCompleted,
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GREEN
+        ).show(childFragmentManager, this.javaClass.name)
+    }
+
     private fun confirmDepositCompleted() {
         Log.d(TAG, "confirmDepositCompleted: clicked")
         dashboardViewModel.confirmDepositCompleted(missionId = missionId, juniorId = juniorId)
+    }
+
+    private fun codeReviewCompleted() {
+        Log.d(TAG, "codeReviewCompleted: clicked")
+        dashboardViewModel.codeReviewCompleted(missionId = missionId, juniorId = juniorId)
     }
 
     private fun observeConfirmDepositStatus() {
@@ -135,7 +157,28 @@ class PingPongSeniorFragment(
                     }
 
                     is NetworkState.Failure -> {
-                        Toast.makeText(requireContext(), "${networkState.msg}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "${networkState.msg}", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        )
+    }
+
+    private fun observeCodeReviewStatus() {
+        dashboardViewModel.codeReviewCompletedStatus.observe(
+            viewLifecycleOwner,
+            EventObserver { networkState ->
+                when (networkState) {
+                    is NetworkState.Init -> return@EventObserver
+                    is NetworkState.Success -> {
+                        showCodeReviewCompletedToast()
+                        fetchSeniorMissionStatus()
+                    }
+
+                    is NetworkState.Failure -> {
+                        Toast.makeText(requireContext(), "${networkState.msg}", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -145,6 +188,12 @@ class PingPongSeniorFragment(
     private fun showDepositCompletedToast() {
         Toast.makeText(requireContext(), getString(deposit_confirm_completed), Toast.LENGTH_SHORT)
             .show()
+    }
+
+    private fun showCodeReviewCompletedToast() {
+        Toast.makeText(
+            requireContext(), getString(string.code_review_completed), Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun setMissionProcessData() {
@@ -164,6 +213,11 @@ class PingPongSeniorFragment(
             ProcessState.MISSION_FINISHED -> false
             ProcessState.FEEDBACK_REVIEWED -> true
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        onDismissListener.onBottomSheetDismiss()
     }
 
     override fun onDestroy() {

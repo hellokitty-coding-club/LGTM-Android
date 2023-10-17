@@ -68,4 +68,13 @@ class MissionDataSource @Inject constructor(
             )
         )
     }
+
+    suspend fun codeReviewCompleted(missionId: Int, juniorId: Int):  BaseDTO<PingPongResponse> {
+        return checkResponse(
+            missionService.codeReviewCompleted(
+                missionId = missionId,
+                juniorId = juniorId
+            )
+        )
+    }
 }

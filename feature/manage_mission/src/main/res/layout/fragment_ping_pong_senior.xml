@@ -76,7 +76,7 @@
                 android:id="@+id/mission_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"></com.lgtm.android.manage_mission.ping_pong_common.ProcessStatusLayout>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_next"

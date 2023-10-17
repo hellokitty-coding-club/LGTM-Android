@@ -1,6 +1,7 @@
 package com.lgtm.android.manage_mission.ping_pong_junior
 
 import android.os.Bundle
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -129,15 +130,14 @@ class PingPongJuniorActivity :
         when (pingPongJuniorViewModel.getMissionStatus()) {
             ProcessState.WAITING_FOR_PAYMENT -> binding.btnNext.isEnabled = true
             ProcessState.PAYMENT_CONFIRMATION -> binding.btnNext.isEnabled = false
-            ProcessState.MISSION_PROCEEDING -> {
+            ProcessState.MISSION_PROCEEDING ->
                 pingPongJuniorViewModel.isValidUrl.observe(this) {
                     binding.btnNext.isEnabled = it
                 }
-            }
 
             ProcessState.CODE_REVIEW -> binding.btnNext.isEnabled = false
-            ProcessState.MISSION_FINISHED -> binding.btnNext.isEnabled = true
-            ProcessState.FEEDBACK_REVIEWED -> binding.btnNext.isEnabled = true
+            ProcessState.MISSION_FINISHED -> binding.btnNext.visibility = GONE
+            ProcessState.FEEDBACK_REVIEWED -> binding.btnNext.visibility = GONE
         }
     }
 
