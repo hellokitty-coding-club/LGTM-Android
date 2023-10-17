@@ -36,6 +36,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -44,10 +45,12 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         buildConfig = true
     }
 
+    lint {
+        disable += "Instantiatable"
+    }
 }
 
 kapt {
