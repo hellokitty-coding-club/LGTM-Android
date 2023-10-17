@@ -39,12 +39,39 @@ class PingPongJuniorViewModel @Inject constructor(
         viewModelScope.launch {
             missionUseCase.fetchJuniorMissionStatus(missionID = missionID)
                 .onSuccess {
-                    _pingPongJuniorUI.postValue(it.toUiModel(getRole()))
-                    _fetchMissionStatusState.postValue(NetworkState.Success(it))
+                    _pingPongJuniorUI.value = it.toUiModel(getRole())
+                    _fetchMissionStatusState.value = NetworkState.Success(it)
+                    getOgImageIfNeeded()
                     Log.d(TAG, "fetchJuniorMissionStatus: $it")
                 }.onFailure {
                     _fetchMissionStatusState.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "fetchJuniorMissionStatus: $it")
+                }
+        }
+    }
+
+    private val _submittedPrUrl = MutableLiveData<String>()
+    val submittedPrUrl: LiveData<String> = _submittedPrUrl
+
+    private val _ogImageUrl = MutableLiveData<String>()
+    val ogImageUrl: LiveData<String> = _ogImageUrl
+
+    private fun getOgImageIfNeeded() {
+        pingPongJuniorUI.value?.pullRequestUrl?.let {
+            _submittedPrUrl.value = it
+            getOgImage()
+        }
+    }
+
+    private fun getOgImage() {
+        if (ogImageUrl.value != null) return
+        viewModelScope.launch {
+            missionUseCase.getOgImage(submittedPrUrl.value ?: "")
+                .onSuccess {
+                    _ogImageUrl.value = it
+                    Log.d(TAG, "getOgImage: $it")
+                }.onFailure {
+                    Log.e(TAG, "getOgImage: $it")
                 }
         }
     }
@@ -94,7 +121,7 @@ class PingPongJuniorViewModel @Inject constructor(
     }
 
 
-    val pullRequestUrlEditTextData = MutableLiveData(
+    val submittingPullRequestUrl = MutableLiveData(
         EditTextData(
             text = MutableLiveData(""),
             infoStatus = MutableLiveData(InfoType.NONE),
@@ -103,14 +130,14 @@ class PingPongJuniorViewModel @Inject constructor(
         )
     )
 
-    val pullRequestUrl: LiveData<String> =
-        pullRequestUrlEditTextData.value?.text ?: MutableLiveData("")
+    val editTextPullRequestUrl: LiveData<String> =
+        submittingPullRequestUrl.value?.text ?: MutableLiveData("")
 
     fun updateMissionTitleInfoStatus() {
-        pullRequestUrlEditTextData.value?.infoStatus?.value =
-            if (this.pullRequestUrl.value?.isEmpty() == true)
+        submittingPullRequestUrl.value?.infoStatus?.value =
+            if (this.editTextPullRequestUrl.value?.isEmpty() == true)
                 InfoType.NONE
-            else if (isGithubPrUrl(pullRequestUrl.value?.trim() ?: ""))
+            else if (isGithubPrUrl(editTextPullRequestUrl.value?.trim() ?: ""))
                 InfoType.PROPER_URL
             else InfoType.GITHUB_URL_ONLY
     }
@@ -125,13 +152,13 @@ class PingPongJuniorViewModel @Inject constructor(
 
     fun setIsValidUrl() {
         _isValidUrl.value =
-            pullRequestUrlEditTextData.value?.infoStatus?.value == InfoType.PROPER_URL
-                    && pullRequestUrlEditTextData.value?.text?.value?.isNotBlank() == true
+            submittingPullRequestUrl.value?.infoStatus?.value == InfoType.PROPER_URL
+                    && submittingPullRequestUrl.value?.text?.value?.isNotBlank() == true
     }
 
     fun requestCodeReview() {
         viewModelScope.launch {
-            val pullRequestUrl = pullRequestUrl.value ?: return@launch
+            val pullRequestUrl = editTextPullRequestUrl.value ?: return@launch
             missionUseCase.submitPullRequest(missionId = missionID, githubPrUrl = pullRequestUrl)
                 .onSuccess {
                     _moveToNextProcessState.postValue(NetworkState.Success(it))

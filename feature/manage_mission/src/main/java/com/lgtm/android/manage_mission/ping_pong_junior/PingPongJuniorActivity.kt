@@ -225,9 +225,7 @@ class PingPongJuniorActivity :
     }
 
     private fun setSubmittedMission() {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.fcv_detail_info, SubmittedMissionFragment()())
-//            .commit()
+        setFragmentWith<SubmittedMissionFragment>()
     }
 
 

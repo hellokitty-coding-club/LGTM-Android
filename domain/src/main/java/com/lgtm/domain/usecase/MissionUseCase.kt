@@ -15,12 +15,16 @@ import com.lgtm.domain.server_drive_ui.SduiEmptyUiState
 import com.lgtm.domain.server_drive_ui.SduiViewType
 import com.lgtm.domain.server_drive_ui.SectionEmptyVO
 import com.lgtm.domain.util.dotStyleFormatter
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 import java.time.LocalDateTime
 import javax.inject.Inject
 
 class MissionUseCase @Inject constructor(
     private val missionRepository: MissionRepository,
-    authRepository: AuthRepository
+    authRepository: AuthRepository,
+    private val dispatcher: CoroutineDispatcher
 ) {
 
     private val role = authRepository.getMemberType()
@@ -176,9 +180,21 @@ class MissionUseCase @Inject constructor(
         }
     }
 
-    suspend fun submitPullRequest(missionId: Int, githubPrUrl: String) : Result<Boolean> {
+    suspend fun submitPullRequest(missionId: Int, githubPrUrl: String): Result<Boolean> {
         return try {
             missionRepository.submitPullRequest(missionId, githubPrUrl)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getOgImage(pullRequestUrl: String): Result<String> {
+        return try {
+            withContext(dispatcher) {
+                val document = Jsoup.connect(pullRequestUrl).get()
+                val ogImage = document.select("meta[property=og:image]").attr("content")
+                Result.success(ogImage)
+            }
         } catch (e: Exception) {
             Result.failure(e)
         }
