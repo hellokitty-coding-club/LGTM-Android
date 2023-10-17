@@ -1,5 +1,7 @@
 package com.lgtm.android.manage_mission.ping_pong_junior
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -18,6 +20,15 @@ class SubmittedMissionFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpViewModel()
+        onClickSubmittedMission()
+    }
+
+    private fun onClickSubmittedMission() {
+        binding.clSubmittedMission.setOnClickListener {
+            val url = pingPongJuniorViewModel.submittedPrUrl.value
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            startActivity(intent)
+        }
     }
 
     private fun setUpViewModel() {
