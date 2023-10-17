@@ -110,6 +110,10 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="ShapeAppearanceOverlay.App.Radius5" parent="">
+        <item name="cornerSize">5%</item>
+    </style>
+
     <style name="PopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@drawable/rectangle_white_stroke_gray_2_radius_10
         </item>
