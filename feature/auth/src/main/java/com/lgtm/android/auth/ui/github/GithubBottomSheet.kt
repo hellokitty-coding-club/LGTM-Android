@@ -1,7 +1,9 @@
 package com.lgtm.android.auth.ui.github
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.lgtm.android.auth.BuildConfig.DEBUG
@@ -36,6 +38,7 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
             webViewClient =
                 GithubWebViewClient(this@GithubBottomSheet, loginSuccessListener)
             loadUrl(getGithubLoginUrl())
+            Log.d(TAG, "loadGithubLoginUsingWebView: ${getGithubLoginUrl()}")
         }
     }
 

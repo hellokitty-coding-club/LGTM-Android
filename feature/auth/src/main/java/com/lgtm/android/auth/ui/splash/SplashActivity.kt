@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
 import androidx.activity.viewModels
+import com.lgtm.android.auth.BuildConfig
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.constant.AutoLoginState
 import com.lgtm.android.auth.databinding.ActivitySplashBinding
@@ -34,9 +35,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun observeCurrentVersion() {
-        // 추후 강제 업데이트 기능 구현
-        splashViewModel.latestVersion.observe(this) {
-            Toast.makeText(this, "latestVersion: $it", Toast.LENGTH_LONG).show()
+        if (BuildConfig.DEBUG) {
+            splashViewModel.latestVersion.observe(this) {
+                Toast.makeText(this, "latestVersion: $it", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
