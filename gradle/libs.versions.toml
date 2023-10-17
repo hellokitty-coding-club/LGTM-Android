@@ -67,6 +67,9 @@ firebase = "32.1.0"
 #sonarqube
 sonarqube = "4.0.0.2929"
 
+# Other
+jsoup = "1.13.1"
+
 
 [libraries]
 agp = { module = "com.android.tools.build:gradle", version.ref = "gradleplugin" }
@@ -126,6 +129,8 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin-bom" }
+
+jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 
 [bundles]
 
