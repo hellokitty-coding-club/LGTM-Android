@@ -1,5 +1,7 @@
 package com.lgtm.android.manage_mission.dashboard
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.google.android.flexbox.FlexWrap
@@ -41,7 +43,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private fun initAdapter() {
         techTagAdapter = TechTagAdapter()
         binding.rvTechTag.adapter = techTagAdapter
-        participantAdapter = ParticipantAdapter(::showPingPongSenior)
+        participantAdapter = ParticipantAdapter(::showPingPongSenior, ::openGithubPullRequestView)
         binding.rvParticipant.adapter = participantAdapter
     }
 
@@ -55,6 +57,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 }
             })
         bottomSheetDialog.show(supportFragmentManager, bottomSheetDialog.tag)
+    }
+
+    private fun openGithubPullRequestView(url : String){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
     }
 
     private fun observeDashboardInfo() {
