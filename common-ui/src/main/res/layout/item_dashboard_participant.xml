@@ -167,15 +167,30 @@
             app:layout_constraintTop_toBottomOf="@id/cl_progress" />
 
         <TextView
-            android:id="@+id/tv_deposit_date"
+            android:id="@+id/tv_dummy_for_alignment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/inner_guideline"
+            android:text="0000.00.00"
+            android:textAppearance="@style/Body3M"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/tv_deposit_date_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_deposit_date_label"
+            tools:ignore="HardcodedText"
+            tools:text="2023.09.16" />
+
+
+        <TextView
+            android:id="@+id/tv_deposit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@{data.paymentDate}"
             android:textAppearance="@style/Body3M"
             android:textColor="@color/gray_5"
             app:layout_constraintBottom_toBottomOf="@id/tv_deposit_date_label"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_dummy_for_alignment"
+            app:layout_constraintStart_toStartOf="@id/tv_dummy_for_alignment"
             app:layout_constraintTop_toTopOf="@id/tv_deposit_date_label"
             tools:text="2023.09.16" />
 
@@ -193,12 +208,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/inner_guideline"
             android:text="@{data.missionFinishedDate}"
             android:textAppearance="@style/Body3M"
             android:textColor="@color/gray_5"
             app:layout_constraintBottom_toBottomOf="@id/tv_mission_submit_date_label"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_dummy_for_alignment"
+            app:layout_constraintStart_toStartOf="@id/tv_dummy_for_alignment"
             app:layout_constraintTop_toTopOf="@id/tv_mission_submit_date_label"
             tools:text="2023.09.23" />
 
