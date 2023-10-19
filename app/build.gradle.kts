@@ -20,6 +20,7 @@ android {
         applicationId = "com.lgtm.android"
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.appVersion.get()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField(
