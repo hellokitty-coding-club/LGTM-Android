@@ -162,4 +162,16 @@ class MissionRepositoryImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+    override suspend fun codeReviewCompleted(missionId: Int, juniorId: Int): Result<Boolean> {
+        return try {
+            val response = missionDataSource.codeReviewCompleted(
+                missionId = missionId, juniorId = juniorId
+            )
+            Result.success(response.data.status != null)
+        } catch (e: Exception) {
+            Log.e(TAG, "codeReviewCompleted: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
 }

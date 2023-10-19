@@ -29,13 +29,13 @@ class SubmittingMissionFragment :
     private fun setEditText() {
         binding.etGithubUrl.apply {
             setLifecycleOwner(viewLifecycleOwner)
-            bindEditTextData(pingPongJuniorViewModel.pullRequestUrlEditTextData)
+            bindEditTextData(pingPongJuniorViewModel.submittingPullRequestUrl)
             setMaxLine(3)
         }
     }
 
     private fun onGithubPrUrlChanged() {
-        pingPongJuniorViewModel.pullRequestUrl.observe(viewLifecycleOwner) {
+        pingPongJuniorViewModel.editTextPullRequestUrl.observe(viewLifecycleOwner) {
             pingPongJuniorViewModel.updateMissionTitleInfoStatus()
             pingPongJuniorViewModel.setIsValidUrl()
         }

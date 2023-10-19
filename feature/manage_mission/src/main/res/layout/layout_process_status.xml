@@ -320,7 +320,7 @@
             android:layout_marginEnd="24dp"
             android:gravity="center"
             android:maxLines="2"
-            android:text="@{missionHistory.feedbackReviewedDate}"
+            android:text="@{missionHistory.missionFinishedDate}"
             android:textAppearance="@style/Body3M"
             android:textColor="@color/gray_5"
             app:layout_constraintBottom_toBottomOf="@id/tv_mission_review_finished"

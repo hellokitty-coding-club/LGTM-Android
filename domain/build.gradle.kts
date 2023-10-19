@@ -14,4 +14,5 @@ dependencies {
     api(project(":swm-logging"))
     implementation(libs.javax.inject)
     implementation(libs.kotlin.coroutines)
+    implementation(libs.jsoup)
 }
