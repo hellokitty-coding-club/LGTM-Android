@@ -77,27 +77,31 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     private fun setNoticeOnClickListener() {
+        // 공지사항
         binding.btnNotice.setOnClickListener {
-            val url = "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?pvs=4"
+            val url = "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?v=3cee323345414e318192b89bfe7dd2d0&pvs=4"
             openUrlInBrowser(url)
         }
     }
 
     private fun setTermsAndPoliciesOnClickListener() {
+        // 약관 및 정책
         binding.btnTermsAndPolicies.setOnClickListener {
-            val url = "https://team-hkcc.notion.site/efa704ed9464409dae3a9dbe4c4e3777?pvs=4"
-            openUrlInBrowser(url)
-        }
-    }
-
-    private fun serviceGuidelines() {
-        binding.btnServiceGuidelines.setOnClickListener {
             val url = "https://team-hkcc.notion.site/c4f56b4e6e1b46e89c494e5b3919ed8c?pvs=4"
             openUrlInBrowser(url)
         }
     }
 
+    private fun serviceGuidelines() {
+        // 서비스 이용 방법
+        binding.btnServiceGuidelines.setOnClickListener {
+            val url = "https://team-hkcc.notion.site/efa704ed9464409dae3a9dbe4c4e3777?pvs=4"
+            openUrlInBrowser(url)
+        }
+    }
+
     private fun setPrivacyPolicy() {
+        // 개인정보 처리방침
         binding.btnPrivacyPolicy.setOnClickListener {
             val url = "https://team-hkcc.notion.site/31a6b7a98d1f4d148bb05cc826d0c9aa?pvs=4"
             openUrlInBrowser(url)
