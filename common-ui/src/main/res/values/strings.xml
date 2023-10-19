@@ -176,5 +176,6 @@
     <string name="code_review_completed">미션 리뷰가 완료되었습니다:)</string>
     <string name="check_out_mission_review">미션 리뷰 보러가기</string>
 
+    <string name="github">Github</string>
 
 </resources>
