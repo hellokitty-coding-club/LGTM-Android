@@ -135,7 +135,7 @@ class MissionUseCase @Inject constructor(
     }
 
     private fun convertTimestampToCustomFormat(timestamp: String?): String {
-        if (timestamp == null) return "-"
+        if (timestamp == null || timestamp == "") return "-"
         val localDateTime = LocalDateTime.parse(timestamp)
         return localDateTime.format(dotStyleFormatter)
     }
