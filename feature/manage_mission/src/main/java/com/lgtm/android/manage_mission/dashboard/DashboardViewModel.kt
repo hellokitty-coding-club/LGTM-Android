@@ -91,7 +91,8 @@ class DashboardViewModel @Inject constructor(
 
 
     private val _codeReviewCompletedStatus = MutableLiveData<Event<NetworkState<String>>>()
-    val codeReviewCompletedStatus: LiveData<Event<NetworkState<String>>> = _codeReviewCompletedStatus
+    val codeReviewCompletedStatus: LiveData<Event<NetworkState<String>>> =
+        _codeReviewCompletedStatus
 
 
     fun codeReviewCompleted(missionId: Int, juniorId: Int) {
@@ -107,5 +108,9 @@ class DashboardViewModel @Inject constructor(
                 Log.e(TAG, "codeReviewCompleted: $it")
             }
         }
+    }
+
+    fun getDashBoardEmptyVisibility(): Boolean {
+        return dashboardInfo.value?.memberInfoList?.isEmpty() ?: true
     }
 }

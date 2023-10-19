@@ -3,6 +3,8 @@ package com.lgtm.android.manage_mission.dashboard
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -68,6 +70,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         dashboardViewModel.dashboardInfo.observe(this) {
             techTagAdapter.submitList(it.techTagList)
             participantAdapter.submitList(it.memberInfoList)
+            binding.clDashboardEmpty.visibility = if(dashboardViewModel.getDashBoardEmptyVisibility()) VISIBLE else GONE
         }
     }
 
