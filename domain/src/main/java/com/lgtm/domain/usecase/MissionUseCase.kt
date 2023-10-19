@@ -108,8 +108,8 @@ class MissionUseCase @Inject constructor(
         return dashboardInfo.copy(
             memberInfoList = dashboardInfo.memberInfoList.map { memberInfo ->
                 memberInfo.copy(
-                    missionFinishedDate = memberInfo.missionFinishedDate.ifEmpty { "-" },
-                    paymentDate = memberInfo.paymentDate.ifEmpty { "-" }
+                    missionFinishedDate = convertTimestampToCustomFormat(memberInfo.missionFinishedDate),
+                    paymentDate = convertTimestampToCustomFormat(memberInfo.paymentDate)
                 )
             }
         )
