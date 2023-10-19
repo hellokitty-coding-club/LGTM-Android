@@ -108,8 +108,8 @@ class MissionUseCase @Inject constructor(
         return dashboardInfo.copy(
             memberInfoList = dashboardInfo.memberInfoList.map { memberInfo ->
                 memberInfo.copy(
-                    missionFinishedDate = memberInfo.missionFinishedDate.ifEmpty { "-" },
-                    paymentDate = memberInfo.paymentDate.ifEmpty { "-" }
+                    missionFinishedDate = convertTimestampToCustomFormat(memberInfo.missionFinishedDate),
+                    paymentDate = convertTimestampToCustomFormat(memberInfo.paymentDate)
                 )
             }
         )
@@ -135,7 +135,7 @@ class MissionUseCase @Inject constructor(
     }
 
     private fun convertTimestampToCustomFormat(timestamp: String?): String {
-        if (timestamp == null) return "-"
+        if (timestamp == null || timestamp == "") return "-"
         val localDateTime = LocalDateTime.parse(timestamp)
         return localDateTime.format(dotStyleFormatter)
     }
@@ -195,6 +195,14 @@ class MissionUseCase @Inject constructor(
                 val ogImage = document.select("meta[property=og:image]").attr("content")
                 Result.success(ogImage)
             }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun codeReviewCompleted(missionId: Int, juniorId: Int): Result<Boolean> {
+        return try {
+            missionRepository.codeReviewCompleted(missionId, juniorId)
         } catch (e: Exception) {
             Result.failure(e)
         }

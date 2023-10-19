@@ -5,9 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.FragmentSubmittedMissionBinding
+import com.lgtm.domain.constants.ProcessState
+import com.lgtm.domain.constants.UNKNOWN
 
 
 class SubmittedMissionFragment :
@@ -21,6 +24,23 @@ class SubmittedMissionFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpViewModel()
         onClickSubmittedMission()
+        observeMissionStatusInfo()
+    }
+
+    private fun observeMissionStatusInfo() {
+        pingPongJuniorViewModel.pingPongJuniorUI.observe(viewLifecycleOwner) {
+            setTitle()
+        }
+    }
+
+    private fun setTitle() {
+        val status = pingPongJuniorViewModel.pingPongJuniorUI.value?.processStatus
+        binding.tvSubmittedMission.text =
+            when (status) {
+                ProcessState.CODE_REVIEW -> getString(string.submitted_mission)
+                ProcessState.MISSION_FINISHED -> getString(string.check_out_mission_review)
+                else -> UNKNOWN
+            }
     }
 
     private fun onClickSubmittedMission() {

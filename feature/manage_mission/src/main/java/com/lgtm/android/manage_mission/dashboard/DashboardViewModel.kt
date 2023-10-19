@@ -88,4 +88,29 @@ class DashboardViewModel @Inject constructor(
             }
         }
     }
+
+
+    private val _codeReviewCompletedStatus = MutableLiveData<Event<NetworkState<String>>>()
+    val codeReviewCompletedStatus: LiveData<Event<NetworkState<String>>> =
+        _codeReviewCompletedStatus
+
+
+    fun codeReviewCompleted(missionId: Int, juniorId: Int) {
+        viewModelScope.launch(lgtmErrorHandler) {
+            missionUseCase.codeReviewCompleted(
+                missionId = missionId,
+                juniorId = juniorId
+            ).onSuccess {
+                _codeReviewCompletedStatus.postValue(Event(NetworkState.Success("")))
+                Log.d(TAG, "codeReviewCompleted: $it")
+            }.onFailure {
+                _codeReviewCompletedStatus.postValue(Event(NetworkState.Failure(it.message)))
+                Log.e(TAG, "codeReviewCompleted: $it")
+            }
+        }
+    }
+
+    fun getDashBoardEmptyVisibility(): Boolean {
+        return dashboardInfo.value?.memberInfoList?.isEmpty() ?: true
+    }
 }

@@ -26,5 +26,6 @@ interface MissionRepository {
     suspend fun confirmDepositCompleted(missionId: Int, juniorId: Int): Result<Boolean>
 
     suspend fun submitPullRequest(missionId: Int, githubPrUrl: String): Result<Boolean>
+    suspend fun codeReviewCompleted(missionId: Int, juniorId: Int): Result<Boolean>
 
 }

@@ -74,5 +74,11 @@ interface MissionService {
         @Path("missionId") missionId: Int,
         @Body githubPrUrl: GithubPrUrlRequest
     ): Response<BaseDTO<PingPongResponse>>
+
+    @POST("v1/mission/{missionId}/review/{juniorId}")
+    suspend fun codeReviewCompleted(
+        @Path("missionId") missionId: Int,
+        @Path("juniorId") juniorId: Int
+    ): Response<BaseDTO<PingPongResponse>>
 }
 
