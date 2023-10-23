@@ -30,7 +30,11 @@ class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingSe
         super.onMessageReceived(remoteMessage)
 
         if (remoteMessage.data.isNotEmpty()) {
-            // data 확인
+            // todo 추후 디테일한 로직 처리 필요
+            val data = remoteMessage.data
+            val title = data["title"]
+            val description = data["body"]
+            generateNotification(title, description)
         }
 
         remoteMessage.notification?.let {
