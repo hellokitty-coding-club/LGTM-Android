@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.CookieManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.lgtm.android.auth.BuildConfig.DEBUG
 import com.lgtm.android.auth.BuildConfig.LGTM_BASE_URL_DEBUG
@@ -33,6 +34,7 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun loadGithubLoginUsingWebView() {
+        clearPreviousLoginCookie()
         binding.webView.apply {
             settings.javaScriptEnabled = true
             webViewClient =
@@ -40,6 +42,11 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
             loadUrl(getGithubLoginUrl())
             Log.d(TAG, "loadGithubLoginUsingWebView: ${getGithubLoginUrl()}")
         }
+    }
+
+    private fun clearPreviousLoginCookie() {
+        CookieManager.getInstance().removeAllCookies(null)
+        CookieManager.getInstance().flush()
     }
 
     private fun getGithubLoginUrl() =
