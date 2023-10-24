@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,kotlin
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,androidstudio,kotlin
 
+
+
 ### Android ###
 # Gradle files
 .gradle/
@@ -8,6 +10,7 @@ build/
 
 # Local configuration file (sdk path, etc)
 local.properties
+lgtm.properties
 
 # Log/OS Files
 *.log
@@ -18,6 +21,7 @@ captures/
 .cxx/
 *.apk
 output.json
+app/release/output-metadata.json
 
 # IntelliJ
 *.iml
@@ -29,9 +33,11 @@ render.experimental.xml
 # Keystore files
 *.jks
 *.keystore
+private_key.pepk
+LgtmKeyStore
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+# google-services.json
 
 # Android Profiling
 *.hprof
@@ -199,3 +205,6 @@ fabric.properties
 /captures
 .cxx
 
+/app/release/output-metadata.json
+/LgtmKeyStore
+/private_key.pepk

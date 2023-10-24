@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.lgtm.android.common_ui.model.ProfileGlanceUI" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-20dp"
+        android:background="@drawable/rectangle_white_radius_top_20"
+        tools:layout_marginTop="0dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            android:text="@{data.nickname}"
+            android:textAppearance="@style/Heading3B"
+            app:layout_constraintEnd_toStartOf="@id/btn_github"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="이름" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_github"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/rectangle_green_radius_10"
+            android:drawableStart="@drawable/ic_tech_github"
+            android:drawablePadding="5dp"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="9dp"
+            android:stateListAnimator="@null"
+            android:text="@string/github"
+            android:textAppearance="@style/Body1M"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_github_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/github_kr"
+            android:textAppearance="@style/Body3R"
+            app:layout_constraintStart_toStartOf="@id/tv_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+        <View
+            android:id="@+id/view_divider_github"
+            android:layout_width="1dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="7dp"
+            android:background="@color/gray_3"
+            app:layout_constraintBottom_toBottomOf="@id/tv_github_title"
+            app:layout_constraintStart_toEndOf="@id/tv_github_title"
+            app:layout_constraintTop_toTopOf="@id/tv_github_title" />
+
+        <TextView
+            android:id="@+id/tv_github"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{`@` + data.githubId}"
+            android:textAppearance="@style/Body3M"
+            app:layout_constraintBottom_toBottomOf="@id/tv_github_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/view_divider_github"
+            app:layout_constraintTop_toTopOf="@id/tv_github_title"
+            tools:text="\@kxxhyorimkxxhyorimkxxhyorimkxxhyorimkxxhyorim" />
+
+        <TextView
+            android:id="@+id/tv_company_and_position_title"
+            setTextRes="@{data.detailInfoLabel}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/Body3R"
+            app:layout_constraintStart_toStartOf="@id/tv_github_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_github_title"
+            tools:text="회사/직책" />
+
+        <View
+            android:id="@+id/view_divider_company_and_position"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="7dp"
+            android:background="@color/gray_3"
+            app:layout_constraintBottom_toBottomOf="@id/tv_company_and_position"
+            app:layout_constraintStart_toEndOf="@id/tv_company_and_position_title"
+            app:layout_constraintTop_toTopOf="@id/tv_company_and_position" />
+
+        <TextView
+            android:id="@+id/tv_company_and_position"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:text="@{data.detailInfo}"
+            android:textAppearance="@style/Body3M"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@id/view_divider_company_and_position"
+            app:layout_constraintTop_toTopOf="@id/tv_company_and_position_title"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게길게 / 안드로이드안드로이드안드로이드안드로이드안드로이드" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.auth.ui.signup.SignUpViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".ui.signup.reviewer.CareerPeriodFragment">
+
+        <TextView
+            android:id="@+id/tv_career_period_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="121dp"
+            android:text="@string/enter_career_period"
+            android:textAppearance="@style/Heading4B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_career_period_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/only_number_allowed"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintStart_toStartOf="@id/tv_career_period_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_career_period_title" />
+
+        <EditText
+            android:id="@+id/et_career_period"
+            style="@style/LGTMEditTextStyle"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="57dp"
+            android:autofillHints="no"
+            android:gravity="center"
+            android:hint="@string/num_hint"
+            android:inputType="number"
+            android:maxLength="8"
+            app:layout_constraintStart_toStartOf="@id/tv_career_period_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_career_period_description" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/month"
+            android:textAppearance="@style/Body1B"
+            app:layout_constraintBottom_toBottomOf="@id/et_career_period"
+            app:layout_constraintStart_toEndOf="@id/et_career_period"
+            app:layout_constraintTop_toTopOf="@id/et_career_period" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="@{viewModel.careerPeriodInfoStatus.isVisible ? View.VISIBLE : View.GONE}"
+            app:layout_constraintStart_toStartOf="@id/et_career_period"
+            app:layout_constraintTop_toBottomOf="@id/et_career_period">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_info"
+                setImageRes="@{viewModel.careerPeriodInfoStatus.icon}"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:padding="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_info_red" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                infoStatusColor="@{viewModel.careerPeriodInfoStatus.color}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.careerPeriodInfoStatus.message}"
+                android:textAppearance="@style/Body3M"
+                app:layout_constraintBottom_toBottomOf="@id/ic_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/ic_info"
+                app:layout_constraintTop_toTopOf="@id/ic_info"
+                tools:text="12개월 이상만 가입 가능함요"
+                tools:textColor="@color/red" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/LGTMButtonLightWhiteTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="@{viewModel.isCareerPeriodValid, default=false}"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

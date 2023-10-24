@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.lgtm.domain.server_drive_ui.SduiTheme" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="uiState"
+            type="com.lgtm.domain.server_drive_ui.SduiEmptyUiState" />
+
+        <variable
+            name="theme"
+            type="com.lgtm.domain.server_drive_ui.SduiTheme" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@color/gray_3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            setItemLayerBackground="@{theme}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_empty"
+                setEmptyIcon="@{theme}"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="14dp"
+                app:layout_constraintBottom_toTopOf="@id/tv_message_main"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:src="@drawable/img_empty_gray" />
+
+            <TextView
+                android:id="@+id/tv_message_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{uiState.mainMessage}"
+                android:textAppearance="@style/Body2"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@id/tv_message_sub"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_empty"
+                tools:text="아직 추천 미션이 없습니다." />
+
+            <TextView
+                android:id="@+id/tv_message_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="@{uiState.subMessage}"
+                android:textColor="@color/gray_6"
+                app:layout_constraintBottom_toTopOf="@id/iv_arrow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_message_main"
+                tools:text="아래에서 미션을 추가해보세요!" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_arrow"
+                setArrowImage="@{uiState.arrowType}"
+                android:layout_width="7dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="5dp"
+                android:visibility="@{uiState.arrowVisible ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_message_sub" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

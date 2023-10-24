@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.mission_detail.MissionDetailViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_1"
+        tools:context=".MissionDetailActivity">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_guideline"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
+            android:elevation="1dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="@dimen/base_guideline"
+            android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
+            android:elevation="1dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_menu_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
+            android:elevation="1dp"
+            android:padding="7dp"
+            android:src="@drawable/ic_share"
+            app:layout_constraintEnd_toStartOf="@id/iv_menu"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/base_guideline" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gl_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/base_guideline" />
+
+
+                <!-- 상단 레이아웃 -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_mission_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rectangle_white_stroke_gray_2_radius_bottom_20"
+                    android:elevation="10dp"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <!-- 진행 상황 태그 -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_progress"
+                        style="@style/MissionStatus"
+                        setButtonStringRes="@{viewModel.missionDetailUiState.missionStatus.message}"
+                        setIconColorRes="@{viewModel.missionDetailUiState.missionStatus.color}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/base_guideline"
+                        android:layout_marginTop="84dp"
+                        android:clickable="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:background="@drawable/rectangle_black_radius_5" />
+
+                    <TextView
+                        android:id="@+id/tv_mission_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/base_guideline"
+                        android:layout_marginTop="12dp"
+                        android:text="@{viewModel.missionDetailUiState.missionTitle}"
+                        android:textAppearance="@style/Heading3B"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/btn_progress"
+                        tools:text="개발자 김효림과 함께하는 안드로이드 기초 강의입니다!" />
+
+                    <!-- 기술 태그 -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_tech_tag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/base_guideline"
+                        android:layout_marginTop="16dp"
+                        app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mission_title"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_tech_tag" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_mission_url"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/inner_guideline"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/rectangle_green_radius_10"
+                        app:layout_constraintTop_toBottomOf="@id/rv_tech_tag">
+
+                        <TextView
+                            android:id="@+id/tv_mission_url_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="17dp"
+                            android:text="@string/mission_url_title"
+                            android:textAppearance="@style/Body1B"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_mission_url"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginEnd="45dp"
+                            android:layout_marginBottom="17dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@{viewModel.missionDetailUiState.missionRepositoryUrl}"
+                            android:textAppearance="@style/Body3M"
+                            android:textColor="@color/gray_1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_mission_url_title"
+                            tools:text="https://github.com/hellokitty-coding-club/LGTM-Android/issues/103" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="6dp"
+                            android:rotationY="180"
+                            android:src="@drawable/ic_back"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tv_due_date_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/inner_guideline"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/mission_registration_date_limit"
+                        android:textAppearance="@style/Body2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cl_mission_url" />
+
+                    <TextView
+                        android:id="@+id/tv_due_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/inner_guideline"
+                        android:text="@{String.valueOf(viewModel.missionDetailUiState.remainingRegisterDays)+ `일 후 마감`}"
+                        android:textAppearance="@style/Body2"
+                        android:textColor="@color/gray_5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_due_date_title"
+                        tools:text="3일 후" />
+
+                    <TextView
+                        android:id="@+id/tv_num_of_people_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="@string/mission_num_of_people"
+                        android:textAppearance="@style/Body2"
+                        app:layout_constraintStart_toStartOf="@id/tv_due_date_title"
+                        app:layout_constraintTop_toBottomOf="@id/tv_due_date_title" />
+
+                    <TextView
+                        android:id="@+id/tv_num_of_people"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="@{String.valueOf(viewModel.missionDetailUiState.currentPeopleNumber) + `/` + String.valueOf(viewModel.missionDetailUiState.maxPeopleNumber)+`명`}"
+                        android:textAppearance="@style/Body2"
+                        android:textColor="@color/gray_5"
+                        app:layout_constraintEnd_toEndOf="@id/tv_due_date"
+                        app:layout_constraintTop_toTopOf="@id/tv_num_of_people_title"
+                        tools:text="10/20명" />
+
+                    <TextView
+                        android:id="@+id/tv_price_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="23dp"
+                        android:text="@string/mission_price"
+                        android:textAppearance="@style/Body2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_due_date_title"
+                        app:layout_constraintTop_toBottomOf="@id/tv_num_of_people_title" />
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="@{@string/price_format(viewModel.missionDetailUiState.price)+ `원`}"
+                        android:textAppearance="@style/Body2"
+                        android:textColor="@color/gray_5"
+                        app:layout_constraintEnd_toEndOf="@id/tv_due_date"
+                        app:layout_constraintTop_toTopOf="@id/tv_price_title"
+                        tools:text="10,000원" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_reviewer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/reviewer"
+                    android:textAppearance="@style/Body1B"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/cl_mission_top"
+                    tools:text="리뷰어" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_reviewer_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/rectangle_white_stroke_gray_2_radius_10"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_reviewer">
+
+                    <include
+                        android:id="@+id/profile_glance"
+                        layout="@layout/layout_profile_glance" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <View
+                    android:id="@+id/view_divider_reviewer_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/gray_2"
+                    app:layout_constraintTop_toBottomOf="@id/cl_reviewer_info" />
+
+                <TextView
+                    android:id="@+id/tv_mission_description_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/mission_description"
+                    android:textAppearance="@style/Body1B"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_reviewer_info" />
+
+                <TextView
+                    android:id="@+id/tv_mission_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.missionDetailUiState.description}"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/gray_6"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mission_description_title"
+                    tools:text="@tools:sample/lorem" />
+
+                <View
+                    android:id="@+id/view_divider_mission_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/gray_2"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mission_description" />
+
+                <TextView
+                    android:id="@+id/tv_recommend_to_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/recommend_group"
+                    android:textAppearance="@style/Body1B"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_mission_description" />
+
+                <TextView
+                    android:id="@+id/tv_recommend_to"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.missionDetailUiState.recommendTo}"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/gray_6"
+                    android:visibility="@{viewModel.recommendToEmptyVisibility ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintBottom_toTopOf="@id/view_divider_recommend_to"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommend_to_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="@tools:sample/lorem" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_recommend_to_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="14dp"
+                    android:visibility="@{viewModel.recommendToEmptyVisibility ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintTop_toBottomOf="@id/tv_recommend_to">
+
+                    <include layout="@layout/layout_empty_no_content" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view_divider_recommend_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@color/gray_2"
+                    app:layout_constraintTop_toBottomOf="@id/cl_recommend_to_empty" />
+
+                <TextView
+                    android:id="@+id/tv_not_recommend_to_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/not_recommend_group"
+                    android:textAppearance="@style/Body1B"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/view_divider_recommend_to" />
+
+                <TextView
+                    android:id="@+id/tv_not_recommend_to"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="139dp"
+                    android:text="@{viewModel.missionDetailUiState.notRecommendTo}"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/gray_6"
+                    android:visibility="@{viewModel.notRecommendToEmptyVisibility ? View.GONE : View.VISIBLE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/gl_end"
+                    app:layout_constraintStart_toStartOf="@id/gl_start"
+                    app:layout_constraintTop_toBottomOf="@id/tv_not_recommend_to_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="@tools:sample/lorem" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_not_recommend_to_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="154dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="14dp"
+                    android:visibility="@{viewModel.notRecommendToEmptyVisibility ? View.VISIBLE : View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_not_recommend_to_title">
+
+                    <include layout="@layout/layout_empty_no_content" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout> <!-- End of ScrollView ViewGroup -->
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_mission_detail"
+            style="@style/LGTMButtonGrayTheme"
+            setButtonStringRes="@{viewModel.missionDetailUiState.missionDetailButtonStatusUI.string}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/base_guideline"
+            android:layout_marginBottom="25dp"
+            android:enabled="@{viewModel.missionDetailUiState.missionDetailButtonStatusUI.isEnable}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="미션 진행하기" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

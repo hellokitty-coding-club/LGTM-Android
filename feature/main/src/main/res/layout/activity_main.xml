@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gray_3"
+        tools:context=".MainActivity">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="-20dp"
+            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/rectangle_white_stroke_gray_2_radius_top_20"
+            app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
+            app:itemIconSize="32dp"
+            app:itemRippleColor="@android:color/transparent"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/menu_main"
+            tools:layout_height="55dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

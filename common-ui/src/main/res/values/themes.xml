@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.LGTMAndroid" parent="Theme.Material3.Light.NoActionBar">
+        <!--color-->
+        <item name="colorPrimary">@color/green</item>
+        <!--status bar-->
+        <item name="android:statusBarColor">@color/gray_3</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!--font-->
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@color/black</item>
+        <!--etc-->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="bottomSheetDialogTheme">@style/LgtmBottomSheetStyle</item>
+        <item name="editTextStyle">@style/LGTMEditTextStyle</item>
+        <item name="android:dropDownListViewStyle">@style/SpinnerStyle</item>
+        <item name="chipCornerRadius">100dp</item>
+    </style>
+
+    <style name="LgtmBottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/LGTMWhiteModalStyle</item>
+    </style>
+
+    <style name="LGTMWhiteModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rectangle_bottom_sheet</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+    </style>
+
+
+    <style name="LGTMButton" parent="Theme.AppCompat">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">14dp</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:layout_marginBottom">28dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">@style/Body1M</item>
+    </style>
+
+    <style name="LGTMButtonLightWhiteTheme" parent="LGTMButton">
+        <item name="android:background">@drawable/selector_lgtm_button_light_background</item>
+        <item name="android:textColor">@color/selector_if_enabled_black_else_gray_4</item>
+    </style>
+
+    <style name="LGTMButtonGrayTheme" parent="LGTMButton">
+        <item name="android:background">@drawable/selector_lgtm_button_dark_background</item>
+        <item name="android:textColor">@color/selector_if_enabled_black_else_gray_5</item>
+    </style>
+
+
+    <style name="LGTMEditTextStyle" parent="@style/Widget.AppCompat.EditText">
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="colorControlNormal">?attr/colorPrimary</item>
+        <item name="colorControlHighlight">?attr/colorPrimary</item>
+        <item name="android:textAppearance">@style/Body1B</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHighlight">?attr/colorPrimary</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
+        <item name="android:textColorHint">@color/gray_3</item>
+        <item name="android:paddingVertical">16dp</item>
+        <item name="android:background">@drawable/rectangle_white_stroke_gray_3_radius_10</item>
+        <item name="android:textCursorDrawable">@drawable/rectangle_primary_cursor</item>
+    </style>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/gray_2</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/black</item>
+    </style>
+
+    <style name="ThemeOverlay.App.DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorAccent">@color/black</item> <!-- Header background color -->
+        <item name="colorPrimary">@color/black</item> <!-- cancel, OK Button Text Color -->
+        <item name="android:textColorPrimaryInverse">@color/green</item> <!-- Header Text Color -->
+        <item name="android:textColorSecondaryInverse">@color/green
+        </item> <!-- Header Year Color -->
+        <item name="android:textColorSecondary">@color/gray_6</item>
+    </style>
+
+    <style name="MissionStatus" parent="BlackTagStyle">
+        <item name="icon">@drawable/oval_diameter_9</item>
+        <item name="iconPadding">5dp</item>
+        <item name="iconSize">9dp</item>
+    </style>
+
+    <style name="ProcessState" parent="BlackTagStyle">
+        <item name="iconSize">20dp</item>
+        <item name="iconTint">@color/green</item>
+    </style>
+
+    <style name="BlackTagStyle" parent="Widget.Material3.Button">
+        <item name="android:backgroundTint">@color/black</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:paddingHorizontal">7dp</item>
+        <item name="cornerRadius">5dp</item>
+        <item name="android:paddingVertical">5dp</item>
+        <item name="android:textAppearance">@style/Body3R</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="iconGravity">textStart</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CircleImage" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.Radius5" parent="">
+        <item name="cornerSize">5%</item>
+    </style>
+
+    <style name="PopupMenu" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@drawable/rectangle_white_stroke_gray_2_radius_10
+        </item>
+        <item name="android:textAppearance">@style/Body2</item>
+    </style>
+</resources>

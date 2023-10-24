@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_sign_up"
+    app:startDestination="@id/fragment_terms">
+
+    <fragment
+        android:id="@+id/fragment_terms"
+        android:name="com.lgtm.android.auth.ui.signup.common.TermsFragment"
+        android:label="fragment_terms"
+        tools:layout="@layout/fragment_terms">
+        <action
+            android:id="@+id/action_termsFragment_to_nicknameFragment"
+            app:destination="@id/fragment_nickname"
+            app:popUpTo="@id/fragment_terms"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_nickname"
+        android:name="com.lgtm.android.auth.ui.signup.common.NicknameFragment"
+        android:label="fragment_nickname"
+        tools:layout="@layout/fragment_nickname">
+        <action
+            android:id="@+id/action_nicknameFragment_to_techTagFragment"
+            app:destination="@id/fragment_tech_tag"
+            app:popUpTo="@id/fragment_nickname"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_tech_tag"
+        android:name="com.lgtm.android.auth.ui.signup.common.TechTagFragment"
+        android:label="fragment_tech_tag"
+        tools:layout="@layout/fragment_tech_tag">
+        <action
+            android:id="@+id/action_techTagFragment_to_introductionFragment"
+            app:destination="@id/fragment_introduction"
+            app:popUpTo="@id/fragment_tech_tag"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_introduction"
+        android:name="com.lgtm.android.auth.ui.signup.common.IntroductionFragment"
+        android:label="fragment_introduction"
+        tools:layout="@layout/fragment_introduction">
+        <action
+            android:id="@+id/action_introductionFragment_to_chooseRoleFragment"
+            app:destination="@id/fragment_choose_role"
+            app:popUpTo="@id/fragment_introduction"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_choose_role"
+        android:name="com.lgtm.android.auth.ui.signup.common.ChooseRoleFragment"
+        android:label="fragment_choose_role"
+        tools:layout="@layout/fragment_choose_role">
+        <action
+            android:id="@+id/action_chooseRoleFragment_to_educationStatusFragment"
+            app:destination="@id/fragment_education_status"
+            app:popUpTo="@id/fragment_choose_role"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+
+        <action
+            android:id="@+id/action_chooseRoleFragment_to_companyNameFragment"
+            app:destination="@id/fragment_company_name"
+            app:popUpTo="@id/fragment_choose_role"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_education_status"
+        android:name="com.lgtm.android.auth.ui.signup.reviewee.EducationStatusFragment"
+        android:label="fragment_education_status"
+        tools:layout="@layout/fragment_education_status">
+        <action
+            android:id="@+id/action_educationStatusFragment_to_realNameFragment"
+            app:destination="@id/fragment_real_name"
+            app:popUpTo="@id/fragment_education_status"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_real_name"
+        android:name="com.lgtm.android.auth.ui.signup.reviewee.RealNameFragment"
+        android:label="fragment_real_name"
+        tools:layout="@layout/fragment_real_name" />
+
+    <fragment
+        android:id="@+id/fragment_company_name"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.CompanyNameFragment"
+        android:label="fragment_company_name"
+        tools:layout="@layout/fragment_company_name">
+
+        <action
+            android:id="@+id/action_companyNameFragment_to_positionFragment"
+            app:destination="@id/fragment_position"
+            app:popUpTo="@id/fragment_company_name"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_position"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.PositionFragment"
+        android:label="fragment_position"
+        tools:layout="@layout/fragment_position">
+
+        <action
+            android:id="@+id/action_positionFragment_to_careerPeriodFragment"
+            app:destination="@id/fragment_career_period"
+            app:popUpTo="@id/fragment_position"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_career_period"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.CareerPeriodFragment"
+        android:label="fragment_career_period"
+        tools:layout="@layout/fragment_career_period">
+
+        <action
+            android:id="@+id/action_careerPeriodFragment_to_bankAccountFragment"
+            app:destination="@id/fragment_bank_account"
+            app:popUpTo="@id/fragment_career_period"
+            app:popUpToSaveState="true"
+            app:restoreState="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_bank_account"
+        android:name="com.lgtm.android.auth.ui.signup.reviewer.BankAccountFragment"
+        android:label="fragment_bank_account"
+        tools:layout="@layout/fragment_bank_account" />
+
+</navigation>

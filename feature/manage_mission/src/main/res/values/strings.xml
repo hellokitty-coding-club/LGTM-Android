@@ -1,0 +1,5 @@
+<resources>
+
+    <string name="no_participant_yet">아직 참가자가 없습니다.</string>
+    <string name="shall_we_wait">조금만 더 기다려볼까요?</string>
+</resources>

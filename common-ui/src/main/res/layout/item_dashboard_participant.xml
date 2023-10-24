@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.lgtm.android.common_ui.model.MemberMissionStatusUI" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/rectangle_white_stroke_gray_2_radius_20">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_profile_image"
+            setCircleProfileImageUrl="@{data.profileImageUrl}"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            android:theme="@style/ShapeAppearanceOverlay.App.CircleImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_profile_empty" />
+
+        <TextView
+            android:id="@+id/tv_nickname_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/nickname"
+            android:textAppearance="@style/Body3R"
+            app:layout_constraintBottom_toTopOf="@id/tv_github_label"
+            app:layout_constraintStart_toEndOf="@id/iv_profile_image"
+            app:layout_constraintTop_toTopOf="@id/iv_profile_image"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <View
+            android:id="@+id/div_nickname"
+            android:layout_width="1dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="7dp"
+            android:background="@color/gray_3"
+            app:layout_constraintBottom_toBottomOf="@id/tv_nickname_label"
+            app:layout_constraintStart_toEndOf="@id/tv_nickname_label"
+            app:layout_constraintTop_toTopOf="@id/tv_nickname_label" />
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:text="@{data.nickname}"
+            android:textAppearance="@style/Body3M"
+            app:layout_constraintBottom_toBottomOf="@id/div_nickname"
+            app:layout_constraintStart_toEndOf="@id/div_nickname"
+            app:layout_constraintTop_toTopOf="@id/div_nickname"
+            tools:text="nickname" />
+
+        <TextView
+            android:id="@+id/tv_github_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/github_kr"
+            android:textAppearance="@style/Body3R"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"
+            app:layout_constraintStart_toStartOf="@id/tv_nickname_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_nickname_label" />
+
+        <View
+            android:id="@+id/div_github"
+            android:layout_width="1dp"
+            android:layout_height="13dp"
+            android:layout_marginStart="7dp"
+            android:background="@color/gray_3"
+            app:layout_constraintBottom_toBottomOf="@id/tv_github_label"
+            app:layout_constraintStart_toEndOf="@id/tv_github_label"
+            app:layout_constraintTop_toTopOf="@id/tv_github_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:text="@{`@` + data.githubId}"
+            android:textAppearance="@style/Body3M"
+            app:layout_constraintBottom_toBottomOf="@id/div_github"
+            app:layout_constraintStart_toEndOf="@id/div_github"
+            app:layout_constraintTop_toTopOf="@id/div_github"
+            tools:text="\@github_id" />
+
+        <View
+            android:id="@+id/div_horizontal_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/gray_2"
+            app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/div_horizontal_line">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_progress"
+                style="@style/ProcessState"
+                setButtonStringRes="@{data.processStatus.tagText}"
+                setImageResOnButton="@{data.processStatus.tagImg}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:layout_marginStart="@dimen/inner_guideline"
+                android:clickable="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/rectangle_black_radius_5"
+                tools:icon="@drawable/ic_reviewee_green"
+                tools:text="입금 확인" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ic_next"
+                android:backgroundTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/btn_progress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btn_progress" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="5dp"
+                android:gravity="end"
+                android:text="@{data.processStatus.detailMessage}"
+                android:textAppearance="@style/Body3M"
+                app:layout_constraintBottom_toBottomOf="@id/iv_next"
+                app:layout_constraintEnd_toStartOf="@id/iv_next"
+                app:layout_constraintStart_toEndOf="@id/btn_progress"
+                app:layout_constraintTop_toTopOf="@id/iv_next"
+                tools:text="리뷰가 미션을 수행중이에요. 리뷰가 미션을 수행중이에요." />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_deposit_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/deposit_date"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_progress" />
+
+        <TextView
+            android:id="@+id/tv_dummy_for_alignment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/inner_guideline"
+            android:text="0000.00.00"
+            android:textAppearance="@style/Body3M"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/tv_deposit_date_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_deposit_date_label"
+            tools:ignore="HardcodedText"
+            tools:text="2023.09.16" />
+
+
+        <TextView
+            android:id="@+id/tv_deposit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.paymentDate}"
+            android:textAppearance="@style/Body3M"
+            android:textColor="@color/gray_5"
+            app:layout_constraintBottom_toBottomOf="@id/tv_deposit_date_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_dummy_for_alignment"
+            app:layout_constraintStart_toStartOf="@id/tv_dummy_for_alignment"
+            app:layout_constraintTop_toTopOf="@id/tv_deposit_date_label"
+            tools:text="2023.09.16" />
+
+        <TextView
+            android:id="@+id/tv_mission_submit_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/mission_submit_date"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_deposit_date_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.missionFinishedDate}"
+            android:textAppearance="@style/Body3M"
+            android:textColor="@color/gray_5"
+            app:layout_constraintBottom_toBottomOf="@id/tv_mission_submit_date_label"
+            app:layout_constraintEnd_toEndOf="@id/tv_dummy_for_alignment"
+            app:layout_constraintStart_toStartOf="@id/tv_dummy_for_alignment"
+            app:layout_constraintTop_toTopOf="@id/tv_mission_submit_date_label"
+            tools:text="2023.09.23" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_review_mission"
+            style="@style/LGTMButtonLightWhiteTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:enabled="@{data.missionSubmitted}"
+            android:text="@string/review_mission"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_mission_submit_date_label" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
