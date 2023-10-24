@@ -79,11 +79,20 @@ class MissionDetailActivity :
     }
 
     private fun observeMissionDetailUiState() {
-        missionDetailViewModel.missionDetailUiState.observe(this) {
-            missionDetailViewModel.setRecommendToEmptyVisibility()
-            missionDetailViewModel.setNotRecommendToEmptyVisibility()
-            techTagAdapter.submitList(it.techTagList)
-            binding.profileGlance.data = requireNotNull(it.memberProfile)
+        missionDetailViewModel.missionDetailStatus.observe(this) {
+            when (it) {
+                is NetworkState.Init -> {} // no-op
+                is NetworkState.Success -> {
+                    val missionDetailUi = missionDetailViewModel.missionDetailUiState.value
+                    missionDetailViewModel.setRecommendToEmptyVisibility()
+                    missionDetailViewModel.setNotRecommendToEmptyVisibility()
+                    techTagAdapter.submitList(missionDetailUi?.techTagList)
+                    binding.profileGlance.data = requireNotNull(missionDetailUi?.memberProfile)
+                }
+                is NetworkState.Failure -> {
+                    Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
