@@ -131,7 +131,10 @@ class MissionRepositoryImpl @Inject constructor(
             )
             Result.success(response.data.toVO())
         } catch (e: IllegalArgumentException) {
-            Log.e(TAG, "fetchSeniorMissionStatus: ${this.javaClass} ${e.message} / casting 도중 null 값 발생")
+            Log.e(
+                TAG,
+                "fetchSeniorMissionStatus: ${this.javaClass} ${e.message} / casting 도중 null 값 발생"
+            )
             Result.failure(e)
         } catch (e: Exception) {
             Log.e(TAG, "fetchSeniorMissionStatus: ${this.javaClass} ${e.message}")
@@ -171,6 +174,16 @@ class MissionRepositoryImpl @Inject constructor(
             Result.success(response.data.status != null)
         } catch (e: Exception) {
             Log.e(TAG, "codeReviewCompleted: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun deleteMission(missionId: Int): Result<Boolean> {
+        return try {
+            val response = missionDataSource.deleteMission(missionId)
+            Result.success(response.data.writerId != null)
+        } catch (e: Exception) {
+            Log.e(TAG, "deleteMission: ${this.javaClass} ${e.message}")
             Result.failure(e)
         }
     }
