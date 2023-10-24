@@ -36,6 +36,14 @@ class MissionDetailViewModel @Inject constructor(
         MutableLiveData(NetworkState.Init)
     val participateMissionUiState: LiveData<NetworkState<Boolean>> = _participateMissionUiState
 
+    private val _deleteMissionState: MutableLiveData<NetworkState<Boolean>> =
+        MutableLiveData(NetworkState.Init)
+    val deleteMissionState: LiveData<NetworkState<Boolean>> = _deleteMissionState
+
+    private val _missionDetailStatus: MutableLiveData<NetworkState<Boolean>> =
+        MutableLiveData(NetworkState.Init)
+    val missionDetailStatus: LiveData<NetworkState<Boolean>> = _missionDetailStatus
+
     fun isMyMission() =
         _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_RECRUITING ||
                 _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_MISSION_FINISH
@@ -74,7 +82,9 @@ class MissionDetailViewModel @Inject constructor(
                 .onSuccess {
                     _missionDetailVO.postValue(it)
                     _missionDetailUiState.postValue(it.toUiModel())
+                    _missionDetailStatus.postValue(NetworkState.Success(true))
                 }.onFailure {
+                    _missionDetailStatus.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "getMissionDetail: $it")
                 }
         }
@@ -93,4 +103,15 @@ class MissionDetailViewModel @Inject constructor(
     }
 
     fun getMissionId() = _missionDetailVO.value?.missionId ?: -1
+    fun deleteMission() {
+        val missionId = _missionDetailVO.value?.missionId ?: return
+        viewModelScope.launch(lgtmErrorHandler) {
+            missionUseCase.deleteMission(missionId)
+                .onSuccess {
+                    _deleteMissionState.postValue(NetworkState.Success(it))
+                }.onFailure {
+                    _deleteMissionState.postValue(NetworkState.Failure(it.message))
+                }
+        }
+    }
 }

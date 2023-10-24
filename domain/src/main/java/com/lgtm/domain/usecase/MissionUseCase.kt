@@ -208,6 +208,14 @@ class MissionUseCase @Inject constructor(
         }
     }
 
+    suspend fun deleteMission(missionId: Int): Result<Boolean> {
+        return try {
+            missionRepository.deleteMission(missionId)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
     companion object {
         // viewType
         private const val ONGOING_MISSION_EMPTY_VIEW = "ongoing_mission_empty_view"
