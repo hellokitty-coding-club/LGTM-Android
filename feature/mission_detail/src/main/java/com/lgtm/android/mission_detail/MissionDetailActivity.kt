@@ -20,7 +20,6 @@ import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.getDrawableCompat
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
-import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_MISSION_FINISH
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_RECRUITING
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_PARTICIPATE_MISSION_FINISH
@@ -81,7 +80,7 @@ class MissionDetailActivity :
     private fun observeMissionDetailUiState() {
         missionDetailViewModel.missionDetailStatus.observe(this) {
             when (it) {
-                is NetworkState.Init -> {} // no-op
+                is NetworkState.Init -> { /* no-op */}
                 is NetworkState.Success -> {
                     val missionDetailUi = missionDetailViewModel.missionDetailUiState.value
                     missionDetailViewModel.setRecommendToEmptyVisibility()
@@ -89,6 +88,7 @@ class MissionDetailActivity :
                     techTagAdapter.submitList(missionDetailUi?.techTagList)
                     binding.profileGlance.data = requireNotNull(missionDetailUi?.memberProfile)
                 }
+
                 is NetworkState.Failure -> {
                     Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
                 }
@@ -202,7 +202,7 @@ class MissionDetailActivity :
     private fun observeDeleteMissionStatus() {
         missionDetailViewModel.deleteMissionState.observe(this) {
             when (it) {
-                is NetworkState.Init -> {} /* no-op*/
+                is NetworkState.Init -> { /* no-op*/ }
                 is NetworkState.Success -> {
                     showMissionDeleteSuccessToast()
                     finish()
@@ -231,7 +231,7 @@ class MissionDetailActivity :
 
     private fun setOnClickBottomButton() {
         binding.btnMissionDetail.setOnClickListener {
-            val missionDetailStatus: MissionDetailStatus =
+            val missionDetailStatus =
                 missionDetailViewModel.getMissionDetailStatus() ?: return@setOnClickListener
             when (missionDetailStatus) {
                 JUNIOR_PARTICIPATE_RECRUITING -> navigateJuniorMyMission()
