@@ -88,7 +88,12 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
                     finish()
                 }
 
-                is NetworkState.Failure -> Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                is NetworkState.Failure -> {
+                    moveToMainActivity()
+                    finish()
+                    Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                    // TODO: 푸시알림 설정 실패 - Crashlytics 연동
+                }
             }
         }
     }

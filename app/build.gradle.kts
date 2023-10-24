@@ -20,6 +20,7 @@ android {
         applicationId = "com.lgtm.android"
         versionCode = libs.versions.versionCode.get().toInt()
         versionName = libs.versions.appVersion.get()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField(
@@ -36,6 +37,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -44,10 +46,12 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         buildConfig = true
     }
 
+    lint {
+        disable += "Instantiatable"
+    }
 }
 
 kapt {
