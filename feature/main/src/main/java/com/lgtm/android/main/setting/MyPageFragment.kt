@@ -79,8 +79,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     private fun setNoticeOnClickListener() {
         // 공지사항
         binding.btnNotice.setOnClickListener {
-            val url =
-                "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?v=3cee323345414e318192b89bfe7dd2d0&pvs=4"
+            val url = "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?v=3cee323345414e318192b89bfe7dd2d0&pvs=4"
             openUrlInBrowser(url)
         }
     }
@@ -115,7 +114,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     private fun logout() {
         myPageViewModel.clearUserData()
-        requireContext().cacheDir.deleteRecursively()
         moveToSignInActivity()
     }
 
