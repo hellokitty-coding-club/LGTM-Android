@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">LGTM</string>
+
+    <string name="price_format">%,2d</string>
+
+    <!-- 회원가입 -->
+    <string name="terms_service"><u>약관 및 정책</u></string>
+    <string name="terms_privacy"><u>개인정보처리방침</u></string>
+    <string name="terms_marketing">이벤트, 광고성 정보 안내 (선택)</string>
+    <string name="next">다음</string>
+    <string name="agree_all">전체 동의</string>
+    <string name="need_service_terms_agree">서비스 이용을 위해\n이용약관 동의가 필요합니다.</string>
+    <string name="login_by_github">Github로 로그인</string>
+    <string name="nickname_description_main">사용하실 닉네임을\n입력하세요.</string>
+    <string name="nickname_description_sub">닉네임은 나중에 다시 수정할 수 있습니다.</string>
+    <string name="enter_nickname">닉네임을 입력하세요.</string>
+    <string name="dash">/</string>
+    <string name="welcome">님, 환영합니다!</string>
+    <string name="select_tech_stack">사용하고 있는 기술 스택을\n선택하세요.</string>
+    <string name="which_role_to_signup">어떤 회원으로 가입하나요?</string>
+    <string name="choose_role">역할을 골라주세요.</string>
+    <string name="reviewee">리뷰이</string>
+    <string name="want_to_learn_develop">개발을 배우고 싶어요.</string>
+    <string name="reviewer">리뷰어</string>
+    <string name="want_to_teach_develop">개발을 알려주고 싶어요.</string>
+    <string name="select_edu_status">학력 정보를\n선택해주세요.</string>
+    <string name="high_school_student">고등학생</string>
+    <string name="undergraduate">대학생</string>
+    <string name="graduate">대학교 졸업</string>
+    <string name="office_workers">직장인</string>
+    <string name="enter_real_name">실명을 입력하세요.</string>
+    <string name="later_used_by_name_verification">추후에 입금자명 확인에 사용됩니다.</string>
+    <string name="signup_complete">회원가입 완료</string>
+    <string name="enter_company_name">재직중인 회사명을\n입력해주세요.</string>
+    <string name="enter_position">직책을 입력해주세요.</string>
+    <string name="position_example">예시) 백엔드 개발자, 안드로이드 개발자</string>
+    <string name="enter_career_period">경력 기간을 입력해주세요.</string>
+    <string name="only_number_allowed">숫자만 사용할 수 있습니다.</string>
+    <string name="month">개월</string>
+    <string name="enter_bank_account_num_title">계좌번호를 입력해주세요.</string>
+    <string name="enter_bank_account_num_description">리뷰 비용이 입금될 계좌입니다.</string>
+    <string name="enter_bank_account">계좌번호를 입력하세요</string>
+    <string name="select_bank">은행을 선택하세요.</string>
+    <string name="cannot_use_space">띄어쓰기는 사용할 수 없습니다.</string>
+    <string name="cannot_only_use_space">띄어쓰기만 입력할 수 없습니다.</string>
+    <string name="write_correct_name">올바른 실명을 입력해 주세요.</string>
+    <string name="over_12_month_experience_required">경력 12개월 이상만 가입할 수 있습니다.</string>
+    <string name="duplicate_nickname">중복된 닉네임입니다.</string>
+    <string name="can_use">사용 가능합니다.</string>
+    <string name="empty_value"></string>
+
+
+    <!-- 미션 조회 -->
+    <string name="mission_price">참여 비용</string>
+    <string name="mission_max_people">참여 인원</string>
+    <string name="mission_registration_date_limit">신청 기한</string>
+    <string name="new_mission">새로운 미션</string>
+
+
+    <!-- 미션 작성 -->
+    <string name="enter_mission_title">미션 제목을 입력하세요.</string>
+    <string name="enter_mission_repo_url">미션 레포지토리 URL을 입력하세요.</string>
+    <string name="github_url_only">전체공개된 github URL만 입력할 수 있습니다.</string>
+    <string name="which_stack_to_use">어떤 스택을 사용하시나요?</string>
+    <string name="choose_over_one">한 개 이상 선택하세요.</string>
+    <string name="what_kind_of_mission">어떤 미션인가요?</string>
+    <string name="mission_description_example">ex) 미션 소개, 구현 요구 사항, 배울 수 있는 것</string>
+    <string name="recommend_group">이런 사람에게 추천해요.</string>
+    <string name="not_recommend_group">이런 사람에게는 추천하지 않아요.</string>
+    <string name="enter_max_people_num">모집 인원을 입력하세요.</string>
+    <string name="persons">명</string>
+    <string name="won">원</string>
+    <string name="num_hint">00</string>
+    <string name="date_hint">0000.00.00</string>
+    <string name="enter_price">가격을 입력하세요.</string>
+    <string name="enter_registration_date_limit">모집 기한을 입력하세요.</string>
+    <string name="until">까지</string>
+    <string name="enter_assignment_due_date">미션 마감일을 입력하세요.</string>
+    <string name="optional">*선택</string>
+    <string name="complete">완료</string>
+    <string name="until_when_should_you_recruit_reviewers">언제까지 리뷰이를 모집할까요?</string>
+
+    <!-- 서비스 준비 중 -->
+    <string name="service_under_preparation">서비스 준비중입니다.</string>
+    <string name="coming_soon_oct">10월에 만나요!</string>
+
+    <!-- 미션 조회 -->
+    <string name="mission_url_title">미션 URL</string>
+    <string name="recruitment_deadline">모집 마감일</string>
+    <string name="mission_num_of_people">참여중/최대 인원</string>
+    <string name="nickname">닉네임</string>
+    <string name="github_kr">깃허브</string>
+    <string name="company_slash_position">회사/직책</string>
+    <string name="mission_description">미션 설명</string>
+    <string name="mission_status_recruiting">참가자 모집중</string>
+    <string name="mission_proceeding">미션 진행중</string>
+    <string name="mission_finished">미션 종료</string>
+
+    <!-- 미션 조회 하단 버튼 -->
+    <string name="mission_participate">미션 참여하기</string>
+    <string name="reviewer_cannot_participate">리뷰어는 미션에 참여할 수 없어요.</string>
+    <string name="mission_progress_management">미션 진행 상황 관리</string>
+    <string name="mission_recruiting_finished">모집이 마감되었습니다</string>
+    <string name="report">신고하기</string>
+    <string name="edit">수정하기</string>
+    <string name="delete">삭제하기</string>
+    <string name="my_profile">내 프로필</string>
+    <string name="see_my_mission">내 미션 보기</string>
+    <string name="notice">공지사항</string>
+    <string name="terms_and_policies">약관 및 정책</string>
+    <string name="service_guidelines">서비스 이용방법</string>
+    <string name="privacy_policy">개인정보 처리 방침</string>
+    <string name="user_info">계정 정보</string>
+    <string name="logout">로그아웃</string>
+    <string name="cs_center">고객센터</string>
+    <string name="version_info">버전 정보</string>
+    <string name="my_activity">내 활동</string>
+    <string name="service_info">서비스 정보</string>
+    <string name="cs_center_mail">hkcc.swm.official@gmail.com</string>
+    <string name="current_version_1">현재 버전 1.0.0</string>
+    <string name="recent_version">최신 버전</string>
+    <string name="setting">설정</string>
+    <string name="education">학력</string>
+    <string name="participant_list">참가자 목록</string>
+
+    <!-- 미션 대시보드 -->
+    <string name="waiting_for_payment">입금 대기</string>
+    <string name="waiting_for_payment_message">리뷰이가 입금할 예정이에요.</string>
+    <string name="payment_confirmation">입금 확인</string>
+    <string name="payment_confirmation_message">입금을 확인해 주세요.</string>
+    <string name="mission_progress">미션 수행중</string>
+    <string name="mission_progress_message">리뷰이가 미션을 수행하고 있어요.</string>
+    <string name="code_review">미션 리뷰 작성</string>
+    <string name="code_review_message">미션을 리뷰해주세요.</string>
+    <string name="mission_review_finished">미션 리뷰 완료</string>
+    <string name="mission_review_finished_message">미션이 종료되었습니다.</string>
+    <string name="deposit_date">입금 완료일</string>
+    <string name="mission_submit_date">미션 제출일시</string>
+    <string name="review_mission">미션 리뷰하기</string>
+    <string name="no">아니요</string>
+    <string name="yes">네</string>
+
+    <!-- dialog -->
+    <string name="want_to_logout">로그아웃 하시겠어요?</string>
+    <string name="cannot_cancle_after_participate_mission">참여한 미션은 취소가 불가능해요</string>
+    <string name="do_you_want_to_participate_mission">미션에 참여하시겠어요?</string>
+
+    <!-- Profile -->
+    <string name="visit_github">Github 방문</string>
+    <string name="using_stack">사용 스택</string>
+    <string name="simple_introduction">한 줄 소개</string>
+    <string name="career">경력</string>
+    <string name="conducted_mission">진행한 미션</string>
+    <string name="participated_mission">참여한 미션</string>
+    <string name="year">년</string>
+    <string name="mission_empty">미션이 없습니다.</string>
+    <string name="ongoing_mission">진행중인 미션</string>
+
+    <!-- pingpong-->
+    <string name="deposit_info">입금 정보</string>
+    <string name="account_info">계좌 정보</string>
+    <string name="account_holder">예금주</string>
+    <string name="deposit_dialog_title">예금주명 \'%s\'님으로 입금하셨나요?</string>
+    <string name="deposit_dialog_description">버튼을 눌러, 리뷰이에게 입금했음을 알려주세요</string>
+    <string name="copied">복사되었습니다.</string>
+    <string name="confirmed_deposit_data_title">입급자명과 금액을 확인했나요?</string>
+    <string name="confirmed_deposit_data_description">확인 후에는 되돌릴 수 없어요.</string>
+    <string name="deposit_confirm_completed">입금 확인이 완료되었습니다.</string>
+    <string name="submitting_mission">미션 제출하기</string>
+    <string name="enter_pull_request_url">Pull Request URL을 입력하세요.</string>
+    <string name="proper_url">올바른 링크입니다.</string>
+    <string name="want_to_request_code_review">미션 리뷰를 요청하시겠어요?</string>
+    <string name="review_request_noti_will_be_sent">리뷰어에게 리뷰요청 알림이 전달됩니다.</string>
+    <string name="submitted_mission">제출한 미션</string>
+    <string name="completed_review_code_for_sure">코드 리뷰를 완료하시겠어요?</string>
+    <string name="code_review_completed">미션 리뷰가 완료되었습니다:)</string>
+    <string name="check_out_mission_review">미션 리뷰 보러가기</string>
+
+    <string name="github">Github</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottoms_sheet_radius">25dp</dimen>
+    <dimen name="body1_b_text_size">16sp</dimen>
+    <dimen name="radio_button_padding_vertical">24dp</dimen>
+    <dimen name="radio_button_margin_top">20dp</dimen>
+    <dimen name="chip_min_height">34dp</dimen>
+    <dimen name="chip_stroke_width_selected">2dp</dimen>
+    <dimen name="chip_stroke_width_unselected">1dp</dimen>
+    <dimen name="chip_padding_horizontal">10dp</dimen>
+    <dimen name="chip_spacing_horizontal">12dp</dimen>
+    <dimen name="chip_spacing_vertical">15dp</dimen>
+    <dimen name="base_guideline">20dp</dimen>
+    <dimen name="inner_guideline">24dp</dimen>
+    <dimen name="profile_first_mission_top_margin">4dp</dimen>
+</resources>

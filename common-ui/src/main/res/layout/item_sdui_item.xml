@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.lgtm.domain.server_drive_ui.SduiTheme" />
+
+        <variable
+            name="data"
+            type="com.lgtm.domain.server_drive_ui.SectionItemVO" />
+
+        <variable
+            name="theme"
+            type="com.lgtm.domain.server_drive_ui.SduiTheme" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        setItemLayerBackground="@{theme}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@drawable/rectangle_white_stroke_1_gray_2_side">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_mission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rectangle_gray_1_stroke_gray_3_radius_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/mission_title"
+                style="@style/Body2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="11dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{data.missionTitle}"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 전문가처럼 서버리스 구축하기 " />
+
+            <!-- 기술 태그 1-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tech_tag_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="9dp"
+                android:background="@drawable/rectangle_white_stroke_gray_2_radius_5"
+                android:visibility="@{data.techTagList.size() >= 1 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toTopOf="@id/cl_detail_info"
+                app:layout_constraintStart_toStartOf="@id/mission_title"
+                app:layout_constraintTop_toBottomOf="@id/mission_title">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tech_iv_1"
+                    setTechTagImageByItsName="@{data.techTagList[0].name}"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_tech_ios" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@{data.techTagList[0].name}"
+                    android:textAppearance="@style/Body3R"
+                    app:layout_constraintBottom_toBottomOf="@id/tech_iv_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tech_iv_1"
+                    app:layout_constraintTop_toTopOf="@id/tech_iv_1"
+                    tools:text="안드로이드" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 기술 태그 2 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tech_tag_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/rectangle_white_stroke_gray_2_radius_5"
+                android:visibility="@{data.techTagList.size() >= 2 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/tech_tag_1"
+                app:layout_constraintStart_toEndOf="@id/tech_tag_1"
+                app:layout_constraintTop_toTopOf="@id/tech_tag_1">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tech_iv_2"
+                    setTechTagImageByItsName="@{(data.techTagList.size() >= 2 ) ? data.techTagList[1].name : ``}"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_tech_android" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@{(data.techTagList.size() >= 2 ) ? data.techTagList[1].name : ``}"
+                    android:textAppearance="@style/Body3R"
+                    app:layout_constraintBottom_toBottomOf="@id/tech_iv_2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tech_iv_2"
+                    app:layout_constraintTop_toTopOf="@id/tech_iv_2"
+                    tools:text="기술 태그 2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 기술 태그 3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tech_tag_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/rectangle_white_stroke_gray_2_radius_5"
+                android:visibility="@{data.techTagList.size() >= 3 ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@id/tech_tag_1"
+                app:layout_constraintStart_toEndOf="@id/tech_tag_2"
+                app:layout_constraintTop_toTopOf="@id/tech_tag_1">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tech_iv_3"
+                    setTechTagImageByItsName="@{(data.techTagList.size() >= 3 ) ? data.techTagList[2].name : ``}"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_tech_kotlin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@{(data.techTagList.size() >= 3 ) ? data.techTagList[2].name : ``}"
+                    android:textAppearance="@style/Body3R"
+                    app:layout_constraintBottom_toBottomOf="@id/tech_iv_3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tech_iv_3"
+                    app:layout_constraintTop_toTopOf="@id/tech_iv_3"
+                    tools:text="기술 태그 3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="@{data.techTagList.size() > 3 ? `+` + String.valueOf(data.techTagList.size() - 3) : ``}"
+                android:textAppearance="@style/Body3R"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@id/tech_tag_3"
+                app:layout_constraintStart_toEndOf="@id/tech_tag_3"
+                app:layout_constraintTop_toTopOf="@id/tech_tag_3"
+                tools:text="+1" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_detail_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:visibility="@{data.price != null ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tech_tag_1"
+                tools:layout_editor_absoluteX="10dp">
+
+                <View
+                    android:id="@+id/view_detail_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/gray_3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- 참여 비용 -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_tag"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_detail_divider" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/mission_price"
+                    android:textAppearance="@style/Body3R"
+                    android:textColor="@color/gray_4"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_price"
+                    app:layout_constraintStart_toEndOf="@id/iv_price"
+                    app:layout_constraintTop_toTopOf="@id/iv_price" />
+
+                <View
+                    android:id="@+id/view_price_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/rectangle_gray_3"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_price"
+                    app:layout_constraintStart_toEndOf="@id/tv_price"
+                    app:layout_constraintTop_toTopOf="@id/tv_price" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@{@string/price_format(data.price)+ `원`}"
+                    android:textAppearance="@style/Body3M"
+                    android:textColor="@color/gray_6"
+                    app:layout_constraintBottom_toBottomOf="@id/view_price_divider"
+                    app:layout_constraintStart_toEndOf="@id/view_price_divider"
+                    app:layout_constraintTop_toTopOf="@id/view_price_divider"
+                    tools:text="10,000원" />
+
+                <!-- 참여 인원 -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_max_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_people"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_price" />
+
+                <TextView
+                    android:id="@+id/tv_max_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/mission_max_people"
+                    android:textAppearance="@style/Body3R"
+                    android:textColor="@color/gray_4"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_max_people"
+                    app:layout_constraintStart_toEndOf="@id/iv_max_people"
+                    app:layout_constraintTop_toTopOf="@id/iv_max_people" />
+
+                <View
+                    android:id="@+id/view_people_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/rectangle_gray_3"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_max_people"
+                    app:layout_constraintStart_toEndOf="@id/tv_max_people"
+                    app:layout_constraintTop_toTopOf="@id/tv_max_people" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@{data.currentPeopleNumber + `/` + data.maxPeopleNumber}"
+                    android:textAppearance="@style/Body3M"
+                    android:textColor="@color/gray_6"
+                    app:layout_constraintBottom_toBottomOf="@id/view_people_divider"
+                    app:layout_constraintStart_toEndOf="@id/view_people_divider"
+                    app:layout_constraintTop_toTopOf="@id/view_people_divider"
+                    tools:text="4/10" />
+
+                <!-- 신청 기간 -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="11dp"
+                    android:src="@drawable/ic_timer"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_max_people" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@string/mission_registration_date_limit"
+                    android:textAppearance="@style/Body3R"
+                    android:textColor="@color/gray_4"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_time"
+                    app:layout_constraintStart_toEndOf="@id/iv_time"
+                    app:layout_constraintTop_toTopOf="@id/iv_time" />
+
+                <View
+                    android:id="@+id/view_time_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/rectangle_gray_3"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_time"
+                    app:layout_constraintStart_toEndOf="@id/tv_time"
+                    app:layout_constraintTop_toTopOf="@id/tv_time" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="@{data.remainingRegisterDays + `일 후 마감`}"
+                    android:textAppearance="@style/Body3M"
+                    android:textColor="@color/gray_6"
+                    app:layout_constraintBottom_toBottomOf="@id/view_time_divider"
+                    app:layout_constraintStart_toEndOf="@id/view_time_divider"
+                    app:layout_constraintTop_toTopOf="@id/view_time_divider"
+                    tools:text="3일 후 마감" />
+
+                <!-- todo 북마크 기능 개발 이후 visibility on -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:visibility="visible">
+
+                    <include
+                        android:id="@+id/bookmark_button"
+                        layout="@layout/layout_bookmark_button" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

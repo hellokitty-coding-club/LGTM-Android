@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.manage_mission.ping_pong_junior.PingPongJuniorViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rectangle_white_radius_20"
+        tools:context=".ping_pong_junior.AccountInfoFragment">
+
+        <TextView
+            android:id="@+id/tv_deposit_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="19dp"
+            android:text="@string/deposit_info"
+            android:textAppearance="@style/Body1B"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_account_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/account_info"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_deposit_info" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_account_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_account_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_account_info">
+
+            <TextView
+                android:id="@+id/tv_account_info_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="9dp"
+                android:text="@{viewModel.pingPongJuniorUI.accountInfoUI.accountInfo}"
+                android:textAppearance="@style/Body2"
+                android:textColor="@color/gray_5"
+                app:layout_constraintBottom_toTopOf="@id/view_account_info_underline"
+                app:layout_constraintEnd_toStartOf="@id/iv_clip"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="토스뱅크 2000-00-0000000" />
+
+            <View
+                android:id="@+id/view_account_info_underline"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/gray_5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/tv_account_info_value"
+                app:layout_constraintStart_toStartOf="@id/tv_account_info_value"
+                app:layout_constraintTop_toBottomOf="@id/tv_account_info_value" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_clip"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:background="@drawable/rectangle_white_stroke_gray_3_radius_5"
+                android:padding="3dp"
+                android:src="@drawable/ic_clip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tv_mission_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/mission_price"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_account_info" />
+
+        <TextView
+            android:id="@+id/tv_mission_price_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="@{@string/price_format(viewModel.pingPongJuniorUI.accountInfoUI.price)+ `원`}"
+            android:textAppearance="@style/Body2"
+            android:textColor="@color/gray_5"
+            app:layout_constraintBottom_toBottomOf="@id/tv_mission_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_mission_price"
+            tools:text="100,000원" />
+
+        <TextView
+            android:id="@+id/tv_account_holder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="19dp"
+            android:text="@string/account_holder"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_mission_price" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:text="@{viewModel.pingPongJuniorUI.accountInfoUI.sendTo}"
+            android:textAppearance="@style/Body2"
+            android:textColor="@color/gray_5"
+            app:layout_constraintBottom_toBottomOf="@id/tv_account_holder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_account_holder"
+            tools:text="김바보" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

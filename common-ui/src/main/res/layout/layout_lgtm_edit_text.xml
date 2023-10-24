@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="editTextData"
+            type="com.lgtm.android.common_ui.model.EditTextData" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/edit_text"
+            style="@style/LGTMEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@{editTextData.hint}"
+            android:maxLength="@{editTextData.maxLength}"
+            android:minHeight="42dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="44dp"
+            android:text="@={editTextData.text}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="test test test test test test test test test ttest test test test test test test test test " />
+
+        <TextView
+            android:id="@+id/tv_max_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="6dp"
+            android:maxLength="@{editTextData.maxLength}"
+            android:text="@{String.valueOf(editTextData.maxLength)}"
+            android:textAppearance="@style/Body3R"
+            android:textColor="@color/gray_3"
+            android:visibility="@{editTextData.wordCountVisibility ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="@id/edit_text"
+            app:layout_constraintTop_toBottomOf="@id/edit_text"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/tv_slash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dash"
+            android:textAppearance="@style/Body3R"
+            android:textColor="@color/gray_3"
+            android:visibility="@{editTextData.wordCountVisibility ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_max_length"
+            app:layout_constraintEnd_toStartOf="@id/tv_max_length" />
+
+        <TextView
+            android:id="@+id/tv_current_length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(editTextData.text.length)}"
+            android:textAppearance="@style/Body3R"
+            android:textColor="@color/gray_3"
+            android:visibility="@{editTextData.wordCountVisibility ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/tv_slash"
+            app:layout_constraintEnd_toStartOf="@id/tv_slash"
+            tools:text="100" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:onClick="@{() -> editText.setText(``)}"
+            android:padding="4dp"
+            android:src="@drawable/ic_close"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/edit_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/edit_text"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{editTextData.infoStatus.isVisible ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_text">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_info"
+                setImageRes="@{editTextData.infoStatus.icon}"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="13dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_info_red" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                infoStatusColor="@{editTextData.infoStatus.color}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@{editTextData.infoStatus.message}"
+                android:textAppearance="@style/Body3M"
+                app:layout_constraintBottom_toBottomOf="@id/ic_info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/ic_info"
+                app:layout_constraintTop_toTopOf="@id/ic_info"
+                tools:text="띄어쓰기 노노"
+                tools:textColor="@color/red" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

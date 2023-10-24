@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PingPong">
+        <attr name="indicatingState" format="enum" >
+            <enum name="WAITING_FOR_PAYMENT" value="0" />
+            <enum name="PAYMENT_CONFIRMATION" value="1" />
+            <enum name="MISSION_PROCEEDING" value="2" />
+            <enum name="CODE_REVIEW" value="3" />
+            <enum name="MISSION_FINISHED" value="4" />
+            <enum name="FEEDBACK_REVIEWED" value="5" />
+        </attr>
+    </declare-styleable>
+</resources>

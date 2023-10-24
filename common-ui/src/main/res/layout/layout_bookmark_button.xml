@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isBookmarked"
+            type="boolean" />
+
+        <variable
+            name="bookmarkNum"
+            type="Integer" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/btn_bookmark"
+        setBookmarkBackground="@{isBookmarked}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:background="@drawable/rectangle_white_stroke_gray_2_radius_10">
+
+        <TextView
+            setBookmarkTextColor="@{isBookmarked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="7dp"
+            android:text="@{String.valueOf(bookmarkNum)}"
+            android:textAppearance="@style/Body3R"
+            tools:text="23" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            setBookmarkImage="@{isBookmarked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="7dp"
+            tools:src="@drawable/ic_bookmark_unselected" />
+
+    </LinearLayout>
+</layout>
