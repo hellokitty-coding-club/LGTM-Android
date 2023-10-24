@@ -13,7 +13,9 @@ import com.lgtm.android.auth.BuildConfig.LGTM_BASE_URL_RELEASE
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.BottomSheetGithubBinding
 import com.lgtm.android.auth.ui.OnLoginSuccess
+import com.lgtm.android.common_ui.R.*
 import com.lgtm.android.common_ui.base.BaseBottomSheetFragment
+import com.lgtm.android.common_ui.util.KeyboardUtil
 
 
 class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuccess) :
@@ -23,6 +25,7 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
         super.onViewCreated(view, savedInstanceState)
         loadGithubLoginUsingWebView()
         setBottomSheetHeight(0.93)
+        setSoftKeyboard()
     }
 
     override fun setBottomSheetBehavior() {
@@ -30,6 +33,10 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
         (dialog as BottomSheetDialog).behavior.apply {
             isDraggable = false
         }
+    }
+
+    private fun setSoftKeyboard() {
+        KeyboardUtil().setUpAsSoftKeyboard(binding.webView)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
