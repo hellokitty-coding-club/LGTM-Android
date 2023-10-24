@@ -58,6 +58,7 @@ class MissionDetailActivity :
         initAdapter()
         setRecyclerViewLayoutManager()
         observeParticipateMissionUiState()
+        observeDeleteMissionStatus()
     }
 
     override fun onResume() {
@@ -159,23 +160,54 @@ class MissionDetailActivity :
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         return when (item.itemId) {
-            id.report -> {
+            id.report, id.edit_profile -> {
                 Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
                 true
             }
 
             id.delete_mission -> {
-                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
-                true
-            }
-
-            id.edit_profile -> {
-                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
+                showDeleteMissionDialog()
                 true
             }
 
             else -> false
         }
+    }
+
+    private fun showDeleteMissionDialog() {
+        val title = getString(string.delete_mission_title)
+        val description = getString(string.delete_mission_message)
+        val dialog = LgtmConfirmationDialog(
+            title = title,
+            description = description,
+            doAfterConfirm = ::deleteMission,
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GREEN
+        )
+        dialog.show(supportFragmentManager, this.javaClass.name)
+    }
+
+    private fun deleteMission() {
+        missionDetailViewModel.deleteMission()
+    }
+
+    private fun observeDeleteMissionStatus() {
+        missionDetailViewModel.deleteMissionState.observe(this) {
+            when (it) {
+                is NetworkState.Init -> {} /* no-op*/
+                is NetworkState.Success -> {
+                    showMissionDeleteSuccessToast()
+                    finish()
+                }
+
+                is NetworkState.Failure -> {
+                    Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun showMissionDeleteSuccessToast() {
+        Toast.makeText(this, getString(string.delete_mission_success), Toast.LENGTH_SHORT).show()
     }
 
     private fun setOnMissionUrlClickListener() {
