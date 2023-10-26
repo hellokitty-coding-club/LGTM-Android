@@ -1,6 +1,8 @@
 package com.lgtm.android.main
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import com.lgtm.android.common_ui.adapter.ViewPagerAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.main.chat.ChatFragment
@@ -18,6 +20,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initAdapter()
         syncBottomNavWithVp()
         setBottomNaviIconTintColor()
+        Log.d(TAG, "onCreate: ")
     }
 
     private fun initAdapter() {
