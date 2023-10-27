@@ -70,6 +70,7 @@
             android:id="@+id/cl_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:visibility="@{viewModel.careerPeriodInfoStatus.isVisible ? View.VISIBLE : View.GONE}"
             app:layout_constraintStart_toStartOf="@id/et_career_period"
             app:layout_constraintTop_toBottomOf="@id/et_career_period">
@@ -77,8 +78,8 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ic_info"
                 setImageRes="@{viewModel.careerPeriodInfoStatus.icon}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -14,16 +14,6 @@ plugins {
 android {
     namespace = "com.lgtm.android.auth"
 
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
     defaultConfig {
         buildConfigField(
             "String",
@@ -39,7 +29,6 @@ android {
 
     buildFeatures {
         buildConfig = true
-        dataBinding = true
     }
 }
 

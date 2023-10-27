@@ -10,19 +10,8 @@ android {
     namespace = "com.lgtm.android.profile"
     compileSdk = 33
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
     buildFeatures {
         buildConfig = true
-        dataBinding = true
     }
 }
 

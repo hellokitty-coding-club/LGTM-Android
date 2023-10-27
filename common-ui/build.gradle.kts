@@ -8,20 +8,6 @@ plugins {
 
 android {
     namespace = "com.lgtm.android.common_ui"
-
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
-    buildFeatures {
-        dataBinding = true
-    }
 }
 
 dependencies {

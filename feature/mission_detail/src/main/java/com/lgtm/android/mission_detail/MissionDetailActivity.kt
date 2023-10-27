@@ -20,7 +20,6 @@ import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.getDrawableCompat
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
-import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_MISSION_FINISH
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_RECRUITING
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_PARTICIPATE_MISSION_FINISH
@@ -58,6 +57,7 @@ class MissionDetailActivity :
         initAdapter()
         setRecyclerViewLayoutManager()
         observeParticipateMissionUiState()
+        observeDeleteMissionStatus()
     }
 
     override fun onResume() {
@@ -78,11 +78,21 @@ class MissionDetailActivity :
     }
 
     private fun observeMissionDetailUiState() {
-        missionDetailViewModel.missionDetailUiState.observe(this) {
-            missionDetailViewModel.setRecommendToEmptyVisibility()
-            missionDetailViewModel.setNotRecommendToEmptyVisibility()
-            techTagAdapter.submitList(it.techTagList)
-            binding.profileGlance.data = requireNotNull(it.memberProfile)
+        missionDetailViewModel.missionDetailStatus.observe(this) {
+            when (it) {
+                is NetworkState.Init -> { /* no-op */}
+                is NetworkState.Success -> {
+                    val missionDetailUi = missionDetailViewModel.missionDetailUiState.value
+                    missionDetailViewModel.setRecommendToEmptyVisibility()
+                    missionDetailViewModel.setNotRecommendToEmptyVisibility()
+                    techTagAdapter.submitList(missionDetailUi?.techTagList)
+                    binding.profileGlance.data = requireNotNull(missionDetailUi?.memberProfile)
+                }
+
+                is NetworkState.Failure -> {
+                    Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -159,23 +169,54 @@ class MissionDetailActivity :
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         return when (item.itemId) {
-            id.report -> {
+            id.report, id.edit_profile -> {
                 Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
                 true
             }
 
             id.delete_mission -> {
-                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
-                true
-            }
-
-            id.edit_profile -> {
-                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
+                showDeleteMissionDialog()
                 true
             }
 
             else -> false
         }
+    }
+
+    private fun showDeleteMissionDialog() {
+        val title = getString(string.delete_mission_title)
+        val description = getString(string.delete_mission_message)
+        val dialog = LgtmConfirmationDialog(
+            title = title,
+            description = description,
+            doAfterConfirm = ::deleteMission,
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GREEN
+        )
+        dialog.show(supportFragmentManager, this.javaClass.name)
+    }
+
+    private fun deleteMission() {
+        missionDetailViewModel.deleteMission()
+    }
+
+    private fun observeDeleteMissionStatus() {
+        missionDetailViewModel.deleteMissionState.observe(this) {
+            when (it) {
+                is NetworkState.Init -> { /* no-op*/ }
+                is NetworkState.Success -> {
+                    showMissionDeleteSuccessToast()
+                    finish()
+                }
+
+                is NetworkState.Failure -> {
+                    Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun showMissionDeleteSuccessToast() {
+        Toast.makeText(this, getString(string.delete_mission_success), Toast.LENGTH_SHORT).show()
     }
 
     private fun setOnMissionUrlClickListener() {
@@ -190,7 +231,7 @@ class MissionDetailActivity :
 
     private fun setOnClickBottomButton() {
         binding.btnMissionDetail.setOnClickListener {
-            val missionDetailStatus: MissionDetailStatus =
+            val missionDetailStatus =
                 missionDetailViewModel.getMissionDetailStatus() ?: return@setOnClickListener
             when (missionDetailStatus) {
                 JUNIOR_PARTICIPATE_RECRUITING -> navigateJuniorMyMission()
