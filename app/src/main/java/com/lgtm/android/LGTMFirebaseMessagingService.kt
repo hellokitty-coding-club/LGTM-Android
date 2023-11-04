@@ -1,3 +1,5 @@
+@file:Suppress("MoveVariableDeclarationIntoWhen")
+
 package com.lgtm.android
 
 import android.app.NotificationChannel
