@@ -275,7 +275,7 @@ class SignUpViewModel @Inject constructor(
         val careerPeriod = careerPeriod.value
         careerPeriodInfoStatus.value = when {
             careerPeriod == null -> InfoType.NONE
-            careerPeriod < 12 -> InfoType.OVER_12_MONTHS_EXPERIENCE_REQUIRED
+            careerPeriod < 1 -> InfoType.EXPERIENCE_REQUIRED
             else -> InfoType.NONE
         }
     }
