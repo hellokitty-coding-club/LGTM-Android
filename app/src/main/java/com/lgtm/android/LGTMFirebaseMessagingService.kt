@@ -15,6 +15,13 @@ import com.google.firebase.messaging.RemoteMessage
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.main.MainActivity
 import com.lgtm.android.manage_mission.dashboard.DashboardActivity
+import com.lgtm.android.manage_mission.ping_pong_junior.PingPongJuniorActivity
+import com.lgtm.domain.constants.ProcessState.CODE_REVIEW
+import com.lgtm.domain.constants.ProcessState.MISSION_FINISHED
+import com.lgtm.domain.constants.ProcessState.MISSION_PROCEEDING
+import com.lgtm.domain.constants.ProcessState.PAYMENT_CONFIRMATION
+import com.lgtm.domain.constants.ProcessState.WAITING_FOR_PAYMENT
+import com.lgtm.domain.constants.ProcessState.valueOf
 import com.lgtm.domain.firebase.LgtmMessagingService
 import com.lgtm.domain.usecase.DeviceTokenManagerUseCase
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,26 +54,39 @@ class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingSe
     private fun handleDataType(data: Map<String, String>) {
         val requestCode = System.currentTimeMillis().toInt()
 
-        val dashboardIntent = Intent(this, DashboardActivity::class.java)
-            .putExtra(DashboardActivity.MISSION_ID, data["missionId"]?.toInt() ?: return)
+        val title = data["title"]
+        val body = data["body"]
+        val missionId: Int? = data["missionId"]?.toInt()
+        val processState = data["pushCategory"]?.let { valueOf(it) }
+        val intent = when (processState) {
+            WAITING_FOR_PAYMENT, PAYMENT_CONFIRMATION, CODE_REVIEW ->
+                Intent(this, DashboardActivity::class.java)
+                    .putExtra(DashboardActivity.MISSION_ID, missionId)
+
+            MISSION_PROCEEDING, MISSION_FINISHED ->
+                Intent(this, PingPongJuniorActivity::class.java)
+                    .putExtra(DashboardActivity.MISSION_ID, missionId)
+
+            else -> return
+        }
+
         val mainIntent = Intent(this, MainActivity::class.java)
 
         val stackBuilder = TaskStackBuilder.create(this)
             .addParentStack(MainActivity::class.java)
             .addNextIntent(mainIntent)
-            .addNextIntent(dashboardIntent)
+            .addNextIntent(intent)
 
-        val resultPendingIntent =
-            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
+        val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
 
-        val builder = createNotificationBuilder(data["title"], data["body"], resultPendingIntent)
+        val builder = createNotificationBuilder(title, body, resultPendingIntent)
         notifyWithChannel(requestCode, builder)
     }
 
     private fun createNotificationBuilder(
         title: String?,
         message: String?,
-        contentIntent: PendingIntent?
+        contentIntent: PendingIntent?,
     ): NotificationCompat.Builder {
         return NotificationCompat.Builder(this, channelID)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
