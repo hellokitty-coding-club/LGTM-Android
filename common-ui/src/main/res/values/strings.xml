@@ -44,7 +44,7 @@
     <string name="cannot_use_space">띄어쓰기는 사용할 수 없습니다.</string>
     <string name="cannot_only_use_space">띄어쓰기만 입력할 수 없습니다.</string>
     <string name="write_correct_name">올바른 실명을 입력해 주세요.</string>
-    <string name="over_12_month_experience_required">경력 12개월 이상만 가입할 수 있습니다.</string>
+    <string name="career_experience_required">현업 개발자만 리뷰어 활동이 가능해요</string>
     <string name="duplicate_nickname">중복된 닉네임입니다.</string>
     <string name="can_use">사용 가능합니다.</string>
     <string name="empty_value"></string>
