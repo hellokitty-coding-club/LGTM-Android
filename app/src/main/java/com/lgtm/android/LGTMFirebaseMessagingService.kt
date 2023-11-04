@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -32,6 +33,8 @@ class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingSe
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 
+        Log.d(TAG, "onMessageReceived: ${remoteMessage.data}")
+
         if (remoteMessage.data.isNotEmpty()) {
             handleDataType(remoteMessage.data)
         }
@@ -54,7 +57,7 @@ class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingSe
             .addNextIntent(dashboardIntent)
 
         val resultPendingIntent =
-            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
 
         val builder = createNotificationBuilder(data["title"], data["body"], resultPendingIntent)
         notifyWithChannel(requestCode, builder)
