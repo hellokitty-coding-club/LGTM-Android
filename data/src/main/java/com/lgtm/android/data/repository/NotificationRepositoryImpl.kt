@@ -8,11 +8,11 @@ import javax.inject.Inject
 class NotificationRepositoryImpl @Inject constructor(
     private val notificationDatasource: NotificationDatasource,
 ) : NotificationRepository {
-    override suspend fun getNotificationList(): Result<ArrayList<NotificationVO>> {
+    override suspend fun getNotificationList(): Result<List<NotificationVO>> {
         return try {
             val response = notificationDatasource.getNotificationList()
-            val list = response.data.map { it.toVO() } as MutableList<NotificationVO>
-            Result.success(list.reversed() as ArrayList<NotificationVO>)
+            val list = response.data.map { it.toVO() }
+            Result.success(list.reversed())
         } catch (e: Exception) {
             Result.failure(e)
         }

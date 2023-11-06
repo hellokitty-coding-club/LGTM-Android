@@ -8,7 +8,7 @@ import javax.inject.Inject
 class NotificationDatasource @Inject constructor(
     private val notificationService: NotificationService,
 ) : BaseNetworkDataSource() {
-    suspend fun getNotificationList(): BaseDTO<ArrayList<NotificationDTO>> {
+    suspend fun getNotificationList(): BaseDTO<List<NotificationDTO>> {
         return checkResponse(notificationService.getNotificationList())
     }
 }

@@ -8,5 +8,5 @@ import retrofit2.http.GET
 interface NotificationService {
 
     @GET("v1/notification")
-    suspend fun getNotificationList(): Response<BaseDTO<ArrayList<NotificationDTO>>>
+    suspend fun getNotificationList(): Response<BaseDTO<List<NotificationDTO>>>
 }
