@@ -65,5 +65,9 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity
+            android:name=".main.notification.NotificationCenterActivity"
+            android:exported="false" />
+
     </application>
 </manifest>
