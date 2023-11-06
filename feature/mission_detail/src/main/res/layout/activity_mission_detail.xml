@@ -201,7 +201,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/inner_guideline"
-                        android:text="@{String.valueOf(viewModel.missionDetailUiState.remainingRegisterDays)+ `일 후 마감`}"
+                        android:text="@{viewModel.missionDetailUiState.remainingRegisterDays >= 1 ?  String.valueOf(viewModel.missionDetailUiState.remainingRegisterDays) + `일 후 마감` : viewModel.missionDetailUiState.remainingRegisterDays == 0 ? `오늘 마감` : `모집 마감`}"
                         android:textAppearance="@style/Body2"
                         android:textColor="@color/gray_5"
                         app:layout_constraintEnd_toEndOf="parent"

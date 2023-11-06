@@ -73,15 +73,12 @@ class CreateMissionViewModel @Inject constructor(
         else if (repositoryUrl.value?.isNotBlank() == true && !isGithubUrl(
                 repositoryUrl.value ?: ""
             )
-        )
-            repoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
-        else
-            repoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
+        ) repoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
+        else repoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
     private fun isMissionRepoUrlValid(): Boolean {
         return repoUrlEditTextData.value?.infoStatus?.value == InfoType.NONE
-                && repoUrlEditTextData.value?.text?.value?.isNotBlank() == true
     }
 
     private fun isGithubUrl(url: String): Boolean {
@@ -216,7 +213,7 @@ class CreateMissionViewModel @Inject constructor(
         return PostMissionRequestDTO(
             description = requireNotNull(description.value),
             maxPeopleNumber = requireNotNull(numOfRecruits.value),
-            missionRepositoryUrl = requireNotNull(repositoryUrl.value),
+            missionRepositoryUrl = repositoryUrl.value,
             notRecommendTo = notRecommendGroup.value,
             recommendTo = recommendGroup.value,
             price = requireNotNull(price.value),
