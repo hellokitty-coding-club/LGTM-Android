@@ -25,6 +25,7 @@ class NotificationCenterActivity :
         getNotificationList()
         initAdapter()
         observeNotificationList()
+        onClickBackButton()
     }
 
     private fun getNotificationList() {
@@ -53,5 +54,9 @@ class NotificationCenterActivity :
             color = com.lgtm.android.common_ui.R.color.gray_3
         )
         binding.rvNotification.addItemDecoration(decoration)
+    }
+
+    private fun onClickBackButton() {
+        binding.ivBack.setOnClickListener { finish() }
     }
 }
