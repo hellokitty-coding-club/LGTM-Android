@@ -3,6 +3,7 @@ package com.lgtm.android.di
 import com.lgtm.android.data.service.AuthService
 import com.lgtm.android.data.service.IntroService
 import com.lgtm.android.data.service.MissionService
+import com.lgtm.android.data.service.NotificationService
 import com.lgtm.android.data.service.ProfileService
 import dagger.Module
 import dagger.Provides
@@ -34,4 +35,10 @@ object RetrofitServiceModule {
     @Singleton
     fun providesProfileService(retrofit: Retrofit): ProfileService =
         retrofit.create(ProfileService::class.java)
+
+
+    @Provides
+    @Singleton
+    fun providesNotificationService(retrofit: Retrofit): NotificationService =
+        retrofit.create(NotificationService::class.java)
 }
