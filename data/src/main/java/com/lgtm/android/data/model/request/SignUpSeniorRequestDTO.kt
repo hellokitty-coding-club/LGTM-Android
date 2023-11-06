@@ -17,5 +17,6 @@ data class SignUpSeniorRequestDTO(
     val nickname: String,
     val position: String,
     val profileImageUrl: String,
-    val tagList: List<String>
+    val tagList: List<String>,
+    val accountHolderName: String
 )

@@ -55,6 +55,9 @@ class TechTagChipGroup(private val chipGroup: ChipGroup, private val theme: Tech
             setTextAppearance(R.style.Body2)
             setTextColor(textStateList) // (순서 중요) textAppearance 후에 배치
             setOnClickListener { onChipSelected(this, techTagUI) }
+            if (selectedTagList.value?.contains(this.text) == true) {
+                isSelected = true
+            }
         }
     }
 
