@@ -292,7 +292,7 @@ class SignUpViewModel @Inject constructor(
 
     fun setIsCareerPeriodValid() {
         val careerPeriod = careerPeriod.value ?: return
-        _isCareerPeriodValid.value = careerPeriod >= ONE_YEAR
+        _isCareerPeriodValid.value = careerPeriod >= ONE_MONTH
     }
 
 
@@ -407,6 +407,7 @@ class SignUpViewModel @Inject constructor(
     }
 
     companion object {
+        private const val ONE_MONTH = 1
         private const val ONE_YEAR = 12
     }
 }
