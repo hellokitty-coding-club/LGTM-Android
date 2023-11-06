@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.ItemDecorationUtil
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.ActivityNotificationCenterBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,16 @@ class NotificationCenterActivity :
             else {
                 binding.clEmpty.visibility = View.GONE
                 notificationAdapter.submitList(it)
+                addItemDecoration()
             }
         }
+    }
+
+    private fun addItemDecoration() {
+        val decoration = ItemDecorationUtil.DividerItemDecoration(
+            padding = com.lgtm.android.common_ui.R.dimen.base_guideline,
+            color = com.lgtm.android.common_ui.R.color.gray_3
+        )
+        binding.rvNotification.addItemDecoration(decoration)
     }
 }
