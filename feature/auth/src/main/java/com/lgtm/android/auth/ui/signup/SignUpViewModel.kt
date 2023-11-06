@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
 ) : BaseViewModel() {
 
     /** Device Token */
@@ -292,7 +292,7 @@ class SignUpViewModel @Inject constructor(
 
     fun setIsCareerPeriodValid() {
         val careerPeriod = careerPeriod.value ?: return
-        _isCareerPeriodValid.value = careerPeriod >= ONE_YEAR
+        _isCareerPeriodValid.value = careerPeriod >= ONE_MONTH
     }
 
 
@@ -310,10 +310,17 @@ class SignUpViewModel @Inject constructor(
     }
 
     private val _accountNumber = MutableLiveData<String>()
-    val accountNumber: LiveData<String> = _accountNumber
+    private val accountNumber: LiveData<String> = _accountNumber
 
     fun setAccountNumber(number: String) {
         _accountNumber.value = number
+    }
+
+    private val _accountHolder = MutableLiveData<String>()
+    private val accountHolder: LiveData<String> = _accountHolder
+
+    fun setAccountHolder(holder: String) {
+        _accountHolder.value = holder
     }
 
     private val _isValidAccountInfo = MutableLiveData<Boolean>()
@@ -321,7 +328,7 @@ class SignUpViewModel @Inject constructor(
 
     fun setIsAccountInfoValid() {
         _isValidAccountInfo.value = selectedBank.value != null
-                && accountNumber.value?.isNotBlank() == true
+                && accountNumber.value?.isNotBlank() == true && accountHolder.value?.isNotBlank() == true
     }
 
     private fun createSignUpJuniorRequestVO(): SignUpJuniorRequestVO {
@@ -329,37 +336,37 @@ class SignUpViewModel @Inject constructor(
             SignUpJuniorRequestVO(
                 githubId = requireNotNull(memberData.value?.githubId),
                 githubOauthId = requireNotNull(memberData.value?.githubOauthId),
-                nickname = requireNotNull(nickname.value),
+                nickname = requireNotNull(nickname.value).trim(),
                 deviceToken = deviceToken.value,
                 profileImageUrl = requireNotNull(memberData.value?.profileImageUrl),
-                introduction = requireNotNull(introduction.value),
-                tagList = requireNotNull(techTagList.value),
+                introduction = requireNotNull(introduction.value).trim(),
+                tagList = requireNotNull(techTagList.value).distinct(),
                 educationalHistory = requireNotNull(educationStatus.value?.status),
-                realName = requireNotNull(realName.value),
-                isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false
+                realName = requireNotNull(realName.value).trim(),
+                isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false,
             )
         } catch (e: IllegalArgumentException) {
             throw SignUpFailedException("입력되지 않은 항목이 있습니다")
         }
     }
 
-    // todo: Refactor - usecase 에서 trim
     private fun createSignUpSeniorRequestVO(): SignUpSeniorRequestVO {
         return try {
             SignUpSeniorRequestVO(
                 githubId = requireNotNull(memberData.value?.githubId),
                 githubOauthId = requireNotNull(memberData.value?.githubOauthId),
-                nickname = requireNotNull(nickname.value),
+                nickname = requireNotNull(nickname.value).trim(),
                 deviceToken = deviceToken.value,
                 profileImageUrl = requireNotNull(memberData.value?.profileImageUrl),
-                introduction = requireNotNull(introduction.value),
-                tagList = requireNotNull(techTagList.value),
-                companyInfo = requireNotNull(companyName.value),
-                position = requireNotNull(position.value),
+                introduction = requireNotNull(introduction.value).trim(),
+                tagList = requireNotNull(techTagList.value).distinct(),
+                companyInfo = requireNotNull(companyName.value).trim(),
+                position = requireNotNull(position.value).trim(),
                 careerPeriod = requireNotNull(careerPeriod.value),
                 isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false,
                 bankName = requireNotNull(selectedBank.value?.bankVO?.bank),
-                accountNumber = requireNotNull(accountNumber.value)
+                accountNumber = requireNotNull(accountNumber.value),
+                accountHolderName = requireNotNull(accountHolder.value).trim(),
             )
         } catch (e: IllegalArgumentException) {
             throw SignUpFailedException("입력되지 않은 항목이 있습니다")
@@ -379,7 +386,7 @@ class SignUpViewModel @Inject constructor(
                 _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
-                authRepository.saveUserData(it, selectedRole.value?.role)
+                authRepository.saveUserData(it, it.memberType)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
@@ -397,7 +404,7 @@ class SignUpViewModel @Inject constructor(
                 _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
-                authRepository.saveUserData(it, selectedRole.value?.role)
+                authRepository.saveUserData(it, it.memberType)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
@@ -407,6 +414,7 @@ class SignUpViewModel @Inject constructor(
     }
 
     companion object {
+        private const val ONE_MONTH = 1
         private const val ONE_YEAR = 12
     }
 }
