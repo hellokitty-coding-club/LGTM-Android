@@ -1,5 +1,6 @@
 package com.lgtm.android.main.notification
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.main.R
@@ -12,10 +13,17 @@ class NotificationCenterActivity :
 
     private val notificationCenterViewModel by viewModels<NotificationCenterViewModel>()
 
-
-
     override fun initializeViewModel() {
         viewModel = notificationCenterViewModel
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getNotificationList()
+    }
+
+    private fun getNotificationList(){
+        notificationCenterViewModel.getNotificationList()
     }
 
 }
