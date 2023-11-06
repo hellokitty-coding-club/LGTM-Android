@@ -23,7 +23,7 @@
     <string name="want_to_learn_develop">개발을 배우고 싶어요.</string>
     <string name="reviewer">리뷰어</string>
     <string name="want_to_teach_develop">개발을 알려주고 싶어요.</string>
-    <string name="select_edu_status">학력 정보를\n선택해주세요.</string>
+    <string name="select_affiliation">현재 소속을\n선택해주세요.</string>
     <string name="high_school_student">고등학생</string>
     <string name="undergraduate">대학생</string>
     <string name="graduate">대학교 졸업</string>
@@ -47,7 +47,7 @@
     <string name="career_experience_required">현업 개발자만 리뷰어 활동이 가능해요</string>
     <string name="duplicate_nickname">중복된 닉네임입니다.</string>
     <string name="can_use">사용 가능합니다.</string>
-    <string name="empty_value"></string>
+    <string name="empty_value" />
     <string name="enter_bank_account_holder">예금주명을 입력하세요.</string>
 
 
@@ -121,7 +121,7 @@
     <string name="current_version_1">현재 버전 1.0.0</string>
     <string name="recent_version">최신 버전</string>
     <string name="setting">설정</string>
-    <string name="education">학력</string>
+    <string name="affiliation">소속</string>
     <string name="participant_list">참가자 목록</string>
 
     <!-- 미션 대시보드 -->
