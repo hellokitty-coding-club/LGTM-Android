@@ -31,6 +31,7 @@ class BankAccountFragment :
         onBankSelectedListener()
         setupCompleteButtonListener()
         observeSignUpStatus()
+        onAccountHolderChanged()
     }
 
     private fun setupViewModel() {
@@ -61,6 +62,13 @@ class BankAccountFragment :
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {/*no-op*/}
+        }
+    }
+
+    private fun onAccountHolderChanged() {
+        binding.etAccountHolder.addTextChangedListener {
+            signUpViewModel.setAccountHolder(it.toString())
+            signUpViewModel.setIsAccountInfoValid()
         }
     }
 

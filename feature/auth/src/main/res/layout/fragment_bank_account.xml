@@ -82,7 +82,7 @@
                     tools:listitem="@layout/item_bank_spinner" />
 
                 <EditText
-                    android:id="@+id/et_bank_account_holder"
+                    android:id="@+id/et_account_holder"
                     style="@style/LGTMEditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="42dp"
@@ -91,6 +91,7 @@
                     android:layout_marginBottom="150dp"
                     android:ellipsize="end"
                     android:hint="@string/enter_bank_account_holder"
+                    android:maxLength="20"
                     android:maxLines="1"
                     android:paddingVertical="0dp"
                     android:paddingStart="10dp"
