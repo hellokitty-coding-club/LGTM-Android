@@ -36,4 +36,6 @@ class MyPageViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getUserRole() = authRepository.getMemberType()
 }

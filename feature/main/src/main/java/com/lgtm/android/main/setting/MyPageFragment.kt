@@ -14,6 +14,7 @@ import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentMyPageBinding
+import com.lgtm.domain.constants.Role
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -94,8 +95,12 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     private fun serviceGuidelines() {
         // 서비스 이용 방법
+        val role = myPageViewModel.getUserRole()
         binding.btnServiceGuidelines.setOnClickListener {
-            val url = "https://team-hkcc.notion.site/efa704ed9464409dae3a9dbe4c4e3777?pvs=4"
+            val url =when(role){
+                Role.REVIEWER -> "https://www.notion.so/team-hkcc/c1933575315e4b50aedbdd6b39069d3e?pvs=4"
+                Role.REVIEWEE -> "https://www.notion.so/team-hkcc/5abf8b03763a4f0d90cb2d463f6d46b4?pvs=4"
+            }
             openUrlInBrowser(url)
         }
     }
