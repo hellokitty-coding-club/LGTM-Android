@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="@string/coming_soon_oct"
+                android:text="@string/coming_soon_nov"
                 android:textAppearance="@style/Description"
                 android:textColor="@color/gray_6"
                 app:layout_constraintEnd_toEndOf="parent"

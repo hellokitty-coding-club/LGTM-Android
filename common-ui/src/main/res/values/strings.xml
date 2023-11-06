@@ -83,7 +83,7 @@
 
     <!-- 서비스 준비 중 -->
     <string name="service_under_preparation">서비스 준비중입니다.</string>
-    <string name="coming_soon_oct">10월에 만나요!</string>
+    <string name="coming_soon_nov">11월에 만나요!</string>
 
     <!-- 미션 조회 -->
     <string name="mission_url_title">미션 URL</string>
