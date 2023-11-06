@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="121dp"
-            android:text="@string/select_edu_status"
+            android:text="@string/select_affiliation"
             android:textAppearance="@style/Heading4B"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
