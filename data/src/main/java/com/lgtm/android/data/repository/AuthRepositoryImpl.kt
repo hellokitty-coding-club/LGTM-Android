@@ -124,7 +124,8 @@ class AuthRepositoryImpl @Inject constructor(
                     careerPeriod = signUpSeniorVO.careerPeriod,
                     companyInfo = signUpSeniorVO.companyInfo,
                     position = signUpSeniorVO.position,
-                    isAgreeWithEventInfo = signUpSeniorVO.isAgreeWithEventInfo
+                    isAgreeWithEventInfo = signUpSeniorVO.isAgreeWithEventInfo,
+                    accountHolderName = signUpSeniorVO.accountHolderName
                 )
             )
             return Result.success(response.data.toVO())
