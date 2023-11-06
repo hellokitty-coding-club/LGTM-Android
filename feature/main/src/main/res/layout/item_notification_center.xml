@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.lgtm.domain.entity.response.NotificationVO" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@color/gray_1">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_notification_icon"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="30dp"
+            android:src="@{data.isRead ? @drawable/oval_diameter_9_gray_2 : @drawable/oval_diameter_9_green}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/oval_diameter_9_green" />
+
+
+        <TextView
+            android:id="@+id/tv_notification_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@{data.title}"
+            android:textAppearance="@style/Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_notification_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="This is title" />
+
+        <TextView
+            android:id="@+id/tv_notification_body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:text="@{data.body}"
+            android:textAppearance="@style/Description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_notification_icon"
+            app:layout_constraintTop_toBottomOf="@id/tv_notification_title"
+            tools:text="This is Body Part." />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
