@@ -48,6 +48,8 @@ class HomeViewModel @Inject constructor(
         SWMLogging.logEvent(scheme)
     }
 
+    fun getUserRole() = role
+
     fun shotHomeNotificationClickLogging() {
         val scheme = getHomeClickLoggingScheme()
         SWMLogging.logEvent(scheme)
