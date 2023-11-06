@@ -2,9 +2,7 @@ package com.lgtm.android.main.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.adapter.SduiAdapter
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.main.R
@@ -43,8 +41,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun setUpNotificationClickListener() {
         binding.ivNotification.setOnClickListener {
-            Toast.makeText(requireContext(), getString(string.service_under_preparation), Toast.LENGTH_SHORT).show()
-//            homeViewModel.shotHomeNotificationClickLogging()
+            moveToNotificationCenter()
         }
     }
 
@@ -55,6 +52,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun moveToMissionDetail(missionId: Int) {
         lgtmNavigator.navigateToMissionDetail(requireContext(), missionId)
+    }
+
+    private fun moveToNotificationCenter(){
+        lgtmNavigator.navigateToNotificationCenter(requireContext())
     }
 
     private fun submitDataWhenDataChanged() {
