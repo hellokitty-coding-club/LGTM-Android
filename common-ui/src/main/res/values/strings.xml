@@ -48,6 +48,7 @@
     <string name="duplicate_nickname">중복된 닉네임입니다.</string>
     <string name="can_use">사용 가능합니다.</string>
     <string name="empty_value"></string>
+    <string name="enter_bank_account_holder">예금주명을 입력하세요.</string>
 
 
     <!-- 미션 조회 -->
