@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.FragmentAccountInfoBinding
 
@@ -33,7 +34,7 @@ class AccountInfoFragment :
     }
 
     private fun onClickAccountInfo() {
-        binding.clAccountInfo.setOnClickListener {
+        binding.clAccountInfo.setOnThrottleClickListener {
             try {
                 val clipboard =
                     requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager

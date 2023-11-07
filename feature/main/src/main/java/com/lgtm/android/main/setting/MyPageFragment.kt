@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentMyPageBinding
 import com.lgtm.domain.constants.Role
@@ -52,21 +53,21 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     }
 
     private fun setOnProfileClickListener() {
-        binding.clProfileGlance.setOnClickListener {
+        binding.clProfileGlance.setOnThrottleClickListener {
             navigateToProfile()
         }
     }
 
 
     private fun setMyMissionOnClickListener() {
-        binding.btnMyMission.setOnClickListener {
+        binding.btnMyMission.setOnThrottleClickListener {
             // MVP 구현사항 아님
             // 추후 업데이트 시 구현
         }
     }
 
     private fun setNotificationSettingClickListener() {
-        binding.btnNotificationSetting.setOnClickListener {
+        binding.btnNotificationSetting.setOnThrottleClickListener {
             val intent = Intent().apply {
                 action = "android.settings.APP_NOTIFICATION_SETTINGS"
                 putExtra("android.provider.extra.APP_PACKAGE", requireContext().packageName)
@@ -79,7 +80,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     private fun setNoticeOnClickListener() {
         // 공지사항
-        binding.btnNotice.setOnClickListener {
+        binding.btnNotice.setOnThrottleClickListener {
             val url = "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?v=3cee323345414e318192b89bfe7dd2d0&pvs=4"
             openUrlInBrowser(url)
         }
@@ -87,7 +88,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     private fun setTermsAndPoliciesOnClickListener() {
         // 약관 및 정책
-        binding.btnTermsAndPolicies.setOnClickListener {
+        binding.btnTermsAndPolicies.setOnThrottleClickListener {
             val url = "https://team-hkcc.notion.site/c4f56b4e6e1b46e89c494e5b3919ed8c?pvs=4"
             openUrlInBrowser(url)
         }
@@ -96,7 +97,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     private fun serviceGuidelines() {
         // 서비스 이용 방법
         val role = myPageViewModel.getUserRole()
-        binding.btnServiceGuidelines.setOnClickListener {
+        binding.btnServiceGuidelines.setOnThrottleClickListener {
             val url =when(role){
                 Role.REVIEWER -> "https://www.notion.so/team-hkcc/c1933575315e4b50aedbdd6b39069d3e?pvs=4"
                 Role.REVIEWEE -> "https://www.notion.so/team-hkcc/5abf8b03763a4f0d90cb2d463f6d46b4?pvs=4"
@@ -107,14 +108,14 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     private fun setPrivacyPolicy() {
         // 개인정보 처리방침
-        binding.btnPrivacyPolicy.setOnClickListener {
+        binding.btnPrivacyPolicy.setOnThrottleClickListener {
             val url = "https://team-hkcc.notion.site/31a6b7a98d1f4d148bb05cc826d0c9aa?pvs=4"
             openUrlInBrowser(url)
         }
     }
 
     private fun setLogoutOnClickListener() {
-        binding.btnLogout.setOnClickListener { showLgtmDialog() }
+        binding.btnLogout.setOnThrottleClickListener { showLgtmDialog() }
     }
 
     private fun logout() {
@@ -133,13 +134,13 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
 
     private fun setCsCenterOnClickListener() {
-        binding.btnCustomerCenter.setOnClickListener {
+        binding.btnCustomerCenter.setOnThrottleClickListener {
             onPressCsCenter()
         }
     }
 
     private fun setVersionInfoOnClickListener() {
-        binding.btnVersionInfo.setOnClickListener {
+        binding.btnVersionInfo.setOnThrottleClickListener {
             val playStoreUrl = "https://play.google.com/store/apps/details?id=com.lgtm.android"
             openUrlInBrowser(playStoreUrl)
         }
