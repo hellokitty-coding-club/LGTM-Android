@@ -1,10 +1,15 @@
 # 미션 기반 코드리뷰 매칭 플랫폼, LGTM
 
-**'LGTM'은 SW 마에스트로 14기 프로젝트입니다.**
+## 📌 Introduction
 
-해당 `LGTM-Android` Repository는 **[@kxxhyorim](https://github.com/KxxHyoRim)** 1인 개발로 이루어지고 있습니다. (팀 구성 = 백엔드 2명, 안드로이드 1명)
+- [**LGTM이 궁금하시다면 Google Play로!**](https://play.google.com/store/apps/details?id=com.lgtm.android)
 
-![image](https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/4cff9177-ac15-4ddf-9a74-3a0654c8a502)
+- 본 서비스는 SW마에스트로 14기 프로젝트입니다:)
+
+
+|  |   |   |
+| -- | -- | -- |
+|![image](https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/b1110a0c-35fc-4896-9d73-b2a3a197e205)|  ![image](https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/7baf51cc-8666-42e6-94b0-1952bfc02d98) | ![image](https://github.com/hellokitty-coding-club/LGTM-Android/assets/59546818/7d26d84b-3aef-4187-bc79-d7505a9b866e) |
 
 
 
