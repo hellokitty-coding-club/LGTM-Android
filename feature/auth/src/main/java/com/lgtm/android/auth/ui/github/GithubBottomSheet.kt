@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.View
 import android.webkit.CookieManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.lgtm.android.auth.BuildConfig.DEBUG
+import com.lgtm.android.auth.BuildConfig.IS_DEV
 import com.lgtm.android.auth.BuildConfig.LGTM_BASE_URL_DEBUG
 import com.lgtm.android.auth.BuildConfig.LGTM_BASE_URL_RELEASE
 import com.lgtm.android.auth.R
@@ -57,6 +57,6 @@ class GithubBottomSheet constructor(private val loginSuccessListener: OnLoginSuc
     }
 
     private fun getGithubLoginUrl() =
-        (if (DEBUG) LGTM_BASE_URL_DEBUG else LGTM_BASE_URL_RELEASE) + "login/getGithubAuthUrl"
+        (if (IS_DEV) LGTM_BASE_URL_DEBUG else LGTM_BASE_URL_RELEASE) + "login/getGithubAuthUrl"
 
 }
