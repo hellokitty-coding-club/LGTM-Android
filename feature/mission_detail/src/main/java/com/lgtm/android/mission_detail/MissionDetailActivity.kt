@@ -19,6 +19,7 @@ import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.getDrawableCompat
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.mission_detail.databinding.ActivityMissionDetailBinding
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_MISSION_FINISH
 import com.lgtm.domain.constants.MissionDetailStatus.JUNIOR_NOT_PARTICIPATE_RECRUITING
@@ -105,19 +106,19 @@ class MissionDetailActivity :
     }
 
     private fun setOnProfileClickListener() {
-        binding.clReviewerInfo.setOnClickListener {
+        binding.clReviewerInfo.setOnThrottleClickListener {
             navigateToProfile()
         }
     }
 
     private fun setBackButtonClickListener() {
-        binding.ivBack.setOnClickListener {
+        binding.ivBack.setOnThrottleClickListener {
             finish()
         }
     }
 
     private fun setShareButtonClickListener() {
-        binding.ivShare.setOnClickListener {
+        binding.ivShare.setOnThrottleClickListener {
             val message = missionDetailViewModel.getMissionInfoMessage()
             val intentShare = Intent(Intent.ACTION_SEND)
             intentShare.putExtra(Intent.EXTRA_TEXT, intent.getStringExtra(message))
@@ -127,7 +128,7 @@ class MissionDetailActivity :
     }
 
     private fun setMenuButtonClickListener() {
-        binding.ivMenu.setOnClickListener {
+        binding.ivMenu.setOnThrottleClickListener {
             showMenu(it)
             setDartMenuIcon()
         }
@@ -220,8 +221,8 @@ class MissionDetailActivity :
     }
 
     private fun setOnMissionUrlClickListener() {
-        binding.clMissionUrl.setOnClickListener {
-            val url: String = missionDetailViewModel.getMissionUrl() ?: return@setOnClickListener
+        binding.clMissionUrl.setOnThrottleClickListener {
+            val url: String = missionDetailViewModel.getMissionUrl() ?: return@setOnThrottleClickListener
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
@@ -230,9 +231,9 @@ class MissionDetailActivity :
 
 
     private fun setOnClickBottomButton() {
-        binding.btnMissionDetail.setOnClickListener {
+        binding.btnMissionDetail.setOnThrottleClickListener {
             val missionDetailStatus =
-                missionDetailViewModel.getMissionDetailStatus() ?: return@setOnClickListener
+                missionDetailViewModel.getMissionDetailStatus() ?: return@setOnThrottleClickListener
             when (missionDetailStatus) {
                 JUNIOR_PARTICIPATE_RECRUITING -> navigateJuniorMyMission()
                 JUNIOR_PARTICIPATE_MISSION_FINISH -> navigateJuniorMyMission()

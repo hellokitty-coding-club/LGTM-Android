@@ -10,6 +10,7 @@ import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentTermsBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +28,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
     }
 
     private fun setupNextButtonListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             setEventInfoAgreeState()
             navigateToNicknameFragment()
         }
@@ -43,10 +44,10 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
 
 
     private fun setUpTextViewListener() {
-        binding.tvTermsService.setOnClickListener {
+        binding.tvTermsService.setOnThrottleClickListener {
             openUrlInBrowser(TERMS_SERVICE_URL)
         }
-        binding.tvTermsPrivacy.setOnClickListener {
+        binding.tvTermsPrivacy.setOnThrottleClickListener {
             openUrlInBrowser(TERMS_PRIVACY_URL)
         }
     }
@@ -64,24 +65,24 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
     }
 
     private fun setUpCheckBoxListeners() {
-        binding.clTermsAll.setOnClickListener {
+        binding.clTermsAll.setOnThrottleClickListener {
             toggleTermsAll()
             setDescendantsState(binding.cbTermsAll.isChecked)
             updateNextButtonState()
         }
 
         // 약관 및 정책
-        binding.cbTermsService.setOnClickListener {
+        binding.cbTermsService.setOnThrottleClickListener {
             updateTermsAllState()
             updateNextButtonState()
         }
         // 개인정보 처리 방침
-        binding.cbTermsPrivacy.setOnClickListener {
+        binding.cbTermsPrivacy.setOnThrottleClickListener {
             updateTermsAllState()
             updateNextButtonState()
         }
         // 이벤트
-        binding.cbTermsMarketing.setOnClickListener {
+        binding.cbTermsMarketing.setOnThrottleClickListener {
             updateTermsAllState()
             updateNextButtonState()
         }

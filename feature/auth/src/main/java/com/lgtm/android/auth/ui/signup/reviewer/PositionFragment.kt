@@ -8,6 +8,7 @@ import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentPositionBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 
 class PositionFragment :
     BaseFragment<FragmentPositionBinding>(R.layout.fragment_position) {
@@ -43,7 +44,7 @@ class PositionFragment :
 
 
     private fun setupNextButtonListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             navigateToPositionFragment()
         }
     }

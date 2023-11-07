@@ -209,7 +209,7 @@ class CreateMissionViewModel @Inject constructor(
 
     private fun createPostMissionRequestDTO(): PostMissionRequestDTO {
         val formattedDate = registrationDueDate.value?.format(isoStyleFormatter)
-        val tempDate = formattedDate?.substring(0, 10)?.replace("-", ".")// todo 서버 코드 바뀌면 수정
+        val date = formattedDate?.substring(0, 10)
         return PostMissionRequestDTO(
             description = requireNotNull(description.value),
             maxPeopleNumber = requireNotNull(numOfRecruits.value),
@@ -217,7 +217,7 @@ class CreateMissionViewModel @Inject constructor(
             notRecommendTo = notRecommendGroup.value,
             recommendTo = recommendGroup.value,
             price = requireNotNull(price.value),
-            registrationDueDate = requireNotNull(tempDate),
+            registrationDueDate = requireNotNull(date),
             tagList = requireNotNull(techTagList.value),
             title = requireNotNull(title.value)
         )

@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.FragmentSubmittedMissionBinding
 import com.lgtm.domain.constants.ProcessState
@@ -44,7 +45,7 @@ class SubmittedMissionFragment :
     }
 
     private fun onClickSubmittedMission() {
-        binding.clSubmittedMission.setOnClickListener {
+        binding.clSubmittedMission.setOnThrottleClickListener {
             val url = pingPongJuniorViewModel.submittedPrUrl.value
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)

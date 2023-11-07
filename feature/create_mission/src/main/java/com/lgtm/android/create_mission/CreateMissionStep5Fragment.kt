@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep5Binding
 import com.lgtm.domain.util.dotStyleFormatter
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +33,7 @@ class CreateMissionStep5Fragment :
     }
 
     private fun onEditTextClicked() {
-        binding.etRegistrationDueDate.setOnClickListener {
+        binding.etRegistrationDueDate.setOnThrottleClickListener {
             showDatePickerDialog()
         }
     }
@@ -74,7 +75,7 @@ class CreateMissionStep5Fragment :
 
 
     private fun setupNextButtonClickListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             createMissionViewModel.createMission()
         }
     }

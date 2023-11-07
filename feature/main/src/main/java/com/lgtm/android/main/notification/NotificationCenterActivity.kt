@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.ItemDecorationUtil
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.ActivityNotificationCenterBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,6 +58,6 @@ class NotificationCenterActivity :
     }
 
     private fun onClickBackButton() {
-        binding.ivBack.setOnClickListener { finish() }
+        binding.ivBack.setOnThrottleClickListener { finish() }
     }
 }
