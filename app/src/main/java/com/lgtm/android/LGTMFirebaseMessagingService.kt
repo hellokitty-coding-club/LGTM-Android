@@ -9,6 +9,7 @@ import android.app.TaskStackBuilder
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessaging
@@ -92,7 +93,8 @@ class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingSe
     ): NotificationCompat.Builder {
         return NotificationCompat.Builder(this, channelID)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_launch_monochrome)
+            .setColor(Color.argb(255, 86, 238, 155))
             .setAutoCancel(true)
             .setContentTitle(title)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
