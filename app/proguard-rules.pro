@@ -23,6 +23,7 @@
 -keep class * extends com.google.gson.TypeAdapter
 -keep class com.lgtm.android.data.** { *; }
 -keep class com.lgtm.domain.** { *; }
+-keep class com.swm.logging.android.** { *; }
 
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
@@ -99,9 +100,9 @@
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
     @retrofit2.http.* <methods>;
 }
-
-# Ignore annotation used for build tooling.
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+#
+## Ignore annotation used for build tooling.
+#-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 
 # Ignore JSR 305 annotations for embedding nullability information.
 -dontwarn javax.annotation.**
