@@ -56,6 +56,7 @@
     <string name="mission_max_people">참여 인원</string>
     <string name="mission_registration_date_limit">신청 기한</string>
     <string name="new_mission">새로운 미션</string>
+    <string name="proceed_with_url_reviewee_submitted">리뷰이가 제출한 URL로만 진행되는 미션입니다.</string>
 
 
     <!-- 미션 작성 -->

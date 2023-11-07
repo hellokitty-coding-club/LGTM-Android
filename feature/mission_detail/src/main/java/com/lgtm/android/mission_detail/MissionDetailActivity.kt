@@ -8,11 +8,16 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.PopupMenu
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.lgtm.android.common_ui.R.color
+import com.lgtm.android.common_ui.R.drawable.rectangle_gray_2_radius_10
+import com.lgtm.android.common_ui.R.drawable.rectangle_green_radius_10
 import com.lgtm.android.common_ui.R.id
 import com.lgtm.android.common_ui.R.string
+import com.lgtm.android.common_ui.R.string.proceed_with_url_reviewee_submitted
 import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
@@ -81,13 +86,15 @@ class MissionDetailActivity :
     private fun observeMissionDetailUiState() {
         missionDetailViewModel.missionDetailStatus.observe(this) {
             when (it) {
-                is NetworkState.Init -> { /* no-op */}
+                is NetworkState.Init -> { /* no-op */ }
+
                 is NetworkState.Success -> {
                     val missionDetailUi = missionDetailViewModel.missionDetailUiState.value
                     missionDetailViewModel.setRecommendToEmptyVisibility()
                     missionDetailViewModel.setNotRecommendToEmptyVisibility()
                     techTagAdapter.submitList(missionDetailUi?.techTagList)
                     binding.profileGlance.data = requireNotNull(missionDetailUi?.memberProfile)
+                    setGithubUrlUI(missionDetailUi?.missionRepositoryUrl)
                 }
 
                 is NetworkState.Failure -> {
@@ -96,6 +103,31 @@ class MissionDetailActivity :
             }
         }
     }
+
+    private fun setGithubUrlUI(url: String?) {
+        if (url.isNullOrEmpty())
+            setUIForNoUrl()
+        else setUIForValidUrl(url)
+    }
+
+    private fun setUIForNoUrl() {
+        val grayBackground = AppCompatResources.getDrawable(this, rectangle_gray_2_radius_10)
+        val grayTextColor = getColor(color.gray_4)
+        binding.clMissionUrl.background = grayBackground
+        binding.tvMissionUrl.setTextColor(grayTextColor)
+        binding.tvMissionUrl.text = getString(proceed_with_url_reviewee_submitted)
+        binding.clMissionUrl.isEnabled = false
+        binding.ivArrow.visibility = View.GONE
+    }
+
+    private fun setUIForValidUrl(url: String) {
+        val greenBackground = AppCompatResources.getDrawable(this, rectangle_green_radius_10)
+        val grayTextColor = getColor(color.gray_1)
+        binding.clMissionUrl.background = greenBackground
+        binding.tvMissionUrl.text = url
+        binding.tvMissionUrl.setTextColor(grayTextColor)
+    }
+
 
     private fun setupViewModel() {
         binding.viewModel = missionDetailViewModel
@@ -203,7 +235,9 @@ class MissionDetailActivity :
     private fun observeDeleteMissionStatus() {
         missionDetailViewModel.deleteMissionState.observe(this) {
             when (it) {
-                is NetworkState.Init -> { /* no-op*/ }
+                is NetworkState.Init -> { /* no-op*/
+                }
+
                 is NetworkState.Success -> {
                     showMissionDeleteSuccessToast()
                     finish()
@@ -222,7 +256,8 @@ class MissionDetailActivity :
 
     private fun setOnMissionUrlClickListener() {
         binding.clMissionUrl.setOnThrottleClickListener {
-            val url: String = missionDetailViewModel.getMissionUrl() ?: return@setOnThrottleClickListener
+            val url: String =
+                missionDetailViewModel.getMissionUrl() ?: return@setOnThrottleClickListener
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
