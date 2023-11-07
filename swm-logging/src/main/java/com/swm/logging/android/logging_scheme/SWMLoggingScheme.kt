@@ -3,7 +3,7 @@ package com.swm.logging.android.logging_scheme
 import com.swm.logging.android.SWMLogging
 
 abstract class SWMLoggingScheme {
-    open lateinit var eventLogName: String
+    open lateinit var logName: String
     open lateinit var screenName: String
     open lateinit var logVersion: String
     private val osVersionAndName: String = SWMLogging.getOsNameAndVersion()
@@ -14,12 +14,12 @@ abstract class SWMLoggingScheme {
     private val appVersion = SWMLogging.getAppVersion()
     private val region = SWMLogging.getRegion()
     fun setLoggingScheme(
-        evenLogName: String,
+        logName: String,
         screenName: String,
         logVersion: String,
         logData: MutableMap<String, Any>?,
     ) {
-        this.eventLogName = evenLogName
+        this.logName = logName
         this.screenName = screenName
         this.logVersion = logVersion
         this.logData = logData

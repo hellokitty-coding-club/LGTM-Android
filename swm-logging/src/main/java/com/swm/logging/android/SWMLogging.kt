@@ -34,7 +34,7 @@ object SWMLogging {
         }
 
         override fun onNext(value: SWMLoggingScheme) {
-            println("Rx: 아이템 받음: ${value.eventLogName}")
+            println("Rx: 아이템 받음: ${value.logName}")
             runBlocking {
                 val result = async { shotLogging(value) }
                 println("Rx: 로깅 결과: ${result.await()}")

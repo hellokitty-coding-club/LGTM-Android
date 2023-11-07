@@ -9,9 +9,9 @@ class HomeScreenClickScheme(
 
     init {
         setLoggingScheme(
-            evenLogName = "notificationClick",
-            screenName = "home",
-            logVersion = 1,
+            logName = "notificationClick",
+            screenName = "HomeFragment",
+            logVersion = "1",
             logData = mutableMapOf(
                 "titleName" to titleName,
                 "age" to age

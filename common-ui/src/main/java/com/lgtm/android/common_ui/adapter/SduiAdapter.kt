@@ -7,11 +7,12 @@ import com.lgtm.android.common_ui.viewholder.SduiBaseHolder
 import com.lgtm.android.common_ui.viewholder.SduiItemViewHolder
 import com.lgtm.android.common_ui.viewholder.getSduiViewHolder
 import com.lgtm.domain.entity.response.SduiItemVO
+import com.lgtm.domain.server_drive_ui.SduiContent
 import com.lgtm.domain.server_drive_ui.SduiViewType
 
 
 class SduiAdapter(
-    private val onMissionClickListener: (Int) -> Unit
+    private val onMissionClickListener: (SduiContent) -> Unit
 ) : ListAdapter<SduiItemVO, SduiBaseHolder>(
     ItemDiffCallback<SduiItemVO>(onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.content == new.content })

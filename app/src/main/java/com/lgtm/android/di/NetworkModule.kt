@@ -1,7 +1,7 @@
 package com.lgtm.android.di
 
 import com.google.gson.GsonBuilder
-import com.lgtm.android.BuildConfig.DEBUG
+import com.lgtm.android.BuildConfig.IS_DEV
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_DEBUG
 import com.lgtm.android.BuildConfig.LGTM_BASE_URL_RELEASE
 import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
@@ -64,7 +64,7 @@ object NetworkModule {
     @Singleton
     fun providesLGTMRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(if (DEBUG) LGTM_BASE_URL_DEBUG else LGTM_BASE_URL_RELEASE)
+            .baseUrl(if (IS_DEV) LGTM_BASE_URL_DEBUG else LGTM_BASE_URL_RELEASE)
             .client(okHttpClient)
             .addConverterFactory(
                 GsonConverterFactory.create(
