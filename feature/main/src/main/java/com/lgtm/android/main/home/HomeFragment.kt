@@ -29,15 +29,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         setUpNotificationClickListener()
         onClickNewMissionButton()
         onClickServiceGuideButton()
+        observeNewNotification()
     }
 
     override fun onResume() {
         super.onResume()
         getHomeInfo()
+        checkNewNotification()
     }
 
     private fun getHomeInfo() {
         homeViewModel.getHomeInfo()
+    }
+
+    private fun checkNewNotification() {
+        homeViewModel.hasNewNotification()
+    }
+
+    private fun observeNewNotification() {
+        homeViewModel.hasNewNotification.observe(viewLifecycleOwner) {
+            if (it == true) {
+                binding.ivNewNotification.visibility = View.VISIBLE
+            } else {
+                binding.ivNewNotification.visibility = View.GONE
+            }
+        }
     }
 
     private fun setupViewModel() {
@@ -59,7 +75,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         lgtmNavigator.navigateToMissionDetail(requireContext(), missionId)
     }
 
-    private fun moveToNotificationCenter(){
+    private fun moveToNotificationCenter() {
         lgtmNavigator.navigateToNotificationCenter(requireContext())
     }
 
@@ -76,10 +92,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
     }
 
-    private fun onClickServiceGuideButton(){
+    private fun onClickServiceGuideButton() {
         val role = homeViewModel.getUserRole()
         binding.ivServiceGuide.setOnThrottleClickListener {
-            val url =when(role){
+            val url = when (role) {
                 Role.REVIEWER -> "https://www.notion.so/team-hkcc/c1933575315e4b50aedbdd6b39069d3e?pvs=4"
                 Role.REVIEWEE -> "https://www.notion.so/team-hkcc/5abf8b03763a4f0d90cb2d463f6d46b4?pvs=4"
             }
