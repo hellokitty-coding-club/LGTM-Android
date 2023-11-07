@@ -17,4 +17,13 @@ class NotificationRepositoryImpl @Inject constructor(
             Result.failure(e)
         }
     }
+
+    override suspend fun hasNewNotification(): Result<Boolean> {
+        return try {
+            val response = notificationDatasource.hasNewNotification()
+            Result.success(response.data.hasNewNotification ?: false)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
