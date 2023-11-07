@@ -11,12 +11,21 @@ import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentHomeBinding
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.logging.FirstMissionClickScheme
+import com.lgtm.domain.logging.HomeMissionClickScheme
+import com.lgtm.domain.server_drive_ui.SduiContent
+import com.lgtm.domain.server_drive_ui.SectionItemVO
+import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var commonAdapter: SduiAdapter
+    private var isFirstMissionClick = false
+    private val entryTime = System.currentTimeMillis()
+    private var firstMissionClickTime by Delegates.notNull<Long>()
 
     override fun initializeViewModel() {
         viewModel = homeViewModel
@@ -67,8 +76,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initAdapter() {
-        commonAdapter = SduiAdapter(::moveToMissionDetail)
+        commonAdapter = SduiAdapter(::onClickMissionItem)
         binding.rvSdui.adapter = commonAdapter
+    }
+
+    private fun onClickMissionItem(sduiContent: SduiContent) {
+        if (!isFirstMissionClick) logFirstMissionClick(sduiContent)
+        logMissionClick(sduiContent)
+        moveToMissionDetail((sduiContent as SectionItemVO).missionId)
+    }
+
+    private fun logFirstMissionClick(sduiContent: SduiContent) {
+        firstMissionClickTime = System.currentTimeMillis()
+        isFirstMissionClick = true
+        val firstMissionClickScheme = FirstMissionClickScheme.Builder()
+            .setMissionId((sduiContent as SectionItemVO).missionId)
+            .setSpendingTime(firstMissionClickTime - entryTime)
+            .build()
+        homeViewModel.shotFirstMissionClickLogging(firstMissionClickScheme)
+    }
+
+    private fun logMissionClick(sduiContent: SduiContent) {
+        val scheme = getHomeMissionClickLoggingScheme(sduiContent)
+        homeViewModel.shotHomeMissionClickLogging(scheme)
+    }
+
+    private fun getHomeMissionClickLoggingScheme(sduiContent: SduiContent): SWMLoggingScheme {
+        return HomeMissionClickScheme.Builder()
+            .setMissionContent(sduiContent)
+            .build()
     }
 
     private fun moveToMissionDetail(missionId: Int) {
@@ -82,7 +118,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun submitDataWhenDataChanged() {
         homeViewModel.sduiList.observe(viewLifecycleOwner) {
             commonAdapter.submitList(it)
-            homeViewModel.shotHomeExposureLogging()
         }
     }
 
