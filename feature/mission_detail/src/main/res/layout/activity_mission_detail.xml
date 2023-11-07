@@ -164,16 +164,16 @@
                             android:layout_marginBottom="17dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="@{viewModel.missionDetailUiState.missionRepositoryUrl}"
                             android:textAppearance="@style/Body3M"
-                            android:textColor="@color/gray_1"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_mission_url_title"
-                            tools:text="https://github.com/hellokitty-coding-club/LGTM-Android/issues/103" />
+                            tools:text="https://github.com/hellokitty-coding-club/LGTM-Android/issues/103"
+                            tools:textColor="@color/gray_1" />
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="6dp"
