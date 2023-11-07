@@ -11,6 +11,7 @@ import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 
 
 class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment_real_name) {
@@ -46,7 +47,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
     }
 
     private fun setupCompleteButtonListener() {
-        binding.btnComplete.setOnClickListener {
+        binding.btnComplete.setOnThrottleClickListener {
             signUpViewModel.signUpJunior()
         }
     }

@@ -2,6 +2,7 @@ package com.lgtm.android.common_ui.viewholder
 
 import com.lgtm.android.common_ui.databinding.ItemProfileGlanceBinding
 import com.lgtm.android.common_ui.model.mapper.toUiModel
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.domain.profile.Profile
 import com.lgtm.domain.profile.profileViewType.ProfileGlance
 
@@ -18,6 +19,6 @@ class ProfileGlanceViewHolder(
     override fun bind(data: Profile) {
         val profileGlanceData: ProfileGlance = data as ProfileGlance
         binding.data = profileGlanceData.toUiModel()
-        binding.btnGithub.setOnClickListener { onClickGithubButton() }
+        binding.btnGithub.setOnThrottleClickListener { onClickGithubButton() }
     }
 }

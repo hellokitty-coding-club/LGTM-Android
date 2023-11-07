@@ -13,6 +13,7 @@ import com.lgtm.android.auth.ui.github.GithubBottomSheet
 import com.lgtm.android.auth.ui.signup.SignUpActivity
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,7 +40,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     }
 
     private fun initClickListener() {
-        binding.clGithub.setOnClickListener {
+        binding.clGithub.setOnThrottleClickListener {
             showGithubLoginBottomSheet()
         }
     }

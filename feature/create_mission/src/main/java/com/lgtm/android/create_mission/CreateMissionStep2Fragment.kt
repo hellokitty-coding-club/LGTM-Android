@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.TechTagChipGroup
 import com.lgtm.android.common_ui.util.TechTagTheme
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep2Binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,7 +44,7 @@ class CreateMissionStep2Fragment :
 
 
     private fun setupNextButtonClickListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             (requireActivity() as? CreateMissionActivity)?.setNextPage()
         }
     }
