@@ -14,6 +14,8 @@ dependencies {
     api(project(":domain"))
     api(libs.flexbox)
     api(libs.glide)
+    api(platform(libs.firebase))
+    api(libs.bundles.firebase)
 
     implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
