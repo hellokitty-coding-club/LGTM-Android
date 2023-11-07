@@ -9,7 +9,7 @@ class HomeMissionClickScheme(
 
     init {
         setLoggingScheme(
-            logName = "homeMissionClick",
+            eventLogName = "homeMissionClick",
             screenName = "HomeFragment",
             logVersion = "1",
             logData = mutableMapOf(

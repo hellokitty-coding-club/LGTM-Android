@@ -56,10 +56,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun shotHomeExposureLogging(swmLoggingScheme: SWMLoggingScheme) {
+    fun shotHomeMissionClickLogging(swmLoggingScheme: SWMLoggingScheme) {
         SWMLogging.logEvent(swmLoggingScheme)
     }
 
     fun getUserRole() = role
 
+    fun shotFirstMissionClickLogging(swmLoggingScheme: SWMLoggingScheme) {
+        SWMLogging.logEvent(swmLoggingScheme)
+    }
 }
