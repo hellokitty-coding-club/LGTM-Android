@@ -75,14 +75,14 @@ class HomeViewModel @Inject constructor(
     private fun getHomeClickLoggingScheme(): ClickScheme {
         return HomeScreenClickScheme.Builder()
             .setAge("-1")
-            .setTitleName("HomeCard")
+            .setTitleName("homeMissionClick")
             .build()
     }
 
     private fun getHomeExposureLoggingScheme(): ExposureScheme {
         return HomeScreenExposureScheme.Builder()
-            .setAge("3")
-            .setTitleName("HomeCard")
+            .setTitleName("homeMissionClick")
+            .setAge("-1")
             .build()
     }
 }
