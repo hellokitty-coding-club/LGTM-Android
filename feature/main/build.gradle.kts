@@ -12,6 +12,12 @@ android {
     buildFeatures {
         buildConfig = true
     }
+
+    defaultConfig {
+        buildConfigField(
+            "String", "versionName", "\"${libs.versions.appVersion.get()}\""
+        )
+    }
 }
 
 dependencies {
@@ -27,5 +33,6 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.hilt)
     implementation(libs.bundles.navigation)
+    implementation(libs.inappupdate)
     kapt(libs.hilt.kapt)
 }
