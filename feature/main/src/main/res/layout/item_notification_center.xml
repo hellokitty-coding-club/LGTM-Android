@@ -22,7 +22,7 @@
             android:layout_height="9dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="30dp"
-            android:src="@{data.isRead ? @drawable/oval_diameter_9_gray_2 : @drawable/oval_diameter_9_green}"
+            android:src="@{data.isRead ? @drawable/oval_diameter_9_gray_3 : @drawable/oval_diameter_9_green}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/oval_diameter_9_green" />

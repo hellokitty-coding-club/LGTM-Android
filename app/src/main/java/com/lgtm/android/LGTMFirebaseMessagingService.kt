@@ -11,6 +11,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -92,7 +93,8 @@ class LGTMFirebaseMessagingService : FirebaseMessagingService(), LgtmMessagingSe
     ): NotificationCompat.Builder {
         return NotificationCompat.Builder(this, channelID)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_launch_mono)
+            .setColor(ContextCompat.getColor(this, R.color.green))
             .setAutoCancel(true)
             .setContentTitle(title)
             .setStyle(NotificationCompat.BigTextStyle().bigText(message))
