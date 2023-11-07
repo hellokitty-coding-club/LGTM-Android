@@ -37,8 +37,8 @@
 
         <activity
             android:name=".auth.ui.signup.SignUpActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".main.MainActivity"
