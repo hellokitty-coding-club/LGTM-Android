@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.SduiItemVO
@@ -36,6 +38,7 @@ class HomeViewModel @Inject constructor(
                 .onSuccess {
                     _sduiList.postValue(it.contents)
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "getHomeInfo: ${it.message}")
                 }
         }
@@ -51,6 +54,7 @@ class HomeViewModel @Inject constructor(
                 .onSuccess {
                     _hasNewNotification.postValue(it)
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "hasNewNotification: ${it.message}")
                 }
         }

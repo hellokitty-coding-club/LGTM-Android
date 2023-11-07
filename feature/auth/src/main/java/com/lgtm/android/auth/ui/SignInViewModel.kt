@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.util.NetworkState
@@ -77,6 +79,7 @@ class SignInViewModel @Inject constructor(
                 .onSuccess {
                     _patchDeviceTokenState.value = NetworkState.Success(it)
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     val errorMessage =
                         if (it is LgtmResponseException) it.message else "푸시 알림 설정 실패"
                     _patchDeviceTokenState.value = NetworkState.Failure(errorMessage)

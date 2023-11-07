@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.entity.response.NotificationVO
 import com.lgtm.domain.repository.NotificationRepository
@@ -25,6 +27,7 @@ class NotificationCenterViewModel @Inject constructor(
                 .onSuccess {
                     _notificationList.postValue(it)
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "getNotificationList: $it")
                 }
         }

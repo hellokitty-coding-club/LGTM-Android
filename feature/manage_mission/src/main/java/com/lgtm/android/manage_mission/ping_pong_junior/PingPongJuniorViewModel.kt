@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
@@ -44,6 +46,7 @@ class PingPongJuniorViewModel @Inject constructor(
                     getOgImageIfNeeded()
                     Log.d(TAG, "fetchJuniorMissionStatus: $it")
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     _fetchMissionStatusState.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "fetchJuniorMissionStatus: $it")
                 }
@@ -71,6 +74,7 @@ class PingPongJuniorViewModel @Inject constructor(
                     _ogImageUrl.value = it
                     Log.d(TAG, "getOgImage: $it")
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "getOgImage: $it")
                 }
         }
@@ -110,6 +114,7 @@ class PingPongJuniorViewModel @Inject constructor(
                     _moveToNextProcessState.postValue(NetworkState.Success(it))
                     Log.d(TAG, "confirmJuniorPayment: $it")
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     _moveToNextProcessState.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "confirmJuniorPayment: $it")
                 }
@@ -163,6 +168,7 @@ class PingPongJuniorViewModel @Inject constructor(
                 .onSuccess {
                     _moveToNextProcessState.postValue(NetworkState.Success(it))
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     _moveToNextProcessState.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "requestCodeReview: $it")
                 }
