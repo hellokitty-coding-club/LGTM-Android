@@ -1,7 +1,7 @@
 package com.lgtm.android
 
 import android.app.Application
-import com.lgtm.android.data.datasource.LgtmPreferenceDataSource
+import com.lgtm.domain.repository.AuthRepository
 import com.swm.logging.android.SWMLogging
 import dagger.hilt.android.HiltAndroidApp
 import java.util.Locale
@@ -11,7 +11,7 @@ import javax.inject.Inject
 class LGTMApplication : Application() {
 
     @Inject
-    lateinit var lgtmPreferenceDataSource: LgtmPreferenceDataSource
+    lateinit var authRepository: AuthRepository
 
     override fun onCreate() {
         super.onCreate()
@@ -27,12 +27,7 @@ class LGTMApplication : Application() {
     }
 
     private fun getUserId(): String {
-        return "123" // todo : get user id from preference
-//        lgtmPreferenceDataSource.getValue(
-//            preferenceKey = LgtmPreferenceDataSource.Companion.PreferenceKey.ACCESS_TOKEN,
-//            defaultValue = "",
-//            isEncrypted = true
-//        )
+        return authRepository.getMemberId().toString()
     }
 
     companion object {

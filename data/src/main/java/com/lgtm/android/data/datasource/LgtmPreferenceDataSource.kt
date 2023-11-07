@@ -18,6 +18,7 @@ class LgtmPreferenceDataSource @Inject constructor(
         return when (defaultValue) {
             is String -> preference.getString(key, defaultValue) as T
             is Boolean -> preference.getBoolean(key, defaultValue) as T
+            is Int -> preference.getInt(key, defaultValue) as T
             else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}")
         }
     }
@@ -33,6 +34,7 @@ class LgtmPreferenceDataSource @Inject constructor(
         when (value) {
             is String -> preference.edit(byAsync) { putString(key, value) }
             is Boolean -> preference.edit(byAsync) { putBoolean(key, value) }
+            is Int -> preference.edit(byAsync) { putInt(key, value) }
             else -> throw IllegalArgumentException("Add data type on ${this.javaClass.simpleName}")
         }
     }
@@ -51,6 +53,7 @@ class LgtmPreferenceDataSource @Inject constructor(
     companion object {
         enum class PreferenceKey {
             MEMBER_TYPE,
+            MEMBER_ID,
             UNKNOWN_MEMBER_TYPE,
             ACCESS_TOKEN,
             REFRESH_TOKEN;

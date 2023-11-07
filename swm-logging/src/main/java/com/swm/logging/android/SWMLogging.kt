@@ -115,6 +115,11 @@ object SWMLogging {
     fun getUUID(): UUID = uuid
     fun getAppVersion(): String = appVersion
     fun getUserID(): String = userID
+
+    /** 앱 실행시에는 로그아웃 상태였지만, 도중 로그아웃을 하는 유저에 한해 사용됨 */
+    fun setUserId(userID: String) {
+        this.userID = userID
+    }
     fun getRegion(): String = region
     fun getDeviceModel(): String = deviceModel
 }
