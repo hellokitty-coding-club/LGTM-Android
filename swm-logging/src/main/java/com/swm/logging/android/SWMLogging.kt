@@ -3,11 +3,10 @@ package com.swm.logging.android
 import com.google.gson.GsonBuilder
 import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
-import okhttp3.Interceptor
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -18,16 +17,16 @@ import java.util.concurrent.TimeUnit
 
 
 object SWMLogging {
-
-    private const val AUTHORIZATION = "Authorization"
-
     private lateinit var appVersion: String
     private lateinit var OSNameAndVersion: String
+    private lateinit var deviceModel: String
     private lateinit var baseUrl: String
     private lateinit var serverPath: String
-    private lateinit var accessToken: String
+    private lateinit var userID: String
     private lateinit var uuid: UUID
+    private lateinit var region: String
     private lateinit var loggingService: LoggingService
+
     private val observable = PublishSubject.create<SWMLoggingScheme>() // 발행
     private val observer = object : Observer<SWMLoggingScheme> { // 구독
         override fun onSubscribe(d: Disposable) {
@@ -36,7 +35,10 @@ object SWMLogging {
 
         override fun onNext(value: SWMLoggingScheme) {
             println("Rx: 아이템 받음: ${value.eventLogName}")
-            shotLogging(value)
+            runBlocking {
+                val result = async { shotLogging(value) }
+                println("Rx: 로깅 결과: ${result.await()}")
+            }
         }
 
         override fun onError(e: Throwable) {
@@ -53,20 +55,10 @@ object SWMLogging {
             .connectTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(interceptor)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             }).build()
     }
-
-    private val interceptor: Interceptor =
-        Interceptor { chain ->
-            with(chain) {
-                proceed(
-                    request().newBuilder().addHeader(AUTHORIZATION, accessToken).build()
-                )
-            }
-        }
 
     private val loggingRetrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -80,10 +72,9 @@ object SWMLogging {
         observable.onNext(swmLoggingScheme)
     }
 
-    private fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Single<Response<BaseDTO>> {
+    suspend fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Response<BaseDTO> {
         checkInitialized()
-        return Single.fromCallable { loggingService.postLogging(serverPath, swmLoggingScheme) }
-            .subscribeOn(Schedulers.io())
+        return loggingService.postLogging(serverPath, swmLoggingScheme)
     }
 
     private fun checkInitialized() {
@@ -95,16 +86,20 @@ object SWMLogging {
     fun init(
         appVersion: String,
         osNameAndVersion: String,
+        deviceModel: String,
         baseUrl: String,
         serverPath: String,
-        token: String
+        region: String,
+        userID: String,
     ) {
         this.appVersion = appVersion
         this.OSNameAndVersion = osNameAndVersion
+        this.deviceModel = deviceModel
         this.baseUrl = baseUrl
         this.serverPath = serverPath
-        this.accessToken = token
         this.uuid = UUID.randomUUID()
+        this.userID = userID
+        this.region = region
         setLoggingService()
         observable.throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(observer)
     }
@@ -116,4 +111,10 @@ object SWMLogging {
     fun getOsNameAndVersion(): String {
         return OSNameAndVersion
     }
+
+    fun getUUID(): UUID = uuid
+    fun getAppVersion(): String = appVersion
+    fun getUserID(): String = userID
+    fun getRegion(): String = region
+    fun getDeviceModel(): String = deviceModel
 }
