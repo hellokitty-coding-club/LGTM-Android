@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
@@ -84,6 +86,7 @@ class MissionDetailViewModel @Inject constructor(
                     _missionDetailUiState.postValue(it.toUiModel())
                     _missionDetailStatus.postValue(NetworkState.Success(true))
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     _missionDetailStatus.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "getMissionDetail: $it")
                 }
@@ -97,6 +100,7 @@ class MissionDetailViewModel @Inject constructor(
                 .onSuccess {
                     _participateMissionUiState.postValue(NetworkState.Success(it))
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     _participateMissionUiState.postValue(NetworkState.Failure(it.message))
                 }
         }
@@ -110,6 +114,7 @@ class MissionDetailViewModel @Inject constructor(
                 .onSuccess {
                     _deleteMissionState.postValue(NetworkState.Success(it))
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     _deleteMissionState.postValue(NetworkState.Failure(it.message))
                 }
         }

@@ -3,6 +3,8 @@ package com.lgtm.android.auth.ui.signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.lgtm.android.auth.exception.SignUpFailedException
 import com.lgtm.android.common_ui.base.BaseViewModel
@@ -346,6 +348,7 @@ class SignUpViewModel @Inject constructor(
                 isAgreeWithEventInfo = isAgreeWithEventInfo.value ?: false,
             )
         } catch (e: IllegalArgumentException) {
+            Firebase.crashlytics.recordException(e)
             throw SignUpFailedException("입력되지 않은 항목이 있습니다")
         }
     }
@@ -369,6 +372,7 @@ class SignUpViewModel @Inject constructor(
                 accountHolderName = requireNotNull(accountHolder.value).trim(),
             )
         } catch (e: IllegalArgumentException) {
+            Firebase.crashlytics.recordException(e)
             throw SignUpFailedException("입력되지 않은 항목이 있습니다")
         }
     }
@@ -383,12 +387,14 @@ class SignUpViewModel @Inject constructor(
                 val signUpJuniorRequestVO = createSignUpJuniorRequestVO()
                 authRepository.signUpJunior(signUpJuniorRequestVO)
             } catch (e: SignUpFailedException) {
+                Firebase.crashlytics.recordException(e)
                 _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
                 authRepository.saveUserData(it)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
+                Firebase.crashlytics.recordException(it)
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
                 _signUpState.value = NetworkState.Failure(errorMessage)
             }
@@ -401,12 +407,14 @@ class SignUpViewModel @Inject constructor(
                 val signUpSeniorRequestVO = createSignUpSeniorRequestVO()
                 authRepository.signUpSenior(signUpSeniorRequestVO)
             } catch (e: SignUpFailedException) {
+                Firebase.crashlytics.recordException(e)
                 _signUpState.value = NetworkState.Failure(e.message)
                 return@launch
             }.onSuccess {
                 authRepository.saveUserData(it)
                 _signUpState.value = NetworkState.Success(it)
             }.onFailure {
+                Firebase.crashlytics.recordException(it)
                 val errorMessage = if (it is LgtmResponseException) it.message else "로그인 실패"
                 _signUpState.value = NetworkState.Failure(errorMessage)
             }

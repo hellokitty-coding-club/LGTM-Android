@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.IntroRepository
@@ -30,6 +32,7 @@ class SplashViewModel @Inject constructor(
                     _minVersion.value = it.minVersion
                     _latestVersion.value = it.latestVersion
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.d(TAG, "getAppVersionInfo: $it")
                 }
         }

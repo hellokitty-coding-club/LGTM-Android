@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.profile.Profile
 import com.lgtm.domain.profile.profileViewType.ProfileGlance
@@ -46,6 +48,7 @@ class ProfileViewModel @Inject constructor(
                     _isMyProfile.postValue((it[0] as ProfileImage).isMyProfile)
                     Log.d(TAG, "fetchProfileInfo: $it")
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "fetchProfileInfo: $it")
                 }
         }

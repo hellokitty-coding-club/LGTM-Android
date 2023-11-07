@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.DashboardUI
 import com.lgtm.android.common_ui.model.MissionProcessInfoUI
@@ -34,6 +36,7 @@ class DashboardViewModel @Inject constructor(
                     _dashboardInfo.postValue(it.toUiModel())
                     Log.d(TAG, "fetchMissionInfo: $it")
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "fetchMissionInfo: $it")
                 }
         }
@@ -57,6 +60,7 @@ class DashboardViewModel @Inject constructor(
                 _pingPongSeniorState.postValue(NetworkState.Success(it))
                 Log.d(TAG, "fetchPingPongSeniorVO: $it")
             }.onFailure {
+                Firebase.crashlytics.recordException(it)
                 Log.e(TAG, "fetchPingPongSeniorVO: $it")
             }
         }
@@ -83,6 +87,7 @@ class DashboardViewModel @Inject constructor(
                 _confirmDepositStatus.postValue(Event(NetworkState.Success("")))
                 Log.d(TAG, "confirmDepositCompleted: $it")
             }.onFailure {
+                Firebase.crashlytics.recordException(it)
                 _confirmDepositStatus.postValue(Event(NetworkState.Failure(it.message)))
                 Log.e(TAG, "confirmDepositCompleted: $it")
             }
@@ -104,6 +109,7 @@ class DashboardViewModel @Inject constructor(
                 _codeReviewCompletedStatus.postValue(Event(NetworkState.Success("")))
                 Log.d(TAG, "codeReviewCompleted: $it")
             }.onFailure {
+                Firebase.crashlytics.recordException(it)
                 _codeReviewCompletedStatus.postValue(Event(NetworkState.Failure(it.message)))
                 Log.e(TAG, "codeReviewCompleted: $it")
             }
