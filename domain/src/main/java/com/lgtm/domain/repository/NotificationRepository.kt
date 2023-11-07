@@ -4,4 +4,5 @@ import com.lgtm.domain.entity.response.NotificationVO
 
 interface NotificationRepository {
     suspend fun getNotificationList(): Result<List<NotificationVO>>
+    suspend fun hasNewNotification(): Result<Boolean>
 }
