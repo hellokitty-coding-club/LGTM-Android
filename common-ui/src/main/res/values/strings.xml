@@ -119,7 +119,7 @@
     <string name="my_activity">내 활동</string>
     <string name="service_info">서비스 정보</string>
     <string name="cs_center_mail">hkcc.swm.official@gmail.com</string>
-    <string name="current_version_1">현재 버전 1.0.0</string>
+    <string name="current_version">현재 버전</string>
     <string name="recent_version">최신 버전</string>
     <string name="setting">설정</string>
     <string name="affiliation">소속</string>
@@ -187,5 +187,8 @@
     <string name="notification">알림</string>
     <string name="no_notification_yet">아직 알림이 없습니다.</string>
     <string name="start_your_mission">미션을 시작해 보세요!</string>
+    <string name="unchecked">미확인</string>
+    <string name="update">업데이트</string>
+    <string name="latest_version">최신 버전</string>
 
 </resources>

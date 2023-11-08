@@ -389,24 +389,22 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <!-- todo : 업데이트 시 부터 버전 확인 로직 작성 -->
                         <TextView
                             android:id="@+id/tv_version_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="14dp"
                             android:layout_marginEnd="15dp"
-                            android:text="@string/recent_version"
                             android:textAppearance="@style/Body3R"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:id="@+id/tv_current_version"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="14dp"
-                            android:text="@string/current_version_1"
                             android:textAppearance="@style/Description"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@id/tv_version_info"
