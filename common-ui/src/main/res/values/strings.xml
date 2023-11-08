@@ -23,7 +23,7 @@
     <string name="want_to_learn_develop">개발을 배우고 싶어요.</string>
     <string name="reviewer">리뷰어</string>
     <string name="want_to_teach_develop">개발을 알려주고 싶어요.</string>
-    <string name="select_edu_status">학력 정보를\n선택해주세요.</string>
+    <string name="select_affiliation">현재 소속을\n선택해주세요.</string>
     <string name="high_school_student">고등학생</string>
     <string name="undergraduate">대학생</string>
     <string name="graduate">대학교 졸업</string>
@@ -44,10 +44,11 @@
     <string name="cannot_use_space">띄어쓰기는 사용할 수 없습니다.</string>
     <string name="cannot_only_use_space">띄어쓰기만 입력할 수 없습니다.</string>
     <string name="write_correct_name">올바른 실명을 입력해 주세요.</string>
-    <string name="over_12_month_experience_required">경력 12개월 이상만 가입할 수 있습니다.</string>
+    <string name="career_experience_required">현업 개발자만 리뷰어 활동이 가능해요</string>
     <string name="duplicate_nickname">중복된 닉네임입니다.</string>
     <string name="can_use">사용 가능합니다.</string>
-    <string name="empty_value"></string>
+    <string name="empty_value" />
+    <string name="enter_bank_account_holder">예금주명을 입력하세요.</string>
 
 
     <!-- 미션 조회 -->
@@ -55,6 +56,7 @@
     <string name="mission_max_people">참여 인원</string>
     <string name="mission_registration_date_limit">신청 기한</string>
     <string name="new_mission">새로운 미션</string>
+    <string name="proceed_with_url_reviewee_submitted">리뷰이가 제출한 URL로만 진행되는 미션입니다.</string>
 
 
     <!-- 미션 작성 -->
@@ -82,7 +84,7 @@
 
     <!-- 서비스 준비 중 -->
     <string name="service_under_preparation">서비스 준비중입니다.</string>
-    <string name="coming_soon_oct">10월에 만나요!</string>
+    <string name="coming_soon_nov">11월에 만나요!</string>
 
     <!-- 미션 조회 -->
     <string name="mission_url_title">미션 URL</string>
@@ -117,10 +119,10 @@
     <string name="my_activity">내 활동</string>
     <string name="service_info">서비스 정보</string>
     <string name="cs_center_mail">hkcc.swm.official@gmail.com</string>
-    <string name="current_version_1">현재 버전 1.0.0</string>
+    <string name="current_version">현재 버전</string>
     <string name="recent_version">최신 버전</string>
     <string name="setting">설정</string>
-    <string name="education">학력</string>
+    <string name="affiliation">소속</string>
     <string name="participant_list">참가자 목록</string>
 
     <!-- 미션 대시보드 -->
@@ -144,6 +146,9 @@
     <string name="want_to_logout">로그아웃 하시겠어요?</string>
     <string name="cannot_cancle_after_participate_mission">참여한 미션은 취소가 불가능해요</string>
     <string name="do_you_want_to_participate_mission">미션에 참여하시겠어요?</string>
+    <string name="delete_mission_title">미션을 삭제하시겠어요?</string>
+    <string name="delete_mission_message">이미 미션에 참여한 리뷰이가 있다면 미션 삭제가 불가능합니다.</string>
+    <string name="delete_mission_success">미션이 삭제되었습니다.</string>
 
     <!-- Profile -->
     <string name="visit_github">Github 방문</string>
@@ -177,5 +182,13 @@
     <string name="check_out_mission_review">미션 리뷰 보러가기</string>
 
     <string name="github">Github</string>
+
+    <!-- Notification -->
+    <string name="notification">알림</string>
+    <string name="no_notification_yet">아직 알림이 없습니다.</string>
+    <string name="start_your_mission">미션을 시작해 보세요!</string>
+    <string name="unchecked">미확인</string>
+    <string name="update">업데이트</string>
+    <string name="latest_version">최신 버전</string>
 
 </resources>

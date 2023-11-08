@@ -9,9 +9,11 @@ import com.lgtm.android.data.model.response.PingPongSeniorDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.model.response.SduiDTO
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
+import com.lgtm.domain.entity.response.DeleteMissionResponse
 import com.lgtm.domain.entity.response.PingPongResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -80,5 +82,10 @@ interface MissionService {
         @Path("missionId") missionId: Int,
         @Path("juniorId") juniorId: Int
     ): Response<BaseDTO<PingPongResponse>>
+
+    @DELETE("v1/mission/{missionId}")
+    suspend fun deleteMission(
+        @Path("missionId") missionId: Int,
+    ): Response<BaseDTO<DeleteMissionResponse>>
 }
 

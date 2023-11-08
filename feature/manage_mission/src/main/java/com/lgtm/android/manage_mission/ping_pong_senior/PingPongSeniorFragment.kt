@@ -17,6 +17,7 @@ import com.lgtm.android.common_ui.R.string.deposit_confirm_completed
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.EventObserver
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.manage_mission.dashboard.DashboardViewModel
 import com.lgtm.android.manage_mission.databinding.FragmentPingPongSeniorBinding
 import com.lgtm.domain.constants.ProcessState
@@ -68,7 +69,7 @@ class PingPongSeniorFragment(
 
 
     private fun onCloseClickListener() {
-        binding.ivClose.setOnClickListener {
+        binding.ivClose.setOnThrottleClickListener {
             dismiss()
         }
     }
@@ -91,7 +92,7 @@ class PingPongSeniorFragment(
     }
 
     private fun setBottomButtonClickListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             when (dashboardViewModel.getMissionStatus()) {
                 ProcessState.WAITING_FOR_PAYMENT -> {/* disable */
                 }

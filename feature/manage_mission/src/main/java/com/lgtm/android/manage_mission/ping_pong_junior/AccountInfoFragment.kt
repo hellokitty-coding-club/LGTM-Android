@@ -9,8 +9,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.R.string
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.FragmentAccountInfoBinding
 
@@ -33,7 +36,7 @@ class AccountInfoFragment :
     }
 
     private fun onClickAccountInfo() {
-        binding.clAccountInfo.setOnClickListener {
+        binding.clAccountInfo.setOnThrottleClickListener {
             try {
                 val clipboard =
                     requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
@@ -42,6 +45,7 @@ class AccountInfoFragment :
                 Toast.makeText(requireContext(), getString(string.copied), Toast.LENGTH_SHORT)
                     .show()
             } catch (e: Exception) {
+                Firebase.crashlytics.recordException(e)
                 Log.e(TAG, "onClickAccountInfo: 계좌정보 클립보드 복사 실패")
             }
         }

@@ -73,15 +73,12 @@ class CreateMissionViewModel @Inject constructor(
         else if (repositoryUrl.value?.isNotBlank() == true && !isGithubUrl(
                 repositoryUrl.value ?: ""
             )
-        )
-            repoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
-        else
-            repoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
+        ) repoUrlEditTextData.value?.infoStatus?.value = InfoType.GITHUB_URL_ONLY
+        else repoUrlEditTextData.value?.infoStatus?.value = InfoType.NONE
     }
 
     private fun isMissionRepoUrlValid(): Boolean {
         return repoUrlEditTextData.value?.infoStatus?.value == InfoType.NONE
-                && repoUrlEditTextData.value?.text?.value?.isNotBlank() == true
     }
 
     private fun isGithubUrl(url: String): Boolean {
@@ -212,15 +209,15 @@ class CreateMissionViewModel @Inject constructor(
 
     private fun createPostMissionRequestDTO(): PostMissionRequestDTO {
         val formattedDate = registrationDueDate.value?.format(isoStyleFormatter)
-        val tempDate = formattedDate?.substring(0, 10)?.replace("-", ".")// todo 서버 코드 바뀌면 수정
+        val date = formattedDate?.substring(0, 10)
         return PostMissionRequestDTO(
             description = requireNotNull(description.value),
             maxPeopleNumber = requireNotNull(numOfRecruits.value),
-            missionRepositoryUrl = requireNotNull(repositoryUrl.value),
+            missionRepositoryUrl = repositoryUrl.value,
             notRecommendTo = notRecommendGroup.value,
             recommendTo = recommendGroup.value,
             price = requireNotNull(price.value),
-            registrationDueDate = requireNotNull(tempDate),
+            registrationDueDate = requireNotNull(date),
             tagList = requireNotNull(techTagList.value),
             title = requireNotNull(title.value)
         )

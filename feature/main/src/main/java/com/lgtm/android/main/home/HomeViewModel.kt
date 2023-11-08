@@ -5,16 +5,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.SduiItemVO
-import com.lgtm.domain.logging.HomeScreenClickScheme
-import com.lgtm.domain.logging.HomeScreenExposureScheme
 import com.lgtm.domain.repository.AuthRepository
+import com.lgtm.domain.repository.NotificationRepository
 import com.lgtm.domain.usecase.MissionUseCase
 import com.swm.logging.android.SWMLogging
-import com.swm.logging.android.logging_scheme.ClickScheme
-import com.swm.logging.android.logging_scheme.ExposureScheme
+import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val useCase: MissionUseCase,
-    authRepository: AuthRepository
+    private val notificationRepository: NotificationRepository,
+    authRepository: AuthRepository,
 ) : BaseViewModel() {
 
     private val role = authRepository.getMemberType()
@@ -37,33 +38,35 @@ class HomeViewModel @Inject constructor(
                 .onSuccess {
                     _sduiList.postValue(it.contents)
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "getHomeInfo: ${it.message}")
                 }
         }
     }
 
 
-    fun shotHomeExposureLogging() {
-        val scheme = getHomeExposureLoggingScheme()
-        SWMLogging.logEvent(scheme)
+    private val _hasNewNotification = MutableLiveData<Boolean>()
+    val hasNewNotification: LiveData<Boolean> = _hasNewNotification
+
+    fun hasNewNotification() {
+        viewModelScope.launch(lgtmErrorHandler) {
+            notificationRepository.hasNewNotification()
+                .onSuccess {
+                    _hasNewNotification.postValue(it)
+                }.onFailure {
+                    Firebase.crashlytics.recordException(it)
+                    Log.e(TAG, "hasNewNotification: ${it.message}")
+                }
+        }
     }
 
-    fun shotHomeNotificationClickLogging() {
-        val scheme = getHomeClickLoggingScheme()
-        SWMLogging.logEvent(scheme)
+    fun shotHomeMissionClickLogging(swmLoggingScheme: SWMLoggingScheme) {
+        SWMLogging.logEvent(swmLoggingScheme)
     }
 
-    private fun getHomeClickLoggingScheme(): ClickScheme {
-        return HomeScreenClickScheme.Builder()
-            .setAge("-1")
-            .setTitleName("HomeCard")
-            .build()
-    }
+    fun getUserRole() = role
 
-    private fun getHomeExposureLoggingScheme(): ExposureScheme {
-        return HomeScreenExposureScheme.Builder()
-            .setAge("3")
-            .setTitleName("HomeCard")
-            .build()
+    fun shotFirstMissionClickLogging(swmLoggingScheme: SWMLoggingScheme) {
+        SWMLogging.logEvent(swmLoggingScheme)
     }
 }

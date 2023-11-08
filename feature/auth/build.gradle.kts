@@ -27,6 +27,20 @@ android {
         )
     }
 
+    flavorDimensions += "version"
+    productFlavors {
+        create("prod") {
+            dimension = "version"
+            buildConfigField("boolean", "IS_PROD", "true")
+            buildConfigField("boolean", "IS_DEV", "false")
+        }
+        create("dev") {
+            dimension = "version"
+            buildConfigField("boolean", "IS_PROD", "false")
+            buildConfigField("boolean", "IS_DEV", "true")
+        }
+    }
+
     buildFeatures {
         buildConfig = true
     }

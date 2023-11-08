@@ -10,6 +10,7 @@ import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.TechTagChipGroup
 import com.lgtm.android.common_ui.util.TechTagTheme
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,7 +45,7 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
 
 
     private fun setupNextButtonListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             navigateToIntroductionFragment()
         }
     }

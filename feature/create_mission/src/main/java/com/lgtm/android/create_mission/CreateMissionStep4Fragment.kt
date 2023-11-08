@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep4Binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,7 +45,7 @@ class CreateMissionStep4Fragment :
 
 
     private fun setupNextButtonClickListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             (requireActivity() as? CreateMissionActivity)?.setNextPage()
         }
     }

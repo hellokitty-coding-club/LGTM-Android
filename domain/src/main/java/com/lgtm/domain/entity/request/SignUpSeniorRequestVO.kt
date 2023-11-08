@@ -13,5 +13,6 @@ data class SignUpSeniorRequestVO(
     val careerPeriod: Int,
     val position: String,
     val accountNumber: String,
-    val bankName: String
+    val bankName: String,
+    val accountHolderName: String
 )

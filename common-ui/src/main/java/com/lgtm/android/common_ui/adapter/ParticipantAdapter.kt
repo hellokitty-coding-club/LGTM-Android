@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lgtm.android.common_ui.databinding.ItemDashboardParticipantBinding
 import com.lgtm.android.common_ui.model.MemberMissionStatusUI
 import com.lgtm.android.common_ui.util.ItemDiffCallback
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 
 
 class ParticipantAdapter(
@@ -35,7 +36,7 @@ class ParticipantViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(item: MemberMissionStatusUI) {
         binding.data = item
-        binding.clProgress.setOnClickListener { onProcessStateClickListener(item.memberId) }
-        binding.btnReviewMission.setOnClickListener { onCodeReviewClickListener(item.githubPrUrl) }
+        binding.clProgress.setOnThrottleClickListener { onProcessStateClickListener(item.memberId) }
+        binding.btnReviewMission.setOnThrottleClickListener { onCodeReviewClickListener(item.githubPrUrl) }
     }
 }

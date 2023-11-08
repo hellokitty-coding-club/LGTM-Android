@@ -13,4 +13,5 @@
     <dimen name="base_guideline">20dp</dimen>
     <dimen name="inner_guideline">24dp</dimen>
     <dimen name="profile_first_mission_top_margin">4dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
 </resources>

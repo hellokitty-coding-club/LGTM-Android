@@ -6,14 +6,16 @@ data class SignUpResponse(
     val memberId: Int?,
     val githubId: String?,
     val accessToken: String?,
-    val refreshToken: String?
+    val refreshToken: String?,
+    val memberType: String?,
 ) {
     fun toVO(): SignUpResponseVO {
         return SignUpResponseVO(
             memberId = memberId ?: throw IllegalArgumentException("memberId is null"),
             githubId = githubId ?: throw IllegalArgumentException("githubId is null"),
             accessToken = accessToken ?: throw IllegalArgumentException("accessToken is null"),
-            refreshToken = refreshToken ?: throw IllegalArgumentException("refreshToken is null")
+            refreshToken = refreshToken ?: throw IllegalArgumentException("refreshToken is null"),
+            memberType = memberType ?: throw IllegalArgumentException("memberType is null"),
         )
     }
 }

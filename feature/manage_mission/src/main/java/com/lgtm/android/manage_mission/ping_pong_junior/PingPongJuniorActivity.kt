@@ -14,6 +14,7 @@ import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityPingPongJuniorBinding
 import com.lgtm.domain.constants.ProcessState
@@ -75,7 +76,7 @@ class PingPongJuniorActivity :
 
 
     private fun setBackButtonClickListener() {
-        binding.ivBack.setOnClickListener {
+        binding.ivBack.setOnThrottleClickListener {
             finish()
         }
     }
@@ -142,7 +143,7 @@ class PingPongJuniorActivity :
     }
 
     private fun setBottomButtonClickListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             when (pingPongJuniorViewModel.getMissionStatus()) {
                 ProcessState.WAITING_FOR_PAYMENT -> showCheckDepositDialog()
                 ProcessState.PAYMENT_CONFIRMATION -> {/* disable */

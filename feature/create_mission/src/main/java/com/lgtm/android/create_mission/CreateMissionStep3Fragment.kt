@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep3Binding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,7 +52,7 @@ class CreateMissionStep3Fragment :
     }
 
     private fun setupNextButtonClickListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             (requireActivity() as? CreateMissionActivity)?.setNextPage()
         }
     }

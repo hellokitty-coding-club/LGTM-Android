@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.databinding.DialogLgtmConfirmationBinding
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 
 class LgtmConfirmationDialog(
     private val title: String,
@@ -54,11 +55,11 @@ class LgtmConfirmationDialog(
     }
 
     private fun onClickCancelListener() {
-        binding.btnCancel.setOnClickListener { dismiss() }
+        binding.btnCancel.setOnThrottleClickListener { dismiss() }
     }
 
     private fun onClickConfirmListener() {
-        binding.btnConfirm.setOnClickListener {
+        binding.btnConfirm.setOnThrottleClickListener {
             dismiss()
             doAfterConfirm()
         }

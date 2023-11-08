@@ -20,56 +20,86 @@
         android:background="@color/white"
         tools:context=".ui.signup.reviewer.BankAccountFragment">
 
-        <TextView
-            android:id="@+id/tv_bank_account_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="121dp"
-            android:text="@string/enter_bank_account_num_title"
-            android:textAppearance="@style/Heading4B"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_bank_account_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/enter_bank_account_num_description"
-            android:textAppearance="@style/Body2"
-            app:layout_constraintStart_toStartOf="@id/tv_bank_account_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_bank_account_title" />
-
-
-        <EditText
-            android:id="@+id/et_bank_account"
-            style="@style/LGTMEditTextStyle"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="57dp"
-            android:digits="0123456789-"
-            android:hint="@string/enter_bank_account"
-            android:maxLength="20"
-            android:maxLines="1"
-            android:paddingVertical="0dp"
-            android:paddingStart="10dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_bank_account_description" />
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/sp_bank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
-            android:dropDownVerticalOffset="15dp"
-            android:overlapAnchor="false"
-            android:popupBackground="@drawable/rectangle_white_stroke_gray_3_radius_10"
-            android:spinnerMode="dropdown"
-            app:layout_constraintTop_toBottomOf="@id/et_bank_account"
-            tools:listitem="@layout/item_bank_spinner" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_bank_account_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="121dp"
+                    android:text="@string/enter_bank_account_num_title"
+                    android:textAppearance="@style/Heading4B"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_bank_account_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/enter_bank_account_num_description"
+                    android:textAppearance="@style/Body2"
+                    app:layout_constraintStart_toStartOf="@id/tv_bank_account_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bank_account_title" />
+
+
+                <EditText
+                    android:id="@+id/et_bank_account"
+                    style="@style/LGTMEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="57dp"
+                    android:digits="0123456789-"
+                    android:hint="@string/enter_bank_account"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:paddingVertical="0dp"
+                    android:paddingStart="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bank_account_description" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
+                    android:dropDownVerticalOffset="15dp"
+                    android:overlapAnchor="false"
+                    android:popupBackground="@drawable/rectangle_white_stroke_gray_3_radius_10"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintTop_toBottomOf="@id/et_bank_account"
+                    tools:listitem="@layout/item_bank_spinner" />
+
+                <EditText
+                    android:id="@+id/et_account_holder"
+                    style="@style/LGTMEditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="150dp"
+                    android:ellipsize="end"
+                    android:hint="@string/enter_bank_account_holder"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:paddingVertical="0dp"
+                    android:paddingStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sp_bank" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_complete"

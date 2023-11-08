@@ -21,8 +21,8 @@ enum class InfoType(
         R.drawable.ic_info_red
     ),
     VALID_REAL_NAME(R.color.red, R.string.write_correct_name, true, R.drawable.ic_info_red),
-    OVER_12_MONTHS_EXPERIENCE_REQUIRED(
-        R.color.red, R.string.over_12_month_experience_required,
+    EXPERIENCE_REQUIRED(
+        R.color.red, R.string.career_experience_required,
         true, R.drawable.ic_info_red
     ),
     GITHUB_URL_ONLY(R.color.red, R.string.github_url_only, true, R.drawable.ic_info_red),

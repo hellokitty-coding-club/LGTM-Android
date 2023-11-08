@@ -55,7 +55,7 @@ fun ProfileVO.toUiModel(role: Role): ProfileGlanceUI = ProfileGlanceUI(
     githubId = githubId,
     detailInfoLabel = when (company == null) {
         false -> R.string.company_slash_position
-        true -> R.string.education
+        true -> R.string.affiliation
     },
     detailInfo = when (company == null) {
         false -> "$company / $position"
@@ -70,7 +70,7 @@ fun ProfileGlance.toUiModel(): ProfileGlanceUI = ProfileGlanceUI(
     githubId = githubId,
     detailInfoLabel = when (company == null) {
         false -> R.string.company_slash_position
-        true -> R.string.education
+        true -> R.string.affiliation
     },
     detailInfo = when (company == null) {
         false -> "$company / $position"

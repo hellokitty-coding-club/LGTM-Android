@@ -9,6 +9,7 @@ import com.lgtm.android.data.model.response.PingPongSeniorDTO
 import com.lgtm.android.data.model.response.PostMissionResponseDTO
 import com.lgtm.android.data.service.MissionService
 import com.lgtm.domain.entity.request.PostMissionRequestDTO
+import com.lgtm.domain.entity.response.DeleteMissionResponse
 import com.lgtm.domain.entity.response.PingPongResponse
 import javax.inject.Inject
 
@@ -69,11 +70,19 @@ class MissionDataSource @Inject constructor(
         )
     }
 
-    suspend fun codeReviewCompleted(missionId: Int, juniorId: Int):  BaseDTO<PingPongResponse> {
+    suspend fun codeReviewCompleted(missionId: Int, juniorId: Int): BaseDTO<PingPongResponse> {
         return checkResponse(
             missionService.codeReviewCompleted(
                 missionId = missionId,
                 juniorId = juniorId
+            )
+        )
+    }
+
+    suspend fun deleteMission(missionId: Int): BaseDTO<DeleteMissionResponse> {
+        return checkResponse(
+            missionService.deleteMission(
+                missionId = missionId,
             )
         )
     }

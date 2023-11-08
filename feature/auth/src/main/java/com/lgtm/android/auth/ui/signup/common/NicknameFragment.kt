@@ -8,6 +8,7 @@ import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentNicknameBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,7 +45,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
     }
 
     private fun setupNextButtonListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             navigateToTechTagFragment()
         }
     }
