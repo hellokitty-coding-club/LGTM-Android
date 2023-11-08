@@ -16,4 +16,6 @@ interface FakeLgtmNavigator {
     fun navigateToProfile(context: Context, userId: Int? = null)
 
     fun navigateToPingPongJunior(context: Context, missionId: Int)
+
+    fun navigateToNotificationCenter(context: Context)
 }

@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import org.jetbrains.kotlin.konan.properties.Properties
 
 val lgtmPropertiesFile = rootProject.file("lgtm.properties")
@@ -42,6 +44,23 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("prod") {
+            dimension = "version"
+            manifestPlaceholders["appLabel"] = "LGTM"
+            buildConfigField("boolean", "IS_PROD", "true")
+            buildConfigField("boolean", "IS_DEV", "false")
+        }
+        create("dev") {
+            dimension = "version"
+            applicationIdSuffix = ".dev"
+            manifestPlaceholders["appLabel"] = "(Dev)LGTM"
+            buildConfigField("boolean", "IS_PROD", "false")
+            buildConfigField("boolean", "IS_DEV", "true")
         }
     }
 

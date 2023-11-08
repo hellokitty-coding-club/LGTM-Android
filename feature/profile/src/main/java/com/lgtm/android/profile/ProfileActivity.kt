@@ -15,6 +15,7 @@ import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.ItemDecorationUtil
 import com.lgtm.android.common_ui.util.getDrawableCompat
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.profile.adapter.ProfileAdapter
 import com.lgtm.android.profile.databinding.ActivityProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,20 +88,20 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     }
 
     private fun setBackButtonClickListener() {
-        binding.ivBack.setOnClickListener {
+        binding.ivBack.setOnThrottleClickListener {
             finish()
         }
     }
 
     private fun setShareButtonClickListener() {
-        binding.ivShare.setOnClickListener {
+        binding.ivShare.setOnThrottleClickListener {
             // 현재 visibility false
             // 추후 deeplink 적용 후 공유하기 기능 추가
         }
     }
 
     private fun setMenuButtonClickListener() {
-        binding.ivMenu.setOnClickListener {
+        binding.ivMenu.setOnThrottleClickListener {
             showMenu(it)
             setDartMenuIcon()
         }

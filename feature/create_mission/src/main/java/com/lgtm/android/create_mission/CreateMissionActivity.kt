@@ -5,6 +5,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import com.lgtm.android.common_ui.adapter.ViewPagerAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.create_mission.databinding.ActivityCreateMissionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -58,7 +59,7 @@ class CreateMissionActivity :
     }
 
     private fun setOnBackButtonClickListener() {
-        binding.ivBack.setOnClickListener {
+        binding.ivBack.setOnThrottleClickListener {
             setPreviousPage()
         }
     }

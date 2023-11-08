@@ -19,6 +19,7 @@ data class SectionItemVO(
     val currentPeopleNumber: Int? = null,
     val maxPeopleNumber: Int? = null,
     val scrapCount: Int? = null,
+    val missionCategory : String? = null,
     @SerializedName("scraped")
     val isScraped: Boolean? = null,
     override val viewType: ProfileViewType = SECTION_ITEM_VO

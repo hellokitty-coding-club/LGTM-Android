@@ -12,24 +12,29 @@ import com.lgtm.domain.entity.response.MemberDataDTO
 import com.lgtm.domain.entity.response.SignUpResponseVO
 import com.lgtm.domain.firebase.LgtmMessagingService
 import com.lgtm.domain.repository.AuthRepository
+import com.swm.logging.android.SWMLogging
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val lgtmPreferenceDataSource: LgtmPreferenceDataSource,
     private val authDataSource: AuthDataSource,
-    private val lgtmFirebaseMessagingService: LgtmMessagingService
+    private val lgtmFirebaseMessagingService: LgtmMessagingService,
 ) : AuthRepository {
 
     override fun saveUserData(memberData: MemberDataDTO) {
         saveAccessToken(requireNotNull(memberData.accessToken))
         saveRefreshToken(requireNotNull(memberData.refreshToken))
         saveMemberType(requireNotNull(memberData.memberType))
+        saveMemberId(requireNotNull(memberData.memberId))
+        SWMLogging.setUserId(memberData.memberId.toString())
     }
 
-    override fun saveUserData(signUpResponseVO: SignUpResponseVO, memberType: String?) {
+    override fun saveUserData(signUpResponseVO: SignUpResponseVO) {
         saveAccessToken(requireNotNull(signUpResponseVO.accessToken))
         saveRefreshToken(requireNotNull(signUpResponseVO.refreshToken))
-        saveMemberType(requireNotNull(memberType))  // todo 추후에 SignUpResponseVO에 memberType이 추가되면 변경
+        saveMemberType(requireNotNull(signUpResponseVO.memberType))
+        saveMemberId(requireNotNull(signUpResponseVO.memberId))
+        SWMLogging.setUserId(signUpResponseVO.memberId.toString())
     }
 
     override fun clearUserData() {
@@ -65,6 +70,23 @@ class AuthRepositoryImpl @Inject constructor(
             value = memberType,
             isEncrypted = false,
             byAsync = true
+        )
+    }
+
+    override fun saveMemberId(memberId: Int) {
+        lgtmPreferenceDataSource.setValue(
+            preferenceKey = PreferenceKey.MEMBER_ID,
+            value = memberId,
+            isEncrypted = true,
+            byAsync = false
+        )
+    }
+
+    override fun getMemberId(): Int {
+        return lgtmPreferenceDataSource.getValue(
+            preferenceKey = PreferenceKey.MEMBER_ID,
+            defaultValue = -1,
+            isEncrypted = true
         )
     }
 
@@ -124,7 +146,8 @@ class AuthRepositoryImpl @Inject constructor(
                     careerPeriod = signUpSeniorVO.careerPeriod,
                     companyInfo = signUpSeniorVO.companyInfo,
                     position = signUpSeniorVO.position,
-                    isAgreeWithEventInfo = signUpSeniorVO.isAgreeWithEventInfo
+                    isAgreeWithEventInfo = signUpSeniorVO.isAgreeWithEventInfo,
+                    accountHolderName = signUpSeniorVO.accountHolderName
                 )
             )
             return Result.success(response.data.toVO())

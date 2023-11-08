@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
@@ -35,6 +37,14 @@ class MissionDetailViewModel @Inject constructor(
     private val _participateMissionUiState: MutableLiveData<NetworkState<Boolean>> =
         MutableLiveData(NetworkState.Init)
     val participateMissionUiState: LiveData<NetworkState<Boolean>> = _participateMissionUiState
+
+    private val _deleteMissionState: MutableLiveData<NetworkState<Boolean>> =
+        MutableLiveData(NetworkState.Init)
+    val deleteMissionState: LiveData<NetworkState<Boolean>> = _deleteMissionState
+
+    private val _missionDetailStatus: MutableLiveData<NetworkState<Boolean>> =
+        MutableLiveData(NetworkState.Init)
+    val missionDetailStatus: LiveData<NetworkState<Boolean>> = _missionDetailStatus
 
     fun isMyMission() =
         _missionDetailVO.value?.missionDetailStatus == MissionDetailStatus.SENIOR_PARTICIPATE_RECRUITING ||
@@ -74,7 +84,10 @@ class MissionDetailViewModel @Inject constructor(
                 .onSuccess {
                     _missionDetailVO.postValue(it)
                     _missionDetailUiState.postValue(it.toUiModel())
+                    _missionDetailStatus.postValue(NetworkState.Success(true))
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
+                    _missionDetailStatus.postValue(NetworkState.Failure(it.message))
                     Log.e(TAG, "getMissionDetail: $it")
                 }
         }
@@ -87,10 +100,23 @@ class MissionDetailViewModel @Inject constructor(
                 .onSuccess {
                     _participateMissionUiState.postValue(NetworkState.Success(it))
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     _participateMissionUiState.postValue(NetworkState.Failure(it.message))
                 }
         }
     }
 
     fun getMissionId() = _missionDetailVO.value?.missionId ?: -1
+    fun deleteMission() {
+        val missionId = _missionDetailVO.value?.missionId ?: return
+        viewModelScope.launch(lgtmErrorHandler) {
+            missionUseCase.deleteMission(missionId)
+                .onSuccess {
+                    _deleteMissionState.postValue(NetworkState.Success(it))
+                }.onFailure {
+                    Firebase.crashlytics.recordException(it)
+                    _deleteMissionState.postValue(NetworkState.Failure(it.message))
+                }
+        }
+    }
 }

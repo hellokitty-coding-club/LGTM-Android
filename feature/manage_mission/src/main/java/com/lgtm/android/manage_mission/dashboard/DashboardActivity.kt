@@ -11,6 +11,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.lgtm.android.common_ui.adapter.ParticipantAdapter
 import com.lgtm.android.common_ui.adapter.TechTagAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.manage_mission.R
 import com.lgtm.android.manage_mission.databinding.ActivityDashboardBinding
 import com.lgtm.android.manage_mission.ping_pong_senior.OnBottomSheetDismiss
@@ -87,7 +88,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
 
     private fun setBackButtonClickListener() {
-        binding.ivBack.setOnClickListener {
+        binding.ivBack.setOnThrottleClickListener {
             finish()
         }
     }

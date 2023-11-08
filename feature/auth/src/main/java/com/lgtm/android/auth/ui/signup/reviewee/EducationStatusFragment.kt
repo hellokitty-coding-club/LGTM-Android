@@ -15,6 +15,7 @@ import com.lgtm.android.common_ui.R.dimen
 import com.lgtm.android.common_ui.R.drawable
 import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseFragment
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.domain.constants.EducationStatus
 
 
@@ -64,7 +65,7 @@ class EducationStatusFragment :
                         resources.getDimensionPixelSize(dimen.radio_button_margin_top)
 
                 this.layoutParams = layoutParams
-                this.setOnClickListener { signUpViewModel.setEducationStatus(educationStatus.ordinal) }
+                this.setOnThrottleClickListener { signUpViewModel.setEducationStatus(educationStatus.ordinal) }
             }
             radioGroup.addView(radioButton)
         }
@@ -81,7 +82,7 @@ class EducationStatusFragment :
     }
 
     private fun setupNextButtonListener() {
-        binding.btnNext.setOnClickListener {
+        binding.btnNext.setOnThrottleClickListener {
             navigateToRealNameActivity()
         }
     }

@@ -4,6 +4,8 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.ProfileGlanceUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
@@ -32,8 +34,11 @@ class MyPageViewModel @Inject constructor(
                 .onSuccess {
                     _profileInfo.postValue(it.toUiModel(requireNotNull(it.memberType)))
                 }.onFailure {
+                    Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "getProfileInfo: $it")
                 }
         }
     }
+
+    fun getUserRole() = authRepository.getMemberType()
 }

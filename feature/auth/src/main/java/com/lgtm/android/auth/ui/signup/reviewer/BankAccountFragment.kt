@@ -16,6 +16,7 @@ import com.lgtm.android.common_ui.adapter.BankSpinnerAdapter
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.constant.Bank
 import com.lgtm.android.common_ui.util.NetworkState
+import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 
 class BankAccountFragment :
     BaseFragment<FragmentBankAccountBinding>(R.layout.fragment_bank_account) {
@@ -31,6 +32,7 @@ class BankAccountFragment :
         onBankSelectedListener()
         setupCompleteButtonListener()
         observeSignUpStatus()
+        onAccountHolderChanged()
     }
 
     private fun setupViewModel() {
@@ -64,8 +66,15 @@ class BankAccountFragment :
         }
     }
 
+    private fun onAccountHolderChanged() {
+        binding.etAccountHolder.addTextChangedListener {
+            signUpViewModel.setAccountHolder(it.toString())
+            signUpViewModel.setIsAccountInfoValid()
+        }
+    }
+
     private fun setupCompleteButtonListener() {
-        binding.btnComplete.setOnClickListener {
+        binding.btnComplete.setOnThrottleClickListener {
             signUpViewModel.signUpSenior()
         }
     }
