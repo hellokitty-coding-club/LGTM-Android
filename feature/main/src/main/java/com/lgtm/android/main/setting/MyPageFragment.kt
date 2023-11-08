@@ -9,10 +9,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.lgtm.android.common_ui.R.string
+import com.lgtm.android.common_ui.R.string.latest_version
+import com.lgtm.android.common_ui.R.string.update
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.ui.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.android.main.BuildConfig
 import com.lgtm.android.main.R
 import com.lgtm.android.main.databinding.FragmentMyPageBinding
 import com.lgtm.domain.constants.Role
@@ -39,6 +44,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         setVersionInfoOnClickListener()
         fetchProfileData()
         setOnProfileClickListener()
+        setVersionInfo()
     }
 
     override fun onResume() {
@@ -81,7 +87,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     private fun setNoticeOnClickListener() {
         // 공지사항
         binding.btnNotice.setOnThrottleClickListener {
-            val url = "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?v=3cee323345414e318192b89bfe7dd2d0&pvs=4"
+            val url =
+                "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?v=3cee323345414e318192b89bfe7dd2d0&pvs=4"
             openUrlInBrowser(url)
         }
     }
@@ -98,7 +105,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         // 서비스 이용 방법
         val role = myPageViewModel.getUserRole()
         binding.btnServiceGuidelines.setOnThrottleClickListener {
-            val url =when(role){
+            val url = when (role) {
                 Role.REVIEWER -> "https://www.notion.so/team-hkcc/c1933575315e4b50aedbdd6b39069d3e?pvs=4"
                 Role.REVIEWEE -> "https://www.notion.so/team-hkcc/5abf8b03763a4f0d90cb2d463f6d46b4?pvs=4"
             }
@@ -179,4 +186,23 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         lgtmNavigator.navigateToProfile(requireContext())
     }
 
+    private fun setVersionInfo() {
+        val currentVersion = getString(string.current_version) + " " + BuildConfig.versionName
+        binding.tvCurrentVersion.text = currentVersion
+        setVersionStatus()
+    }
+
+    private fun setVersionStatus() {
+        val appUpdateManager = AppUpdateManagerFactory.create(requireContext())
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                binding.tvVersionInfo.text = getString(update)
+            } else {
+                binding.tvVersionInfo.text = getString(latest_version)
+            }
+        }.addOnFailureListener { _ ->
+            binding.tvVersionInfo.text = getString(string.unchecked)
+        }
+    }
 }
