@@ -48,7 +48,7 @@
                 android:textAppearance="@style/Description"
                 android:textColor="@color/gray_6"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
-                tools:text="현재는 시스템 점검 중입니다. 불편을 끼쳐드려 죄송합니다" />
+                tools:text="현재는 시스템 점검 중입니다.\n불편을 끼쳐드려 죄송합니다" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

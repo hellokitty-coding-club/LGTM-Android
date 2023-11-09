@@ -3,6 +3,7 @@ package com.lgtm.android.auth.ui
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.ActivitySystemMaintenanceBinding
 import com.lgtm.android.common_ui.base.BaseActivity
@@ -17,6 +18,10 @@ class SystemMaintenanceActivity :
         super.onResume()
 
         val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 10
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.fetchAndActivate().addOnCompleteListener {
             val isSystemMaintenance = remoteConfig.getString("systemUnderMaintenanceDescription")
                 .replace("\\n", "\n")
