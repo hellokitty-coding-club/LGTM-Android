@@ -147,7 +147,7 @@
     <string name="cannot_cancle_after_participate_mission">참여한 미션은 취소가 불가능해요</string>
     <string name="do_you_want_to_participate_mission">미션에 참여하시겠어요?</string>
     <string name="delete_mission_title">미션을 삭제하시겠어요?</string>
-    <string name="delete_mission_message">이미 미션에 참여한 리뷰이가 있다면 미션 삭제가 불가능합니다.</string>
+    <string name="delete_mission_message">참여중인 리뷰어가 있다면 삭제가 불가능해요.</string>
     <string name="delete_mission_success">미션이 삭제되었습니다.</string>
 
     <!-- Profile -->
@@ -190,5 +190,9 @@
     <string name="unchecked">미확인</string>
     <string name="update">업데이트</string>
     <string name="latest_version">최신 버전</string>
+
+    <!-- 시스템 점검중 -->
+    <string name="system_under_maintenance">시스템 점검 안내</string>
+
 
 </resources>

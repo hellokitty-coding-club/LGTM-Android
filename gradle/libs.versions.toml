@@ -128,6 +128,7 @@ firebase = { module = "com.google.firebase:firebase-bom", version.ref = "firebas
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
+firebase-config = { module = "com.google.firebase:firebase-config-ktx" }
 kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin-bom" }
 
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
@@ -138,7 +139,7 @@ androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "const
 okhttp = ["okhttp", "okhttp-logging-interceptor", "okhttp-bom"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 gson = ["gson", "gson-converter"]
-firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-messaging"]
+firebase = ["firebase-analytics", "firebase-crashlytics", "firebase-messaging", "firebase-config"]
 accompanist = ["accompanist-systemuicontroller"]
 androidx-android-test = ["androidx-test-runner", "androidx-test-rules"]
 basic-test = ["junit", "androidx-test-junit", "androidx-test-espresso"]
