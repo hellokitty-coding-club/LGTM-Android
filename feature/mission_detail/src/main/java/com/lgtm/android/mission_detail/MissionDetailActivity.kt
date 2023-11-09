@@ -223,7 +223,7 @@ class MissionDetailActivity :
             title = title,
             description = description,
             doAfterConfirm = ::deleteMission,
-            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GREEN
+            confirmBtnBackground = LgtmConfirmationDialog.ConfirmButtonBackground.GRAY
         )
         dialog.show(supportFragmentManager, this.javaClass.name)
     }

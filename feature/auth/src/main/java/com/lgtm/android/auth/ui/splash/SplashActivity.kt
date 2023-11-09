@@ -11,6 +11,7 @@ import com.lgtm.android.auth.R
 import com.lgtm.android.auth.constant.AutoLoginState
 import com.lgtm.android.auth.databinding.ActivitySplashBinding
 import com.lgtm.android.auth.ui.SignInActivity
+import com.lgtm.android.auth.ui.SystemMaintenanceActivity
 import com.lgtm.android.common_ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,6 +32,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     override fun onResume() {
         super.onResume()
+        splashViewModel.checkSystemMaintenance()
         splashViewModel.getAppVersionInfo()
     }
 
@@ -55,15 +57,29 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun startNextActivity() {
-        if (autoLoginState == AutoLoginState.AUTO_LOGIN_SUCCESS) {
-            moveToMainActivity()
-        } else {
-            moveToAuthActivity()
+        splashViewModel.isDataAllSet.observe(this) { isReady ->
+            if (isReady == true) {
+                when {
+                    isSystemMaintenance() -> navigateToSystemMaintenanceActivity()
+                    isAutoLoginAvailable() -> moveToMainActivity()
+                    isAutoLoginAvailable().not() -> moveToAuthActivity()
+                    else -> throw IllegalStateException("Unhandled state")
+                }
+            }
         }
     }
 
+    private fun isSystemMaintenance() = splashViewModel.isSystemMaintenance.value == true
+
+    private fun isAutoLoginAvailable() = autoLoginState == AutoLoginState.AUTO_LOGIN_SUCCESS
+
     private fun moveToMainActivity() {
         lgtmNavigator.navigateToMain(this)
+        finish()
+    }
+
+    private fun navigateToSystemMaintenanceActivity() {
+        startActivity(Intent(this, SystemMaintenanceActivity::class.java))
         finish()
     }
 
@@ -71,6 +87,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         startActivity(Intent(this, SignInActivity::class.java))
         overridePendingTransition(0, 0)
         finish()
+    }
+
+    override fun onDestroy() {
+        splashViewModel.removeSourceOnIsDataAllSet()
+        super.onDestroy()
     }
 
     companion object {
