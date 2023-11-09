@@ -191,4 +191,8 @@
     <string name="update">업데이트</string>
     <string name="latest_version">최신 버전</string>
 
+    <!-- 시스템 점검중 -->
+    <string name="system_under_maintenance">시스템 점검 안내</string>
+
+
 </resources>
