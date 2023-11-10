@@ -12,7 +12,8 @@ import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 
 class ParticipantAdapter(
     private val onProcessStateClickListener: (Int) -> Unit,
-    private val onCodeReviewClickListener: (String) -> Unit
+    private val onCodeReviewClickListener: (String) -> Unit,
+    private val onParticipantClickListener: (Int) -> Unit,
 ) : ListAdapter<MemberMissionStatusUI, ParticipantViewHolder>(
     ItemDiffCallback<MemberMissionStatusUI>(onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.memberId == new.memberId })
@@ -21,7 +22,12 @@ class ParticipantAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParticipantViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemDashboardParticipantBinding.inflate(layoutInflater, parent, false)
-        return ParticipantViewHolder(binding, onProcessStateClickListener, onCodeReviewClickListener)
+        return ParticipantViewHolder(
+            binding,
+            onProcessStateClickListener,
+            onCodeReviewClickListener,
+            onParticipantClickListener
+        )
     }
 
     override fun onBindViewHolder(holder: ParticipantViewHolder, position: Int) {
@@ -32,11 +38,13 @@ class ParticipantAdapter(
 class ParticipantViewHolder(
     private val binding: ItemDashboardParticipantBinding,
     private val onProcessStateClickListener: (Int) -> Unit,
-    private val onCodeReviewClickListener: (String) -> Unit
+    private val onCodeReviewClickListener: (String) -> Unit,
+    private val onParticipantClickListener: (Int) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(item: MemberMissionStatusUI) {
         binding.data = item
         binding.clProgress.setOnThrottleClickListener { onProcessStateClickListener(item.memberId) }
         binding.btnReviewMission.setOnThrottleClickListener { onCodeReviewClickListener(item.githubPrUrl) }
+        binding.clProfile.setOnThrottleClickListener { onParticipantClickListener(item.memberId) }
     }
 }
