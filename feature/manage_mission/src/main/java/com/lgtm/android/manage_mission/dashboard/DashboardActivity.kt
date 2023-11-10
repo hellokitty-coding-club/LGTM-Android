@@ -46,7 +46,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private fun initAdapter() {
         techTagAdapter = TechTagAdapter()
         binding.rvTechTag.adapter = techTagAdapter
-        participantAdapter = ParticipantAdapter(::showPingPongSenior, ::openGithubPullRequestView)
+        participantAdapter = ParticipantAdapter(::showPingPongSenior, ::openGithubPullRequestView, ::moveToJuniorProfile)
         binding.rvParticipant.adapter = participantAdapter
     }
 
@@ -67,6 +67,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         startActivity(intent)
     }
 
+    private fun moveToJuniorProfile(memberId : Int) {
+        lgtmNavigator.navigateToProfile(this, memberId)
+    }
     private fun observeDashboardInfo() {
         dashboardViewModel.dashboardInfo.observe(this) {
             techTagAdapter.submitList(it.techTagList)
