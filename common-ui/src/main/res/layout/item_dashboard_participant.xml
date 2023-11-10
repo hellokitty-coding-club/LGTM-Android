@@ -17,84 +17,94 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/rectangle_white_stroke_gray_2_radius_20">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_profile_image"
-            setCircleProfileImageUrl="@{data.profileImageUrl}"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            android:theme="@style/ShapeAppearanceOverlay.App.CircleImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/img_profile_empty" />
-
-        <TextView
-            android:id="@+id/tv_nickname_label"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_profile"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="@string/nickname"
-            android:textAppearance="@style/Body3R"
-            app:layout_constraintBottom_toTopOf="@id/tv_github_label"
-            app:layout_constraintStart_toEndOf="@id/iv_profile_image"
-            app:layout_constraintTop_toTopOf="@id/iv_profile_image"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/div_nickname"
-            android:layout_width="1dp"
-            android:layout_height="13dp"
-            android:layout_marginStart="7dp"
-            android:background="@color/gray_3"
-            app:layout_constraintBottom_toBottomOf="@id/tv_nickname_label"
-            app:layout_constraintStart_toEndOf="@id/tv_nickname_label"
-            app:layout_constraintTop_toTopOf="@id/tv_nickname_label" />
 
-        <TextView
-            android:id="@+id/tv_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:text="@{data.nickname}"
-            android:textAppearance="@style/Body3M"
-            app:layout_constraintBottom_toBottomOf="@id/div_nickname"
-            app:layout_constraintStart_toEndOf="@id/div_nickname"
-            app:layout_constraintTop_toTopOf="@id/div_nickname"
-            tools:text="nickname" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_profile_image"
+                setCircleProfileImageUrl="@{data.profileImageUrl}"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:theme="@style/ShapeAppearanceOverlay.App.CircleImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/img_profile_empty" />
 
-        <TextView
-            android:id="@+id/tv_github_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/github_kr"
-            android:textAppearance="@style/Body3R"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"
-            app:layout_constraintStart_toStartOf="@id/tv_nickname_label"
-            app:layout_constraintTop_toBottomOf="@id/tv_nickname_label" />
+            <TextView
+                android:id="@+id/tv_nickname_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/nickname"
+                android:textAppearance="@style/Body3R"
+                app:layout_constraintBottom_toTopOf="@id/tv_github_label"
+                app:layout_constraintStart_toEndOf="@id/iv_profile_image"
+                app:layout_constraintTop_toTopOf="@id/iv_profile_image"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        <View
-            android:id="@+id/div_github"
-            android:layout_width="1dp"
-            android:layout_height="13dp"
-            android:layout_marginStart="7dp"
-            android:background="@color/gray_3"
-            app:layout_constraintBottom_toBottomOf="@id/tv_github_label"
-            app:layout_constraintStart_toEndOf="@id/tv_github_label"
-            app:layout_constraintTop_toTopOf="@id/tv_github_label" />
+            <View
+                android:id="@+id/div_nickname"
+                android:layout_width="1dp"
+                android:layout_height="13dp"
+                android:layout_marginStart="7dp"
+                android:background="@color/gray_3"
+                app:layout_constraintBottom_toBottomOf="@id/tv_nickname_label"
+                app:layout_constraintStart_toEndOf="@id/tv_nickname_label"
+                app:layout_constraintTop_toTopOf="@id/tv_nickname_label" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:text="@{`@` + data.githubId}"
-            android:textAppearance="@style/Body3M"
-            app:layout_constraintBottom_toBottomOf="@id/div_github"
-            app:layout_constraintStart_toEndOf="@id/div_github"
-            app:layout_constraintTop_toTopOf="@id/div_github"
-            tools:text="\@github_id" />
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="@{data.nickname}"
+                android:textAppearance="@style/Body3M"
+                app:layout_constraintBottom_toBottomOf="@id/div_nickname"
+                app:layout_constraintStart_toEndOf="@id/div_nickname"
+                app:layout_constraintTop_toTopOf="@id/div_nickname"
+                tools:text="nickname" />
+
+            <TextView
+                android:id="@+id/tv_github_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/github_kr"
+                android:textAppearance="@style/Body3R"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_profile_image"
+                app:layout_constraintStart_toStartOf="@id/tv_nickname_label"
+                app:layout_constraintTop_toBottomOf="@id/tv_nickname_label" />
+
+            <View
+                android:id="@+id/div_github"
+                android:layout_width="1dp"
+                android:layout_height="13dp"
+                android:layout_marginStart="7dp"
+                android:background="@color/gray_3"
+                app:layout_constraintBottom_toBottomOf="@id/tv_github_label"
+                app:layout_constraintStart_toEndOf="@id/tv_github_label"
+                app:layout_constraintTop_toTopOf="@id/tv_github_label" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:text="@{`@` + data.githubId}"
+                android:textAppearance="@style/Body3M"
+                app:layout_constraintBottom_toBottomOf="@id/div_github"
+                app:layout_constraintStart_toEndOf="@id/div_github"
+                app:layout_constraintTop_toTopOf="@id/div_github"
+                tools:text="\@github_id" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/div_horizontal_line"
@@ -103,7 +113,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="12dp"
             android:background="@color/gray_2"
-            app:layout_constraintTop_toBottomOf="@id/iv_profile_image" />
+            app:layout_constraintTop_toBottomOf="@id/cl_profile" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_progress"
