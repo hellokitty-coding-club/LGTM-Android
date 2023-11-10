@@ -70,5 +70,9 @@
             android:name=".main.notification.NotificationCenterActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".auth.ui.SystemMaintenanceActivity"
+            android:exported="false" />
+
     </application>
 </manifest>

@@ -24,7 +24,7 @@ interface MissionService {
     @GET("v1/home")
     suspend fun getHomeMission(): Response<BaseDTO<SduiDTO>>
 
-    @POST("v1/mission")
+    @POST("v2/mission")
     suspend fun postMission(
         @Body postMissionRequest: PostMissionRequestDTO
     ): Response<BaseDTO<PostMissionResponseDTO>>
