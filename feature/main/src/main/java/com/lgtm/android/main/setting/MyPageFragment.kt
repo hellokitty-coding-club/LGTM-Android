@@ -170,7 +170,6 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         if (intent.resolveActivity(requireActivity().packageManager) != null)
             startActivity(intent)
         else copyEmailToClipboard()
-
     }
 
     private fun copyEmailToClipboard() {

@@ -23,11 +23,24 @@ class SplashViewModel @Inject constructor(
     private val introRepository: IntroRepository,
     private val authRepository: AuthRepository,
 ) : BaseViewModel() {
+
+
     private val _minVersion = MutableLiveData<Int>()
     val minVersion: LiveData<Int> = _minVersion
 
     private val _latestVersion = MutableLiveData<Int>()
     val latestVersion: LiveData<Int> = _latestVersion
+
+    private val _isSystemMaintenance = MutableLiveData<Boolean>()
+    val isSystemMaintenance: LiveData<Boolean> = _isSystemMaintenance
+
+
+    private val _isDataAllSet = MediatorLiveData<Boolean>().apply { value = false }
+    val isDataAllSet: LiveData<Boolean> = _isDataAllSet
+
+    init {
+        addSourceOnIsDataAllSet()
+    }
 
     fun getAppVersionInfo() {
         viewModelScope.launch(lgtmErrorHandler) {
@@ -42,11 +55,22 @@ class SplashViewModel @Inject constructor(
         }
     }
 
-    private val _isDataAllSet = MediatorLiveData<Boolean>().apply { value = false }
-    val isDataAllSet: LiveData<Boolean> = _isDataAllSet
-
-    init {
-        addSourceOnIsDataAllSet()
+    fun checkSystemMaintenance() {
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 10
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+        remoteConfig.fetchAndActivate().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val isSystemMaintenance = remoteConfig.getBoolean(IS_SYSTEM_MAINTENANCE)
+                _isSystemMaintenance.value = isSystemMaintenance
+                Log.d(TAG, "checkSystemMaintenance: $isSystemMaintenance")
+            } else {
+                Log.e(TAG, "checkSystemMaintenance: fail")
+                _isSystemMaintenance.value = false
+            }
+        }
     }
 
     private fun addSourceOnIsDataAllSet() {
@@ -54,34 +78,19 @@ class SplashViewModel @Inject constructor(
             if (_isDataAllSet.value == true) return@addSource
             fetchIsDataAllSetState()
         }
-        _isDataAllSet.addSource(latestVersion) {
+        _isDataAllSet.addSource(isSystemMaintenance) {
             if (_isDataAllSet.value == true) return@addSource
             fetchIsDataAllSetState()
         }
     }
 
+    private fun fetchIsDataAllSetState() {
+        _isDataAllSet.value = minVersion.value != null && isSystemMaintenance.value != null
+    }
+
     fun removeSourceOnIsDataAllSet() {
         _isDataAllSet.removeSource(minVersion)
-        _isDataAllSet.removeSource(latestVersion)
-    }
-
-    private fun fetchIsDataAllSetState() {
-        _isDataAllSet.value = _minVersion.value != null && _isSystemMaintenance.value != null
-    }
-
-    private val _isSystemMaintenance = MutableLiveData<Boolean>()
-    val isSystemMaintenance: LiveData<Boolean> = _isSystemMaintenance
-
-    fun checkSystemMaintenance() {
-        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
-        val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 10
-        }
-        remoteConfig.setConfigSettingsAsync(configSettings)
-        remoteConfig.fetchAndActivate().addOnCompleteListener {
-            val isSystemMaintenance = remoteConfig.getBoolean(IS_SYSTEM_MAINTENANCE)
-            _isSystemMaintenance.postValue(isSystemMaintenance)
-        }
+        _isDataAllSet.removeSource(isSystemMaintenance)
     }
 
     fun isAutoLoginAvailable(): Boolean {
