@@ -141,7 +141,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
                 true
             }
 
-            id.edit_profile -> {
+            id.edit -> {
                 makeToastServiceUnderPreparation()
                 true
             }

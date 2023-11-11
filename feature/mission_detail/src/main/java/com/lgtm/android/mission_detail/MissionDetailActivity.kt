@@ -1,5 +1,6 @@
 package com.lgtm.android.mission_detail
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -202,8 +203,8 @@ class MissionDetailActivity :
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         return when (item.itemId) {
-            id.report, id.edit_profile -> {
-                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
+            id.report -> {
+                onPressCsCenter()
                 true
             }
 
@@ -212,7 +213,26 @@ class MissionDetailActivity :
                 true
             }
 
+            id.edit_text -> {
+                Toast.makeText(this, string.service_under_preparation, Toast.LENGTH_SHORT).show()
+                true
+            }
+
             else -> false
+        }
+    }
+
+    private fun onPressCsCenter() {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("hkcc.swm.official@gmail.com"))
+            putExtra(Intent.EXTRA_SUBJECT, "[LGTM] 미션 불편사항 신고")
+            putExtra(Intent.EXTRA_TEXT, missionDetailViewModel.getReportMessage())
+        }
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "메일을 보낼 수 없습니다", Toast.LENGTH_SHORT).show()
         }
     }
 
