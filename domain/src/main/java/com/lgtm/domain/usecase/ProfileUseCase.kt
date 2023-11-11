@@ -20,6 +20,10 @@ class ProfileUseCase @Inject constructor(
 ) {
 
     private lateinit var role: Role
+    private lateinit var nickname: String
+    private lateinit var github: String
+    private lateinit var introduction: String
+
 
     suspend fun fetchProfileInfo(userId: Int? = null): Result<List<Profile>> {
         return try {
@@ -27,6 +31,9 @@ class ProfileUseCase @Inject constructor(
                 ?: return Result.failure(Exception("response is null"))
 
             role = response.memberType ?: throw IllegalStateException("memberType is null")
+            nickname = response.nickname
+            github = response.githubId
+            introduction = response.introduction
 
             val profileList = when (response.memberType) {
                 Role.REVIEWEE -> getRevieweeProfile(response)
@@ -37,6 +44,10 @@ class ProfileUseCase @Inject constructor(
             Result.failure(e)
         }
     }
+
+    fun getNickname() = nickname
+    fun getGithub() = github
+    fun getIntroduction() = introduction
 
     private fun commonProfileList(response: ProfileVO) = listOf(
         ProfileImage(response.profileImageUrl, response.isMyProfile),
@@ -66,6 +77,7 @@ class ProfileUseCase @Inject constructor(
             *response.memberMissionHistory?.toTypedArray() ?: addEmptyView(),
         )
     }
+
     private fun getReviewerProfile(response: ProfileVO): List<Profile> {
         return commonProfileList(response) + listOf(
             ProfileTitleText(ProfileTitleTextType.CAREER),
