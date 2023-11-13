@@ -101,7 +101,7 @@ object SWMLogging {
         this.userID = userID
         this.region = region
         setLoggingService()
-        observable.throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(observer)
+        observable.throttleFirst(300, TimeUnit.MILLISECONDS).subscribe(observer)
     }
 
     private fun setLoggingService() {
