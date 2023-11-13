@@ -10,6 +10,7 @@ import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.domain.constants.Role
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
         setupViewModel()
         observeSelectedRole()
         setupNextButtonListener()
+        shotChooseRoleExposureLogging()
     }
 
     private fun observeSelectedRole() {
@@ -51,6 +53,15 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
 
     private fun navigateToCompanyNameFragment() {
         findNavController().navigate(R.id.action_chooseRoleFragment_to_companyNameFragment)
+    }
+
+    private fun shotChooseRoleExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("chooseRoleExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 4))
+            .build()
+        viewModel.shotSwmLogging(scheme)
     }
 
 }
