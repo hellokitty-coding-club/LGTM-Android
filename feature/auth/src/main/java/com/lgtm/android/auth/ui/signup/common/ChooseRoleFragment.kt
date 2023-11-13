@@ -61,7 +61,7 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 5))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
 }

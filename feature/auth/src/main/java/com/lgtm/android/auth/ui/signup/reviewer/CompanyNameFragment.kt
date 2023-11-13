@@ -61,6 +61,6 @@ class CompanyNameFragment :
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 6, "seniorStep" to 1))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 }

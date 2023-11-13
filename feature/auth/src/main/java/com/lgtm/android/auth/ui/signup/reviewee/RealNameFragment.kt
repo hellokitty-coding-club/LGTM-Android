@@ -82,7 +82,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 7, "juniorStep" to 2))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
 }

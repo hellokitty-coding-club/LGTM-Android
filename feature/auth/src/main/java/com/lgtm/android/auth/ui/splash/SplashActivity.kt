@@ -37,7 +37,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             .setEventLogName("splashExposure")
             .setScreenName(this.javaClass)
             .build()
-        viewModel?.shotSwmLogging(scheme)
+        splashViewModel.shotSwmLogging(scheme)
     }
 
     override fun onResume() {

@@ -34,7 +34,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 2))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
     private fun setupViewModel() {

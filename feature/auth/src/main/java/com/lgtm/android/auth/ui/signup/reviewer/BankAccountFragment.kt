@@ -120,7 +120,7 @@ class BankAccountFragment :
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 9, "seniorStep" to 4))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
 }

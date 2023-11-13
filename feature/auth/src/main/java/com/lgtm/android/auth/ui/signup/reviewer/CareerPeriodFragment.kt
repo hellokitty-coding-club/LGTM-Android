@@ -57,7 +57,7 @@ class CareerPeriodFragment :
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 8, "seniorStep" to 3))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
 }

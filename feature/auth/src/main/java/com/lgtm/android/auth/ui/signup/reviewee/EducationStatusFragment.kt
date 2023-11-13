@@ -99,6 +99,6 @@ class EducationStatusFragment :
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 6, "juniorStep" to 1))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 }

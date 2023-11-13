@@ -6,8 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lgtm.domain.entity.LgtmResponseException
-import com.lgtm.domain.logging.SwmCommonLoggingScheme
-import com.swm.logging.android.SWMLogging
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 abstract class BaseViewModel : ViewModel() {
@@ -31,9 +29,5 @@ abstract class BaseViewModel : ViewModel() {
                 )
             }
         }
-    }
-
-    fun shotSwmLogging(scheme : SwmCommonLoggingScheme) {
-        SWMLogging.logEvent(scheme)
     }
 }

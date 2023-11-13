@@ -61,7 +61,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
             .setEventLogName("termsServiceClick")
             .setScreenName(this.javaClass)
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
     private fun shotTermsPrivacyClickLogging() {
@@ -69,7 +69,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
             .setEventLogName("termsPrivacyClick")
             .setScreenName(this.javaClass)
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
     private fun openUrlInBrowser(url: String) {
@@ -135,7 +135,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 1))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
     companion object {

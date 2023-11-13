@@ -64,6 +64,6 @@ class IntroductionFragment :
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 4))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 }

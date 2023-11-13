@@ -62,6 +62,6 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 3))
             .build()
-        viewModel.shotSwmLogging(scheme)
+        signUpViewModel.shotSwmLogging(scheme)
     }
 }
