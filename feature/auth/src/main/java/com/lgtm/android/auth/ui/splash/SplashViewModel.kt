@@ -14,6 +14,8 @@ import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.IntroRepository
+import com.swm.logging.android.SWMLogging
+import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -95,6 +97,10 @@ class SplashViewModel @Inject constructor(
 
     fun isAutoLoginAvailable(): Boolean {
         return authRepository.isAutoLoginAvailable()
+    }
+
+    fun shotSplashExposureLogging(swmLoggingScheme: SWMLoggingScheme) {
+        SWMLogging.logEvent(swmLoggingScheme)
     }
 
     companion object {
