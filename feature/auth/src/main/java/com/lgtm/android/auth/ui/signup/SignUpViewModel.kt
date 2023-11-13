@@ -23,6 +23,8 @@ import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
 import com.lgtm.domain.entity.response.SignUpResponseVO
 import com.lgtm.domain.repository.AuthRepository
+import com.swm.logging.android.SWMLogging
+import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -419,6 +421,10 @@ class SignUpViewModel @Inject constructor(
                 _signUpState.value = NetworkState.Failure(errorMessage)
             }
         }
+    }
+
+    fun shotSignUpExposureLogging(scheme : SWMLoggingScheme) {
+        SWMLogging.logEvent(scheme)
     }
 
     companion object {
