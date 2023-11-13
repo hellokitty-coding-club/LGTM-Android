@@ -10,6 +10,7 @@ import com.lgtm.android.auth.databinding.FragmentCareerPeriodBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 
 
 class CareerPeriodFragment :
@@ -23,6 +24,7 @@ class CareerPeriodFragment :
         setupViewModel()
         onCareerPeriodChanged()
         setupNextButtonListener()
+        shotCareerPeriodExposureLogging()
     }
 
 
@@ -47,6 +49,15 @@ class CareerPeriodFragment :
 
     private fun navigateToBankAccountFragment() {
         findNavController().navigate(R.id.action_careerPeriodFragment_to_bankAccountFragment)
+    }
+
+    private fun shotCareerPeriodExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("careerExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 8, "seniorStep" to 3))
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
 }

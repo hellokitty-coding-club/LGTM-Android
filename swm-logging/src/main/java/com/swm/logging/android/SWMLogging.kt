@@ -72,7 +72,7 @@ object SWMLogging {
         observable.onNext(swmLoggingScheme)
     }
 
-    suspend fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Response<BaseDTO> {
+    private suspend fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Response<BaseDTO> {
         checkInitialized()
         return loggingService.postLogging(serverPath, swmLoggingScheme)
     }
@@ -101,7 +101,7 @@ object SWMLogging {
         this.userID = userID
         this.region = region
         setLoggingService()
-        observable.throttleFirst(500, TimeUnit.MILLISECONDS).subscribe(observer)
+        observable.throttleFirst(300, TimeUnit.MILLISECONDS).subscribe(observer)
     }
 
     private fun setLoggingService() {

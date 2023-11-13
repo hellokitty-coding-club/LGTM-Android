@@ -11,6 +11,7 @@ import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.TechTagChipGroup
 import com.lgtm.android.common_ui.util.TechTagTheme
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +26,7 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
         setChips()
         observeTechTagList()
         setupNextButtonListener()
+        shotTechTagExposureLogging()
     }
 
     private fun setupViewModel() {
@@ -52,5 +54,14 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
 
     private fun navigateToIntroductionFragment() {
         findNavController().navigate(R.id.action_techTagFragment_to_introductionFragment)
+    }
+
+    private fun shotTechTagExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("techTagExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 3))
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
     }
 }

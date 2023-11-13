@@ -9,6 +9,7 @@ import com.lgtm.android.auth.databinding.FragmentNicknameBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -24,6 +25,16 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
         setupEditText()
         onNicknameChanged()
         setupNextButtonListener()
+        shotNickNameExposureLogging()
+    }
+
+    private fun shotNickNameExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("nicknameExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 2))
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
     private fun setupViewModel() {
