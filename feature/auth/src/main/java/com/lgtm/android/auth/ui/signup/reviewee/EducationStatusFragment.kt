@@ -97,7 +97,7 @@ class EducationStatusFragment :
         val scheme = SwmCommonLoggingScheme.Builder()
             .setEventLogName("educationStatusExposure")
             .setScreenName(this.javaClass)
-            .setLogData(mapOf("signUpStep" to 5, "juniorStep" to 1))
+            .setLogData(mapOf("signUpStep" to 6, "juniorStep" to 1))
             .build()
         viewModel.shotSwmLogging(scheme)
     }

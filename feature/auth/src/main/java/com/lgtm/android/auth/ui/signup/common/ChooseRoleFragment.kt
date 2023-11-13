@@ -59,7 +59,7 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
         val scheme = SwmCommonLoggingScheme.Builder()
             .setEventLogName("chooseRoleExposure")
             .setScreenName(this.javaClass)
-            .setLogData(mapOf("signUpStep" to 4))
+            .setLogData(mapOf("signUpStep" to 5))
             .build()
         viewModel.shotSwmLogging(scheme)
     }

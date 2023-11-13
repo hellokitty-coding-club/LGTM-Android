@@ -23,8 +23,6 @@ import com.lgtm.domain.entity.request.SignUpSeniorRequestVO
 import com.lgtm.domain.entity.response.MemberDataDTO
 import com.lgtm.domain.entity.response.SignUpResponseVO
 import com.lgtm.domain.repository.AuthRepository
-import com.swm.logging.android.SWMLogging
-import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -314,14 +312,14 @@ class SignUpViewModel @Inject constructor(
     }
 
     private val _accountNumber = MutableLiveData<String>()
-    private val accountNumber: LiveData<String> = _accountNumber
+    val accountNumber: LiveData<String> = _accountNumber
 
     fun setAccountNumber(number: String) {
         _accountNumber.value = number
     }
 
     private val _accountHolder = MutableLiveData<String>()
-    private val accountHolder: LiveData<String> = _accountHolder
+    val accountHolder: LiveData<String> = _accountHolder
 
     fun setAccountHolder(holder: String) {
         _accountHolder.value = holder
@@ -423,8 +421,14 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    fun shotSignUpExposureLogging(scheme : SWMLoggingScheme) {
-        SWMLogging.logEvent(scheme)
+    fun clearSignUpState() {
+        _signUpState.value = NetworkState.Init
+    }
+
+    private val _selectedBankIdx = MutableLiveData<Int>()
+    val selectedBankIdx: LiveData<Int> = _selectedBankIdx
+    fun setSelectedBankIdx(position: Int) {
+        _selectedBankIdx.value = position
     }
 
     companion object {

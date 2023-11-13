@@ -9,6 +9,7 @@ import com.lgtm.android.auth.databinding.FragmentCompanyNameBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 
 class CompanyNameFragment :
     BaseFragment<FragmentCompanyNameBinding>(R.layout.fragment_company_name) {
@@ -22,6 +23,7 @@ class CompanyNameFragment :
         setupEditText()
         onCompanyNameChanged()
         setupNextButtonListener()
+        shotCompanyNameExposureLogging()
     }
 
     private fun setupViewModel() {
@@ -51,5 +53,14 @@ class CompanyNameFragment :
 
     private fun navigateToPositionFragment() {
         findNavController().navigate(R.id.action_companyNameFragment_to_positionFragment)
+    }
+
+    private fun shotCompanyNameExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("companyNameExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 6, "seniorStep" to 1))
+            .build()
+        viewModel.shotSwmLogging(scheme)
     }
 }

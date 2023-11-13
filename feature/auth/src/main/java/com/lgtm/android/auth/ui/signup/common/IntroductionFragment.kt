@@ -62,7 +62,7 @@ class IntroductionFragment :
         val scheme = SwmCommonLoggingScheme.Builder()
             .setEventLogName("introductionExposure")
             .setScreenName(this.javaClass)
-            .setLogData(mapOf("signUpStep" to 3))
+            .setLogData(mapOf("signUpStep" to 4))
             .build()
         viewModel.shotSwmLogging(scheme)
     }

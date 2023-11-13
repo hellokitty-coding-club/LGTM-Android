@@ -66,6 +66,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
 
                 is NetworkState.Failure -> {
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                    signUpViewModel.clearSignUpState()
                 }
             }
         }
@@ -79,7 +80,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
         val scheme = SwmCommonLoggingScheme.Builder()
             .setEventLogName("realNameExposure")
             .setScreenName(this.javaClass)
-            .setLogData(mapOf("signUpStep" to 6, "juniorStep" to 2))
+            .setLogData(mapOf("signUpStep" to 7, "juniorStep" to 2))
             .build()
         viewModel.shotSwmLogging(scheme)
     }
