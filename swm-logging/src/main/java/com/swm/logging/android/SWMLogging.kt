@@ -72,7 +72,7 @@ object SWMLogging {
         observable.onNext(swmLoggingScheme)
     }
 
-    suspend fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Response<BaseDTO> {
+    private suspend fun shotLogging(swmLoggingScheme: SWMLoggingScheme): Response<BaseDTO> {
         checkInitialized()
         return loggingService.postLogging(serverPath, swmLoggingScheme)
     }

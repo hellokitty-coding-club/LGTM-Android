@@ -13,7 +13,7 @@ import com.lgtm.android.auth.databinding.ActivitySplashBinding
 import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.auth.ui.SystemMaintenanceActivity
 import com.lgtm.android.common_ui.base.BaseActivity
-import com.lgtm.domain.logging.CommonLoggingScheme
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +33,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun shotSplashExposureLogging() {
-        val scheme = CommonLoggingScheme.Builder()
+        val scheme = SwmCommonLoggingScheme.Builder()
             .setEventLogName("splashExposure")
             .setScreenName(this.javaClass)
             .build()

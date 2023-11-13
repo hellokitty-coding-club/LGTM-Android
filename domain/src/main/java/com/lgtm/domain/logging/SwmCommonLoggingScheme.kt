@@ -1,14 +1,14 @@
 package com.lgtm.domain.logging
 
-import com.swm.logging.android.logging_scheme.ClickScheme
+import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import java.lang.reflect.Type
 
-class CommonLoggingScheme(
+class SwmCommonLoggingScheme(
     eventLogName: String,
     screenName: String,
     logVersion: String,
     logData: Map<String, Any>,
-) : ClickScheme() {
+) : SWMLoggingScheme() {
 
     init {
         setLoggingScheme(
@@ -52,11 +52,11 @@ class CommonLoggingScheme(
             return this
         }
 
-        fun build(): CommonLoggingScheme {
+        fun build(): SwmCommonLoggingScheme {
             check(::eventLogName.isInitialized) { "eventLogName is not initialized" }
             check(::screenName.isInitialized) { "screenName is not initialized" }
 
-            return CommonLoggingScheme(
+            return SwmCommonLoggingScheme(
                 eventLogName,
                 screenName,
                 logVersion,
