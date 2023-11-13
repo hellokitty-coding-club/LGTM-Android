@@ -32,6 +32,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
             .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .build()
-        signUpViewModel.shotSignUpExposureLogging(scheme)
+        viewModel?.shotSwmLogging(scheme)
     }
 }
