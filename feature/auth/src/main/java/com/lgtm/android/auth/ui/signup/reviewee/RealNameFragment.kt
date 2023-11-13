@@ -1,17 +1,16 @@
 package com.lgtm.android.auth.ui.signup.reviewee
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentRealNameBinding
-import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 
 
 class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment_real_name) {
@@ -26,6 +25,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
         onRealNameChanged()
         setupCompleteButtonListener()
         observeSignUpStatus()
+        shotRealNameExposureLogging()
     }
 
     private fun setupViewModel() {
@@ -75,9 +75,13 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
         lgtmNavigator.navigateToMain(requireContext())
     }
 
-    private fun navigateToSignInActivity() {
-        startActivity(Intent(requireContext(), SignInActivity::class.java))
+    private fun shotRealNameExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("realNameExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 6, "juniorStep" to 2))
+            .build()
+        viewModel.shotSwmLogging(scheme)
     }
-
 
 }
