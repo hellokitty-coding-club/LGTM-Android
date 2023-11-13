@@ -11,6 +11,7 @@ import com.lgtm.android.auth.databinding.FragmentTermsBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +26,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
         setUpCheckBoxListeners()
         setUpTextViewListener()
         setupNextButtonListener()
+        shotTermsExposureLogging()
     }
 
     private fun setupNextButtonListener() {
@@ -45,11 +47,29 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
 
     private fun setUpTextViewListener() {
         binding.tvTermsService.setOnThrottleClickListener {
+            shotTermsServiceClickLogging()
             openUrlInBrowser(TERMS_SERVICE_URL)
         }
         binding.tvTermsPrivacy.setOnThrottleClickListener {
+            shotTermsPrivacyClickLogging()
             openUrlInBrowser(TERMS_PRIVACY_URL)
         }
+    }
+
+    private fun shotTermsServiceClickLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("termsServiceClick")
+            .setScreenName(this.javaClass)
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
+    }
+
+    private fun shotTermsPrivacyClickLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("termsPrivacyClick")
+            .setScreenName(this.javaClass)
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
     private fun openUrlInBrowser(url: String) {
@@ -88,7 +108,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
         }
     }
 
-    private fun toggleTermsAll(){
+    private fun toggleTermsAll() {
         binding.cbTermsAll.isChecked = !binding.cbTermsAll.isChecked
     }
 
@@ -109,12 +129,22 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
         signUpViewModel.setIsAgreeWithTerms(isAgreeWithTerms)
     }
 
+    private fun shotTermsExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("termsExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 1))
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
+    }
+
     companion object {
-        // todo : url 수정
         // 약관 및 정책
-        const val TERMS_SERVICE_URL = "https://www.naver.com"
+        const val TERMS_SERVICE_URL =
+            "https://www.notion.so/team-hkcc/c4f56b4e6e1b46e89c494e5b3919ed8c?pvs=4"
 
         // 개인정보 처리 방침
-        const val TERMS_PRIVACY_URL = "https://www.google.com"
+        const val TERMS_PRIVACY_URL =
+            "https://www.notion.so/team-hkcc/31a6b7a98d1f4d148bb05cc826d0c9aa?pvs=4"
     }
 }

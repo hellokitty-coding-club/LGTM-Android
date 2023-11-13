@@ -14,6 +14,7 @@ import com.lgtm.android.auth.ui.signup.SignUpActivity
 import com.lgtm.android.common_ui.base.BaseActivity
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,6 +32,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
         initClickListener()
         observeGithubLoginResponse()
         observePatchDeviceTokenStatus()
+        shotSignInExposureLogging()
     }
 
     private fun setAnimationOnGithubButton() {
@@ -117,6 +119,15 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     private fun makeToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+    private fun shotSignInExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("signInExposure")
+            .setScreenName(this.javaClass)
+            .build()
+        signInViewModel.shotSignInExposureLogging(scheme)
+    }
+
 
     companion object {
         const val MEMBER_DATA = "memberData"
