@@ -6,7 +6,6 @@ import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.ActivitySignUpBinding
 import com.lgtm.android.auth.ui.SignInActivity.Companion.MEMBER_DATA
 import com.lgtm.android.common_ui.base.BaseActivity
-import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,7 +14,6 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getExtraData()
-        shotSignUpExposureLogging()
     }
 
     override fun initializeViewModel() {
@@ -25,13 +23,5 @@ class SignUpActivity : BaseActivity<ActivitySignUpBinding>(R.layout.activity_sig
     private fun getExtraData() {
         val memberDataJson = intent.getStringExtra(MEMBER_DATA) ?: return
         signUpViewModel.parseAndSetMemberDataJson(memberDataJson)
-    }
-
-    private fun shotSignUpExposureLogging() {
-        val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("signUpExposure")
-            .setScreenName(this.javaClass)
-            .build()
-        viewModel?.shotSwmLogging(scheme)
     }
 }

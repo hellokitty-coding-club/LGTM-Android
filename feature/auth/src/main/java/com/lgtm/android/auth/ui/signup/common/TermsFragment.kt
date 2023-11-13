@@ -58,7 +58,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
 
     private fun shotTermsServiceClickLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("TermsServiceClick")
+            .setEventLogName("termsServiceClick")
             .setScreenName(this.javaClass)
             .build()
         viewModel.shotSwmLogging(scheme)
@@ -66,7 +66,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
 
     private fun shotTermsPrivacyClickLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("TermsPrivacyClick")
+            .setEventLogName("termsPrivacyClick")
             .setScreenName(this.javaClass)
             .build()
         viewModel.shotSwmLogging(scheme)
@@ -131,7 +131,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
 
     private fun shotTermsExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("TermsExposure")
+            .setEventLogName("termsExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 1))
             .build()

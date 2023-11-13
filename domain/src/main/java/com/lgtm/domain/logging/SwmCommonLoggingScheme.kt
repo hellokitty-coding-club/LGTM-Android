@@ -23,7 +23,7 @@ class SwmCommonLoggingScheme(
         private lateinit var eventLogName: String
         private lateinit var screenName: String
         private var logVersion: String = "1"
-        private var map = mutableMapOf<String, Any>()
+        private var map = mapOf<String, Any>()
 
         fun setEventLogName(eventLogName: String): Builder {
             this.eventLogName = eventLogName
@@ -43,7 +43,7 @@ class SwmCommonLoggingScheme(
 
 
         fun setLogData(map: Map<String, Any>): Builder {
-            this.map = map.toMutableMap()
+            this.map = map
             return this
         }
 
