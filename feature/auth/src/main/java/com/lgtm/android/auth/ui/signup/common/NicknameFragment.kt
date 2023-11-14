@@ -30,7 +30,7 @@ class NicknameFragment : BaseFragment<FragmentNicknameBinding>(R.layout.fragment
 
     private fun shotNickNameExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("nicknameExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 2))
             .build()

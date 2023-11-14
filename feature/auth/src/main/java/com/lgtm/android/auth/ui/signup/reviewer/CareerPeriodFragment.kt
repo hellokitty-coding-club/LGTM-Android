@@ -53,7 +53,7 @@ class CareerPeriodFragment :
 
     private fun shotCareerPeriodExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("careerExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 8, "seniorStep" to 3))
             .build()

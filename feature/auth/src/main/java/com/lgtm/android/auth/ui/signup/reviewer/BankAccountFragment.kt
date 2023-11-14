@@ -116,7 +116,7 @@ class BankAccountFragment :
 
     private fun shotBankAccountExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("bankAccountExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 9, "seniorStep" to 4))
             .build()

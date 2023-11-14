@@ -58,7 +58,7 @@ class TechTagFragment : BaseFragment<FragmentTechTagBinding>(R.layout.fragment_t
 
     private fun shotTechTagExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("techTagExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 3))
             .build()
