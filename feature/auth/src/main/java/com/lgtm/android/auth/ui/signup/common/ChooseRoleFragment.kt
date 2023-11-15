@@ -57,7 +57,7 @@ class ChooseRoleFragment : BaseFragment<FragmentChooseRoleBinding>(R.layout.frag
 
     private fun shotChooseRoleExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("chooseRoleExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 5))
             .build()
