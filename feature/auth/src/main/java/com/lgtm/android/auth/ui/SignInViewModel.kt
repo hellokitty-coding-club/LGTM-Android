@@ -13,6 +13,8 @@ import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.domain.entity.LgtmResponseException
 import com.lgtm.domain.entity.response.GithubLoginResponse
 import com.lgtm.domain.repository.AuthRepository
+import com.lgtm.domain.repository.LoggingRepository
+import com.swm.logging.android.logging_scheme.SWMLoggingScheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val authRepository: AuthRepository,
+    private val loggingRepository: LoggingRepository
 ) : BaseViewModel() {
 
     private val deviceToken = MutableLiveData<String?>()
@@ -85,5 +88,9 @@ class SignInViewModel @Inject constructor(
                     _patchDeviceTokenState.value = NetworkState.Failure(errorMessage)
                 }
         }
+    }
+
+    fun shotSignInExposureLogging(scheme: SWMLoggingScheme) {
+        loggingRepository.shotSwmLogging(scheme)
     }
 }

@@ -17,6 +17,7 @@ import com.lgtm.android.common_ui.R.style
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.domain.constants.EducationStatus
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 
 
 class EducationStatusFragment :
@@ -31,6 +32,7 @@ class EducationStatusFragment :
         setupViewModel()
         fetchEducationStatus()
         setupNextButtonListener()
+        shotEducationStatusExposureLogging()
     }
 
     private fun setupRadioButtons() {
@@ -89,5 +91,14 @@ class EducationStatusFragment :
 
     private fun navigateToRealNameActivity() {
         findNavController().navigate(R.id.action_educationStatusFragment_to_realNameFragment)
+    }
+
+    private fun shotEducationStatusExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("signUpExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 6, "juniorStep" to 1))
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
     }
 }

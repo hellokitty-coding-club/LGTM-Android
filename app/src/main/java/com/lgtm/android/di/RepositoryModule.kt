@@ -2,11 +2,13 @@ package com.lgtm.android.di
 
 import com.lgtm.android.data.repository.AuthRepositoryImpl
 import com.lgtm.android.data.repository.IntroRepositoryImpl
+import com.lgtm.android.data.repository.LoggingRepositoryImpl
 import com.lgtm.android.data.repository.MissionRepositoryImpl
 import com.lgtm.android.data.repository.NotificationRepositoryImpl
 import com.lgtm.android.data.repository.ProfileRepositoryImpl
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.IntroRepository
+import com.lgtm.domain.repository.LoggingRepository
 import com.lgtm.domain.repository.MissionRepository
 import com.lgtm.domain.repository.NotificationRepository
 import com.lgtm.domain.repository.ProfileRepository
@@ -43,5 +45,10 @@ interface RepositoryModule {
     fun bindsNotificationRepository(
         notificationRepositoryImpl: NotificationRepositoryImpl
     ): NotificationRepository
+
+    @Binds
+    fun bindsLoggingRepository(
+        loggingRepositoryImpl: LoggingRepositoryImpl
+    ): LoggingRepository
 
 }

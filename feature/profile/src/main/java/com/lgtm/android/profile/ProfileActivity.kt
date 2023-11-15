@@ -1,5 +1,6 @@
 package com.lgtm.android.profile
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -137,16 +138,30 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
     override fun onMenuItemClick(item: MenuItem): Boolean {
         return when (item.itemId) {
             id.report -> {
-                makeToastServiceUnderPreparation()
+                onClickReport()
                 true
             }
 
-            id.edit_profile -> {
+            id.edit -> {
                 makeToastServiceUnderPreparation()
                 true
             }
 
             else -> false
+        }
+    }
+
+    private fun onClickReport() {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf("hkcc.swm.official@gmail.com"))
+            putExtra(Intent.EXTRA_SUBJECT, "[LGTM] 사용자 프로필 신고")
+            putExtra(Intent.EXTRA_TEXT, profileViewModel.getReportMessage())
+        }
+        try {
+            startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(this, "메일을 보낼 수 없습니다", Toast.LENGTH_SHORT).show()
         }
     }
 

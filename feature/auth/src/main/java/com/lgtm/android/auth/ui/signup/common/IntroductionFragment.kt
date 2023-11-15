@@ -9,6 +9,7 @@ import com.lgtm.android.auth.databinding.FragmentIntroductionBinding
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +25,7 @@ class IntroductionFragment :
         setupEditText()
         onIntroductionChanged()
         setupNextButtonListener()
+        shotIntroductionExposureLogging()
     }
 
     private fun setupViewModel() {
@@ -54,5 +56,14 @@ class IntroductionFragment :
 
     private fun navigateToSelectRoleFragment() {
         findNavController().navigate(R.id.action_introductionFragment_to_chooseRoleFragment)
+    }
+
+    private fun shotIntroductionExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("signUpExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 4))
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
     }
 }

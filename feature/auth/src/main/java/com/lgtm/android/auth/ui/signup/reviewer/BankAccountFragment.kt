@@ -1,7 +1,8 @@
 package com.lgtm.android.auth.ui.signup.reviewer
 
-import android.content.Intent
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
@@ -9,7 +10,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.lgtm.android.auth.R
 import com.lgtm.android.auth.databinding.FragmentBankAccountBinding
-import com.lgtm.android.auth.ui.SignInActivity
 import com.lgtm.android.auth.ui.signup.SignUpViewModel
 import com.lgtm.android.common_ui.R.layout
 import com.lgtm.android.common_ui.adapter.BankSpinnerAdapter
@@ -17,10 +17,12 @@ import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.constant.Bank
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
+import com.lgtm.domain.logging.SwmCommonLoggingScheme
 
 class BankAccountFragment :
     BaseFragment<FragmentBankAccountBinding>(R.layout.fragment_bank_account) {
     private val signUpViewModel by activityViewModels<SignUpViewModel>()
+    private lateinit var bankAdapter : BankSpinnerAdapter
     override fun initializeViewModel() {
         viewModel = signUpViewModel
     }
@@ -29,14 +31,23 @@ class BankAccountFragment :
         setupViewModel()
         onAccountNumberChanged()
         setupBankSpinner()
+        setEnteredData()
         onBankSelectedListener()
         setupCompleteButtonListener()
-        observeSignUpStatus()
         onAccountHolderChanged()
+        observeSignUpStatus()
+        shotBankAccountExposureLogging()
     }
 
     private fun setupViewModel() {
         binding.viewModel = signUpViewModel
+    }
+
+    private fun setEnteredData(){
+        Log.d(TAG, "setEnteredData: ${signUpViewModel.selectedBankIdx.value}")
+        binding.spBank.setSelection(signUpViewModel.selectedBankIdx.value ?: 0)
+        binding.etBankAccount.setText(signUpViewModel.accountNumber.value)
+        binding.etAccountHolder.setText(signUpViewModel.accountHolder.value)
     }
 
     private fun onAccountNumberChanged() {
@@ -47,8 +58,7 @@ class BankAccountFragment :
     }
 
     private fun setupBankSpinner() {
-        val bankAdapter =
-            BankSpinnerAdapter(requireContext(), layout.item_bank_spinner, signUpViewModel.bankList)
+        bankAdapter = BankSpinnerAdapter(requireContext(), layout.item_bank_spinner, signUpViewModel.bankList)
         binding.spBank.adapter = bankAdapter
     }
 
@@ -58,6 +68,7 @@ class BankAccountFragment :
                 parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
                 if (position == 0) return // Pos 0 Indicate Hint
+                signUpViewModel.setSelectedBankIdx(position)
                 signUpViewModel.setSelectedBank(signUpViewModel.bankList[position] as Bank)
                 signUpViewModel.setIsAccountInfoValid()
             }
@@ -93,6 +104,7 @@ class BankAccountFragment :
 
                 is NetworkState.Failure -> {
                     Toast.makeText(requireContext(), it.msg, Toast.LENGTH_SHORT).show()
+                    signUpViewModel.clearSignUpState()
                 }
             }
         }
@@ -102,8 +114,13 @@ class BankAccountFragment :
         lgtmNavigator.navigateToMain(requireContext())
     }
 
-    private fun navigateToSignInActivity() {
-        startActivity(Intent(requireContext(), SignInActivity::class.java))
+    private fun shotBankAccountExposureLogging() {
+        val scheme = SwmCommonLoggingScheme.Builder()
+            .setEventLogName("signUpExposure")
+            .setScreenName(this.javaClass)
+            .setLogData(mapOf("signUpStep" to 9, "seniorStep" to 4))
+            .build()
+        signUpViewModel.shotSwmLogging(scheme)
     }
 
 }
