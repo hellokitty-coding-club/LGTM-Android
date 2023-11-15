@@ -78,7 +78,7 @@ class RealNameFragment : BaseFragment<FragmentRealNameBinding>(R.layout.fragment
 
     private fun shotRealNameExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("realNameExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 7, "juniorStep" to 2))
             .build()

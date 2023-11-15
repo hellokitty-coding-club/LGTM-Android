@@ -57,7 +57,7 @@ class CompanyNameFragment :
 
     private fun shotCompanyNameExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("companyNameExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 6, "seniorStep" to 1))
             .build()

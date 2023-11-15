@@ -131,7 +131,7 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
 
     private fun shotTermsExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("termsExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 1))
             .build()

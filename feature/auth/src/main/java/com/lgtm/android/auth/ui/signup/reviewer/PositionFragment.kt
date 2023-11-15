@@ -57,7 +57,7 @@ class PositionFragment :
 
     private fun shotPositionExposureLogging() {
         val scheme = SwmCommonLoggingScheme.Builder()
-            .setEventLogName("positionExposure")
+            .setEventLogName("signUpExposure")
             .setScreenName(this.javaClass)
             .setLogData(mapOf("signUpStep" to 7, "seniorStep" to 2))
             .build()
