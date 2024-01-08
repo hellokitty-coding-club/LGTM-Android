@@ -21,7 +21,7 @@ import retrofit2.http.Query
 
 interface MissionService {
 
-    @GET("v1/home")
+    @GET("v2/home")
     suspend fun getHomeMission(): Response<BaseDTO<SduiDTO>>
 
     @POST("v2/mission")
