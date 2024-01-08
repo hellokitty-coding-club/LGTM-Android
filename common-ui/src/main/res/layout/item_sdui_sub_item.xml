@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.lgtm.domain.server_drive_ui.SectionSubItemVO" />
+
+        <variable
+            name="theme"
+            type="com.lgtm.domain.server_drive_ui.SduiTheme" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        setItemLayerBackground="@{theme}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@drawable/rectangle_white_stroke_1_gray_2_side">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_mission_recommend"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rectangle_gray_1_stroke_gray_3_radius_10"
+            android:drawableEnd="@drawable/ic_next"
+            android:drawableTint="@color/gray_4"
+            android:gravity="center_vertical"
+            android:paddingVertical="15dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="10dp"
+            android:stateListAnimator="@null"
+            android:textAppearance="@style/Body2"
+            android:text="@{data.text}"
+            tools:text="리뷰어님, 이런 미션 만들어주세요!"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
