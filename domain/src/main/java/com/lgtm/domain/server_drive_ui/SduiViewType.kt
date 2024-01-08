@@ -9,6 +9,7 @@ enum class SduiViewType(
     EMPTY("empty", SectionEmptyVO::class.java),
     CLOSER("sectionCloser", SectionCloserVO::class.java),
     ITEM("sectionItem", SectionItemVO::class.java),
+    SUBITEM("sectionSubItem", SectionSubItemVO::class.java),
     UNKNOWN("sectionUnknown", SectionUnknownVO::class.java);
 
     companion object {
