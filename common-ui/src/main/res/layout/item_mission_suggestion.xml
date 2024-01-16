@@ -3,6 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.lgtm.domain.entity.response.SuggestionVO" />
+
+        <variable
+            name="createdDate"
+            type="String" />
+
+        <variable
+            name="createdTime"
+            type="String" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,6 +35,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/black"
+            android:text="@{data.title}"
             tools:text="저기요저기요저기요저기요저기요저기요저기요저기요저기요저기요저기요저기요저기요저기요저기요저기..."
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/cl_detail_info"/>
@@ -47,6 +64,7 @@
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:layout_marginTop="10dp"
+                android:text="@{data.description}"
                 tools:text="난.. 하고 싶은게 있는데.. 난.. 하고 싶은게 있는데.. 난.. 하고 싶은게 있는데.. 난.. 하고 싶은게 있는데.. 난.. 하고 싶은게 있는데.. 난.. 하고 싶은게 있는데.. 난.. 하고 싶은게 있는데.. "
                 app:layout_constraintTop_toBottomOf="@id/view_detail_divider" />
 
@@ -64,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Description"
                     android:textColor="@color/gray_5"
+                    android:text="@{createdDate}"
                     tools:text="2024.01.15"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -88,11 +107,12 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Description"
                     android:textColor="@color/gray_5"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@{createdTime}"
+                    tools:text="오후 1:03"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/view_date_time_divider"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="오후 1:03" />
+                    app:layout_constraintStart_toEndOf="@id/view_date_time_divider"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
