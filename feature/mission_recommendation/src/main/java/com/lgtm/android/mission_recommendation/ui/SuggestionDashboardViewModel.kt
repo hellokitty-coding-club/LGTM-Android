@@ -8,7 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
+import com.lgtm.domain.constants.Role
 import com.lgtm.domain.entity.response.MissionSuggestionVO
+import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.SuggestionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,8 +18,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SuggestionDashboardViewModel @Inject constructor(
-    private val suggestionRepository: SuggestionRepository
+    private val suggestionRepository: SuggestionRepository,
+    authRepository: AuthRepository
 ): BaseViewModel() {
+
+    val suggestionBtnVisibility: Boolean = authRepository.getMemberType() == Role.REVIEWEE
 
     private val _missionSuggestion = MutableLiveData<MissionSuggestionVO>()
     val missionSuggestion: LiveData<MissionSuggestionVO> = _missionSuggestion

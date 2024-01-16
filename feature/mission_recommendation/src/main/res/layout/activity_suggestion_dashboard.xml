@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.lgtm.android.mission_recommendation.ui.SuggestionDashboardViewModel" />
@@ -120,6 +122,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="25dp"
             android:elevation="10dp"
+            android:visibility="@{viewModel.suggestionBtnVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
