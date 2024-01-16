@@ -31,14 +31,14 @@
             android:text="@{likeNum}"
             tools:text="23" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <androidx.appcompat.widget.AppCompatImageView
+            setLikeImage="@{isLiked}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="6dp"
             android:layout_marginVertical="7dp"
-            android:button="@drawable/selector_lgtm_like_icon"
-            tools:checked="true"/>
+            tools:src="@drawable/ic_like_selected"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
