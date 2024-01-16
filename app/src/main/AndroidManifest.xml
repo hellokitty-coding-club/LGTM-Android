@@ -74,5 +74,9 @@
             android:name=".auth.ui.SystemMaintenanceActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".mission_recommendation.ui.SuggestionDashboardActivity"
+            android:exported="false" />
+
     </application>
 </manifest>

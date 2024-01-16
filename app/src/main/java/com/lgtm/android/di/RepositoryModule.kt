@@ -6,12 +6,14 @@ import com.lgtm.android.data.repository.LoggingRepositoryImpl
 import com.lgtm.android.data.repository.MissionRepositoryImpl
 import com.lgtm.android.data.repository.NotificationRepositoryImpl
 import com.lgtm.android.data.repository.ProfileRepositoryImpl
+import com.lgtm.android.data.repository.SuggestionRepositoryImpl
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.IntroRepository
 import com.lgtm.domain.repository.LoggingRepository
 import com.lgtm.domain.repository.MissionRepository
 import com.lgtm.domain.repository.NotificationRepository
 import com.lgtm.domain.repository.ProfileRepository
+import com.lgtm.domain.repository.SuggestionRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -50,5 +52,10 @@ interface RepositoryModule {
     fun bindsLoggingRepository(
         loggingRepositoryImpl: LoggingRepositoryImpl
     ): LoggingRepository
+
+    @Binds
+    fun bindsSuggestionRepository(
+        suggestionRepositoryImpl: SuggestionRepositoryImpl
+    ): SuggestionRepository
 
 }

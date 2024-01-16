@@ -151,3 +151,12 @@ fun AppCompatImageView.setBookmarkImage(isBookmarked: Boolean) {
         setImageResource(R.drawable.ic_bookmark_unselected)
     }
 }
+
+@BindingAdapter("setLikeImage")
+fun AppCompatImageView.setLikeImage(isLiked: Boolean) {
+    if (isLiked) {
+        setImageResource(R.drawable.ic_like_selected)
+    } else {
+        setImageResource(R.drawable.ic_like_unselected)
+    }
+}
