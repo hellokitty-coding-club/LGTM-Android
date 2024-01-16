@@ -156,7 +156,7 @@
             android:id="@+id/cl_dashboard_empty"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.dashBoardEmptyVisibility ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_header">
 
