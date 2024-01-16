@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.lgtm.domain.entity.response.SuggestionVO" />
+            type="com.lgtm.domain.mission_suggestion.SuggestionVO" />
 
         <variable
             name="createdDate"

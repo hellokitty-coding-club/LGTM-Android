@@ -1,6 +1,6 @@
 package com.lgtm.android.data.model.response
 
-import com.lgtm.domain.entity.response.MissionSuggestionVO
+import com.lgtm.domain.mission_suggestion.MissionSuggestionVO
 
 data class MissionSuggestionDTO(
     val infoTitle: String?,

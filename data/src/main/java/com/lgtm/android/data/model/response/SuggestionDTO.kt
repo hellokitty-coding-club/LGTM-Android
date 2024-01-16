@@ -1,6 +1,6 @@
 package com.lgtm.android.data.model.response
 
-import com.lgtm.domain.entity.response.SuggestionVO
+import com.lgtm.domain.mission_suggestion.SuggestionVO
 
 data class SuggestionDTO(
     val suggestionId: Int?,

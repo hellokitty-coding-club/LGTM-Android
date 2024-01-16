@@ -27,7 +27,7 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
 
     override fun onResume() {
         super.onResume()
-        suggestionDashboardViewModel.getSuggestion()
+        suggestionDashboardViewModel.getSuggestionList()
     }
 
     private fun setupBindingData() {
@@ -35,8 +35,8 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
     }
 
     private fun observeMissionSuggestion() {
-        suggestionDashboardViewModel.missionSuggestion.observe(this) {
-            missionSuggestionAdapter.submitList(it.suggestions)
+        suggestionDashboardViewModel.suggestionList.observe(this) {
+            missionSuggestionAdapter.submitList(it)
         }
     }
 

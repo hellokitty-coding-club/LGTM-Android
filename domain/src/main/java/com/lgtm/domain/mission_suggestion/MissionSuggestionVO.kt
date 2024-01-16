@@ -1,7 +1,7 @@
-package com.lgtm.domain.entity.response
+package com.lgtm.domain.mission_suggestion
 
 data class MissionSuggestionVO(
     val infoTitle: String,
     val infoDescription: String,
-    val suggestions: List<SuggestionVO>
+    val suggestions: List<SuggestionContent>
 )

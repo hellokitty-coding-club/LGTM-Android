@@ -3,7 +3,7 @@ package com.lgtm.android.data.repository
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.lgtm.android.data.datasource.SuggestionDataSource
-import com.lgtm.domain.entity.response.MissionSuggestionVO
+import com.lgtm.domain.mission_suggestion.MissionSuggestionVO
 import com.lgtm.domain.repository.SuggestionRepository
 import javax.inject.Inject
 

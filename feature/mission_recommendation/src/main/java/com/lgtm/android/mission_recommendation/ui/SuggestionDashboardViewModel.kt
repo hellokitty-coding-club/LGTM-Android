@@ -10,37 +10,37 @@ import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.domain.constants.Role
-import com.lgtm.domain.entity.response.MissionSuggestionVO
+import com.lgtm.domain.mission_suggestion.SuggestionContent
 import com.lgtm.domain.repository.AuthRepository
-import com.lgtm.domain.repository.SuggestionRepository
+import com.lgtm.domain.usecase.SuggestionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SuggestionDashboardViewModel @Inject constructor(
-    private val suggestionRepository: SuggestionRepository,
+    private val suggestionUseCase: SuggestionUseCase,
     authRepository: AuthRepository
 ): BaseViewModel() {
 
     val suggestionBtnVisibility: Boolean = authRepository.getMemberType() == Role.REVIEWEE
 
-    private val _missionSuggestion = MutableLiveData<MissionSuggestionVO>()
-    val missionSuggestion: LiveData<MissionSuggestionVO> = _missionSuggestion
+    private val _suggestionList = MutableLiveData<List<SuggestionContent>>()
+    val suggestionList: LiveData<List<SuggestionContent>> = _suggestionList
 
     private val _dashBoardEmptyVisibility = MediatorLiveData<Boolean>()
     init {
-        _dashBoardEmptyVisibility.addSource(_missionSuggestion) {
-            _dashBoardEmptyVisibility.postValue(it.suggestions.isEmpty())
+        _dashBoardEmptyVisibility.addSource(_suggestionList) {
+            _dashBoardEmptyVisibility.postValue(it.size <= 1)
         }
     }
     val dashBoardEmptyVisibility: LiveData<Boolean> = _dashBoardEmptyVisibility
 
-    fun getSuggestion() {
+    fun getSuggestionList() {
         viewModelScope.launch(lgtmErrorHandler) {
-            suggestionRepository.getSuggestion()
+            suggestionUseCase.getSuggestionList()
                 .onSuccess {
-                    _missionSuggestion.postValue(it)
+                    _suggestionList.postValue(it)
                     Log.d(TAG, "getSuggestion: $it")
                 }.onFailure {
                     Firebase.crashlytics.recordException(it)
