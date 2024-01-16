@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.lgtm.android.mission_recommendation.ui.SuggestionDashboardViewModel" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -69,7 +77,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Body2"
                     android:textColor="@color/white"
-                    tools:text="👋 어떤 미션이 필요한지 알려주세요."
+                    android:text="@{viewModel.missionSuggestion.infoTitle}"
+                    tools:text="대시 보드 info title이 들어가는 자리입니다."
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/tv_info_description"/>
@@ -80,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Body3R"
                     android:textColor="@color/white"
+                    android:text="@{viewModel.missionSuggestion.infoDescription}"
                     tools:text="info 설명이 들어갑니다. 길게되어도 여기서는 다 보여줄거임 info 설명이 들어갑니다. 길게되어도 여기서는 다 보여줄거임"
                     android:layout_marginTop="8dp"
                     android:layout_marginHorizontal="4dp"
@@ -91,6 +101,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mission_suggestion"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"
