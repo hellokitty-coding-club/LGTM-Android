@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_3"
-        tools:context=".ui.RecommendationDashboardActivity">
+        tools:context=".ui.SuggestionDashboardActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"
@@ -62,7 +62,7 @@
                 android:background="@drawable/rectangle_gray_7_radius_20"
                 app:layout_constraintTop_toBottomOf="@id/cl_header_inner_top"
                 app:layout_constraintBottom_toBottomOf="parent" >
-                
+
                 <TextView
                     android:id="@+id/tv_info_title"
                     android:layout_width="wrap_content"
@@ -99,7 +99,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cl_header"
-            tools:listitem="@layout/item_recommendation_mission" />
+            tools:listitem="@layout/item_mission_suggestion" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_recommend_mission"

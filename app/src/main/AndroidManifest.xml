@@ -75,7 +75,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".mission_recommendation.ui.RecommendationDashboardActivity"
+            android:name=".mission_recommendation.ui.SuggestionDashboardActivity"
             android:exported="false" />
 
     </application>
