@@ -36,7 +36,7 @@ class SuggestionDashboardViewModel @Inject constructor(
     }
     val dashBoardEmptyVisibility: LiveData<Boolean> = _dashBoardEmptyVisibility
 
-    fun getSuggestionList() {
+    fun fetchSuggestionList() {
         viewModelScope.launch(lgtmErrorHandler) {
             suggestionUseCase.getSuggestionList()
                 .onSuccess {

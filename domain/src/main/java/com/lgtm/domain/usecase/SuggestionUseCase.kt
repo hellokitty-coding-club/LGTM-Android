@@ -14,13 +14,13 @@ class SuggestionUseCase @Inject constructor(
         return try {
             val response = suggestionRepository.getSuggestion().getOrNull()
                 ?: return Result.failure(Exception("response is null"))
-            Result.success(getSuggestionHeader(response))
+            Result.success(createSuggestionContentList(response))
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
 
-    private fun getSuggestionHeader(response: MissionSuggestionVO): List<SuggestionContent> {
+    private fun createSuggestionContentList(response: MissionSuggestionVO): List<SuggestionContent> {
         val suggestionWithHeader: MutableList<SuggestionContent> = mutableListOf(
             SuggestionHeaderVO(
                 title = response.infoTitle,
