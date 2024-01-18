@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:paddingVertical="16dp"
-        android:layout_marginTop="5dp"
         android:background="@drawable/rectangle_gray_7_radius_20">
 
         <TextView

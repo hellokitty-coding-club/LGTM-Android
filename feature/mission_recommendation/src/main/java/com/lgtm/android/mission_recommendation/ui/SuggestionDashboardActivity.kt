@@ -2,8 +2,10 @@ package com.lgtm.android.mission_recommendation.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.lgtm.android.common_ui.R.dimen
 import com.lgtm.android.common_ui.adapter.MissionSuggestionAdapter
 import com.lgtm.android.common_ui.base.BaseActivity
+import com.lgtm.android.common_ui.util.ItemDecorationUtil
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.mission_recommendation.R
 import com.lgtm.android.mission_recommendation.databinding.ActivitySuggestionDashboardBinding
@@ -37,7 +39,13 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
     private fun observeMissionSuggestion() {
         suggestionDashboardViewModel.suggestionList.observe(this) {
             missionSuggestionAdapter.submitList(it)
+            addDashboardItemDecoration()
         }
+    }
+
+    private fun addDashboardItemDecoration() {
+        val topMarginItemDecoration = ItemDecorationUtil.TopMarginItemDecoration(dimen.item_top_margin)
+        binding.rvMissionSuggestion.addItemDecoration(topMarginItemDecoration)
     }
 
     private fun initAdapter() {

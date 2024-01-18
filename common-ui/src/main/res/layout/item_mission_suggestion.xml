@@ -22,7 +22,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:paddingHorizontal="20dp"
         android:paddingVertical="16dp"
         android:background="@drawable/rectangle_white_stroke_gray_2_radius_20">
