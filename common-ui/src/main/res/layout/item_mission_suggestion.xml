@@ -7,15 +7,7 @@
 
         <variable
             name="data"
-            type="com.lgtm.domain.mission_suggestion.SuggestionVO" />
-
-        <variable
-            name="createdDate"
-            type="String" />
-
-        <variable
-            name="createdTime"
-            type="String" />
+            type="com.lgtm.android.common_ui.model.SuggestionUI" />
 
     </data>
 
@@ -81,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Description"
                     android:textColor="@color/gray_5"
-                    android:text="@{createdDate}"
+                    android:text="@{data.date}"
                     tools:text="2024.01.15"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/Description"
                     android:textColor="@color/gray_5"
-                    android:text="@{createdTime}"
+                    android:text="@{data.time}"
                     tools:text="오후 1:03"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

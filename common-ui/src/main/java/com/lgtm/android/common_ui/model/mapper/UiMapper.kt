@@ -16,6 +16,7 @@ import com.lgtm.android.common_ui.model.MissionProcessInfoUI
 import com.lgtm.android.common_ui.model.PingPongJuniorUI
 import com.lgtm.android.common_ui.model.PingPongSeniorUI
 import com.lgtm.android.common_ui.model.ProfileGlanceUI
+import com.lgtm.android.common_ui.model.SuggestionUI
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.Role
 import com.lgtm.domain.constants.UNKNOWN
@@ -27,7 +28,11 @@ import com.lgtm.domain.entity.response.MissionProcessInfoVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.ProfileVO
+import com.lgtm.domain.mission_suggestion.SuggestionVO
 import com.lgtm.domain.profile.profileViewType.ProfileGlance
+import com.lgtm.domain.util.dotStyleFormatter
+import com.lgtm.domain.util.timeFormatter
+import java.time.LocalDateTime
 
 fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,
@@ -209,3 +214,17 @@ fun PingPongSeniorVO.toUiModel(role: Role) = PingPongSeniorUI(
     processState = processState
 )
 
+fun SuggestionVO.toUiModel(): SuggestionUI {
+    val localDateTime = LocalDateTime.parse(this.date)
+    return SuggestionUI(
+        viewType = viewType,
+        title = title,
+        description = description,
+        suggestionId = suggestionId,
+        date = localDateTime.format(dotStyleFormatter),
+        time = localDateTime.format(timeFormatter),
+        likeNum = likeNum,
+        isLiked = isLiked,
+        isMyPost = isMyPost
+    )
+}
