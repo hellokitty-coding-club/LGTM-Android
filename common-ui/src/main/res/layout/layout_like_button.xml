@@ -26,7 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="9dp"
-            android:layout_marginStart="14dp"
+            android:layout_marginStart="6dp"
+            android:minWidth="30sp"
+            android:gravity="center"
             android:textAppearance="@style/Body3R"
             android:text="@{likeNum}"
             tools:text="23" />
@@ -35,7 +37,6 @@
             setLikeImage="@{isLiked}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="6dp"
             android:layout_marginVertical="7dp"
             tools:src="@drawable/ic_like_selected"/>
