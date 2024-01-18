@@ -22,19 +22,25 @@ class SduiAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SduiBaseHolder {
         val viewHolder = getSduiViewHolder(parent, SduiViewType.getViewTypeByOrdinal(viewType))
-        return when (viewType) {
-            SduiViewType.ITEM.ordinal -> {
-                viewHolder.apply {
-                    (viewHolder as SduiItemViewHolder).setNavigateToMissionDetail(onMissionClickListener)
-                }
-            }
-            SduiViewType.SUBITEM.ordinal -> {
-                viewHolder.apply {
-                    (viewHolder as SduiSubItemViewHolder).setNavigateToRecommendationDashboard(onRecommendationClickListener)
-                }
-            }
-            else -> viewHolder
+
+        when (viewType) {
+            SduiViewType.ITEM.ordinal -> setOnMissionClickListener(viewHolder)
+            SduiViewType.SUBITEM.ordinal -> setOnRecommendationClickListener(viewHolder)
+            else -> Unit
         }
+
+        return viewHolder
+    }
+
+    private fun setOnMissionClickListener(viewHolder: SduiBaseHolder) {
+        viewHolder as SduiItemViewHolder
+        viewHolder.setNavigateToMissionDetail(onMissionClickListener)
+
+    }
+
+    private fun setOnRecommendationClickListener(viewHolder: SduiBaseHolder) {
+        viewHolder as SduiSubItemViewHolder
+        viewHolder.setNavigateToRecommendationDashboard(onRecommendationClickListener)
     }
 
     override fun onBindViewHolder(holder: SduiBaseHolder, position: Int) {

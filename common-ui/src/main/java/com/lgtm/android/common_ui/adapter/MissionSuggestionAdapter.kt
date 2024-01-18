@@ -21,12 +21,14 @@ class MissionSuggestionAdapter: ListAdapter<SuggestionContent, MissionSuggestion
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionSuggestionBaseViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return if (SuggestionViewType.CONTENT == SuggestionViewType.getViewTypeByOrdinal(viewType)) {
-            val binding = ItemMissionSuggestionBinding.inflate(layoutInflater, parent, false)
-            MissionSuggestionContentViewHolder(binding)
-        } else {
-            val binding = ItemMissionSuggestionInfoBinding.inflate(layoutInflater, parent, false)
-            MissionSuggestionHeaderViewHolder(binding)
+        val suggestionViewType = SuggestionViewType.getViewTypeByOrdinal(viewType)
+        val binding = when(suggestionViewType) {
+            SuggestionViewType.CONTENT -> ItemMissionSuggestionBinding.inflate(layoutInflater, parent, false)
+            SuggestionViewType.HEADER -> ItemMissionSuggestionInfoBinding.inflate(layoutInflater, parent, false)
+        }
+        return when(suggestionViewType) {
+            SuggestionViewType.CONTENT -> MissionSuggestionContentViewHolder(binding as ItemMissionSuggestionBinding)
+            SuggestionViewType.HEADER -> MissionSuggestionHeaderViewHolder(binding as ItemMissionSuggestionInfoBinding)
         }
     }
 
