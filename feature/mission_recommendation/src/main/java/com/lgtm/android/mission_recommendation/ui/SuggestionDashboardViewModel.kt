@@ -3,7 +3,6 @@ package com.lgtm.android.mission_recommendation.ui
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.crashlytics.ktx.crashlytics
@@ -27,14 +26,6 @@ class SuggestionDashboardViewModel @Inject constructor(
 
     private val _suggestionList = MutableLiveData<List<SuggestionContent>>()
     val suggestionList: LiveData<List<SuggestionContent>> = _suggestionList
-
-    private val _dashBoardEmptyVisibility = MediatorLiveData<Boolean>()
-    init {
-        _dashBoardEmptyVisibility.addSource(_suggestionList) {
-            _dashBoardEmptyVisibility.postValue(it.size <= 1)
-        }
-    }
-    val dashBoardEmptyVisibility: LiveData<Boolean> = _dashBoardEmptyVisibility
 
     fun fetchSuggestionList() {
         viewModelScope.launch(lgtmErrorHandler) {

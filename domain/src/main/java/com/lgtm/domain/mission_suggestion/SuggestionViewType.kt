@@ -2,7 +2,8 @@ package com.lgtm.domain.mission_suggestion
 
 enum class SuggestionViewType {
     HEADER,
-    CONTENT;
+    CONTENT,
+    EMPTY;
 
     companion object {
         fun getViewTypeByOrdinal(ordinal: Int): SuggestionViewType {

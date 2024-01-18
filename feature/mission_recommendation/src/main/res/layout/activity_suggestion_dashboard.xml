@@ -20,104 +20,53 @@
         tools:context=".ui.SuggestionDashboardActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_content"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="-20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_header">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_mission_suggestion"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-                android:paddingTop="20dp"
-                android:paddingBottom="5dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@id/cl_dashboard_empty"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_mission_suggestion" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_dashboard_empty"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:visibility="@{viewModel.dashBoardEmptyVisibility ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_mission_suggestion"
-                app:layout_constraintVertical_weight="1"
-                tools:visibility="gone">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_empty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
-                    android:src="@drawable/img_empty_gray_1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/iv_no_recommendation_yet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/no_recommendation_yet"
-                    android:textAppearance="@style/Body2"
-                    android:textColor="@color/gray_6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_empty" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_white_stroke_gray_2_radius_bottom_20"
+            android:elevation="1dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_header_inner"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_white_stroke_gray_2_radius_bottom_20"
+                android:layout_marginStart="@dimen/base_guideline"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
                 android:elevation="1dp"
-                app:layout_constraintTop_toTopOf="parent">
+                android:padding="7dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/base_guideline"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rectangle_white_stroke_gray_3_radius_10"
-                    android:elevation="1dp"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mission_recommendation"
-                    android:textAppearance="@style/Body1B"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_back"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/iv_back" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mission_recommendation"
+                android:textAppearance="@style/Body1B"
+                app:layout_constraintBottom_toBottomOf="@id/iv_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/iv_back" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_mission_suggestion"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="-20dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingTop="20dp"
+            android:paddingBottom="5dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_header"
+            tools:listitem="@layout/item_mission_suggestion" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_recommend_mission"

@@ -2,6 +2,7 @@ package com.lgtm.domain.usecase
 
 import com.lgtm.domain.mission_suggestion.MissionSuggestionVO
 import com.lgtm.domain.mission_suggestion.SuggestionContent
+import com.lgtm.domain.mission_suggestion.SuggestionEmpty
 import com.lgtm.domain.mission_suggestion.SuggestionHeaderVO
 import com.lgtm.domain.repository.SuggestionRepository
 import javax.inject.Inject
@@ -27,8 +28,18 @@ class SuggestionUseCase @Inject constructor(
                 description = response.infoDescription
             )
         )
-        suggestionWithHeader.addAll(response.suggestions)
+
+        if (response.suggestions.isEmpty()) {
+            suggestionWithHeader.add(getSuggestionEmptyView())
+        } else {
+            suggestionWithHeader.addAll(response.suggestions)
+        }
+
         return suggestionWithHeader
+    }
+
+    private fun getSuggestionEmptyView(): SuggestionContent {
+        return SuggestionEmpty()
     }
 
 }
