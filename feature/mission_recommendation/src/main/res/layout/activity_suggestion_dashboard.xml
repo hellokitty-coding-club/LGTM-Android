@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="-20dp"
-            app:layout_constraintTop_toBottomOf="@id/cl_header"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_header">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_mission_suggestion"
@@ -33,21 +33,21 @@
                 android:layout_height="0dp"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
-                android:paddingBottom="5dp"
                 android:paddingTop="20dp"
+                android:paddingBottom="5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/cl_dashboard_empty"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/item_mission_suggestion" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_dashboard_empty"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintVertical_weight="1"
                 android:visibility="@{viewModel.dashBoardEmptyVisibility ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rv_mission_suggestion"
+                app:layout_constraintVertical_weight="1"
                 tools:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -55,9 +55,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
-                    android:src="@drawable/img_empty_gray"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:src="@drawable/img_empty_gray_1"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -65,11 +65,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:text="@string/no_recommendation_yet"
                     android:textAppearance="@style/Body2"
                     android:textColor="@color/gray_6"
-                    android:text="@string/no_recommendation_yet"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_empty" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -135,25 +135,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_add"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_recommend_mission"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tv_recommend_mission"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_recommend_mission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/Body1M"
-                android:textColor="@color/black"
-                android:text="@string/recommend_mission"
                 android:layout_marginStart="5dp"
                 android:layout_marginBottom="2dp"
-                app:layout_constraintTop_toTopOf="@id/iv_add"
+                android:text="@string/recommend_mission"
+                android:textAppearance="@style/Body1M"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@id/iv_add"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_add"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/iv_add" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
