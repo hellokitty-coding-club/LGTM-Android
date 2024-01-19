@@ -22,6 +22,7 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupBindingData()
+        addDashboardItemDecoration()
         observeMissionSuggestion()
         initAdapter()
         setBackButtonClickListener()
@@ -39,7 +40,6 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
     private fun observeMissionSuggestion() {
         suggestionDashboardViewModel.suggestionList.observe(this) {
             missionSuggestionAdapter.submitList(it)
-            addDashboardItemDecoration()
         }
     }
 
