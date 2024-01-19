@@ -10,7 +10,5 @@ class MissionSuggestionContentViewHolder(
     override fun onBind(item: SuggestionContent) {
         item as SuggestionUI
         binding.data = item
-        binding.btnLike.isLiked = item.isLiked
-        binding.btnLike.likeNum = item.likeNum
     }
 }
