@@ -82,7 +82,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(R.layout.activity_p
 
     private fun addItemDecoration() {
         val itemDecoration = ItemDecorationUtil.BottomItemDecoration(
-            padding = dimen.profile_first_mission_top_margin,
+            padding = dimen.item_top_margin,
             index = profileViewModel.getFirstMissionIdx()
         )
         binding.rvProfile.addItemDecoration(itemDecoration)

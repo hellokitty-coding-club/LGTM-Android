@@ -10,6 +10,7 @@ import com.lgtm.android.main.notification.NotificationCenterActivity
 import com.lgtm.android.manage_mission.dashboard.DashboardActivity
 import com.lgtm.android.manage_mission.ping_pong_junior.PingPongJuniorActivity
 import com.lgtm.android.mission_detail.MissionDetailActivity
+import com.lgtm.android.mission_recommendation.ui.SuggestionDashboardActivity
 import com.lgtm.android.profile.ProfileActivity
 import javax.inject.Inject
 
@@ -60,6 +61,11 @@ class LgtmNavigator @Inject constructor(
 
     override fun navigateToNotificationCenter(context: Context) {
         val intent = Intent(context, NotificationCenterActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    override fun navigateToRecommendationDashboard(context: Context) {
+        val intent = Intent(context, SuggestionDashboardActivity::class.java)
         context.startActivity(intent)
     }
 }

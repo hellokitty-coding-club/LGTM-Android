@@ -9,11 +9,18 @@ import com.lgtm.domain.server_drive_ui.SectionSubItemVO
 class SduiSubItemViewHolder(
     private val binding: ItemSduiSubItemBinding
 ) : SduiBaseHolder(binding) {
+    private lateinit var navigateToRecommendationDashboard: () -> Unit
+
     override fun bind(theme: SduiTheme, viewContent: SduiContent) {
         binding.data = viewContent as SectionSubItemVO
         binding.theme = theme
         binding.btnMissionRecommend.setOnThrottleClickListener {
-            // todo appUrl을 활용한 화면 전환 처리
+            // todo 추후 appUrl을 활용한 화면 전환 처리
+            navigateToRecommendationDashboard()
         }
+    }
+
+    fun setNavigateToRecommendationDashboard(navigateToRecommendationDashboard: () -> Unit) {
+        this.navigateToRecommendationDashboard = navigateToRecommendationDashboard
     }
 }

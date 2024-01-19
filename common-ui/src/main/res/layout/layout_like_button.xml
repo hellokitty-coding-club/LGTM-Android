@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="isLiked"
+            type="boolean" />
+
+        <variable
+            name="likeNum"
+            type="String" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/btn_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/rectangle_white_stroke_gray_2_radius_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="9dp"
+            android:layout_marginStart="6dp"
+            android:minWidth="30sp"
+            android:gravity="center"
+            android:textAppearance="@style/Body3R"
+            android:text="@{likeNum}"
+            tools:text="23" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            setLikeImage="@{isLiked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_marginVertical="7dp"
+            tools:src="@drawable/ic_like_selected"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

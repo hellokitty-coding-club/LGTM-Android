@@ -76,7 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     private fun initAdapter() {
-        commonAdapter = SduiAdapter(::onClickMissionItem)
+        commonAdapter = SduiAdapter(::onClickMissionItem, ::onClickRecommendation)
         binding.rvSdui.adapter = commonAdapter
     }
 
@@ -84,6 +84,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         if (!isFirstMissionClick) logFirstMissionClick(sduiContent)
         logMissionClick(sduiContent)
         moveToMissionDetail((sduiContent as SectionItemVO).missionId)
+    }
+
+    private fun onClickRecommendation() {
+        moveToRecommendationDashboard()
     }
 
     private fun logFirstMissionClick(sduiContent: SduiContent) {
@@ -109,6 +113,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private fun moveToMissionDetail(missionId: Int) {
         lgtmNavigator.navigateToMissionDetail(requireContext(), missionId)
+    }
+
+    private fun moveToRecommendationDashboard() {
+        lgtmNavigator.navigateToRecommendationDashboard(requireContext())
     }
 
     private fun moveToNotificationCenter() {

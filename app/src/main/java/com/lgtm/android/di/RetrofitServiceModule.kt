@@ -5,6 +5,7 @@ import com.lgtm.android.data.service.IntroService
 import com.lgtm.android.data.service.MissionService
 import com.lgtm.android.data.service.NotificationService
 import com.lgtm.android.data.service.ProfileService
+import com.lgtm.android.data.service.SuggestionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,4 +42,9 @@ object RetrofitServiceModule {
     @Singleton
     fun providesNotificationService(retrofit: Retrofit): NotificationService =
         retrofit.create(NotificationService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesSuggestionService(retrofit: Retrofit): SuggestionService =
+        retrofit.create(SuggestionService::class.java)
 }

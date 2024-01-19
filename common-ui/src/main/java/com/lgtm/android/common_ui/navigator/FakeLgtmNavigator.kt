@@ -18,4 +18,6 @@ interface FakeLgtmNavigator {
     fun navigateToPingPongJunior(context: Context, missionId: Int)
 
     fun navigateToNotificationCenter(context: Context)
+
+    fun navigateToRecommendationDashboard(context: Context)
 }
