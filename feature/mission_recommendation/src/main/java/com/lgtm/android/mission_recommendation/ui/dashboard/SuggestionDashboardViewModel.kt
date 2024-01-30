@@ -1,4 +1,4 @@
-package com.lgtm.android.mission_recommendation.ui
+package com.lgtm.android.mission_recommendation.ui.dashboard
 
 import android.content.ContentValues.TAG
 import android.util.Log
