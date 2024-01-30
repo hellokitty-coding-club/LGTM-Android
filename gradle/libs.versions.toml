@@ -67,6 +67,11 @@ firebase = "32.1.0"
 #sonarqube
 sonarqube = "4.0.0.2929"
 
+#compose
+compose-bom = "2023.08.00"
+compose-appcompat-theme = "0.28.0"
+compose-constraintlayout = "2.1.4"
+
 # Other
 jsoup = "1.13.1"
 
@@ -130,6 +135,16 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx"
 firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx" }
 firebase-config = { module = "com.google.firebase:firebase-config-ktx" }
 kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin-bom" }
+
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
+compose-material = { module = "androidx.compose.material:material" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-activity = { module = "androidx.activity:activity-compose" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
+compose-constraintlayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "compose-constraintlayout"}
+compose-appcompat-theme = { module = "com.google.accompanist:accompanist-appcompat-theme" , version.ref = "compose-appcompat-theme"}
 
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 

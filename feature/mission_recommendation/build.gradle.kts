@@ -8,6 +8,14 @@ plugins {
 
 android {
     namespace = "com.lgtm.android.mission_recommendation"
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.3.2"
+    }
 }
 
 dependencies {
@@ -23,4 +31,16 @@ dependencies {
     implementation(libs.hilt)
     implementation(libs.bundles.navigation)
     kapt(libs.hilt.kapt)
+
+    //compose
+    val composePlatform = platform(libs.compose.bom)
+    implementation(composePlatform)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.preview)
+    implementation(libs.compose.activity)
+    implementation(libs.compose.material)
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.constraintlayout)
+    implementation(libs.compose.appcompat.theme)
 }
