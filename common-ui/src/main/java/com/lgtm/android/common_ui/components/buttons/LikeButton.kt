@@ -22,7 +22,7 @@ import com.lgtm.android.common_ui.theme.body3R
 
 @Composable
 fun LikeButton(
-    likeCount: String,
+    likeNum: String,
     isLiked: Boolean,
     modifier: Modifier = Modifier
 ) {
@@ -45,7 +45,7 @@ fun LikeButton(
     ) {
         
         Text(
-            text = likeCount,
+            text = likeNum,
             style = Typography.body3R
         )
 
@@ -62,7 +62,7 @@ fun LikeButton(
 fun LikeButtonPreview() {
     MaterialTheme {
         LikeButton(
-            likeCount = "999+",
+            likeNum = "999+",
             isLiked = true
         )
     }
