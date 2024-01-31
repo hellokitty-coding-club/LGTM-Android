@@ -19,5 +19,5 @@ interface FakeLgtmNavigator {
 
     fun navigateToNotificationCenter(context: Context)
 
-    fun navigateToRecommendationDashboard(context: Context)
+    fun navigateToSuggestionDashboard(context: Context)
 }
