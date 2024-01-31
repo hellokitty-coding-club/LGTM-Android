@@ -12,6 +12,7 @@ import com.lgtm.android.manage_mission.dashboard.DashboardActivity
 import com.lgtm.android.manage_mission.ping_pong_junior.PingPongJuniorActivity
 import com.lgtm.android.mission_detail.MissionDetailActivity
 import com.lgtm.android.mission_recommendation.ui.dashboard.SuggestionDashboardActivity
+import com.lgtm.android.mission_recommendation.ui.detail.SuggestionDetailActivity
 import com.lgtm.android.profile.ProfileActivity
 import javax.inject.Inject
 
@@ -67,6 +68,13 @@ class LgtmNavigatorImpl @Inject constructor(
 
     override fun navigateToSuggestionDashboard(context: Context) {
         val intent = Intent(context, SuggestionDashboardActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    override fun navigateToSuggestionDetail(context: Context, suggestionId: Int) {
+        val intent = Intent(context, SuggestionDetailActivity::class.java).apply {
+            putExtra(SuggestionDetailActivity.SUGGESTION_ID, suggestionId)
+        }
         context.startActivity(intent)
     }
 
