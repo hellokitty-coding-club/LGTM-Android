@@ -23,7 +23,7 @@ class SuggestionRepositoryImpl @Inject constructor(
 
     override suspend fun getSuggestionDetail(suggestionId: Int): Result<SuggestionVO> {
         return try {
-            val response = suggestionDataSource.getSuggestionDetail()
+            val response = suggestionDataSource.getSuggestionDetail(suggestionId)
             Result.success(response.data.toVO())
         } catch (e: Exception) {
             Log.e(TAG, "getSuggestionDetail: ${this.javaClass} ${e.message}")

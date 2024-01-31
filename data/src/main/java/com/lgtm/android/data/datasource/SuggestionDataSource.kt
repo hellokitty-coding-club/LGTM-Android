@@ -13,7 +13,7 @@ class SuggestionDataSource @Inject constructor(
         return checkResponse(suggestionService.getSuggestion())
     }
 
-    suspend fun getSuggestionDetail(): BaseDTO<SuggestionDTO> {
-        return checkResponse(suggestionService.getSuggestionDetail())
+    suspend fun getSuggestionDetail(suggestionId: Int): BaseDTO<SuggestionDTO> {
+        return checkResponse(suggestionService.getSuggestionDetail(suggestionId))
     }
 }
