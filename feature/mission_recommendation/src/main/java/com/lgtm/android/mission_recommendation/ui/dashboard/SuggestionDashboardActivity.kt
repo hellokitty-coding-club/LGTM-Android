@@ -49,8 +49,16 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
     }
 
     private fun initAdapter() {
-        missionSuggestionAdapter = MissionSuggestionAdapter()
+        missionSuggestionAdapter = MissionSuggestionAdapter(::onClickSuggestionItem)
         binding.rvMissionSuggestion.adapter = missionSuggestionAdapter
+    }
+
+    private fun onClickSuggestionItem(suggestionId: Int) {
+        moveToSuggestionDetail(suggestionId)
+    }
+
+    private fun moveToSuggestionDetail(suggestionId: Int) {
+        lgtmNavigator.navigateToSuggestionDetail(this, suggestionId)
     }
 
     private fun setBackButtonClickListener() {

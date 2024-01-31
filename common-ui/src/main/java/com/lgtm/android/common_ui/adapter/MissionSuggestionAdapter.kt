@@ -4,11 +4,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.lgtm.android.common_ui.util.ItemDiffCallback
 import com.lgtm.android.common_ui.viewholder.MissionSuggestionBaseViewHolder
+import com.lgtm.android.common_ui.viewholder.MissionSuggestionContentViewHolder
 import com.lgtm.android.common_ui.viewholder.getSuggestionViewHolder
 import com.lgtm.domain.mission_suggestion.SuggestionContent
 import com.lgtm.domain.mission_suggestion.SuggestionViewType
 
-class MissionSuggestionAdapter: ListAdapter<SuggestionContent, MissionSuggestionBaseViewHolder>(
+class MissionSuggestionAdapter(
+    private val onSuggestionClickListener: (Int) -> Unit
+): ListAdapter<SuggestionContent, MissionSuggestionBaseViewHolder>(
     ItemDiffCallback<SuggestionContent>(
         onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old == new }
@@ -16,7 +19,14 @@ class MissionSuggestionAdapter: ListAdapter<SuggestionContent, MissionSuggestion
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MissionSuggestionBaseViewHolder {
-        return getSuggestionViewHolder(parent, SuggestionViewType.getViewTypeByOrdinal(viewType))
+        val viewHolder = getSuggestionViewHolder(parent, SuggestionViewType.getViewTypeByOrdinal(viewType))
+
+        when(viewType) {
+            SuggestionViewType.CONTENT.ordinal -> setOnSuggestionClickListener(viewHolder)
+            else -> Unit
+        }
+
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: MissionSuggestionBaseViewHolder, position: Int) {
@@ -25,5 +35,10 @@ class MissionSuggestionAdapter: ListAdapter<SuggestionContent, MissionSuggestion
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).viewType.ordinal
+    }
+
+    private fun setOnSuggestionClickListener(viewHolder: MissionSuggestionBaseViewHolder) {
+        viewHolder as MissionSuggestionContentViewHolder
+        viewHolder.setNavigateToSuggestionDetail(onSuggestionClickListener)
     }
 }
