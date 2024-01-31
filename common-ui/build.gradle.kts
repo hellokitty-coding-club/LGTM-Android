@@ -34,13 +34,13 @@ dependencies {
 
     //compose
     val composePlatform = platform(libs.compose.bom)
-    implementation(composePlatform)
-    implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
-    implementation(libs.compose.preview)
-    implementation(libs.compose.activity)
-    implementation(libs.compose.material)
-    implementation(libs.compose.foundation)
-    implementation(libs.compose.constraintlayout)
-    implementation(libs.compose.appcompat.theme)
+    api(composePlatform)
+    api(libs.compose.ui)
+    api(libs.compose.ui.tooling)
+    api(libs.compose.preview)
+    api(libs.compose.activity)
+    api(libs.compose.material)
+    api(libs.compose.foundation)
+    api(libs.compose.constraintlayout)
+    api(libs.compose.appcompat.theme)
 }
