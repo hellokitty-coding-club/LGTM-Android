@@ -65,7 +65,7 @@ class LgtmNavigatorImpl @Inject constructor(
         context.startActivity(intent)
     }
 
-    override fun navigateToRecommendationDashboard(context: Context) {
+    override fun navigateToSuggestionDashboard(context: Context) {
         val intent = Intent(context, SuggestionDashboardActivity::class.java)
         context.startActivity(intent)
     }
