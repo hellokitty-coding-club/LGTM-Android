@@ -22,6 +22,13 @@ class SuggestionDetailActivity: BaseActivity<ActivitySuggestionDetailBinding>(R.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fetchSuggestionDetail()
+        addSuggestionDetailScreen()
+    }
+    private fun fetchSuggestionDetail() {
+        suggestionDetailViewModel.fetchDetail(suggestionId)
+    }
+
+    private fun addSuggestionDetailScreen() {
         binding.composeView.setContent {
             MaterialTheme {
                 SuggestionDetailScreen(
@@ -29,9 +36,6 @@ class SuggestionDetailActivity: BaseActivity<ActivitySuggestionDetailBinding>(R.
                 )
             }
         }
-    }
-    private fun fetchSuggestionDetail() {
-        suggestionDetailViewModel.fetchDetail(suggestionId)
     }
 
     companion object {
