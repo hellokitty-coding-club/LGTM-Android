@@ -146,6 +146,9 @@
     <string name="mission_recommendation">미션 제안하기</string>
     <string name="no_recommendation_yet">첫 번째 제안을 남겨주세요!</string>
     <string name= "recommend_mission">제안하기</string>
+    
+    <!-- 미션 제안 디테일  -->
+    <string name="want_this_mission">저도 이 미션 원해요!</string>
 
     <!-- dialog -->
     <string name="want_to_logout">로그아웃 하시겠어요?</string>
@@ -198,6 +201,5 @@
 
     <!-- 시스템 점검중 -->
     <string name="system_under_maintenance">시스템 점검 안내</string>
-
-
+    
 </resources>
