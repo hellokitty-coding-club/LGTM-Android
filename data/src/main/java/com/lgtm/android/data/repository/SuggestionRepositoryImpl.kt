@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.lgtm.android.data.datasource.SuggestionDataSource
 import com.lgtm.domain.mission_suggestion.MissionSuggestionVO
+import com.lgtm.domain.mission_suggestion.SuggestionVO
 import com.lgtm.domain.repository.SuggestionRepository
 import javax.inject.Inject
 
@@ -16,6 +17,16 @@ class SuggestionRepositoryImpl @Inject constructor(
             Result.success(response.data.toVO())
         } catch (e: Exception) {
             Log.e(TAG, "getSuggestion: ${this.javaClass} ${e.message}")
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun getSuggestionDetail(suggestionId: Int): Result<SuggestionVO> {
+        return try {
+            val response = suggestionDataSource.getSuggestionDetail(suggestionId)
+            Result.success(response.data.toVO())
+        } catch (e: Exception) {
+            Log.e(TAG, "getSuggestionDetail: ${this.javaClass} ${e.message}")
             Result.failure(e)
         }
     }

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.lgtm.android.mission_recommendation.ui.SuggestionDashboardViewModel" />
+            type="com.lgtm.android.mission_recommendation.ui.dashboard.SuggestionDashboardViewModel" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/gray_3"
-        tools:context=".ui.SuggestionDashboardActivity">
+        tools:context=".ui.dashboard.SuggestionDashboardActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_header"
