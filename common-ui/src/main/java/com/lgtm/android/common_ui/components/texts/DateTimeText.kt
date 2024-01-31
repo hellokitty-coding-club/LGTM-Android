@@ -37,7 +37,7 @@ fun DateTimeText(
         )
 
         Divider(
-            color = colorResource(id = R.color.gray_5),
+            color = colorResource(id = R.color.gray_3),
             modifier = Modifier
                 .width(1.dp)
                 .fillMaxHeight()
