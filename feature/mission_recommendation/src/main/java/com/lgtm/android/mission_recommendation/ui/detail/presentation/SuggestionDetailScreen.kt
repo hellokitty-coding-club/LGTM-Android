@@ -22,13 +22,15 @@ import com.lgtm.android.common_ui.components.buttons.BackButton
 import com.lgtm.android.common_ui.components.buttons.LikeButton
 import com.lgtm.android.common_ui.components.buttons.MenuButton
 import com.lgtm.android.common_ui.components.texts.DateTimeText
+import com.lgtm.android.common_ui.model.SuggestionUI
 import com.lgtm.android.common_ui.theme.body1B
 import com.lgtm.android.common_ui.theme.body2
 import com.lgtm.android.common_ui.theme.heading3B
+import com.lgtm.android.common_ui.util.UiState
 
 @Composable
 fun SuggestionDetailScreen(
-    suggestionDetailStateHolder: State<SuggestionDetailState>
+    suggestionDetailStateHolder: State<UiState<SuggestionUI>>
 ) {
     Column(
         modifier = Modifier
@@ -50,13 +52,13 @@ fun SuggestionDetailScreen(
 @Composable
 fun SuggestionDetailContent(
     modifier: Modifier = Modifier,
-    suggestionDetailState: SuggestionDetailState
+    suggestionDetailState: UiState<SuggestionUI>
 ) {
     when (suggestionDetailState) {
-        is SuggestionDetailState.Loading -> {
+        is UiState.Init -> {
             /* no-op */
         }
-        is SuggestionDetailState.Main -> {
+        is UiState.Success -> {
             Column(
                 modifier = modifier
                     .fillMaxWidth()
@@ -72,14 +74,14 @@ fun SuggestionDetailContent(
 
                 Text(
                     modifier = Modifier.padding(horizontal = 20.dp),
-                    text = suggestionDetailState.suggestionDetail.title,
+                    text = suggestionDetailState.data.title,
                     style = Typography.heading3B,
                     color = Color.Black
                 )
 
                 DateTimeText(
-                    date = suggestionDetailState.suggestionDetail.date,
-                    time = suggestionDetailState.suggestionDetail.time,
+                    date = suggestionDetailState.data.date,
+                    time = suggestionDetailState.data.time,
                     modifier = Modifier.padding(
                         vertical = 11.dp,
                         horizontal = 20.dp
@@ -98,11 +100,15 @@ fun SuggestionDetailContent(
                         start = 20.dp,
                         end = 20.dp
                     ),
-                    text = suggestionDetailState.suggestionDetail.description,
+                    text = suggestionDetailState.data.description,
                     style = Typography.body2,
                     color = Color.Black
                 )
             }
+        }
+
+        else -> {
+            /* no-op */
         }
     }
 }
@@ -110,13 +116,13 @@ fun SuggestionDetailContent(
 @Composable
 fun SuggestionLikeSection(
     modifier: Modifier = Modifier,
-    suggestionDetailState: SuggestionDetailState
+    suggestionDetailState: UiState<SuggestionUI>
 ) {
     when(suggestionDetailState) {
-        is SuggestionDetailState.Loading -> {
+        is UiState.Init -> {
             /* no-op */
         }
-        is SuggestionDetailState.Main -> {
+        is UiState.Success -> {
             Row (
                 modifier = modifier
                     .fillMaxWidth()
@@ -138,10 +144,14 @@ fun SuggestionLikeSection(
                 )
 
                 LikeButton(
-                    likeNum = suggestionDetailState.suggestionDetail.likeNum,
-                    isLiked = suggestionDetailState.suggestionDetail.isLiked
+                    likeNum = suggestionDetailState.data.likeNum,
+                    isLiked = suggestionDetailState.data.isLiked
                 )
             }
+        }
+
+        else -> {
+            /* no-op */
         }
     }
 }
