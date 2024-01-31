@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lgtm.android.common_ui.R
@@ -45,7 +47,10 @@ fun LikeButton(
     ) {
         
         Text(
+            modifier = Modifier
+                .requiredWidth(30.dp),
             text = likeNum,
+            textAlign = TextAlign.Center,
             style = Typography.body3R
         )
 
@@ -62,7 +67,7 @@ fun LikeButton(
 fun LikeButtonPreview() {
     MaterialTheme {
         LikeButton(
-            likeNum = "999+",
+            likeNum = "22",
             isLiked = true
         )
     }
