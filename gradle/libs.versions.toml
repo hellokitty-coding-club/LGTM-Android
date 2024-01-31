@@ -1,8 +1,8 @@
 [versions]
 # Versions
-compileSdk = "33"
+compileSdk = "34"
 minSdk = "26"
-targetSdk = "33"
+targetSdk = "34"
 appVersion = "1.1.3"
 versionCode = "113"
 
@@ -39,7 +39,7 @@ androidx-test-espresso = "3.5.1"
 androidx-test = "1.5.2"
 
 # Build Tools and Plugins
-gradleplugin = "8.0.1"
+gradleplugin = "8.1.1"
 kspplugin = "1.8.21-1.0.11"
 
 # Dependency Injection
@@ -70,7 +70,7 @@ sonarqube = "4.0.0.2929"
 #compose
 compose-bom = "2023.08.00"
 compose-appcompat-theme = "0.28.0"
-compose-constraintlayout = "2.1.4"
+compose-constraintlayout = "1.0.1"
 
 # Other
 jsoup = "1.13.1"
