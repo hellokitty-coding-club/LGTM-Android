@@ -13,6 +13,7 @@ import com.lgtm.android.common_ui.model.DashboardUI
 import com.lgtm.android.common_ui.model.MemberMissionStatusUI
 import com.lgtm.android.common_ui.model.MissionDetailUI
 import com.lgtm.android.common_ui.model.MissionProcessInfoUI
+import com.lgtm.android.common_ui.model.NotificationUI
 import com.lgtm.android.common_ui.model.PingPongJuniorUI
 import com.lgtm.android.common_ui.model.PingPongSeniorUI
 import com.lgtm.android.common_ui.model.ProfileGlanceUI
@@ -25,6 +26,7 @@ import com.lgtm.domain.entity.response.DashboardVO
 import com.lgtm.domain.entity.response.MemberMissionStatusVO
 import com.lgtm.domain.entity.response.MissionDetailVO
 import com.lgtm.domain.entity.response.MissionProcessInfoVO
+import com.lgtm.domain.entity.response.NotificationVO
 import com.lgtm.domain.entity.response.PingPongJuniorVO
 import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.ProfileVO
@@ -226,5 +228,16 @@ fun SuggestionVO.toUiModel(): SuggestionUI {
         likeNum = likeNum,
         isLiked = isLiked,
         isMyPost = isMyPost
+    )
+}
+
+fun NotificationVO.toUiModel(): NotificationUI {
+    return NotificationUI(
+        title = title,
+        body = body,
+        notificationId = notificationId,
+        isRead = isRead,
+        time = date?.format(timeFormatter) ?: "",
+        date = date?.format(dotStyleFormatter) ?: ""
     )
 }

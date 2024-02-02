@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.lgtm.android.common_ui.model.NotificationUI
 import com.lgtm.android.common_ui.util.ItemDiffCallback
 import com.lgtm.android.main.databinding.ItemNotificationCenterBinding
-import com.lgtm.domain.entity.response.NotificationVO
 
-class NotificationAdapter : ListAdapter<NotificationVO, NotificationViewHolder>(
-    ItemDiffCallback<NotificationVO>(
+class NotificationAdapter : ListAdapter<NotificationUI, NotificationViewHolder>(
+    ItemDiffCallback<NotificationUI>(
         onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.notificationId == new.notificationId })
 ) {
@@ -28,7 +28,8 @@ class NotificationAdapter : ListAdapter<NotificationVO, NotificationViewHolder>(
 class NotificationViewHolder(
     private val binding: ItemNotificationCenterBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-    fun onBind(item: NotificationVO) {
+    fun onBind(item: NotificationUI) {
         binding.data = item
+        binding.lgtmTimestamp.setTimeStamp(item.date, item.time)
     }
 }

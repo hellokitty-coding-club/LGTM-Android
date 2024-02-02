@@ -16,6 +16,8 @@ dependencies {
     implementation(libs.hilt)
     kapt(libs.hilt.kapt)
     implementation(libs.bundles.basic.test)
+    api(platform(libs.firebase))
+    api(libs.bundles.firebase)
 
     // app 모듈에 전달 (NetworkModule)
     api(libs.bundles.retrofit)
