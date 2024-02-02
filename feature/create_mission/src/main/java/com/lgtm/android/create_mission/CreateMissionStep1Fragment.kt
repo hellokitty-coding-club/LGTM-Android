@@ -24,7 +24,9 @@ class CreateMissionStep1Fragment :
         onMissionTitleChanged()
         onMissionRepoUrlChanged()
         setupNextButtonClickListener()
+        setupMissionGuideClickListener()
     }
+
 
     private fun setupViewModel() {
         binding.viewModel = createMissionViewModel
@@ -62,5 +64,20 @@ class CreateMissionStep1Fragment :
             closeKeyboard()
             (requireActivity() as? CreateMissionActivity)?.setNextPage()
         }
+    }
+
+    private fun setupMissionGuideClickListener() {
+        binding.clCreateMissionGuide.setOnThrottleClickListener {
+            openCreateMissionGuideNotion()
+        }
+    }
+
+    private fun openCreateMissionGuideNotion() {
+        lgtmNavigator.openUrlInBrowser(requireContext(), CREATE_MISSION_GUIDE_NOTION_URL)
+    }
+
+    companion object {
+        const val CREATE_MISSION_GUIDE_NOTION_URL =
+            "https://waiting-keyboard-1b3.notion.site/LGTM-Mission-ec7bc4313a7142a1acab3c9cb5fc3d65?pvs=4"
     }
 }

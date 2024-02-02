@@ -32,12 +32,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/choose_over_one"
+            android:text="@string/choose_tech_stack_description"
             android:textAppearance="@style/Body2"
             android:textColor="@color/gray_6"
             app:layout_constraintStart_toStartOf="@id/tv_stack_to_use"
             app:layout_constraintTop_toBottomOf="@id/tv_stack_to_use" />
-
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_tech_tag"

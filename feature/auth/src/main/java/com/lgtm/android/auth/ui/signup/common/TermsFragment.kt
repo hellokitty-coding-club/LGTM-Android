@@ -1,7 +1,5 @@
 package com.lgtm.android.auth.ui.signup.common
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -48,11 +46,11 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
     private fun setUpTextViewListener() {
         binding.tvTermsService.setOnThrottleClickListener {
             shotTermsServiceClickLogging()
-            openUrlInBrowser(TERMS_SERVICE_URL)
+            lgtmNavigator.openUrlInBrowser(requireContext(), TERMS_SERVICE_URL)
         }
         binding.tvTermsPrivacy.setOnThrottleClickListener {
             shotTermsPrivacyClickLogging()
-            openUrlInBrowser(TERMS_PRIVACY_URL)
+            lgtmNavigator.openUrlInBrowser(requireContext(), TERMS_PRIVACY_URL)
         }
     }
 
@@ -70,14 +68,6 @@ class TermsFragment : BaseFragment<FragmentTermsBinding>(R.layout.fragment_terms
             .setScreenName(this.javaClass)
             .build()
         signUpViewModel.shotSwmLogging(scheme)
-    }
-
-    private fun openUrlInBrowser(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse(url)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-        startActivity(intent)
     }
 
     private fun setupViewModel() {
