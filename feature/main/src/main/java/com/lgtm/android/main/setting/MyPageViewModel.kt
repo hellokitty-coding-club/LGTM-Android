@@ -32,7 +32,7 @@ class MyPageViewModel @Inject constructor(
         viewModelScope.launch(lgtmErrorHandler) {
             profileRepository.getProfileInfo()
                 .onSuccess {
-                    _profileInfo.postValue(it.toUiModel(requireNotNull(it.memberType)))
+                    _profileInfo.postValue(it.toUiModel())
                 }.onFailure {
                     Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "getProfileInfo: $it")
