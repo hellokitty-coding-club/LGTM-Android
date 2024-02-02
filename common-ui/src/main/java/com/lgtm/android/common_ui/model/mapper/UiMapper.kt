@@ -32,15 +32,15 @@ import com.lgtm.domain.entity.response.PingPongSeniorVO
 import com.lgtm.domain.entity.response.ProfileVO
 import com.lgtm.domain.mission_suggestion.SuggestionVO
 import com.lgtm.domain.profile.profileViewType.ProfileGlance
-import com.lgtm.domain.util.dotStyleFormatter
-import com.lgtm.domain.util.timeFormatter
+import com.lgtm.domain.util.dotStyleDateFormatter
+import com.lgtm.domain.util.korean12HourTimeFormatter
 import java.time.LocalDateTime
 
 fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,
     description = description,
     maxPeopleNumber = maxPeopleNumber,
-    memberProfile = memberProfile.toUiModel(memberType),
+    memberProfile = memberProfile.toUiModel(),
     memberType = memberType,
     missionId = missionId,
     missionRepositoryUrl = missionRepositoryUrl,
@@ -55,7 +55,7 @@ fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     missionDetailButtonStatusUI = getButtonStatusUI(missionDetailStatus)
 )
 
-fun ProfileVO.toUiModel(role: Role): ProfileGlanceUI = ProfileGlanceUI(
+fun ProfileVO.toUiModel(): ProfileGlanceUI = ProfileGlanceUI(
     memberId = memberId,
     profileImage = profileImageUrl,
     nickname = nickname,
@@ -223,8 +223,8 @@ fun SuggestionVO.toUiModel(): SuggestionUI {
         title = title,
         description = description,
         suggestionId = suggestionId,
-        date = localDateTime.format(dotStyleFormatter),
-        time = localDateTime.format(timeFormatter),
+        date = localDateTime.format(dotStyleDateFormatter),
+        time = localDateTime.format(korean12HourTimeFormatter),
         likeNum = likeNum,
         isLiked = isLiked,
         isMyPost = isMyPost
@@ -237,7 +237,7 @@ fun NotificationVO.toUiModel(): NotificationUI {
         body = body,
         notificationId = notificationId,
         isRead = isRead,
-        time = date?.format(timeFormatter) ?: "",
-        date = date?.format(dotStyleFormatter) ?: ""
+        time = date?.format(korean12HourTimeFormatter) ?: "",
+        date = date?.format(dotStyleDateFormatter) ?: ""
     )
 }

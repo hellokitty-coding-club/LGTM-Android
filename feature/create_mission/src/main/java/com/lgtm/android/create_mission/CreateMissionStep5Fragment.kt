@@ -10,7 +10,7 @@ import com.lgtm.android.common_ui.base.BaseFragment
 import com.lgtm.android.common_ui.util.NetworkState
 import com.lgtm.android.common_ui.util.setOnThrottleClickListener
 import com.lgtm.android.create_mission.databinding.FragmentCreateMissionStep5Binding
-import com.lgtm.domain.util.dotStyleFormatter
+import com.lgtm.domain.util.dotStyleDateFormatter
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.util.Calendar
@@ -46,7 +46,7 @@ class CreateMissionStep5Fragment :
     }
 
     private fun setFormattedDate(localDate: LocalDate) {
-        val formattedDate = localDate.format(dotStyleFormatter)
+        val formattedDate = localDate.format(dotStyleDateFormatter)
         binding.etRegistrationDueDate.setText(formattedDate)
     }
 
