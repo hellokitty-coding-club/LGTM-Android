@@ -3,15 +3,14 @@ package com.lgtm.android.mission_recommendation.ui.detail
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import com.lgtm.android.common_ui.base.BaseActivity
-import com.lgtm.android.mission_recommendation.R
-import com.lgtm.android.mission_recommendation.databinding.ActivitySuggestionDetailBinding
+import com.lgtm.android.common_ui.base.BaseComposeActivity
 import com.lgtm.android.mission_recommendation.ui.detail.presentation.SuggestionDetailScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SuggestionDetailActivity: BaseActivity<ActivitySuggestionDetailBinding>(R.layout.activity_suggestion_detail) {
+class SuggestionDetailActivity: BaseComposeActivity(){
     private val suggestionDetailViewModel by viewModels<SuggestionDetailViewModel>()
     private val suggestionId by lazy { intent.getIntExtra(SUGGESTION_ID, defaultValue) }
 
@@ -19,23 +18,21 @@ class SuggestionDetailActivity: BaseActivity<ActivitySuggestionDetailBinding>(R.
         viewModel = suggestionDetailViewModel
     }
 
+    @Composable
+    override fun content() {
+        MaterialTheme {
+            SuggestionDetailScreen(
+                suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsState()
+            )
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fetchSuggestionDetail()
-        addSuggestionDetailScreen()
     }
     private fun fetchSuggestionDetail() {
         suggestionDetailViewModel.fetchDetail(suggestionId)
-    }
-
-    private fun addSuggestionDetailScreen() {
-        binding.composeView.setContent {
-            MaterialTheme {
-                SuggestionDetailScreen(
-                    suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsState()
-                )
-            }
-        }
     }
 
     companion object {
