@@ -14,7 +14,7 @@ import com.lgtm.domain.server_drive_ui.SduiContent
 import com.lgtm.domain.server_drive_ui.SduiEmptyUiState
 import com.lgtm.domain.server_drive_ui.SduiViewType
 import com.lgtm.domain.server_drive_ui.SectionEmptyVO
-import com.lgtm.domain.util.dotStyleFormatter
+import com.lgtm.domain.util.dotStyleDateFormatter
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
@@ -137,7 +137,7 @@ class MissionUseCase @Inject constructor(
     private fun convertTimestampToCustomFormat(timestamp: String?): String {
         if (timestamp == null || timestamp == "") return "-"
         val localDateTime = LocalDateTime.parse(timestamp)
-        return localDateTime.format(dotStyleFormatter)
+        return localDateTime.format(dotStyleDateFormatter)
     }
 
     suspend fun confirmJuniorPayment(missionID: Int): Result<Boolean> {
