@@ -12,7 +12,8 @@
     <string name="need_service_terms_agree">서비스 이용을 위해\n이용약관 동의가 필요합니다.</string>
     <string name="login_by_github">Github로 로그인</string>
     <string name="nickname_description_main">사용하실 닉네임을\n입력하세요.</string>
-    <string name="nickname_description_sub">닉네임은 나중에 다시 수정할 수 있습니다.</string>
+    <string name="nickname_description_sub">닉네임은 내 프로필에서 수정할 수 있습니다.</string>
+    <string name="introduction_description">프로필에 표시되는 자기소개입니다.</string>
     <string name="enter_nickname">닉네임을 입력하세요.</string>
     <string name="dash">/</string>
     <string name="welcome">님, 환영합니다!</string>
@@ -20,16 +21,16 @@
     <string name="which_role_to_signup">어떤 회원으로 가입하나요?</string>
     <string name="choose_role">역할을 골라주세요.</string>
     <string name="reviewee">리뷰이</string>
-    <string name="want_to_learn_develop">개발을 배우고 싶어요.</string>
+    <string name="choose_role_reviewee_description">미션에 참여하고 코드 리뷰를 받아요.</string>
     <string name="reviewer">리뷰어</string>
-    <string name="want_to_teach_develop">개발을 알려주고 싶어요.</string>
+    <string name="choose_role_reviewer_description">미션을 출제하고 코드 리뷰를 제공해요.</string>
     <string name="select_affiliation">현재 소속을\n선택해주세요.</string>
     <string name="high_school_student">고등학생</string>
     <string name="undergraduate">대학생</string>
     <string name="graduate">대학교 졸업</string>
     <string name="office_workers">직장인</string>
     <string name="enter_real_name">실명을 입력하세요.</string>
-    <string name="later_used_by_name_verification">추후에 입금자명 확인에 사용됩니다.</string>
+    <string name="later_used_by_name_verification">추후에 입금자명 확인에만 사용됩니다.</string>
     <string name="signup_complete">회원가입 완료</string>
     <string name="enter_company_name">재직중인 회사명을\n입력해주세요.</string>
     <string name="enter_position">직책을 입력해주세요.</string>
@@ -38,7 +39,7 @@
     <string name="only_number_allowed">숫자만 사용할 수 있습니다.</string>
     <string name="month">개월</string>
     <string name="enter_bank_account_num_title">계좌번호를 입력해주세요.</string>
-    <string name="enter_bank_account_num_description">리뷰 비용이 입금될 계좌입니다.</string>
+    <string name="enter_bank_account_num_description">리뷰이에게 제공되는 계좌 정보입니다.\n입력한 계좌로 리뷰 비용이 입금됩니다.</string>
     <string name="enter_bank_account">계좌번호를 입력하세요</string>
     <string name="select_bank">은행을 선택하세요.</string>
     <string name="cannot_use_space">띄어쓰기는 사용할 수 없습니다.</string>
@@ -62,9 +63,11 @@
     <!-- 미션 작성 -->
     <string name="enter_mission_title">미션 제목을 입력하세요.</string>
     <string name="enter_mission_repo_url">미션 레포지토리 URL을 입력하세요.</string>
+    <string name="enter_mission_repo_url_description">미션 기반 코드리뷰인 경우만 미션 설명 URL을 제출해주세요. 자유로운 코드 리뷰이면 비워주세요.</string>
     <string name="github_url_only">전체공개된 github URL만 입력할 수 있습니다.</string>
+    <string name="see_create_mission_guide">미션 생성 가이드 보기</string>
     <string name="which_stack_to_use">어떤 스택을 사용하시나요?</string>
-    <string name="choose_over_one">한 개 이상 선택하세요.</string>
+    <string name="choose_tech_stack_description">미션에서 사용되는 기술 스택을 선택하세요. 자유로운 코드 리뷰 시 본인이 리뷰 가능한 기술 스택을 선택하세요.</string>
     <string name="what_kind_of_mission">어떤 미션인가요?</string>
     <string name="mission_description_example">ex) 미션 소개, 구현 요구 사항, 배울 수 있는 것</string>
     <string name="recommend_group">이런 사람에게 추천해요.</string>
@@ -81,6 +84,8 @@
     <string name="optional">*선택</string>
     <string name="complete">완료</string>
     <string name="until_when_should_you_recruit_reviewers">언제까지 리뷰이를 모집할까요?</string>
+    <string name="automatically_close_when_recruit_finished">정원이 차면 자동으로 모집이 마감됩니다.</string>
+    <string name="price_per_reviewee">리뷰이 한 명당 받을 가격입니다.</string>
 
     <!-- 서비스 준비 중 -->
     <string name="service_under_preparation">서비스 준비중입니다.</string>

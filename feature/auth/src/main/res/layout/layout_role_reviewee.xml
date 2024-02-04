@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/want_to_learn_develop"
+            android:text="@string/choose_role_reviewee_description"
             android:textAppearance="@style/Body3R"
             app:layout_constraintStart_toStartOf="@id/tv_role"
             app:layout_constraintTop_toBottomOf="@id/tv_role"

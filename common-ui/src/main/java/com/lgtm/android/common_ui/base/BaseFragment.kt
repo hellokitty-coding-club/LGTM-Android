@@ -11,8 +11,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
 import com.lgtm.android.common_ui.navigator.LgtmInjector
+import com.lgtm.android.common_ui.navigator.LgtmNavigator
 import com.lgtm.android.common_ui.util.KeyboardUtil
 import dagger.hilt.android.EntryPointAccessors
 
@@ -25,7 +25,7 @@ abstract class BaseFragment<T : ViewDataBinding>(
 
     lateinit var viewModel: BaseViewModel
 
-    val lgtmNavigator: FakeLgtmNavigator by lazy {
+    val lgtmNavigator: LgtmNavigator by lazy {
         EntryPointAccessors.fromActivity(
             requireActivity(), LgtmInjector.LgtmNavigatorInjector::class.java
         ).lgtmNavigator()

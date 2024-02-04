@@ -89,7 +89,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         binding.btnNotice.setOnThrottleClickListener {
             val url =
                 "https://team-hkcc.notion.site/4823db3b781e40fdadd0cf61093c5158?v=3cee323345414e318192b89bfe7dd2d0&pvs=4"
-            openUrlInBrowser(url)
+            lgtmNavigator.openUrlInBrowser(requireContext(), url)
         }
     }
 
@@ -97,7 +97,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         // 약관 및 정책
         binding.btnTermsAndPolicies.setOnThrottleClickListener {
             val url = "https://team-hkcc.notion.site/c4f56b4e6e1b46e89c494e5b3919ed8c?pvs=4"
-            openUrlInBrowser(url)
+            lgtmNavigator.openUrlInBrowser(requireContext(), url)
         }
     }
 
@@ -109,7 +109,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 Role.REVIEWER -> "https://www.notion.so/team-hkcc/c1933575315e4b50aedbdd6b39069d3e?pvs=4"
                 Role.REVIEWEE -> "https://www.notion.so/team-hkcc/5abf8b03763a4f0d90cb2d463f6d46b4?pvs=4"
             }
-            openUrlInBrowser(url)
+            lgtmNavigator.openUrlInBrowser(requireContext(), url)
         }
     }
 
@@ -117,7 +117,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
         // 개인정보 처리방침
         binding.btnPrivacyPolicy.setOnThrottleClickListener {
             val url = "https://team-hkcc.notion.site/31a6b7a98d1f4d148bb05cc826d0c9aa?pvs=4"
-            openUrlInBrowser(url)
+            lgtmNavigator.openUrlInBrowser(requireContext(), url)
         }
     }
 
@@ -149,17 +149,10 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
     private fun setVersionInfoOnClickListener() {
         binding.btnVersionInfo.setOnThrottleClickListener {
             val playStoreUrl = "https://play.google.com/store/apps/details?id=com.lgtm.android"
-            openUrlInBrowser(playStoreUrl)
+            lgtmNavigator.openUrlInBrowser(requireContext(), playStoreUrl)
         }
     }
 
-    private fun openUrlInBrowser(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            data = Uri.parse(url)
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }
-        startActivity(intent)
-    }
 
     private fun onPressCsCenter() {
         // check whether sending email valid
