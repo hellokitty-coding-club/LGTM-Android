@@ -6,8 +6,8 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
 import com.lgtm.android.common_ui.navigator.LgtmInjector
+import com.lgtm.android.common_ui.navigator.LgtmNavigator
 import dagger.hilt.android.EntryPointAccessors
 
 abstract class BaseActivity<T : ViewDataBinding>(
@@ -16,7 +16,7 @@ abstract class BaseActivity<T : ViewDataBinding>(
     protected lateinit var binding: T
     var viewModel: BaseViewModel? = null
 
-    val lgtmNavigator: FakeLgtmNavigator by lazy {
+    val lgtmNavigator: LgtmNavigator by lazy {
         EntryPointAccessors.fromActivity(
             this, LgtmInjector.LgtmNavigatorInjector::class.java
         ).lgtmNavigator()

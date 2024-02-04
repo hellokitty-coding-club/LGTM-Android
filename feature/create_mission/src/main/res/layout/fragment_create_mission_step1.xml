@@ -57,6 +57,17 @@
                     app:layout_constraintStart_toStartOf="@id/tv_mission_title"
                     app:layout_constraintTop_toBottomOf="@id/et_mission_title" />
 
+                <TextView
+                    android:id="@+id/tv_mission_repo_url_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/base_guideline"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/enter_mission_repo_url_description"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/gray_6"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mission_repo_url" />
+
                 <com.lgtm.android.common_ui.ui.LGTMEditText
                     android:id="@+id/et_mission_repo_url"
                     android:layout_width="match_parent"
@@ -65,8 +76,40 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="92dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_mission_repo_url" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_mission_repo_url_description" />
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_create_mission_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="@dimen/base_guideline"
+                    android:background="@drawable/rectangle_white_stroke_gray_3_radius_100"
+                    android:padding="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_mission_repo_url">
+
+                    <TextView
+                        android:id="@+id/tv_create_mission_guide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/see_create_mission_guide"
+                        android:textAppearance="@style/Body3M"
+                        android:textColor="@color/gray_6"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:rotationY="180"
+                        android:src="@drawable/ic_back"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_create_mission_guide"
+                        app:layout_constraintStart_toEndOf="@id/tv_create_mission_guide"
+                        app:layout_constraintTop_toTopOf="@id/tv_create_mission_guide" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

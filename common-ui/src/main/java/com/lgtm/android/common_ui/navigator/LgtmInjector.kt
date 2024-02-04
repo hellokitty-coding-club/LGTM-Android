@@ -9,6 +9,6 @@ sealed interface LgtmInjector {
     @EntryPoint
     @InstallIn(ActivityComponent::class)
     interface LgtmNavigatorInjector {
-        fun lgtmNavigator(): FakeLgtmNavigator
+        fun lgtmNavigator(): LgtmNavigator
     }
 }

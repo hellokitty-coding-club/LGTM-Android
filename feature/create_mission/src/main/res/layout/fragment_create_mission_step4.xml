@@ -51,6 +51,17 @@
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/tv_auto_close"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/base_guideline"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/automatically_close_when_recruit_finished"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/tv_num_of_recruits" />
+
                 <EditText
                     android:id="@+id/et_num_of_recruits"
                     style="@style/LGTMEditTextStyle"
@@ -62,7 +73,7 @@
                     android:inputType="number"
                     android:maxLength="9"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_num_of_recruits" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_auto_close" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,6 +96,17 @@
                     app:layout_constraintStart_toStartOf="@id/gl_start"
                     app:layout_constraintTop_toBottomOf="@id/et_num_of_recruits" />
 
+                <TextView
+                    android:id="@+id/tv_price_per_reviewee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/base_guideline"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/price_per_reviewee"
+                    android:textAppearance="@style/Body2"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
                 <EditText
                     android:id="@+id/et_price"
                     style="@style/LGTMEditTextStyle"
@@ -98,7 +120,7 @@
                     android:maxLength="9"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/gl_start"
-                    app:layout_constraintTop_toBottomOf="@id/tv_price"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price_per_reviewee"
                     tools:text="100,000" />
 
                 <TextView

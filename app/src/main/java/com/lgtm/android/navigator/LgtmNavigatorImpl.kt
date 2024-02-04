@@ -2,8 +2,9 @@ package com.lgtm.android.navigator
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import com.lgtm.android.auth.ui.SignInActivity
-import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
+import com.lgtm.android.common_ui.navigator.LgtmNavigator
 import com.lgtm.android.create_mission.CreateMissionActivity
 import com.lgtm.android.main.MainActivity
 import com.lgtm.android.main.notification.NotificationCenterActivity
@@ -14,8 +15,8 @@ import com.lgtm.android.mission_recommendation.ui.SuggestionDashboardActivity
 import com.lgtm.android.profile.ProfileActivity
 import javax.inject.Inject
 
-class LgtmNavigator @Inject constructor(
-) : FakeLgtmNavigator {
+class LgtmNavigatorImpl @Inject constructor(
+) : LgtmNavigator {
     override fun navigateToSignIn(context: Context) {
         val intent = Intent(context, SignInActivity::class.java)
         context.startActivity(intent)
@@ -66,6 +67,14 @@ class LgtmNavigator @Inject constructor(
 
     override fun navigateToRecommendationDashboard(context: Context) {
         val intent = Intent(context, SuggestionDashboardActivity::class.java)
+        context.startActivity(intent)
+    }
+
+    override fun openUrlInBrowser(context: Context, url: String) {
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(url)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
         context.startActivity(intent)
     }
 }
