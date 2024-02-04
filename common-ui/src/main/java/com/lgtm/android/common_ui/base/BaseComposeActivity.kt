@@ -5,14 +5,14 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import com.lgtm.android.common_ui.navigator.FakeLgtmNavigator
 import com.lgtm.android.common_ui.navigator.LgtmInjector
+import com.lgtm.android.common_ui.navigator.LgtmNavigator
 import dagger.hilt.android.EntryPointAccessors
 
 abstract class BaseComposeActivity: ComponentActivity() {
     var viewModel: BaseViewModel? = null
 
-    val lgtmNavigator: FakeLgtmNavigator by lazy {
+    val lgtmNavigator: LgtmNavigator by lazy {
         EntryPointAccessors.fromActivity(
             this, LgtmInjector.LgtmNavigatorInjector::class.java
         ).lgtmNavigator()
