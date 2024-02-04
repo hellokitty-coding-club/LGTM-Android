@@ -8,6 +8,14 @@ plugins {
 
 android {
     namespace = "com.lgtm.android.common_ui"
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.get()
+    }
 }
 
 dependencies {
@@ -23,4 +31,16 @@ dependencies {
     implementation(libs.bundles.basic.test)
     implementation(libs.hilt)
     kapt(libs.hilt.kapt)
+
+    //compose
+    val composePlatform = platform(libs.compose.bom)
+    api(composePlatform)
+    api(libs.compose.ui)
+    api(libs.compose.ui.tooling)
+    api(libs.compose.preview)
+    api(libs.compose.activity)
+    api(libs.compose.material)
+    api(libs.compose.foundation)
+    api(libs.compose.constraintlayout)
+    api(libs.compose.appcompat.theme)
 }

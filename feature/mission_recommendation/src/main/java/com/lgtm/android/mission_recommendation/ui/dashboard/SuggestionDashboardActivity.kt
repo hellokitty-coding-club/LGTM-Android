@@ -1,4 +1,4 @@
-package com.lgtm.android.mission_recommendation.ui
+package com.lgtm.android.mission_recommendation.ui.dashboard
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -49,8 +49,16 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
     }
 
     private fun initAdapter() {
-        missionSuggestionAdapter = MissionSuggestionAdapter()
+        missionSuggestionAdapter = MissionSuggestionAdapter(::onClickSuggestionItem)
         binding.rvMissionSuggestion.adapter = missionSuggestionAdapter
+    }
+
+    private fun onClickSuggestionItem(suggestionId: Int) {
+        moveToSuggestionDetail(suggestionId)
+    }
+
+    private fun moveToSuggestionDetail(suggestionId: Int) {
+        lgtmNavigator.navigateToSuggestionDetail(this, suggestionId)
     }
 
     private fun setBackButtonClickListener() {

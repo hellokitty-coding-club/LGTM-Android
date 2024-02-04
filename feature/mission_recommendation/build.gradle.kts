@@ -8,6 +8,14 @@ plugins {
 
 android {
     namespace = "com.lgtm.android.mission_recommendation"
+
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.kotlin.compiler.get()
+    }
 }
 
 dependencies {

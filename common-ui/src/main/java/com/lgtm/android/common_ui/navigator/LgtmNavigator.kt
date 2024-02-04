@@ -19,7 +19,9 @@ interface LgtmNavigator {
 
     fun navigateToNotificationCenter(context: Context)
 
-    fun navigateToRecommendationDashboard(context: Context)
+    fun navigateToSuggestionDashboard(context: Context)
+
+    fun navigateToSuggestionDetail(context: Context, suggestionId: Int)
 
     fun openUrlInBrowser(context: Context, url: String)
 }
