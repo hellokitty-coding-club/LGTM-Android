@@ -1,4 +1,4 @@
-package com.lgtm.android.mission_recommendation.ui.detail.presentation
+package com.lgtm.android.mission_suggestion.ui.detail.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

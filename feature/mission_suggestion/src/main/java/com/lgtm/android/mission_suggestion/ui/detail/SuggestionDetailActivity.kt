@@ -1,4 +1,4 @@
-package com.lgtm.android.mission_recommendation.ui.detail
+package com.lgtm.android.mission_suggestion.ui.detail
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -6,7 +6,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.lgtm.android.common_ui.base.BaseComposeActivity
-import com.lgtm.android.mission_recommendation.ui.detail.presentation.SuggestionDetailScreen
+import com.lgtm.android.mission_suggestion.ui.detail.presentation.SuggestionDetailScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.lgtm.android.mission_recommendation.ui.dashboard
+package com.lgtm.android.mission_suggestion.ui.dashboard
 
 import android.os.Bundle
 import androidx.activity.viewModels
