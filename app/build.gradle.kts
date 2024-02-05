@@ -87,6 +87,7 @@ dependencies {
     implementation(project(":feature:manage_mission"))
     implementation(project(":feature:profile"))
     implementation(project(":feature:mission_recommendation"))
+    implementation(project(":feature:suggestion_detail"))
     implementation(project(":common-ui"))
 
     implementation(libs.hilt)
