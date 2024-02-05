@@ -75,11 +75,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".mission_recommendation.ui.dashboard.SuggestionDashboardActivity"
+            android:name=".mission_suggestion.ui.dashboard.SuggestionDashboardActivity"
             android:exported="false" />
 
         <activity
-            android:name=".suggestion_detail.SuggestionDetailActivity"
+            android:name=".mission_suggestion.ui.detail.SuggestionDetailActivity"
             android:exported="false" />
 
     </application>
