@@ -19,7 +19,7 @@ class SuggestionDetailActivity: BaseComposeActivity(){
     }
 
     @Composable
-    override fun content() {
+    override fun Content() {
         MaterialTheme {
             SuggestionDetailScreen(
                 suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsState()

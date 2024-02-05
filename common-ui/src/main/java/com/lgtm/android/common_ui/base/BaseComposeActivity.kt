@@ -21,13 +21,13 @@ abstract class BaseComposeActivity: ComponentActivity() {
     abstract fun initializeViewModel()
 
     @Composable
-    abstract fun content()
+    abstract fun Content()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeViewModel()
         setContent {
-            content()
+            Content()
         }
     }
 
