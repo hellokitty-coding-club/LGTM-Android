@@ -26,6 +26,7 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
         observeMissionSuggestion()
         initAdapter()
         setBackButtonClickListener()
+        setCreateSuggestionButtonClickListener()
     }
 
     override fun onResume() {
@@ -64,6 +65,12 @@ class SuggestionDashboardActivity : BaseActivity<ActivitySuggestionDashboardBind
     private fun setBackButtonClickListener() {
         binding.ivBack.setOnThrottleClickListener {
             finish()
+        }
+    }
+
+    private fun setCreateSuggestionButtonClickListener() {
+        binding.btnCreateSuggestion.setOnThrottleClickListener {
+            lgtmNavigator.navigateToCreateSuggestion(this)
         }
     }
 }

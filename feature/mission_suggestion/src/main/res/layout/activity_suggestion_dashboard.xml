@@ -69,7 +69,7 @@
             tools:listitem="@layout/item_mission_suggestion" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_recommend_mission"
+            android:id="@+id/btn_create_suggestion"
             style="@style/LGTMButtonGrayTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
