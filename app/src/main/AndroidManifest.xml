@@ -79,7 +79,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".suggestion_detail.SuggestionDetailActivity"
+            android:name=".mission_recommendation.ui.detail.SuggestionDetailActivity"
             android:exported="false" />
 
     </application>
