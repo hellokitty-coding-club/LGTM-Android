@@ -91,6 +91,7 @@ javax-inject = { module = "javax.inject:javax.inject", version.ref = "javax-inje
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
@@ -151,7 +152,7 @@ jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 
 [bundles]
 
-androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "constraintlayout", "activity", "fragment"]
+androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "lifecycle-viewmodel-compose", "constraintlayout", "activity", "fragment"]
 okhttp = ["okhttp", "okhttp-logging-interceptor", "okhttp-bom"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 gson = ["gson", "gson-converter"]
