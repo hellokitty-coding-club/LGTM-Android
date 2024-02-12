@@ -3,6 +3,7 @@ package com.lgtm.domain.entity.response
 import com.lgtm.domain.constants.MissionDetailStatus
 import com.lgtm.domain.constants.MissionStatus
 import com.lgtm.domain.constants.Role
+import java.time.LocalDateTime
 
 data class MissionDetailVO(
     val currentPeopleNumber: Int,
@@ -20,5 +21,6 @@ data class MissionDetailVO(
     val remainingRegisterDays: Int,
     val scraped: Boolean,
     val techTagList: List<TechTagVO>,
-    val missionDetailStatus: MissionDetailStatus
+    val missionDetailStatus: MissionDetailStatus,
+    val date: LocalDateTime?,
 )

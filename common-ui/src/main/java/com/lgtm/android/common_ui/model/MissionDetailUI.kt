@@ -21,5 +21,7 @@ data class MissionDetailUI(
     val remainingRegisterDays: Int,
     val scraped: Boolean,
     val techTagList: List<TechTagVO>,
-    val missionDetailButtonStatusUI: MissionDetailButtonStatus
+    val missionDetailButtonStatusUI: MissionDetailButtonStatus,
+    val time: String,
+    val date: String,
 )

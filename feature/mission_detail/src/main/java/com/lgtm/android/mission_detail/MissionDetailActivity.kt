@@ -96,6 +96,7 @@ class MissionDetailActivity :
                     techTagAdapter.submitList(missionDetailUi?.techTagList)
                     binding.profileGlance.data = requireNotNull(missionDetailUi?.memberProfile)
                     setGithubUrlUI(missionDetailUi?.missionRepositoryUrl)
+                    bindDateAndTimeInfo()
                 }
 
                 is NetworkState.Failure -> {
@@ -129,7 +130,6 @@ class MissionDetailActivity :
         binding.tvMissionUrl.setTextColor(grayTextColor)
     }
 
-
     private fun setupViewModel() {
         binding.viewModel = missionDetailViewModel
     }
@@ -158,6 +158,11 @@ class MissionDetailActivity :
             intentShare.type = "text/plain"
             startActivity(Intent.createChooser(intentShare, "앱을 선택해 주세요."))
         }
+    }
+
+    private fun bindDateAndTimeInfo() {
+        val (date, time) = missionDetailViewModel.getMissionDateAndTime()
+        binding.lgtmTimestamp.setTimeStamp(date, time)
     }
 
     private fun setMenuButtonClickListener() {

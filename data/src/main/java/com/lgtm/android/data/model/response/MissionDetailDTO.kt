@@ -1,6 +1,7 @@
 package com.lgtm.android.data.model.response
 
 import com.google.gson.annotations.SerializedName
+import com.lgtm.android.data.model.mapper.parseDate
 import com.lgtm.domain.constants.MissionDetailStatus.Companion.getMissionDetailStatus
 import com.lgtm.domain.constants.MissionStatus.Companion.getMissionStatus
 import com.lgtm.domain.constants.Role
@@ -25,7 +26,8 @@ data class MissionDetailDTO(
     @SerializedName("participated")
     val isParticipated: Boolean?,
     @SerializedName("closed")
-    val isClosed: Boolean?
+    val isClosed: Boolean?,
+    val createdAt: String?,
 ) {
     fun toVO(role: Role?): MissionDetailVO {
         val memberType: Role = Role.getRole(requireNotNull(memberType)) ?: requireNotNull(role)
@@ -49,7 +51,8 @@ data class MissionDetailDTO(
                 memberType,
                 requireNotNull(isParticipated),
                 requireNotNull(isClosed)
-            )
+            ),
+            date = parseDate(createdAt)
         )
     }
 }
