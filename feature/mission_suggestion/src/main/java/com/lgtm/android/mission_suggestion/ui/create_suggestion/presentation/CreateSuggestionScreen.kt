@@ -1,5 +1,6 @@
 package com.lgtm.android.mission_suggestion.ui.create_suggestion.presentation
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,18 +15,22 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.BackButton
-import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.model.NoLimitEditTextData
 import com.lgtm.android.common_ui.theme.body1M
@@ -33,9 +38,11 @@ import com.lgtm.android.common_ui.theme.body2
 import com.lgtm.android.common_ui.theme.heading4B
 import com.lgtm.android.common_ui.ui.LGTMEditText
 import com.lgtm.android.common_ui.ui.LGTMNoLimitEditText
+import com.lgtm.android.common_ui.util.throttleClickable
+import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestionViewModel
 
 @Composable
-fun CreateSuggestionScreen() {
+fun CreateSuggestionScreen(viewModel: CreateSuggestionViewModel = viewModel()) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxHeight()
@@ -51,7 +58,11 @@ fun CreateSuggestionScreen() {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                }
+                },
+            suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsState(),
+            suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsState(),
+            updateTitleEditTextData = viewModel::updateSuggestionTitleTextData,
+            updateContentEditTextData = viewModel::updateSuggestionContentTextData
         )
 
         CreateSuggestionNextButton(
@@ -60,7 +71,8 @@ fun CreateSuggestionScreen() {
                     bottom.linkTo(parent.bottom, margin = 28.dp)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                }
+                },
+            enabledState = viewModel.isSuggestionValid.collectAsState()
         )
 
         CreateSuggestionBackButton(
@@ -75,33 +87,48 @@ fun CreateSuggestionScreen() {
 
 @Composable
 fun CreateSuggestionBackButton(modifier: Modifier = Modifier) {
-    BackButton(modifier)
+    val context = LocalContext.current
+    BackButton(modifier) {
+        (context as ComponentActivity).finish()
+    }
 }
 
 @Composable
-fun CreateSuggestionNextButton(modifier: Modifier = Modifier) {
+fun CreateSuggestionNextButton(
+    modifier: Modifier = Modifier,
+    enabledState: State<Boolean>
+) {
+    val enabled by remember { enabledState }
     Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp)
             .background(
-                color = colorResource(id = R.color.gray_2),
+                color = if (enabled) colorResource(id = R.color.green) else colorResource(id = R.color.gray_2),
                 shape = RoundedCornerShape(5.dp)
-            ),
-        contentAlignment = Alignment.Center
-    ) {
+            )
+            .throttleClickable(enabled) { /* TODO */},
+        contentAlignment = Alignment.Center,
+
+        ) {
         Text(
             modifier = Modifier
                 .padding(vertical = 14.dp),
             text = stringResource(id = R.string.suggestion_next),
             style = Typography.body1M,
-            color = colorResource(id = R.color.gray_4)
+            color = if (enabled) colorResource(id = R.color.black) else colorResource(id = R.color.gray_4)
         )
     }
 }
 
 @Composable
-fun SuggestionSection(modifier: Modifier = Modifier) {
+fun SuggestionSection(
+    modifier: Modifier = Modifier,
+    suggestionTitleEditTextData: State<EditTextData>,
+    suggestionContentEditTextData: State<NoLimitEditTextData>,
+    updateTitleEditTextData: () -> Unit,
+    updateContentEditTextData: () -> Unit
+) {
     Column(
         modifier
             .padding(
@@ -111,22 +138,25 @@ fun SuggestionSection(modifier: Modifier = Modifier) {
             ),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        SuggestionTitle()
-        SuggestionContent()
+        SuggestionTitle(
+            suggestionTitleEditTextData,
+            updateTitleEditTextData
+        )
+        SuggestionContent(
+            suggestionContentEditTextData,
+            updateContentEditTextData
+        )
     }
 }
 
 @Composable
-fun SuggestionTitle() {
+fun SuggestionTitle(
+    suggestionTitleEditTextData: State<EditTextData>,
+    updateTitleEditTextData: () -> Unit
+) {
     val lifecycleOwner = LocalLifecycleOwner.current
-    val suggestionTitleEditTextData = MutableLiveData(
-        EditTextData(
-            text = MutableLiveData(""),
-            infoStatus = MutableLiveData(InfoType.NONE),
-            maxLength = 100,
-            hint = "제목을 입력하세요."
-        )
-    )
+    val title by remember { suggestionTitleEditTextData }
+
     Column(
         modifier = Modifier
             .padding(top = 107.dp)
@@ -144,8 +174,11 @@ fun SuggestionTitle() {
             factory = { context ->
                 LGTMEditText(context).apply {
                     setLifecycleOwner(lifecycleOwner)
-                    bindEditTextData(suggestionTitleEditTextData)
+                    bindStateEditTextData(title)
                     setMaxLine(1)
+                    onTextChangedListener {
+                        updateTitleEditTextData()
+                    }
                 }
             }
         )
@@ -153,15 +186,13 @@ fun SuggestionTitle() {
 }
 
 @Composable
-fun SuggestionContent() {
+fun SuggestionContent(
+    suggestionContentEditTextData: State<NoLimitEditTextData>,
+    updateContentEditTextData: () -> Unit
+) {
     val lifecycleOwner = LocalLifecycleOwner.current
-    val suggestionTitleEditTextData = MutableLiveData(
-        NoLimitEditTextData(
-            text = MutableLiveData(""),
-            infoStatus = MutableLiveData(InfoType.NONE),
-            hint = "본문을 입력하세요."
-        )
-    )
+    val content by remember { suggestionContentEditTextData }
+
     Column(
         modifier = Modifier
             .padding(top = 42.dp)
@@ -180,8 +211,11 @@ fun SuggestionContent() {
             factory = { context ->
                 LGTMNoLimitEditText(context).apply {
                     setLifecycleOwner(lifecycleOwner)
-                    bindEditTextData(suggestionTitleEditTextData)
+                    bindStateEditTextData(content)
                     setMaxLine(5)
+                    onTextChangedListener {
+                        updateContentEditTextData()
+                    }
                 }
             }
         )
