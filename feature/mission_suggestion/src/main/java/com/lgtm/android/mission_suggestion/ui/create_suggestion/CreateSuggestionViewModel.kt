@@ -44,6 +44,7 @@ class CreateSuggestionViewModel @Inject constructor(
                 InfoType.NONE
             }
         setIsSuggestionValid()
+        setIsSuggestionEmpty()
     }
 
     /** content **/
@@ -64,6 +65,7 @@ class CreateSuggestionViewModel @Inject constructor(
                 InfoType.NONE
             }
         setIsSuggestionValid()
+        setIsSuggestionEmpty()
     }
 
     /** check suggestion valid **/
@@ -73,6 +75,14 @@ class CreateSuggestionViewModel @Inject constructor(
     private fun setIsSuggestionValid() {
         _isSuggestionValid.value =
             (_suggestionTitleTextData.value.infoStatus.value == InfoType.NONE) && (_suggestionContentTextData.value.infoStatus.value == InfoType.NONE)
+    }
+
+    private val _isSuggestionEmpty = MutableStateFlow(true)
+    val isSuggestionEmpty: StateFlow<Boolean> = _isSuggestionEmpty
+
+    private fun setIsSuggestionEmpty() {
+        _isSuggestionEmpty.value =
+            (_suggestionTitleTextData.value.text.value.isNullOrBlank() && _suggestionContentTextData.value.text.value.isNullOrBlank())
     }
 
     /** create suggestion **/

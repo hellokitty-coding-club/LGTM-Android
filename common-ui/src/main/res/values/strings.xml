@@ -163,6 +163,8 @@
     <string name="suggestion_next">다음</string>
     <string name="title_required">제목은 필수 입력 항목 입니다.</string>
     <string name="content_required">본문은 필수 입력 항목 입니다.</string>
+    <string name="want_to_stop_creating_suggestion">작성을 중단할까요?</string>
+    <string name="content_will_not_be_saved">작성한 내용은 저장되지 않아요.</string>
 
     <!-- dialog -->
     <string name="want_to_logout">로그아웃 하시겠어요?</string>

@@ -1,5 +1,6 @@
 package com.lgtm.android.mission_suggestion.ui.create_suggestion.presentation
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -43,7 +44,8 @@ import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestion
 @Composable
 fun CreateSuggestionScreen(
     viewModel: CreateSuggestionViewModel = hiltViewModel(),
-    onBackButtonClick: () -> Unit
+    onBackButtonClick: () -> Unit,
+    showStopCreationDialog: () -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -54,6 +56,7 @@ fun CreateSuggestionScreen(
         when(viewModel.createSuggestionState.collectAsStateWithLifecycle().value) {
             is UiState.Init -> {
                 val (backButton, suggestionSection, nextButton) = createRefs()
+                val isSuggestionEmpty = viewModel.isSuggestionEmpty.collectAsStateWithLifecycle().value
 
                 SuggestionSection(
                     modifier = Modifier
@@ -86,8 +89,18 @@ fun CreateSuggestionScreen(
                             top.linkTo(parent.top, margin = 30.dp)
                             start.linkTo(parent.start, margin = 20.dp)
                         },
-                    onBackButtonClick = onBackButtonClick
+                    isSuggestionEmpty = isSuggestionEmpty,
+                    onBackButtonClick = onBackButtonClick,
+                    showStopCreationDialog = showStopCreationDialog
                 )
+
+                BackHandler {
+                    if (!isSuggestionEmpty) {
+                        showStopCreationDialog()
+                    } else {
+                        onBackButtonClick()
+                    }
+                }
             }
             is UiState.Success -> { onBackButtonClick() }
             is UiState.Failure -> { /* no-op */ }
@@ -98,9 +111,17 @@ fun CreateSuggestionScreen(
 @Composable
 fun CreateSuggestionBackButton(
     modifier: Modifier = Modifier,
-    onBackButtonClick: () -> Unit
+    isSuggestionEmpty: Boolean,
+    onBackButtonClick: () -> Unit,
+    showStopCreationDialog: () -> Unit
 ) {
-    BackButton(modifier) { onBackButtonClick() }
+    BackButton(modifier) {
+        if (!isSuggestionEmpty) {
+            showStopCreationDialog()
+        } else {
+            onBackButtonClick()
+        }
+    }
 }
 
 @Composable
