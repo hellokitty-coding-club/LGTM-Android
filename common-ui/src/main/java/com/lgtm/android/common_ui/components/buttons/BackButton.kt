@@ -13,10 +13,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.lgtm.android.common_ui.R
+import com.lgtm.android.common_ui.util.throttleClickable
 
 @Composable
 fun BackButton(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Box(
         modifier = modifier
@@ -29,9 +31,10 @@ fun BackButton(
                 color = Color.White,
                 shape = RoundedCornerShape(10.dp)
             )
-            .padding(7.dp)
+            .throttleClickable { onClick() }
     ) {
         Image(
+            modifier = Modifier.padding(7.dp),
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = null
         )
