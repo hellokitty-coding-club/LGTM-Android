@@ -3,6 +3,11 @@ package com.lgtm.android.common_ui.util
 import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.View
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 
 
 class OnThrottleClickListener(
@@ -32,3 +37,14 @@ fun View.setOnThrottleClickListener(action: (v: View) -> Unit) {
 fun View.setOnThrottleClickListener(action: (v: View) -> Unit, interval: Long) {
     setOnClickListener(OnThrottleClickListener(action, interval))
 }
+
+@Composable
+fun Modifier.throttleClickable(
+    enabled: Boolean = false,
+    onClick: () -> Unit
+) = clickable(
+    enabled = enabled,
+    interactionSource = remember { MutableInteractionSource() },
+    indication = null,
+    onClick = onClick
+)
