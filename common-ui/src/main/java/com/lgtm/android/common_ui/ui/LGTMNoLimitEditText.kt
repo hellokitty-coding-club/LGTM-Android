@@ -8,7 +8,6 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
 import com.lgtm.android.common_ui.databinding.LayoutLgtmNoLimitEditTextBinding
 import com.lgtm.android.common_ui.model.NoLimitEditTextData
 
@@ -33,8 +32,8 @@ class LGTMNoLimitEditText @JvmOverloads constructor(
         initializeView()
     }
 
-    fun bindEditTextData(editTextData: MutableLiveData<NoLimitEditTextData>) {
-        binding.editTextData = editTextData.value
+    fun bindStateEditTextData(editTextData: NoLimitEditTextData?) {
+        binding.editTextData = editTextData
         binding.lifecycleOwner = lifecycleOwner
     }
 
@@ -53,6 +52,12 @@ class LGTMNoLimitEditText @JvmOverloads constructor(
             editText.addTextChangedListener {
                 ivClear.visibility = if (editText.text.isNotEmpty()) View.VISIBLE else View.GONE
             }
+        }
+    }
+
+    fun onTextChangedListener(listener: (String) -> Unit) {
+        binding.editText.addTextChangedListener {
+            listener(it.toString())
         }
     }
 }

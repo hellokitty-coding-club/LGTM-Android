@@ -55,4 +55,16 @@ class LGTMEditText @JvmOverloads constructor(
             }
         }
     }
+
+    /* compose에서 활용하기 위해 추가 */
+    fun bindStateEditTextData(editTextData: EditTextData?) {
+        binding.editTextData = editTextData
+        binding.lifecycleOwner = lifecycleOwner
+    }
+
+    fun onTextChangedListener(listener: (String) -> Unit) {
+        binding.editText.addTextChangedListener {
+            listener(it.toString())
+        }
+    }
 }
