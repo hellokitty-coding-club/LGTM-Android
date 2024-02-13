@@ -1,17 +1,31 @@
 package com.lgtm.android.mission_suggestion.ui.create_suggestion
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.model.NoLimitEditTextData
+import com.lgtm.android.common_ui.util.UiState
+import com.lgtm.domain.entity.request.CreateSuggestionRequestDTO
+import com.lgtm.domain.entity.response.CreateSuggestionResponseVO
+import com.lgtm.domain.repository.SuggestionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CreateSuggestionViewModel @Inject constructor(): BaseViewModel() {
+class CreateSuggestionViewModel @Inject constructor(
+    private val suggestionRepository: SuggestionRepository
+): BaseViewModel() {
+
+    /** title **/
     private val _suggestionTitleTextData = MutableStateFlow(
         EditTextData(
             text = MutableLiveData(""),
@@ -21,18 +35,6 @@ class CreateSuggestionViewModel @Inject constructor(): BaseViewModel() {
         )
     )
     val suggestionTitleTextData: StateFlow<EditTextData> = _suggestionTitleTextData
-
-    private val _suggestionContentTextData = MutableStateFlow(
-        NoLimitEditTextData(
-            text = MutableLiveData(""),
-            infoStatus = MutableLiveData(InfoType.CONTENT_REQUIRED),
-            hint = "본문을 입력하세요."
-        )
-    )
-    val suggestionContentTextData: StateFlow<NoLimitEditTextData> = _suggestionContentTextData
-
-    private val _isSuggestionValid = MutableStateFlow(false)
-    val isSuggestionValid: StateFlow<Boolean> =_isSuggestionValid
 
     fun updateSuggestionTitleTextData() {
         _suggestionTitleTextData.value.infoStatus.value =
@@ -44,6 +46,16 @@ class CreateSuggestionViewModel @Inject constructor(): BaseViewModel() {
         setIsSuggestionValid()
     }
 
+    /** content **/
+    private val _suggestionContentTextData = MutableStateFlow(
+        NoLimitEditTextData(
+            text = MutableLiveData(""),
+            infoStatus = MutableLiveData(InfoType.CONTENT_REQUIRED),
+            hint = "본문을 입력하세요."
+        )
+    )
+    val suggestionContentTextData: StateFlow<NoLimitEditTextData> = _suggestionContentTextData
+
     fun updateSuggestionContentTextData() {
         _suggestionContentTextData.value.infoStatus.value =
             if ((this._suggestionContentTextData.value.text.value ?: "").isBlank()) {
@@ -54,8 +66,36 @@ class CreateSuggestionViewModel @Inject constructor(): BaseViewModel() {
         setIsSuggestionValid()
     }
 
+    /** check suggestion valid **/
+    private val _isSuggestionValid = MutableStateFlow(false)
+    val isSuggestionValid: StateFlow<Boolean> =_isSuggestionValid
+
     private fun setIsSuggestionValid() {
         _isSuggestionValid.value =
             (_suggestionTitleTextData.value.infoStatus.value == InfoType.NONE) && (_suggestionContentTextData.value.infoStatus.value == InfoType.NONE)
     }
+
+    /** create suggestion **/
+    private val _createSuggestionState: MutableStateFlow<UiState<CreateSuggestionResponseVO>> = MutableStateFlow(UiState.Init)
+    val createSuggestionState: StateFlow<UiState<CreateSuggestionResponseVO>>
+        get() = _createSuggestionState
+
+    fun createSuggestion() {
+        viewModelScope.launch(lgtmErrorHandler) {
+            suggestionRepository.createSuggestion(createSuggestionDTO())
+                .onSuccess {
+                    _createSuggestionState.value = UiState.Success(data = it)
+                    Log.d(TAG, "createSuggestion: $it")
+                }.onFailure {
+                    _createSuggestionState.value = UiState.Failure(msg = it.message)
+                    Firebase.crashlytics.recordException(it)
+                    Log.e(TAG, "createSuggestion: $it")
+                }
+        }
+    }
+
+    private fun createSuggestionDTO() = CreateSuggestionRequestDTO(
+        title = requireNotNull(suggestionTitleTextData.value.text.value),
+        description = requireNotNull(suggestionContentTextData.value.text.value)
+    )
 }
