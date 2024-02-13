@@ -28,60 +28,72 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.BackButton
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.model.NoLimitEditTextData
+import com.lgtm.android.common_ui.navigator.LgtmNavigator
 import com.lgtm.android.common_ui.theme.body1M
 import com.lgtm.android.common_ui.theme.body2
 import com.lgtm.android.common_ui.theme.heading4B
 import com.lgtm.android.common_ui.ui.LGTMEditText
 import com.lgtm.android.common_ui.ui.LGTMNoLimitEditText
+import com.lgtm.android.common_ui.util.UiState
 import com.lgtm.android.common_ui.util.throttleClickable
 import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestionViewModel
 
 @Composable
-fun CreateSuggestionScreen(viewModel: CreateSuggestionViewModel = viewModel()) {
+fun CreateSuggestionScreen(
+    viewModel: CreateSuggestionViewModel = hiltViewModel(),
+    navigator: LgtmNavigator
+) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxHeight()
             .background(color = colorResource(id = R.color.white))
             .imePadding()
     ) {
-        val (backButton, suggestionSection, nextButton) = createRefs()
+        when(viewModel.createSuggestionState.collectAsState().value) {
+            is UiState.Init -> {
+                val (backButton, suggestionSection, nextButton) = createRefs()
 
-        SuggestionSection(
-            modifier = Modifier
-                .verticalScroll(rememberScrollState(), reverseScrolling = true)
-                .constrainAs(suggestionSection) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                },
-            suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsState(),
-            suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsState(),
-            updateTitleEditTextData = viewModel::updateSuggestionTitleTextData,
-            updateContentEditTextData = viewModel::updateSuggestionContentTextData
-        )
+                SuggestionSection(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState(), reverseScrolling = true)
+                        .constrainAs(suggestionSection) {
+                            top.linkTo(parent.top)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        },
+                    suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsState(),
+                    suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsState(),
+                    updateTitleEditTextData = viewModel::updateSuggestionTitleTextData,
+                    updateContentEditTextData = viewModel::updateSuggestionContentTextData
+                )
 
-        CreateSuggestionNextButton(
-            modifier = Modifier
-                .constrainAs(nextButton) {
-                    bottom.linkTo(parent.bottom, margin = 28.dp)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                },
-            enabledState = viewModel.isSuggestionValid.collectAsState()
-        )
+                CreateSuggestionNextButton(
+                    modifier = Modifier
+                        .constrainAs(nextButton) {
+                            bottom.linkTo(parent.bottom, margin = 28.dp)
+                            start.linkTo(parent.start)
+                            end.linkTo(parent.end)
+                        },
+                    enabledState = viewModel.isSuggestionValid.collectAsState(),
+                    onClick = viewModel::createSuggestion
+                )
 
-        CreateSuggestionBackButton(
-            modifier = Modifier
-                .constrainAs(backButton) {
-                    top.linkTo(parent.top, margin = 30.dp)
-                    start.linkTo(parent.start, margin = 20.dp)
-                }
-        )
+                CreateSuggestionBackButton(
+                    modifier = Modifier
+                        .constrainAs(backButton) {
+                            top.linkTo(parent.top, margin = 30.dp)
+                            start.linkTo(parent.start, margin = 20.dp)
+                        }
+                )
+            }
+            is UiState.Success -> { navigator.navigateToSuggestionDashboard(LocalContext.current) }
+            is UiState.Failure -> { /* no-op */ }
+        }
     }
 }
 
@@ -96,7 +108,8 @@ fun CreateSuggestionBackButton(modifier: Modifier = Modifier) {
 @Composable
 fun CreateSuggestionNextButton(
     modifier: Modifier = Modifier,
-    enabledState: State<Boolean>
+    enabledState: State<Boolean>,
+    onClick: () -> Unit = {}
 ) {
     val enabled by remember { enabledState }
     Box(
@@ -107,7 +120,9 @@ fun CreateSuggestionNextButton(
                 color = if (enabled) colorResource(id = R.color.green) else colorResource(id = R.color.gray_2),
                 shape = RoundedCornerShape(5.dp)
             )
-            .throttleClickable(enabled) { /* TODO */},
+            .throttleClickable(enabled) {
+                onClick()
+            },
         contentAlignment = Alignment.Center,
 
         ) {
