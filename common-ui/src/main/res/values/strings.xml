@@ -155,6 +155,17 @@
     <!-- 미션 제안 디테일  -->
     <string name="want_this_mission">저도 이 미션 원해요!</string>
 
+    <!-- 미션 제안 생성  -->
+    <string name="mission_suggestion_title">제목</string>
+    <string name="mission_suggestion_title_description">어떤 주제로 코드 리뷰를 받고 싶나요?</string>
+    <string name="mission_suggestion_content">본문</string>
+    <string name="mission_suggestion_content_description">리뷰어에게 자세히 설명해 주세요.</string>
+    <string name="suggestion_next">다음</string>
+    <string name="title_required">제목은 필수 입력 항목 입니다.</string>
+    <string name="content_required">본문은 필수 입력 항목 입니다.</string>
+    <string name="want_to_stop_creating_suggestion">작성을 중단할까요?</string>
+    <string name="content_will_not_be_saved">작성한 내용은 저장되지 않아요.</string>
+
     <!-- dialog -->
     <string name="want_to_logout">로그아웃 하시겠어요?</string>
     <string name="cannot_cancle_after_participate_mission">참여한 미션은 취소가 불가능해요</string>
