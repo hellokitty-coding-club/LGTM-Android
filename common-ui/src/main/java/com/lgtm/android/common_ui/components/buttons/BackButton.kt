@@ -31,7 +31,10 @@ fun BackButton(
                 color = Color.White,
                 shape = RoundedCornerShape(10.dp)
             )
-            .throttleClickable { onClick() }
+            .throttleClickable(
+                enabled = true,
+                onClick = onClick
+            )
     ) {
         Image(
             modifier = Modifier.padding(7.dp),
