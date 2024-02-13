@@ -46,6 +46,7 @@ kspplugin = "1.8.21-1.0.11"
 
 # Dependency Injection
 dagger-hilt = "2.46.1"
+hilt-compose = "1.1.0-alpha01"
 
 # Networking
 okhttp = "4.11.0"
@@ -93,6 +94,7 @@ core-ktx = { module = "androidx.core:core-ktx", version.ref = "corektx" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle" }
 runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "liveData" }
 navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
 navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
@@ -124,6 +126,7 @@ gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson-converter" }
 
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
+hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compose" }
 hilt-kapt = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger-hilt" }
 
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
@@ -154,7 +157,7 @@ jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 
 [bundles]
 
-androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "lifecycle-viewmodel-compose", "runtime-livedata", "constraintlayout", "activity", "fragment"]
+androidx-ui-foundation = ["core-ktx", "appcompat", "lifecycle-viewmodel", "lifecycle-viewmodel-compose", "lifecycle-runtime-compose", "runtime-livedata", "constraintlayout", "activity", "fragment"]
 okhttp = ["okhttp", "okhttp-logging-interceptor", "okhttp-bom"]
 retrofit = ["retrofit", "retrofit-kotlin-serialization-converter"]
 gson = ["gson", "gson-converter"]
