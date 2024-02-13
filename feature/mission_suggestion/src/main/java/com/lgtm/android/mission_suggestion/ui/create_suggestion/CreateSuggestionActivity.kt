@@ -17,7 +17,13 @@ class CreateSuggestionActivity: BaseComposeActivity() {
     @Composable
     override fun Content() {
         MaterialTheme {
-            CreateSuggestionScreen(navigator = lgtmNavigator)
+            CreateSuggestionScreen {
+                setBackButtonClick()
+            }
         }
+    }
+
+    private fun setBackButtonClick() {
+        finish()
     }
 }

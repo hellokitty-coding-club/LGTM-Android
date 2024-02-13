@@ -1,6 +1,5 @@
 package com.lgtm.android.mission_suggestion.ui.create_suggestion.presentation
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,7 +19,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -33,7 +31,6 @@ import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.BackButton
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.model.NoLimitEditTextData
-import com.lgtm.android.common_ui.navigator.LgtmNavigator
 import com.lgtm.android.common_ui.theme.body1M
 import com.lgtm.android.common_ui.theme.body2
 import com.lgtm.android.common_ui.theme.heading4B
@@ -46,7 +43,7 @@ import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestion
 @Composable
 fun CreateSuggestionScreen(
     viewModel: CreateSuggestionViewModel = hiltViewModel(),
-    navigator: LgtmNavigator
+    onBackButtonClick: () -> Unit
 ) {
     ConstraintLayout(
         modifier = Modifier
@@ -88,21 +85,22 @@ fun CreateSuggestionScreen(
                         .constrainAs(backButton) {
                             top.linkTo(parent.top, margin = 30.dp)
                             start.linkTo(parent.start, margin = 20.dp)
-                        }
+                        },
+                    onBackButtonClick = onBackButtonClick
                 )
             }
-            is UiState.Success -> { navigator.navigateToSuggestionDashboard(LocalContext.current) }
+            is UiState.Success -> { onBackButtonClick() }
             is UiState.Failure -> { /* no-op */ }
         }
     }
 }
 
 @Composable
-fun CreateSuggestionBackButton(modifier: Modifier = Modifier) {
-    val context = LocalContext.current
-    BackButton(modifier) {
-        (context as ComponentActivity).finish()
-    }
+fun CreateSuggestionBackButton(
+    modifier: Modifier = Modifier,
+    onBackButtonClick: () -> Unit
+) {
+    BackButton(modifier) { onBackButtonClick() }
 }
 
 @Composable
