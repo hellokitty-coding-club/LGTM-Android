@@ -16,7 +16,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -29,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.BackButton
 import com.lgtm.android.common_ui.model.EditTextData
@@ -54,7 +54,7 @@ fun CreateSuggestionScreen(
             .background(color = colorResource(id = R.color.white))
             .imePadding()
     ) {
-        when(viewModel.createSuggestionState.collectAsState().value) {
+        when(viewModel.createSuggestionState.collectAsStateWithLifecycle().value) {
             is UiState.Init -> {
                 val (backButton, suggestionSection, nextButton) = createRefs()
 
@@ -66,8 +66,8 @@ fun CreateSuggestionScreen(
                             start.linkTo(parent.start)
                             end.linkTo(parent.end)
                         },
-                    suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsState(),
-                    suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsState(),
+                    suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsStateWithLifecycle(),
+                    suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsStateWithLifecycle(),
                     updateTitleEditTextData = viewModel::updateSuggestionTitleTextData,
                     updateContentEditTextData = viewModel::updateSuggestionContentTextData
                 )
@@ -79,7 +79,7 @@ fun CreateSuggestionScreen(
                             start.linkTo(parent.start)
                             end.linkTo(parent.end)
                         },
-                    enabledState = viewModel.isSuggestionValid.collectAsState(),
+                    enabledState = viewModel.isSuggestionValid.collectAsStateWithLifecycle(),
                     onClick = viewModel::createSuggestion
                 )
 
