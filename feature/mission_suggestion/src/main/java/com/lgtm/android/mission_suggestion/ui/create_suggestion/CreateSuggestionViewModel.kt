@@ -10,7 +10,7 @@ import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.util.UiState
-import com.lgtm.domain.entity.request.CreateSuggestionRequestDTO
+import com.lgtm.domain.entity.request.CreateSuggestionRequestVO
 import com.lgtm.domain.entity.response.CreateSuggestionResponseVO
 import com.lgtm.domain.repository.SuggestionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -93,7 +93,7 @@ class CreateSuggestionViewModel @Inject constructor(
 
     fun createSuggestion() {
         viewModelScope.launch(lgtmErrorHandler) {
-            suggestionRepository.createSuggestion(createSuggestionDTO())
+            suggestionRepository.createSuggestion(createSuggestionVO())
                 .onSuccess {
                     _createSuggestionState.value = UiState.Success(data = it)
                     Log.d(TAG, "createSuggestion: $it")
@@ -105,7 +105,7 @@ class CreateSuggestionViewModel @Inject constructor(
         }
     }
 
-    private fun createSuggestionDTO() = CreateSuggestionRequestDTO(
+    private fun createSuggestionVO() = CreateSuggestionRequestVO(
         title = requireNotNull(suggestionTitleTextData.value.text.value),
         description = requireNotNull(suggestionContentTextData.value.text.value)
     )

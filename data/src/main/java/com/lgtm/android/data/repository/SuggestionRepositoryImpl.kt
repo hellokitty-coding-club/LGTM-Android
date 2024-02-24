@@ -3,7 +3,7 @@ package com.lgtm.android.data.repository
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.lgtm.android.data.datasource.SuggestionDataSource
-import com.lgtm.domain.entity.request.CreateSuggestionRequestDTO
+import com.lgtm.domain.entity.request.CreateSuggestionRequestVO
 import com.lgtm.domain.entity.response.CreateSuggestionResponseVO
 import com.lgtm.domain.mission_suggestion.MissionSuggestionVO
 import com.lgtm.domain.mission_suggestion.SuggestionVO
@@ -33,7 +33,7 @@ class SuggestionRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun createSuggestion(createSuggestionRequest: CreateSuggestionRequestDTO): Result<CreateSuggestionResponseVO> {
+    override suspend fun createSuggestion(createSuggestionRequest: CreateSuggestionRequestVO): Result<CreateSuggestionResponseVO> {
         return try {
             val response = suggestionDataSource.createSuggestion(createSuggestionRequest)
             Result.success(response.data.toVO())

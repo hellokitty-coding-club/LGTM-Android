@@ -5,7 +5,7 @@ import com.lgtm.android.data.model.response.CreateSuggestionResponseDTO
 import com.lgtm.android.data.model.response.MissionSuggestionDTO
 import com.lgtm.android.data.model.response.SuggestionDTO
 import com.lgtm.android.data.service.SuggestionService
-import com.lgtm.domain.entity.request.CreateSuggestionRequestDTO
+import com.lgtm.domain.entity.request.CreateSuggestionRequestVO
 import javax.inject.Inject
 
 class SuggestionDataSource @Inject constructor(
@@ -19,7 +19,7 @@ class SuggestionDataSource @Inject constructor(
         return checkResponse(suggestionService.getSuggestionDetail(suggestionId))
     }
 
-    suspend fun createSuggestion(createSuggestionRequest: CreateSuggestionRequestDTO): BaseDTO<CreateSuggestionResponseDTO> {
+    suspend fun createSuggestion(createSuggestionRequest: CreateSuggestionRequestVO): BaseDTO<CreateSuggestionResponseDTO> {
         return checkResponse(suggestionService.createSuggestion(createSuggestionRequest))
     }
 }
