@@ -9,7 +9,6 @@ import com.google.firebase.ktx.Firebase
 import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.constant.InfoType
 import com.lgtm.android.common_ui.model.EditTextData
-import com.lgtm.android.common_ui.model.NoLimitEditTextData
 import com.lgtm.android.common_ui.util.UiState
 import com.lgtm.domain.entity.request.CreateSuggestionRequestDTO
 import com.lgtm.domain.entity.response.CreateSuggestionResponseVO
@@ -49,13 +48,15 @@ class CreateSuggestionViewModel @Inject constructor(
 
     /** content **/
     private val _suggestionContentTextData = MutableStateFlow(
-        NoLimitEditTextData(
+        EditTextData(
             text = MutableLiveData(""),
+            maxLength = 1000,
+            hint = "본문을 입력하세요.",
             infoStatus = MutableLiveData(InfoType.CONTENT_REQUIRED),
-            hint = "본문을 입력하세요."
+            wordCountVisibility = false
         )
     )
-    val suggestionContentTextData: StateFlow<NoLimitEditTextData> = _suggestionContentTextData
+    val suggestionContentTextData: StateFlow<EditTextData> = _suggestionContentTextData
 
     fun updateSuggestionContentTextData() {
         _suggestionContentTextData.value.infoStatus.value =

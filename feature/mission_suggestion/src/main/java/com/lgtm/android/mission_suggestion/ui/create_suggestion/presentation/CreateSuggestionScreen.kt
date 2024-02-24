@@ -31,12 +31,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.BackButton
 import com.lgtm.android.common_ui.model.EditTextData
-import com.lgtm.android.common_ui.model.NoLimitEditTextData
 import com.lgtm.android.common_ui.theme.body1M
 import com.lgtm.android.common_ui.theme.body2
 import com.lgtm.android.common_ui.theme.heading4B
 import com.lgtm.android.common_ui.ui.LGTMEditText
-import com.lgtm.android.common_ui.ui.LGTMNoLimitEditText
 import com.lgtm.android.common_ui.util.UiState
 import com.lgtm.android.common_ui.util.throttleClickable
 import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestionViewModel
@@ -159,7 +157,7 @@ fun CreateSuggestionNextButton(
 fun SuggestionSection(
     modifier: Modifier = Modifier,
     suggestionTitleEditTextData: State<EditTextData>,
-    suggestionContentEditTextData: State<NoLimitEditTextData>,
+    suggestionContentEditTextData: State<EditTextData>,
     updateTitleEditTextData: () -> Unit,
     updateContentEditTextData: () -> Unit
 ) {
@@ -221,7 +219,7 @@ fun SuggestionTitle(
 
 @Composable
 fun SuggestionContent(
-    suggestionContentEditTextData: State<NoLimitEditTextData>,
+    suggestionContentEditTextData: State<EditTextData>,
     updateContentEditTextData: () -> Unit
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -243,7 +241,7 @@ fun SuggestionContent(
             modifier = Modifier
                 .fillMaxWidth(),
             factory = { context ->
-                LGTMNoLimitEditText(context).apply {
+                LGTMEditText(context).apply {
                     setLifecycleOwner(lifecycleOwner)
                     bindStateEditTextData(content)
                     setMaxLine(5)
