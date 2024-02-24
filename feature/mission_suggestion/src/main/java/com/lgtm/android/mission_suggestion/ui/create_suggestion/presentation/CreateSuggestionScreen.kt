@@ -245,6 +245,7 @@ fun SuggestionContent(
                     setLifecycleOwner(lifecycleOwner)
                     bindStateEditTextData(content)
                     setMaxLine(5)
+                    setCustomHeight(320)
                     onTextChangedListener {
                         updateContentEditTextData()
                     }

@@ -42,6 +42,10 @@ class LGTMEditText @JvmOverloads constructor(
         binding.editText.maxLines = lines
     }
 
+    fun setCustomHeight(height: Int) {
+        binding.editText.height = height
+    }
+
     private fun initializeView() {
         addView(binding.root)
         showClearButton()
