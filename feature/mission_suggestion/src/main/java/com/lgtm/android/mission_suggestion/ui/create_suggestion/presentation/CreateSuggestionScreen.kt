@@ -1,6 +1,7 @@
 package com.lgtm.android.mission_suggestion.ui.create_suggestion.presentation
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.relocation.BringIntoViewRequester
+import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -18,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -38,6 +42,8 @@ import com.lgtm.android.common_ui.ui.LGTMEditText
 import com.lgtm.android.common_ui.util.UiState
 import com.lgtm.android.common_ui.util.throttleClickable
 import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestionViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun CreateSuggestionScreen(
@@ -58,7 +64,6 @@ fun CreateSuggestionScreen(
 
                 SuggestionSection(
                     modifier = Modifier
-                        .verticalScroll(rememberScrollState(), reverseScrolling = true)
                         .constrainAs(suggestionSection) {
                             top.linkTo(parent.top)
                             start.linkTo(parent.start)
@@ -163,16 +168,17 @@ fun SuggestionSection(
 ) {
     Column(
         modifier
+            .verticalScroll(rememberScrollState(), reverseScrolling = true)
             .padding(
-                bottom = 193.dp,
                 start = 20.dp,
-                end = 20.dp
+                end = 20.dp,
+                bottom = 193.dp
             ),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         SuggestionTitle(
             suggestionTitleEditTextData,
-            updateTitleEditTextData
+            updateTitleEditTextData,
         )
         SuggestionContent(
             suggestionContentEditTextData,
@@ -181,6 +187,7 @@ fun SuggestionSection(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SuggestionTitle(
     suggestionTitleEditTextData: State<EditTextData>,
@@ -189,8 +196,12 @@ fun SuggestionTitle(
     val lifecycleOwner = LocalLifecycleOwner.current
     val title by remember { suggestionTitleEditTextData }
 
+    val titleSectionBringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
+
     Column(
         modifier = Modifier
+            .bringIntoViewRequester(titleSectionBringIntoViewRequester)
             .padding(top = 107.dp)
             .fillMaxWidth()
             .wrapContentHeight(),
@@ -211,22 +222,35 @@ fun SuggestionTitle(
                     onTextChangedListener {
                         updateTitleEditTextData()
                     }
+                    onFocusChangedListener { isFocused ->
+                        if (isFocused) {
+                            coroutineScope.launch {
+                                delay(300)
+                                titleSectionBringIntoViewRequester.bringIntoView()
+                            }
+                        }
+                    }
                 }
             }
         )
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SuggestionContent(
     suggestionContentEditTextData: State<EditTextData>,
-    updateContentEditTextData: () -> Unit
+    updateContentEditTextData: () -> Unit,
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val content by remember { suggestionContentEditTextData }
 
+    val contentSectionBringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
+
     Column(
         modifier = Modifier
+            .bringIntoViewRequester(contentSectionBringIntoViewRequester)
             .padding(top = 42.dp)
             .fillMaxWidth()
             .wrapContentHeight(),
@@ -248,6 +272,14 @@ fun SuggestionContent(
                     setCustomHeight(320)
                     onTextChangedListener {
                         updateContentEditTextData()
+                    }
+                    onFocusChangedListener { isFocused ->
+                        if (isFocused) {
+                            coroutineScope.launch {
+                                delay(300)
+                                contentSectionBringIntoViewRequester.bringIntoView()
+                            }
+                        }
                     }
                 }
             }

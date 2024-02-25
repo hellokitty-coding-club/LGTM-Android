@@ -51,7 +51,6 @@ class LGTMEditText @JvmOverloads constructor(
         showClearButton()
     }
 
-
     private fun showClearButton() {
         binding.apply {
             editText.addTextChangedListener {
@@ -60,7 +59,6 @@ class LGTMEditText @JvmOverloads constructor(
         }
     }
 
-    /* compose에서 활용하기 위해 추가 */
     fun bindStateEditTextData(editTextData: EditTextData?) {
         binding.editTextData = editTextData
         binding.lifecycleOwner = lifecycleOwner
@@ -69,6 +67,12 @@ class LGTMEditText @JvmOverloads constructor(
     fun onTextChangedListener(listener: (String) -> Unit) {
         binding.editText.addTextChangedListener {
             listener(it.toString())
+        }
+    }
+
+    fun onFocusChangedListener(listener: (Boolean) -> Unit) {
+        binding.editText.setOnFocusChangeListener { _, hasFocus ->
+            listener(hasFocus)
         }
     }
 }
