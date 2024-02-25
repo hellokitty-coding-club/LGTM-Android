@@ -16,7 +16,11 @@ import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -34,6 +38,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.BackButton
+import com.lgtm.android.common_ui.components.buttons.ConfirmButtonBackgroundColor
+import com.lgtm.android.common_ui.components.dialog.LGTMBottomSheetDialogContent
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.theme.body1M
 import com.lgtm.android.common_ui.theme.body2
@@ -45,68 +51,105 @@ import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestion
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CreateSuggestionScreen(
     viewModel: CreateSuggestionViewModel = hiltViewModel(),
-    onBackButtonClick: () -> Unit,
-    showStopCreationDialog: () -> Unit
+    onBackButtonClick: () -> Unit
 ) {
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxHeight()
-            .background(color = colorResource(id = R.color.white))
-            .imePadding()
-    ) {
-        when(viewModel.createSuggestionState.collectAsStateWithLifecycle().value) {
-            is UiState.Init -> {
-                val (backButton, suggestionSection, nextButton) = createRefs()
-                val isSuggestionEmpty = viewModel.isSuggestionEmpty.collectAsStateWithLifecycle().value
+    val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+    val coroutineScope = rememberCoroutineScope()
 
-                SuggestionSection(
-                    modifier = Modifier
-                        .constrainAs(suggestionSection) {
-                            top.linkTo(parent.top)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        },
-                    suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsStateWithLifecycle(),
-                    suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsStateWithLifecycle(),
-                    updateTitleEditTextData = viewModel::updateSuggestionTitleTextData,
-                    updateContentEditTextData = viewModel::updateSuggestionContentTextData
-                )
-
-                CreateSuggestionNextButton(
-                    modifier = Modifier
-                        .constrainAs(nextButton) {
-                            bottom.linkTo(parent.bottom, margin = 28.dp)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        },
-                    enabledState = viewModel.isSuggestionValid.collectAsStateWithLifecycle(),
-                    onClick = viewModel::createSuggestion
-                )
-
-                CreateSuggestionBackButton(
-                    modifier = Modifier
-                        .constrainAs(backButton) {
-                            top.linkTo(parent.top, margin = 30.dp)
-                            start.linkTo(parent.start, margin = 20.dp)
-                        },
-                    isSuggestionEmpty = isSuggestionEmpty,
-                    onBackButtonClick = onBackButtonClick,
-                    showStopCreationDialog = showStopCreationDialog
-                )
-
-                BackHandler {
-                    if (!isSuggestionEmpty) {
-                        showStopCreationDialog()
-                    } else {
+    ModalBottomSheetLayout(
+        sheetState = bottomSheetState,
+        sheetShape = RoundedCornerShape(
+            topStart = 20.dp,
+            topEnd = 20.dp
+        ),
+        scrimColor = colorResource(id = R.color.transparent_black),
+        sheetContent = {
+            LGTMBottomSheetDialogContent(
+                dialogTitle = stringResource(id = R.string.want_to_stop_creating_suggestion),
+                dialogDescription = stringResource(id = R.string.content_will_not_be_saved),
+                onClickCancel = {
+                    coroutineScope.launch {
+                        bottomSheetState.hide()
+                    }
+                },
+                onClickConfirm = {
+                    coroutineScope.launch {
+                        bottomSheetState.hide()
                         onBackButtonClick()
                     }
+                },
+                confirmBtnBackground = ConfirmButtonBackgroundColor.GRAY
+            )
+        }
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxHeight()
+                .background(color = colorResource(id = R.color.white))
+                .imePadding()
+        ) {
+
+            when(viewModel.createSuggestionState.collectAsStateWithLifecycle().value) {
+                is UiState.Init -> {
+                    val (backButton, suggestionSection, nextButton) = createRefs()
+                    val isSuggestionEmpty = viewModel.isSuggestionEmpty.collectAsStateWithLifecycle().value
+
+                    SuggestionSection(
+                        modifier = Modifier
+                            .constrainAs(suggestionSection) {
+                                top.linkTo(parent.top)
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                            },
+                        suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsStateWithLifecycle(),
+                        suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsStateWithLifecycle(),
+                        updateTitleEditTextData = viewModel::updateSuggestionTitleTextData,
+                        updateContentEditTextData = viewModel::updateSuggestionContentTextData
+                    )
+
+                    CreateSuggestionNextButton(
+                        modifier = Modifier
+                            .constrainAs(nextButton) {
+                                bottom.linkTo(parent.bottom, margin = 28.dp)
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                            },
+                        enabledState = viewModel.isSuggestionValid.collectAsStateWithLifecycle(),
+                        onClick = viewModel::createSuggestion
+                    )
+
+                    CreateSuggestionBackButton(
+                        modifier = Modifier
+                            .constrainAs(backButton) {
+                                top.linkTo(parent.top, margin = 30.dp)
+                                start.linkTo(parent.start, margin = 20.dp)
+                            },
+                        isSuggestionEmpty = isSuggestionEmpty,
+                        onBackButtonClick = onBackButtonClick,
+                        showStopCreationDialog = {
+                            coroutineScope.launch {
+                                bottomSheetState.show()
+                            }
+                        }
+                    )
+
+                    BackHandler {
+                        if (!isSuggestionEmpty) {
+                            coroutineScope.launch {
+                                bottomSheetState.show()
+                            }
+                        } else {
+                            onBackButtonClick()
+                        }
+                    }
                 }
+                is UiState.Success -> { onBackButtonClick() }
+                is UiState.Failure -> { /* no-op */ }
             }
-            is UiState.Success -> { onBackButtonClick() }
-            is UiState.Failure -> { /* no-op */ }
         }
     }
 }
@@ -225,7 +268,7 @@ fun SuggestionTitle(
                     onFocusChangedListener { isFocused ->
                         if (isFocused) {
                             coroutineScope.launch {
-                                delay(300)
+                                delay(420)
                                 titleSectionBringIntoViewRequester.bringIntoView()
                             }
                         }
@@ -276,7 +319,7 @@ fun SuggestionContent(
                     onFocusChangedListener { isFocused ->
                         if (isFocused) {
                             coroutineScope.launch {
-                                delay(300)
+                                delay(420)
                                 contentSectionBringIntoViewRequester.bringIntoView()
                             }
                         }
