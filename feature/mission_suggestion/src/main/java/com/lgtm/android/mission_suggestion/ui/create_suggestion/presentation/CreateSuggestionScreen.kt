@@ -23,7 +23,6 @@ import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -61,6 +60,12 @@ fun CreateSuggestionScreen(
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val coroutineScope = rememberCoroutineScope()
 
+    val createSuggestionState by viewModel.createSuggestionState.collectAsStateWithLifecycle()
+    val isSuggestionEmpty by viewModel.isSuggestionEmpty.collectAsStateWithLifecycle()
+    val suggestionTitleTextData by viewModel.suggestionTitleTextData.collectAsStateWithLifecycle()
+    val suggestionContentTextData by viewModel.suggestionContentTextData.collectAsStateWithLifecycle()
+    val isSuggestionValid by viewModel.isSuggestionValid.collectAsStateWithLifecycle()
+
     ModalBottomSheetLayout(
         sheetState = bottomSheetState,
         sheetShape = RoundedCornerShape(
@@ -94,10 +99,9 @@ fun CreateSuggestionScreen(
                 .imePadding()
         ) {
 
-            when(viewModel.createSuggestionState.collectAsStateWithLifecycle().value) {
+            when(createSuggestionState) {
                 is UiState.Init -> {
                     val (backButton, suggestionSection, nextButton) = createRefs()
-                    val isSuggestionEmpty = viewModel.isSuggestionEmpty.collectAsStateWithLifecycle().value
 
                     SuggestionSection(
                         modifier = Modifier
@@ -106,8 +110,8 @@ fun CreateSuggestionScreen(
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
                             },
-                        suggestionTitleEditTextData = viewModel.suggestionTitleTextData.collectAsStateWithLifecycle(),
-                        suggestionContentEditTextData = viewModel.suggestionContentTextData.collectAsStateWithLifecycle(),
+                        suggestionTitleEditTextData = suggestionTitleTextData,
+                        suggestionContentEditTextData = suggestionContentTextData,
                         updateTitleEditTextData = viewModel::updateSuggestionTitleTextData,
                         updateContentEditTextData = viewModel::updateSuggestionContentTextData
                     )
@@ -119,7 +123,7 @@ fun CreateSuggestionScreen(
                                 start.linkTo(parent.start)
                                 end.linkTo(parent.end)
                             },
-                        enabledState = viewModel.isSuggestionValid.collectAsStateWithLifecycle(),
+                        enabledState = isSuggestionValid,
                         onClick = viewModel::createSuggestion
                     )
 
@@ -174,19 +178,18 @@ fun CreateSuggestionBackButton(
 @Composable
 fun CreateSuggestionNextButton(
     modifier: Modifier = Modifier,
-    enabledState: State<Boolean>,
+    enabledState: Boolean,
     onClick: () -> Unit = {}
 ) {
-    val enabled by remember { enabledState }
     Box(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp)
             .background(
-                color = if (enabled) colorResource(id = R.color.green) else colorResource(id = R.color.gray_2),
+                color = if (enabledState) colorResource(id = R.color.green) else colorResource(id = R.color.gray_2),
                 shape = RoundedCornerShape(5.dp)
             )
-            .throttleClickable(enabled) {
+            .throttleClickable(enabledState) {
                 onClick()
             },
         contentAlignment = Alignment.Center,
@@ -197,7 +200,7 @@ fun CreateSuggestionNextButton(
                 .padding(vertical = 14.dp),
             text = stringResource(id = R.string.suggestion_next),
             style = Typography.body1M,
-            color = if (enabled) colorResource(id = R.color.black) else colorResource(id = R.color.gray_4)
+            color = if (enabledState) colorResource(id = R.color.black) else colorResource(id = R.color.gray_4)
         )
     }
 }
@@ -205,8 +208,8 @@ fun CreateSuggestionNextButton(
 @Composable
 fun SuggestionSection(
     modifier: Modifier = Modifier,
-    suggestionTitleEditTextData: State<EditTextData>,
-    suggestionContentEditTextData: State<EditTextData>,
+    suggestionTitleEditTextData: EditTextData,
+    suggestionContentEditTextData: EditTextData,
     updateTitleEditTextData: () -> Unit,
     updateContentEditTextData: () -> Unit
 ) {
@@ -236,11 +239,11 @@ private const val TIME_FOR_KEYBOARD_DELAY = 420L
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SuggestionTitle(
-    suggestionTitleEditTextData: State<EditTextData>,
+    suggestionTitleEditTextData: EditTextData,
     updateTitleEditTextData: () -> Unit
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
-    val title by remember { suggestionTitleEditTextData }
+    val title = remember { suggestionTitleEditTextData }
 
     val titleSectionBringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
@@ -285,11 +288,11 @@ fun SuggestionTitle(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SuggestionContent(
-    suggestionContentEditTextData: State<EditTextData>,
+    suggestionContentEditTextData: EditTextData,
     updateContentEditTextData: () -> Unit,
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
-    val content by remember { suggestionContentEditTextData }
+    val content = remember { suggestionContentEditTextData }
 
     val contentSectionBringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
