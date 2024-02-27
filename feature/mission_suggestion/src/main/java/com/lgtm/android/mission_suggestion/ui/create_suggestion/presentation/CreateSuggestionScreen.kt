@@ -231,6 +231,8 @@ fun SuggestionSection(
     }
 }
 
+private const val TIME_FOR_KEYBOARD_DELAY = 420L
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SuggestionTitle(
@@ -269,7 +271,7 @@ fun SuggestionTitle(
                     onFocusChangedListener { isFocused ->
                         if (isFocused) {
                             coroutineScope.launch {
-                                delay(420)
+                                delay(TIME_FOR_KEYBOARD_DELAY)
                                 titleSectionBringIntoViewRequester.bringIntoView()
                             }
                         }
@@ -321,7 +323,7 @@ fun SuggestionContent(
                     onFocusChangedListener { isFocused ->
                         if (isFocused) {
                             coroutineScope.launch {
-                                delay(420)
+                                delay(TIME_FOR_KEYBOARD_DELAY)
                                 contentSectionBringIntoViewRequester.bringIntoView()
                             }
                         }
