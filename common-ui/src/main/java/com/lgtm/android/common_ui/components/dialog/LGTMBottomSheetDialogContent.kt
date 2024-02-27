@@ -3,8 +3,10 @@ package com.lgtm.android.common_ui.components.dialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -67,17 +69,19 @@ fun DialogButtons(
 ) {
     Row(
         modifier = Modifier.padding(
-            top = 30.dp,
-            bottom = 30.dp
+            vertical = 30.dp,
+            horizontal = 24.dp
         ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         DialogButton(
+            modifier = Modifier.weight(1f),
             text = stringResource(id = R.string.no),
             onClick = onClickCancel,
         )
+        Spacer(modifier = Modifier.width(20.dp))
         DialogButton(
-            modifier = Modifier.padding(start = 20.dp),
+            modifier = Modifier.weight(1f),
             text = stringResource(id = R.string.yes),
             onClick = onClickConfirm,
             confirmBtnBackground = confirmBtnBackground
