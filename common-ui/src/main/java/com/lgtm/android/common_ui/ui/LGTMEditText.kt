@@ -42,8 +42,12 @@ class LGTMEditText @JvmOverloads constructor(
         binding.editText.maxLines = lines
     }
 
-    fun setCustomHeight(height: Int) {
-        binding.editText.height = height
+    fun setMinLine(lines: Int) {
+        binding.editText.minLines = lines
+    }
+
+    fun setGravity(gravity: Int) {
+        binding.editText.gravity = gravity
     }
 
     private fun initializeView() {

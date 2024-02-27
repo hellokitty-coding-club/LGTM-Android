@@ -1,5 +1,6 @@
 package com.lgtm.android.mission_suggestion.ui.create_suggestion.presentation
 
+import android.view.Gravity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -312,7 +313,8 @@ fun SuggestionContent(
                     setLifecycleOwner(lifecycleOwner)
                     bindStateEditTextData(content)
                     setMaxLine(5)
-                    setCustomHeight(320)
+                    setMinLine(5)
+                    setGravity(Gravity.TOP)
                     onTextChangedListener {
                         updateContentEditTextData()
                     }
