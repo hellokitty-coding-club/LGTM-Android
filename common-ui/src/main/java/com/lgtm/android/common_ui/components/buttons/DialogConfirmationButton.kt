@@ -16,7 +16,7 @@ import com.lgtm.android.common_ui.theme.body1M
 import com.lgtm.android.common_ui.util.throttleClickable
 
 @Composable
-fun DialogButton(
+fun DialogConfirmationButton(
     modifier: Modifier = Modifier,
     text: String,
     confirmBtnBackground: ConfirmButtonBackgroundColor = ConfirmButtonBackgroundColor.GRAY,

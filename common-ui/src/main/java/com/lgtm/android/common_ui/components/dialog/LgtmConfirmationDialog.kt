@@ -17,12 +17,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.ConfirmButtonBackgroundColor
-import com.lgtm.android.common_ui.components.buttons.DialogButton
+import com.lgtm.android.common_ui.components.buttons.DialogConfirmationButton
 import com.lgtm.android.common_ui.theme.body1B
 import com.lgtm.android.common_ui.theme.description
 
 @Composable
-fun LGTMBottomSheetDialogContent(
+fun LgtmConfirmationDialog(
     dialogTitle: String,
     dialogDescription: String? = null,
     onClickCancel: () -> Unit,
@@ -74,13 +74,13 @@ fun DialogButtons(
         ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        DialogButton(
+        DialogConfirmationButton(
             modifier = Modifier.weight(1f),
             text = stringResource(id = R.string.no),
             onClick = onClickCancel,
         )
         Spacer(modifier = Modifier.width(20.dp))
-        DialogButton(
+        DialogConfirmationButton(
             modifier = Modifier.weight(1f),
             text = stringResource(id = R.string.yes),
             onClick = onClickConfirm,
@@ -92,7 +92,7 @@ fun DialogButtons(
 @Composable
 @Preview
 fun LGTMBottomSheetDialogContentPreview() {
-    LGTMBottomSheetDialogContent(
+    LgtmConfirmationDialog(
         dialogTitle = "작성을 중단할까요?",
         dialogDescription = "작성한 내용은 저장되지 않아요.",
         onClickCancel = {},

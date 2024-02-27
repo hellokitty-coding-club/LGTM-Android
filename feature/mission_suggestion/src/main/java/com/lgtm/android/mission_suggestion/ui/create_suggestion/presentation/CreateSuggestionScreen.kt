@@ -40,7 +40,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.BackButton
 import com.lgtm.android.common_ui.components.buttons.ConfirmButtonBackgroundColor
-import com.lgtm.android.common_ui.components.dialog.LGTMBottomSheetDialogContent
+import com.lgtm.android.common_ui.components.dialog.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.model.EditTextData
 import com.lgtm.android.common_ui.theme.body1M
 import com.lgtm.android.common_ui.theme.body2
@@ -69,7 +69,7 @@ fun CreateSuggestionScreen(
         ),
         scrimColor = colorResource(id = R.color.transparent_black),
         sheetContent = {
-            LGTMBottomSheetDialogContent(
+            LgtmConfirmationDialog(
                 dialogTitle = stringResource(id = R.string.want_to_stop_creating_suggestion),
                 dialogDescription = stringResource(id = R.string.content_will_not_be_saved),
                 onClickCancel = {
