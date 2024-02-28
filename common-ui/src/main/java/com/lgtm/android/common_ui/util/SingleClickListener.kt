@@ -4,7 +4,6 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.View
 
-
 class OnThrottleClickListener(
     private val onClickListener: View.OnClickListener,
     private val interval: Long = 300L,

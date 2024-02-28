@@ -29,6 +29,7 @@ dependencies {
     implementation(libs.bundles.androidx.ui.foundation)
     implementation(libs.constraintlayout)
     implementation(libs.hilt)
+    implementation(libs.hilt.compose)
     implementation(libs.bundles.navigation)
     implementation(libs.bundles.basic.test)
     kapt(libs.hilt.kapt)

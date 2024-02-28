@@ -42,17 +42,41 @@ class LGTMEditText @JvmOverloads constructor(
         binding.editText.maxLines = lines
     }
 
+    fun setMinLine(lines: Int) {
+        binding.editText.minLines = lines
+    }
+
+    fun setGravity(gravity: Int) {
+        binding.editText.gravity = gravity
+    }
+
     private fun initializeView() {
         addView(binding.root)
         showClearButton()
     }
-
 
     private fun showClearButton() {
         binding.apply {
             editText.addTextChangedListener {
                 ivClear.visibility = if (editText.text.isNotEmpty()) View.VISIBLE else View.GONE
             }
+        }
+    }
+
+    fun bindStateEditTextData(editTextData: EditTextData?) {
+        binding.editTextData = editTextData
+        binding.lifecycleOwner = lifecycleOwner
+    }
+
+    fun onTextChangedListener(listener: (String) -> Unit) {
+        binding.editText.addTextChangedListener {
+            listener(it.toString())
+        }
+    }
+
+    fun onFocusChangedListener(listener: (Boolean) -> Unit) {
+        binding.editText.setOnFocusChangeListener { _, hasFocus ->
+            listener(hasFocus)
         }
     }
 }

@@ -11,6 +11,7 @@ import com.lgtm.android.main.notification.NotificationCenterActivity
 import com.lgtm.android.manage_mission.dashboard.DashboardActivity
 import com.lgtm.android.manage_mission.ping_pong_junior.PingPongJuniorActivity
 import com.lgtm.android.mission_detail.MissionDetailActivity
+import com.lgtm.android.mission_suggestion.ui.create_suggestion.CreateSuggestionActivity
 import com.lgtm.android.mission_suggestion.ui.dashboard.SuggestionDashboardActivity
 import com.lgtm.android.mission_suggestion.ui.detail.SuggestionDetailActivity
 import com.lgtm.android.profile.ProfileActivity
@@ -75,6 +76,11 @@ class LgtmNavigatorImpl @Inject constructor(
         val intent = Intent(context, SuggestionDetailActivity::class.java).apply {
             putExtra(SuggestionDetailActivity.SUGGESTION_ID, suggestionId)
         }
+        context.startActivity(intent)
+    }
+
+    override fun navigateToCreateSuggestion(context: Context) {
+        val intent = Intent(context, CreateSuggestionActivity::class.java)
         context.startActivity(intent)
     }
 
