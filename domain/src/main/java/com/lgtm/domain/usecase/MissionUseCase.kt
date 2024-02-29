@@ -14,17 +14,15 @@ import com.lgtm.domain.server_drive_ui.SduiContent
 import com.lgtm.domain.server_drive_ui.SduiEmptyUiState
 import com.lgtm.domain.server_drive_ui.SduiViewType
 import com.lgtm.domain.server_drive_ui.SectionEmptyVO
-import com.lgtm.domain.util.dotStyleDateFormatter
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
-import java.time.LocalDateTime
 import javax.inject.Inject
 
 class MissionUseCase @Inject constructor(
     private val missionRepository: MissionRepository,
     authRepository: AuthRepository,
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher,
 ) {
 
     private val role = authRepository.getMemberType()
@@ -108,8 +106,8 @@ class MissionUseCase @Inject constructor(
         return dashboardInfo.copy(
             memberInfoList = dashboardInfo.memberInfoList.map { memberInfo ->
                 memberInfo.copy(
-                    missionFinishedDate = convertTimestampToCustomFormat(memberInfo.missionFinishedDate),
-                    paymentDate = convertTimestampToCustomFormat(memberInfo.paymentDate)
+                    missionFinishedDate = memberInfo.missionFinishedDate,
+                    paymentDate = memberInfo.paymentDate
                 )
             }
         )
@@ -132,12 +130,6 @@ class MissionUseCase @Inject constructor(
         } catch (e: Exception) {
             Result.failure(e)
         }
-    }
-
-    private fun convertTimestampToCustomFormat(timestamp: String?): String {
-        if (timestamp == null || timestamp == "") return "-"
-        val localDateTime = LocalDateTime.parse(timestamp)
-        return localDateTime.format(dotStyleDateFormatter)
     }
 
     suspend fun confirmJuniorPayment(missionID: Int): Result<Boolean> {

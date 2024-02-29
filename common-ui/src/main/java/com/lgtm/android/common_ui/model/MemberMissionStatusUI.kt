@@ -1,5 +1,6 @@
 package com.lgtm.android.common_ui.model
 
+import android.text.SpannableString
 import com.lgtm.android.common_ui.constant.ProcessStateUI
 
 data class MemberMissionStatusUI(
@@ -7,9 +8,9 @@ data class MemberMissionStatusUI(
     val githubPrUrl: String,
     val memberId: Int,
     val nickname: String,
-    val missionFinishedDate: String,
-    val paymentDate: String,
+    val missionFinishedDate: SpannableString,
+    val paymentDate: SpannableString,
     val processStatus: ProcessStateUI,
     val profileImageUrl: String,
-    val isMissionSubmitted : Boolean
+    val isMissionSubmitted: Boolean,
 )
