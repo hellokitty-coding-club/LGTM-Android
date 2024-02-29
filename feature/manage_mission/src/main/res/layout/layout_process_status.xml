@@ -70,7 +70,7 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_waiting_for_payment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_waiting_for_payment"
-            tools:text="2023.10.09" />
+            tools:text="2023.10.09 | 오후 1:03" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongLine
             android:id="@+id/iv_payment_confirm_line"
@@ -139,7 +139,7 @@
             app:layout_constraintEnd_toEndOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintTop_toTopOf="@id/tv_payment_confirm"
-            tools:text="2023.10.09" />
+            tools:text="2023.10.09 | 오후 1:03" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongLine
             android:id="@+id/iv_mission_progress_line"
@@ -205,7 +205,7 @@
             app:layout_constraintEnd_toEndOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintTop_toTopOf="@id/tv_mission_progress"
-            tools:text="2023.10.09" />
+            tools:text="2023.10.09 | 오후 1:03" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongLine
             android:id="@+id/iv_mission_code_review_line"
@@ -271,7 +271,7 @@
             app:layout_constraintEnd_toEndOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintTop_toTopOf="@id/tv_mission_code_review"
-            tools:text="2023.10.09" />
+            tools:text="2023.10.09 | 오후 1:03" />
 
         <com.lgtm.android.manage_mission.ping_pong_common.PingPongLine
             android:id="@+id/iv_mission_review_finished_line"
@@ -328,7 +328,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="@id/tv_waiting_for_payment_date"
             app:layout_constraintTop_toTopOf="@id/tv_mission_review_finished"
-            tools:text="2023.10.09" />
+            tools:text="2023.10.09 | 오후 1:03" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

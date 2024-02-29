@@ -129,7 +129,6 @@ class MissionDetailActivity :
         binding.tvMissionUrl.setTextColor(grayTextColor)
     }
 
-
     private fun setupViewModel() {
         binding.viewModel = missionDetailViewModel
     }

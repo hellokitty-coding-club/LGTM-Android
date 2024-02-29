@@ -36,6 +36,10 @@ import com.lgtm.domain.util.dotStyleDateFormatter
 import com.lgtm.domain.util.korean12HourTimeFormatter
 import java.time.LocalDateTime
 
+const val LGTM_RED = "#fe504f"
+const val LGTM_GRAY_3 = "#cfd8e7"
+const val LGTM_GRAY_5 = "#78879f"
+
 fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,
     description = description,
@@ -52,7 +56,8 @@ fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     remainingRegisterDays = remainingRegisterDays,
     scraped = scraped,
     techTagList = techTagList,
-    missionDetailButtonStatusUI = getButtonStatusUI(missionDetailStatus)
+    missionDetailButtonStatusUI = getButtonStatusUI(missionDetailStatus),
+    dateTime = createLgtmDateTimeSpannable(dateTime)
 )
 
 fun ProfileVO.toUiModel(): ProfileGlanceUI = ProfileGlanceUI(
@@ -96,8 +101,8 @@ fun MemberMissionStatusVO.toUiModel() = MemberMissionStatusUI(
     githubPrUrl = githubPrUrl,
     memberId = memberId,
     nickname = nickname,
-    missionFinishedDate = missionFinishedDate,
-    paymentDate = paymentDate,
+    missionFinishedDate = createLgtmDateTimeSpannable(missionFinishedDate),
+    paymentDate = createLgtmDateTimeSpannable(paymentDate),
     processStatus = getProcessStateUI(processStatus),
     profileImageUrl = profileImageUrl,
     isMissionSubmitted = isMissionSubmitted,
@@ -123,12 +128,40 @@ fun AccountInfoVO.toUiModel() = AccountInfoUI(
 fun createRedSpannableText(text: String, redTextStart: Int, redTextEnd: Int): SpannableString {
     val spannableText = SpannableString(text)
     spannableText.setSpan(
-        ForegroundColorSpan(Color.RED),
+        ForegroundColorSpan(Color.parseColor(LGTM_RED)),
         redTextStart,
         redTextEnd,
         Spannable.SPAN_EXCLUSIVE_INCLUSIVE
     )
     return spannableText
+}
+
+fun createLgtmDateTimeSpannable(
+    localDateTime: LocalDateTime?,
+): SpannableString {
+    return when (localDateTime) {
+        null -> SpannableString("-")
+
+        else -> {
+            val time = localDateTime.format(korean12HourTimeFormatter)
+            val date = localDateTime.format(dotStyleDateFormatter)
+            val spannableText = SpannableString("$date | $time").apply {
+                setSpan(
+                    ForegroundColorSpan(Color.parseColor(LGTM_GRAY_5)),
+                    0,
+                    this@apply.length,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
+                setSpan(
+                    ForegroundColorSpan(Color.parseColor(LGTM_GRAY_3)),
+                    date.length + 1,
+                    date.length + 2,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
+            }
+            spannableText
+        }
+    }
 }
 
 fun MissionProcessInfoVO.toUiModel(
@@ -193,12 +226,12 @@ fun MissionProcessInfoVO.toUiModel(
         else null
 
     return MissionProcessInfoUI(
-        waitingForPaymentDate = waitingForPaymentDate,
-        paymentConfirmationDate = paymentConfirmationDate,
-        missionProceedingDate = missionProceedingDate,
-        codeReviewDate = codeReviewDate,
-        feedbackReviewedDate = feedbackReviewedDate,
-        missionFinishedDate = missionFinishedDate,
+        waitingForPaymentDate = createLgtmDateTimeSpannable(waitingForPaymentDate),
+        paymentConfirmationDate = createLgtmDateTimeSpannable(paymentConfirmationDate),
+        missionProceedingDate = createLgtmDateTimeSpannable(missionProceedingDate),
+        codeReviewDate = createLgtmDateTimeSpannable(codeReviewDate),
+        feedbackReviewedDate = createLgtmDateTimeSpannable(feedbackReviewedDate),
+        missionFinishedDate = createLgtmDateTimeSpannable(missionFinishedDate),
         waitingForPaymentDetail = waitingForPaymentDetail,
         paymentConfirmationDetail = paymentConfirmationDetail,
         missionProceedingDetail = missionProceedingDetail,
@@ -237,7 +270,6 @@ fun NotificationVO.toUiModel(): NotificationUI {
         body = body,
         notificationId = notificationId,
         isRead = isRead,
-        time = date?.format(korean12HourTimeFormatter) ?: "",
-        date = date?.format(dotStyleDateFormatter) ?: ""
+        dateTime = createLgtmDateTimeSpannable(dateTime)
     )
 }

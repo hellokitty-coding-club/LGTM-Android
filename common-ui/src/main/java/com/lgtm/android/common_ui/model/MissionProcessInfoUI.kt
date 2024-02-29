@@ -4,15 +4,15 @@ import android.text.SpannableString
 import java.io.Serializable
 
 data class MissionProcessInfoUI(
-    val waitingForPaymentDate: String?,
+    val waitingForPaymentDate: SpannableString?,
     val waitingForPaymentDetail: SpannableString? = null,
-    val paymentConfirmationDate: String?,
+    val paymentConfirmationDate: SpannableString?,
     val paymentConfirmationDetail: SpannableString? = null,
-    val missionProceedingDate: String?,
+    val missionProceedingDate: SpannableString?,
     val missionProceedingDetail: SpannableString? = null,
-    val codeReviewDate: String?,
+    val codeReviewDate: SpannableString?,
     val codeReviewDetail: SpannableString? = null,
-    val missionFinishedDate: String?,
-    val feedbackReviewedDate: String?,
+    val missionFinishedDate: SpannableString?,
+    val feedbackReviewedDate: SpannableString?,
     val depositorName: String? = null,
 ) : Serializable

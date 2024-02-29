@@ -57,12 +57,14 @@
             app:layout_constraintTop_toBottomOf="@id/tv_notification_title"
             tools:text="This is Body Part." />
 
-        <com.lgtm.android.common_ui.ui.LGTMTimestamp
+        <TextView
             android:id="@+id/lgtm_timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="20dp"
+            android:text="@{data.dateTime}"
+            android:textAppearance="@style/Description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/tv_notification_body"
             app:layout_constraintTop_toBottomOf="@id/tv_notification_body" />

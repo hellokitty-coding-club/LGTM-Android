@@ -1,5 +1,6 @@
 package com.lgtm.android.data.model.response
 
+import com.lgtm.android.data.model.mapper.parseDate
 import com.lgtm.domain.constants.ProcessState
 import com.lgtm.domain.constants.ProcessState.Companion.getProcessState
 import com.lgtm.domain.constants.UNKNOWN
@@ -13,7 +14,7 @@ data class MemberMissionStatusDTO(
     val nickname: String?,
     val paymentDate: String?,
     val processStatus: String?,
-    val profileImageUrl: String?
+    val profileImageUrl: String?,
 ) {
     fun toVO(): MemberMissionStatusVO {
         return MemberMissionStatusVO(
@@ -21,8 +22,8 @@ data class MemberMissionStatusDTO(
             githubPrUrl = githubPrUrl ?: UNKNOWN,
             memberId = requireNotNull(memberId),
             nickname = nickname ?: UNKNOWN,
-            missionFinishedDate = missionFinishedDate ?: UNKNOWN,
-            paymentDate = paymentDate ?: UNKNOWN,
+            missionFinishedDate = parseDate(missionFinishedDate),
+            paymentDate = parseDate(paymentDate),
             processStatus = getProcessState(processStatus),
             profileImageUrl = profileImageUrl ?: UNKNOWN,
             isMissionSubmitted = ProcessState.isMissionSubmitted(processStatus)

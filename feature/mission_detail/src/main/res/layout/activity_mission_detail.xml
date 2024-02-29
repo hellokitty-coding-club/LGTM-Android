@@ -122,6 +122,18 @@
                         app:layout_constraintTop_toBottomOf="@id/btn_progress"
                         tools:text="개발자 김효림과 함께하는 안드로이드 기초 강의입니다!" />
 
+                    <TextView
+                        android:id="@+id/lgtm_timestamp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@{viewModel.missionDetailUiState.dateTime}"
+                        android:textAppearance="@style/Description"
+                        app:layout_constraintStart_toStartOf="@id/tv_mission_title"
+                        app:layout_constraintTop_toBottomOf="@id/tv_mission_title"
+                        tools:text="2021.07.01 | 오후 12:00"
+                        tools:textColor="" />
+
                     <!-- 기술 태그 -->
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_tech_tag"
@@ -130,7 +142,7 @@
                         android:layout_marginHorizontal="@dimen/base_guideline"
                         android:layout_marginTop="16dp"
                         app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                        app:layout_constraintTop_toBottomOf="@id/tv_mission_title"
+                        app:layout_constraintTop_toBottomOf="@id/lgtm_timestamp"
                         tools:itemCount="1"
                         tools:listitem="@layout/item_tech_tag" />
 
