@@ -163,12 +163,12 @@ class MissionUseCase @Inject constructor(
 
     private fun formattingTimestamps(missionProcessInfo: MissionProcessInfoVO): MissionProcessInfoVO {
         return missionProcessInfo.copy(
-            waitingForPaymentDate = convertTimestampToCustomFormat(missionProcessInfo.waitingForPaymentDate),
-            paymentConfirmationDate = convertTimestampToCustomFormat(missionProcessInfo.paymentConfirmationDate),
-            missionProceedingDate = convertTimestampToCustomFormat(missionProcessInfo.missionProceedingDate),
-            codeReviewDate = convertTimestampToCustomFormat(missionProcessInfo.codeReviewDate),
-            missionFinishedDate = convertTimestampToCustomFormat(missionProcessInfo.missionFinishedDate),
-            feedbackReviewedDate = convertTimestampToCustomFormat(missionProcessInfo.feedbackReviewedDate)
+            waitingForPaymentDate = missionProcessInfo.waitingForPaymentDate,
+            paymentConfirmationDate = missionProcessInfo.paymentConfirmationDate,
+            missionProceedingDate = missionProcessInfo.missionProceedingDate,
+            codeReviewDate = missionProcessInfo.codeReviewDate,
+            missionFinishedDate = missionProcessInfo.missionFinishedDate,
+            feedbackReviewedDate = missionProcessInfo.feedbackReviewedDate
         )
     }
 

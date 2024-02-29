@@ -136,6 +136,25 @@ fun createRedSpannableText(text: String, redTextStart: Int, redTextEnd: Int): Sp
     return spannableText
 }
 
+fun createLgtmDateTimeSpannable(localDateTime: LocalDateTime?): SpannableString {
+    return when (localDateTime) {
+        null -> SpannableString("-")
+
+        else -> {
+            val time = localDateTime.format(korean12HourTimeFormatter)
+            val date = localDateTime.format(dotStyleDateFormatter)
+            val spannableText = SpannableString("$date | $time")
+            spannableText.setSpan(
+                ForegroundColorSpan(Color.parseColor(LGTM_GRAY_3)),
+                date.length + 1,
+                date.length + 2,
+                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+            )
+            spannableText
+        }
+    }
+}
+
 fun MissionProcessInfoVO.toUiModel(
     role: Role,
     processStatus: ProcessState,
@@ -198,12 +217,12 @@ fun MissionProcessInfoVO.toUiModel(
         else null
 
     return MissionProcessInfoUI(
-        waitingForPaymentDate = waitingForPaymentDate,
-        paymentConfirmationDate = paymentConfirmationDate,
-        missionProceedingDate = missionProceedingDate,
-        codeReviewDate = codeReviewDate,
-        feedbackReviewedDate = feedbackReviewedDate,
-        missionFinishedDate = missionFinishedDate,
+        waitingForPaymentDate = createLgtmDateTimeSpannable(waitingForPaymentDate),
+        paymentConfirmationDate = createLgtmDateTimeSpannable(paymentConfirmationDate),
+        missionProceedingDate = createLgtmDateTimeSpannable(missionProceedingDate),
+        codeReviewDate = createLgtmDateTimeSpannable(codeReviewDate),
+        feedbackReviewedDate = createLgtmDateTimeSpannable(feedbackReviewedDate),
+        missionFinishedDate = createLgtmDateTimeSpannable(missionFinishedDate),
         waitingForPaymentDetail = waitingForPaymentDetail,
         paymentConfirmationDetail = paymentConfirmationDetail,
         missionProceedingDetail = missionProceedingDetail,
