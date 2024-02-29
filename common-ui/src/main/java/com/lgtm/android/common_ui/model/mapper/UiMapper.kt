@@ -57,8 +57,7 @@ fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     scraped = scraped,
     techTagList = techTagList,
     missionDetailButtonStatusUI = getButtonStatusUI(missionDetailStatus),
-    time = date?.format(korean12HourTimeFormatter) ?: "",
-    date = date?.format(dotStyleDateFormatter) ?: ""
+    dateTime = createLgtmDateTimeSpannable(dateTime)
 )
 
 fun ProfileVO.toUiModel(): ProfileGlanceUI = ProfileGlanceUI(

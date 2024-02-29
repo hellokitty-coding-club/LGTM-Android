@@ -1,5 +1,6 @@
 package com.lgtm.android.common_ui.model
 
+import android.text.SpannableString
 import com.lgtm.android.common_ui.constant.MissionDetailButtonStatus
 import com.lgtm.android.common_ui.constant.MissionStatusUI
 import com.lgtm.domain.constants.Role
@@ -22,6 +23,5 @@ data class MissionDetailUI(
     val scraped: Boolean,
     val techTagList: List<TechTagVO>,
     val missionDetailButtonStatusUI: MissionDetailButtonStatus,
-    val time: String,
-    val date: String,
+    val dateTime: SpannableString,
 )

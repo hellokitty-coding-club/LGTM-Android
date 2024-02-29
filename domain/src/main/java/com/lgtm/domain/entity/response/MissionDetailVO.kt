@@ -22,5 +22,5 @@ data class MissionDetailVO(
     val scraped: Boolean,
     val techTagList: List<TechTagVO>,
     val missionDetailStatus: MissionDetailStatus,
-    val date: LocalDateTime?,
+    val dateTime: LocalDateTime?,
 )

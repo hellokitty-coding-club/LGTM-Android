@@ -52,7 +52,7 @@ data class MissionDetailDTO(
                 requireNotNull(isParticipated),
                 requireNotNull(isClosed)
             ),
-            date = parseDate(createdAt)
+            dateTime = parseDate(createdAt)
         )
     }
 }

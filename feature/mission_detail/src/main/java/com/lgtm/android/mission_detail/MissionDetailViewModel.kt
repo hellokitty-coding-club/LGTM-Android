@@ -161,10 +161,4 @@ class MissionDetailViewModel @Inject constructor(
     private fun getReviewerNickname(): String {
         return missionDetailUiState.value?.memberProfile?.nickname ?: ""
     }
-
-    fun getMissionDateAndTime(): Pair<String, String> {
-        val missionDate = missionDetailUiState.value?.date ?: ""
-        val missionTime = missionDetailUiState.value?.time ?: ""
-        return missionDate to missionTime
-    }
 }
