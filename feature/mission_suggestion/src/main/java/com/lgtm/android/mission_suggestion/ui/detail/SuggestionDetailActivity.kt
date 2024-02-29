@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lgtm.android.common_ui.base.BaseComposeActivity
 import com.lgtm.android.mission_suggestion.ui.detail.presentation.SuggestionDetailScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +22,7 @@ class SuggestionDetailActivity: BaseComposeActivity(){
     override fun Content() {
         MaterialTheme {
             SuggestionDetailScreen(
-                suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsState()
+                suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsStateWithLifecycle()
             )
         }
     }

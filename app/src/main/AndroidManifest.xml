@@ -82,5 +82,10 @@
             android:name=".mission_suggestion.ui.detail.SuggestionDetailActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".mission_suggestion.ui.create_suggestion.CreateSuggestionActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 </manifest>

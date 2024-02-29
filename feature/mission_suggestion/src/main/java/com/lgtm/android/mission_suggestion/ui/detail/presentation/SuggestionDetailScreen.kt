@@ -168,7 +168,7 @@ fun SuggestionDetailTopBar() {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        BackButton()
+        BackButton() { /* TODO */ }
         MenuButton()
     }
 }
