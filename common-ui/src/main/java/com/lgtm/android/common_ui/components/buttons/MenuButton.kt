@@ -9,11 +9,10 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.lgtm.android.common_ui.R
+import com.lgtm.android.common_ui.theme.LGTMTheme
 
 @Composable
 fun MenuButton(
@@ -24,11 +23,11 @@ fun MenuButton(
             .wrapContentSize()
             .border(
                 width = 1.dp,
-                color = colorResource(id = R.color.gray_3),
+                color = LGTMTheme.colors.gray_3,
                 shape = RoundedCornerShape(10.dp)
             )
             .background(
-                color = Color.White,
+                color = LGTMTheme.colors.white,
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(3.dp)

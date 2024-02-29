@@ -11,15 +11,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.components.buttons.ConfirmButtonBackgroundColor
 import com.lgtm.android.common_ui.components.buttons.DialogConfirmationButton
-import com.lgtm.android.common_ui.theme.body1B
-import com.lgtm.android.common_ui.theme.description
+import com.lgtm.android.common_ui.theme.LGTMTheme
 
 @Composable
 fun LgtmConfirmationDialog(
@@ -32,7 +30,7 @@ fun LgtmConfirmationDialog(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(color = colorResource(id = R.color.white)),
+            .background(color = LGTMTheme.colors.white),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         DialogDescription(dialogTitle, dialogDescription)
@@ -48,15 +46,15 @@ fun DialogDescription(
     Text(
         modifier = Modifier.padding(top = 30.dp),
         text = title,
-        style = Typography.body1B,
-        color = colorResource(id = R.color.black)
+        style = LGTMTheme.typography.body1B,
+        color = LGTMTheme.colors.black
     )
     description?.let {
         Text(
             modifier = Modifier.padding(top = 10.dp),
             text = description,
-            style = Typography.description,
-            color = colorResource(id = R.color.black)
+            style = LGTMTheme.typography.description,
+            color = LGTMTheme.colors.black
         )
     }
 }
@@ -92,11 +90,13 @@ fun DialogButtons(
 @Composable
 @Preview
 fun LGTMBottomSheetDialogContentPreview() {
-    LgtmConfirmationDialog(
-        dialogTitle = "작성을 중단할까요?",
-        dialogDescription = "작성한 내용은 저장되지 않아요.",
-        onClickCancel = {},
-        onClickConfirm = {},
-        confirmBtnBackground = ConfirmButtonBackgroundColor.GREEN
-    )
+    LGTMTheme {
+        LgtmConfirmationDialog(
+            dialogTitle = "작성을 중단할까요?",
+            dialogDescription = "작성한 내용은 저장되지 않아요.",
+            onClickCancel = {},
+            onClickConfirm = {},
+            confirmBtnBackground = ConfirmButtonBackgroundColor.GREEN
+        )
+    }
 }
