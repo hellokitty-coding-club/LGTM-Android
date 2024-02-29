@@ -30,6 +30,5 @@ class NotificationViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
     fun onBind(item: NotificationUI) {
         binding.data = item
-        binding.lgtmTimestamp.setTimeStamp(item.date, item.time)
     }
 }
