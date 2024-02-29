@@ -14,7 +14,6 @@ import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.lgtm.android.common_ui.R
@@ -23,9 +22,7 @@ import com.lgtm.android.common_ui.components.buttons.LikeButton
 import com.lgtm.android.common_ui.components.buttons.MenuButton
 import com.lgtm.android.common_ui.components.texts.DateTimeText
 import com.lgtm.android.common_ui.model.SuggestionUI
-import com.lgtm.android.common_ui.theme.body1B
-import com.lgtm.android.common_ui.theme.body2
-import com.lgtm.android.common_ui.theme.heading3B
+import com.lgtm.android.common_ui.theme.LGTMTheme
 import com.lgtm.android.common_ui.util.UiState
 
 @Composable
@@ -34,7 +31,7 @@ fun SuggestionDetailScreen(
 ) {
     Column(
         modifier = Modifier
-            .background(colorResource(id = R.color.gray_3)),
+            .background(LGTMTheme.colors.gray_3),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SuggestionDetailContent(
@@ -75,8 +72,8 @@ fun SuggestionDetailContent(
                 Text(
                     modifier = Modifier.padding(horizontal = 20.dp),
                     text = suggestionDetailState.data.title,
-                    style = Typography.heading3B,
-                    color = Color.Black
+                    style = LGTMTheme.typography.heading3B,
+                    color = LGTMTheme.colors.black
                 )
 
                 DateTimeText(
@@ -90,7 +87,7 @@ fun SuggestionDetailContent(
 
                 Divider(
                     modifier = Modifier.padding(horizontal = 20.dp),
-                    color = colorResource(id = R.color.gray_2),
+                    color = LGTMTheme.colors.gray_2,
                     thickness = 1.dp
                 )
 
@@ -101,8 +98,8 @@ fun SuggestionDetailContent(
                         end = 20.dp
                     ),
                     text = suggestionDetailState.data.description,
-                    style = Typography.body2,
-                    color = Color.Black
+                    style = LGTMTheme.typography.body2,
+                    color = LGTMTheme.colors.black
                 )
             }
         }
@@ -127,7 +124,7 @@ fun SuggestionLikeSection(
                 modifier = modifier
                     .fillMaxWidth()
                     .background(
-                        color = colorResource(id = R.color.gray_2),
+                        color = LGTMTheme.colors.gray_2,
                         shape = RoundedCornerShape(20.dp)
                     )
                     .padding(
@@ -139,8 +136,8 @@ fun SuggestionLikeSection(
             ) {
                 Text(
                     text = stringResource(id = R.string.want_this_mission),
-                    style = Typography.body1B,
-                    color = colorResource(id = R.color.gray_6)
+                    style = LGTMTheme.typography.body1B,
+                    color = LGTMTheme.colors.gray_6
                 )
 
                 LikeButton(
@@ -168,7 +165,7 @@ fun SuggestionDetailTopBar() {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        BackButton() { /* TODO */ }
+        BackButton { /* TODO */ }
         MenuButton()
     }
 }

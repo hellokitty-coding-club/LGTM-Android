@@ -29,7 +29,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -41,9 +40,7 @@ import com.lgtm.android.common_ui.components.buttons.BackButton
 import com.lgtm.android.common_ui.components.buttons.ConfirmButtonBackgroundColor
 import com.lgtm.android.common_ui.components.dialog.LgtmConfirmationDialog
 import com.lgtm.android.common_ui.model.EditTextData
-import com.lgtm.android.common_ui.theme.body1M
-import com.lgtm.android.common_ui.theme.body2
-import com.lgtm.android.common_ui.theme.heading4B
+import com.lgtm.android.common_ui.theme.LGTMTheme
 import com.lgtm.android.common_ui.ui.LGTMEditText
 import com.lgtm.android.common_ui.util.UiState
 import com.lgtm.android.common_ui.util.throttleClickable
@@ -72,7 +69,7 @@ fun CreateSuggestionScreen(
             topStart = 20.dp,
             topEnd = 20.dp
         ),
-        scrimColor = colorResource(id = R.color.transparent_black),
+        scrimColor = LGTMTheme.colors.transparent_black,
         sheetContent = {
             LgtmConfirmationDialog(
                 dialogTitle = stringResource(id = R.string.want_to_stop_creating_suggestion),
@@ -95,7 +92,7 @@ fun CreateSuggestionScreen(
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxHeight()
-                .background(color = colorResource(id = R.color.white))
+                .background(color = LGTMTheme.colors.white)
                 .imePadding()
         ) {
 
@@ -186,7 +183,7 @@ fun CreateSuggestionNextButton(
             .fillMaxWidth()
             .padding(horizontal = 20.dp)
             .background(
-                color = if (enabledState) colorResource(id = R.color.green) else colorResource(id = R.color.gray_2),
+                color = if (enabledState) LGTMTheme.colors.green else LGTMTheme.colors.gray_2,
                 shape = RoundedCornerShape(5.dp)
             )
             .throttleClickable(enabledState) {
@@ -199,8 +196,8 @@ fun CreateSuggestionNextButton(
             modifier = Modifier
                 .padding(vertical = 14.dp),
             text = stringResource(id = R.string.suggestion_next),
-            style = Typography.body1M,
-            color = if (enabledState) colorResource(id = R.color.black) else colorResource(id = R.color.gray_4)
+            style = LGTMTheme.typography.body1M,
+            color = if (enabledState) LGTMTheme.colors.black else LGTMTheme.colors.gray_4
         )
     }
 }
@@ -345,14 +342,14 @@ fun SubTitleWithDescription(
     Text(
         modifier = Modifier.padding(bottom = 10.dp),
         text = stringResource(id = subTitle),
-        style = Typography.heading4B,
-        color = colorResource(id = R.color.black)
+        style = LGTMTheme.typography.heading4B,
+        color = LGTMTheme.colors.black
     )
 
     Text(
         modifier = Modifier.padding(bottom = 14.dp),
         text = stringResource(id = description),
-        style = Typography.body2,
-        color = colorResource(id = R.color.gray_6)
+        style = LGTMTheme.typography.body2,
+        color = LGTMTheme.colors.gray_6
     )
 }

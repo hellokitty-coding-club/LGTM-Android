@@ -7,16 +7,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.lgtm.android.common_ui.R
-import com.lgtm.android.common_ui.theme.description
+import com.lgtm.android.common_ui.theme.LGTMTheme
 
 @Composable
 fun DateTimeText(
@@ -32,12 +29,12 @@ fun DateTimeText(
         Text(
             modifier = Modifier.padding(end = 3.dp),
             text = date,
-            style = Typography.description,
-            color = colorResource(id = R.color.gray_5),
+            style = LGTMTheme.typography.description,
+            color = LGTMTheme.colors.gray_5,
         )
 
         Divider(
-            color = colorResource(id = R.color.gray_3),
+            color = LGTMTheme.colors.gray_3,
             modifier = Modifier
                 .width(1.dp)
                 .fillMaxHeight()
@@ -49,8 +46,8 @@ fun DateTimeText(
         Text(
             modifier = Modifier.padding(start = 3.dp),
             text = time,
-            style = Typography.description,
-            color = colorResource(id = R.color.gray_5)
+            style = LGTMTheme.typography.description,
+            color = LGTMTheme.colors.gray_5
         )
     }
 }
@@ -58,7 +55,7 @@ fun DateTimeText(
 @Preview
 @Composable
 fun DateTimePreview() {
-    MaterialTheme {
+    LGTMTheme {
         DateTimeText(
             date = "2021.09.01",
             time = "오후 12:00"
