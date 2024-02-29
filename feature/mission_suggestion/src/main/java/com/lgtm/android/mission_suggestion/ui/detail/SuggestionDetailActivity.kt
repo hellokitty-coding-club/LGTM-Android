@@ -2,10 +2,10 @@ package com.lgtm.android.mission_suggestion.ui.detail
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lgtm.android.common_ui.base.BaseComposeActivity
+import com.lgtm.android.common_ui.theme.LGTMTheme
 import com.lgtm.android.mission_suggestion.ui.detail.presentation.SuggestionDetailScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ class SuggestionDetailActivity: BaseComposeActivity(){
 
     @Composable
     override fun Content() {
-        MaterialTheme {
+        LGTMTheme {
             SuggestionDetailScreen(
                 suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsStateWithLifecycle()
             )
