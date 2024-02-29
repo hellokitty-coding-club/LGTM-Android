@@ -36,6 +36,9 @@ import com.lgtm.domain.util.dotStyleDateFormatter
 import com.lgtm.domain.util.korean12HourTimeFormatter
 import java.time.LocalDateTime
 
+const val LGTM_RED = "#fe504f"
+const val LGTM_GRAY_3 = "#cfd8e7"
+
 fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,
     description = description,
@@ -125,7 +128,7 @@ fun AccountInfoVO.toUiModel() = AccountInfoUI(
 fun createRedSpannableText(text: String, redTextStart: Int, redTextEnd: Int): SpannableString {
     val spannableText = SpannableString(text)
     spannableText.setSpan(
-        ForegroundColorSpan(Color.RED),
+        ForegroundColorSpan(Color.parseColor(LGTM_RED)),
         redTextStart,
         redTextEnd,
         Spannable.SPAN_EXCLUSIVE_INCLUSIVE
