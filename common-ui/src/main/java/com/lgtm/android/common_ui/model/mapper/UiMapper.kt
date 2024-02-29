@@ -38,6 +38,7 @@ import java.time.LocalDateTime
 
 const val LGTM_RED = "#fe504f"
 const val LGTM_GRAY_3 = "#cfd8e7"
+const val LGTM_GRAY_5 = "#78879f"
 
 fun MissionDetailVO.toUiModel(): MissionDetailUI = MissionDetailUI(
     currentPeopleNumber = currentPeopleNumber,
@@ -136,20 +137,29 @@ fun createRedSpannableText(text: String, redTextStart: Int, redTextEnd: Int): Sp
     return spannableText
 }
 
-fun createLgtmDateTimeSpannable(localDateTime: LocalDateTime?): SpannableString {
+fun createLgtmDateTimeSpannable(
+    localDateTime: LocalDateTime?,
+): SpannableString {
     return when (localDateTime) {
         null -> SpannableString("-")
 
         else -> {
             val time = localDateTime.format(korean12HourTimeFormatter)
             val date = localDateTime.format(dotStyleDateFormatter)
-            val spannableText = SpannableString("$date | $time")
-            spannableText.setSpan(
-                ForegroundColorSpan(Color.parseColor(LGTM_GRAY_3)),
-                date.length + 1,
-                date.length + 2,
-                Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-            )
+            val spannableText = SpannableString("$date | $time").apply {
+                setSpan(
+                    ForegroundColorSpan(Color.parseColor(LGTM_GRAY_5)),
+                    0,
+                    this@apply.length,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
+                setSpan(
+                    ForegroundColorSpan(Color.parseColor(LGTM_GRAY_3)),
+                    date.length + 1,
+                    date.length + 2,
+                    Spannable.SPAN_EXCLUSIVE_INCLUSIVE
+                )
+            }
             spannableText
         }
     }
@@ -261,7 +271,6 @@ fun NotificationVO.toUiModel(): NotificationUI {
         body = body,
         notificationId = notificationId,
         isRead = isRead,
-        time = date?.format(korean12HourTimeFormatter) ?: "",
-        date = date?.format(dotStyleDateFormatter) ?: ""
+        dateTime = createLgtmDateTimeSpannable(dateTime)
     )
 }

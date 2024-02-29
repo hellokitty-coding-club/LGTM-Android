@@ -7,5 +7,5 @@ data class NotificationVO(
     val body: String,
     val isRead: Boolean,
     val notificationId: Int,
-    val date: LocalDateTime?,
+    val dateTime: LocalDateTime?,
 )

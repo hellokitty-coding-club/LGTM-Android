@@ -16,7 +16,7 @@ data class NotificationDTO(
             body = body.orEmpty(),
             isRead = isRead ?: false,
             notificationId = requireNotNull(notificationId) { "notificationId is null" },
-            date = parseDate(createdAt)
+            dateTime = parseDate(createdAt)
         )
     }
 }
