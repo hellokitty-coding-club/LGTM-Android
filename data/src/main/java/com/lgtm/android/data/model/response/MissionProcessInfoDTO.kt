@@ -1,6 +1,7 @@
 package com.lgtm.android.data.model.response
 
 import com.google.gson.annotations.SerializedName
+import com.lgtm.android.data.model.mapper.parseDate
 import com.lgtm.domain.entity.response.MissionProcessInfoVO
 
 data class MissionProcessInfoDTO(
@@ -19,12 +20,12 @@ data class MissionProcessInfoDTO(
 ) {
     fun toVO(): MissionProcessInfoVO {
         return MissionProcessInfoVO(
-            paymentConfirmationDate = paymentConfirmationDate,
-            codeReviewDate = codeReviewDate,
-            waitingForPaymentDate = waitingForPaymentDate,
-            missionProceedingDate = missionProceedingDate,
-            missionFinishedDate = missionFinishedDate,
-            feedbackReviewedDate = feedbackReviewedDate
+            paymentConfirmationDate = parseDate(paymentConfirmationDate),
+            codeReviewDate = parseDate(codeReviewDate),
+            waitingForPaymentDate = parseDate(waitingForPaymentDate),
+            missionProceedingDate = parseDate(missionProceedingDate),
+            missionFinishedDate = parseDate(missionFinishedDate),
+            feedbackReviewedDate = parseDate(feedbackReviewedDate)
         )
     }
 }
