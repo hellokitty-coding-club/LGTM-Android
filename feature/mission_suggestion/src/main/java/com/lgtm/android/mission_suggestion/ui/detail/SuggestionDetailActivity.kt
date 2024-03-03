@@ -22,7 +22,8 @@ class SuggestionDetailActivity: BaseComposeActivity(){
     override fun Content() {
         LGTMTheme {
             SuggestionDetailScreen(
-                suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsStateWithLifecycle()
+                suggestionDetailStateHolder = suggestionDetailViewModel.detailState.collectAsStateWithLifecycle(),
+                onBackButtonClick = ::setBackButtonClick
             )
         }
     }
@@ -33,6 +34,10 @@ class SuggestionDetailActivity: BaseComposeActivity(){
     }
     private fun fetchSuggestionDetail() {
         suggestionDetailViewModel.fetchDetail(suggestionId)
+    }
+
+    private fun setBackButtonClick() {
+        finish()
     }
 
     companion object {

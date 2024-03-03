@@ -27,7 +27,8 @@ import com.lgtm.android.common_ui.util.UiState
 
 @Composable
 fun SuggestionDetailScreen(
-    suggestionDetailStateHolder: State<UiState<SuggestionUI>>
+    suggestionDetailStateHolder: State<UiState<SuggestionUI>>,
+    onBackButtonClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -35,9 +36,9 @@ fun SuggestionDetailScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         SuggestionDetailContent(
-            modifier = Modifier
-                .weight(1f),
-            suggestionDetailState = suggestionDetailStateHolder.value
+            modifier = Modifier.weight(1f),
+            suggestionDetailState = suggestionDetailStateHolder.value,
+            onBackButtonClick = onBackButtonClick
         )
         SuggestionLikeSection(
             modifier = Modifier.padding(vertical = 5.dp),
@@ -49,12 +50,11 @@ fun SuggestionDetailScreen(
 @Composable
 fun SuggestionDetailContent(
     modifier: Modifier = Modifier,
-    suggestionDetailState: UiState<SuggestionUI>
+    suggestionDetailState: UiState<SuggestionUI>,
+    onBackButtonClick: () -> Unit
 ) {
     when (suggestionDetailState) {
-        is UiState.Init -> {
-            /* no-op */
-        }
+        is UiState.Init -> { /* no-op */ }
         is UiState.Success -> {
             Column(
                 modifier = modifier
@@ -67,7 +67,7 @@ fun SuggestionDetailContent(
                         )
                     )
             ) {
-                SuggestionDetailTopBar()
+                SuggestionDetailTopBar(onBackButtonClick)
 
                 Text(
                     modifier = Modifier.padding(horizontal = 20.dp),
@@ -104,9 +104,7 @@ fun SuggestionDetailContent(
             }
         }
 
-        else -> {
-            /* no-op */
-        }
+        else -> { /* no-op */ }
     }
 }
 
@@ -116,9 +114,7 @@ fun SuggestionLikeSection(
     suggestionDetailState: UiState<SuggestionUI>
 ) {
     when(suggestionDetailState) {
-        is UiState.Init -> {
-            /* no-op */
-        }
+        is UiState.Init -> { /* no-op */ }
         is UiState.Success -> {
             Row (
                 modifier = modifier
@@ -146,15 +142,14 @@ fun SuggestionLikeSection(
                 )
             }
         }
-
-        else -> {
-            /* no-op */
-        }
+        else -> { /* no-op */ }
     }
 }
 
 @Composable
-fun SuggestionDetailTopBar() {
+fun SuggestionDetailTopBar(
+    onBackButtonClick: () -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -165,7 +160,7 @@ fun SuggestionDetailTopBar() {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        BackButton { /* TODO */ }
+        BackButton(onClick = onBackButtonClick)
         MenuButton()
     }
 }
