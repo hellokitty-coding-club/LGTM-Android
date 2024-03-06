@@ -2,6 +2,7 @@ package com.lgtm.android.data.datasource
 
 import com.lgtm.android.data.model.response.BaseDTO
 import com.lgtm.android.data.model.response.CreateSuggestionResponseDTO
+import com.lgtm.android.data.model.response.DeleteSuggestionDTO
 import com.lgtm.android.data.model.response.MissionSuggestionDTO
 import com.lgtm.android.data.model.response.SuggestionDTO
 import com.lgtm.android.data.model.response.SuggestionLikeDTO
@@ -30,5 +31,9 @@ class SuggestionDataSource @Inject constructor(
 
     suspend fun cancelLikeSuggestion(suggestionId: Int): BaseDTO<SuggestionLikeDTO> {
         return checkResponse(suggestionService.cancelLikeSuggestion(suggestionId))
+    }
+
+    suspend fun deleteSuggestion(suggestionId: Int): BaseDTO<DeleteSuggestionDTO> {
+        return checkResponse(suggestionService.deleteSuggestion(suggestionId))
     }
 }

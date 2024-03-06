@@ -2,6 +2,7 @@ package com.lgtm.android.data.service
 
 import com.lgtm.android.data.model.response.BaseDTO
 import com.lgtm.android.data.model.response.CreateSuggestionResponseDTO
+import com.lgtm.android.data.model.response.DeleteSuggestionDTO
 import com.lgtm.android.data.model.response.MissionSuggestionDTO
 import com.lgtm.android.data.model.response.SuggestionDTO
 import com.lgtm.android.data.model.response.SuggestionLikeDTO
@@ -37,4 +38,8 @@ interface SuggestionService {
         @Path("suggestionId") suggestionId: Int
     ): Response<BaseDTO<SuggestionLikeDTO>>
 
+    @DELETE("v1/suggestion/{suggestionId}")
+    suspend fun deleteSuggestion(
+        @Path("suggestionId") suggestionId: Int
+    ): Response<BaseDTO<DeleteSuggestionDTO>>
 }
