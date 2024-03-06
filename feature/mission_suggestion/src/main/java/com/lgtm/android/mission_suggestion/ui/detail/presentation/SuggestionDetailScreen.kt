@@ -54,6 +54,7 @@ fun SuggestionDetailScreen(
         dialogTitle = stringResource(id = R.string.want_to_delete_suggestion),
         dialogDescription = stringResource(id = R.string.cannot_cancel_the_deletion),
         onClickConfirm = {
+            viewModel.deleteSuggestion()
             onBackButtonClick()
         },
         confirmBtnBackground = ConfirmButtonBackgroundColor.GRAY

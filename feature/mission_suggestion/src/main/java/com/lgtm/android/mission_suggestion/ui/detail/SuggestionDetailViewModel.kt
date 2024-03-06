@@ -81,4 +81,19 @@ class SuggestionDetailViewModel @Inject constructor(
                 }
         }
     }
+
+    /* 미션 제안 삭제 기능 */
+
+    fun deleteSuggestion() {
+        viewModelScope.launch(lgtmErrorHandler) {
+            suggestionRepository.deleteSuggestion(getSuggestionId())
+                .onSuccess {
+                    Log.d(TAG, "deletedSuggestion: $it")
+                }
+                .onFailure {
+                    Firebase.crashlytics.recordException(it)
+                    Log.e(TAG, "deleteSuggestion: $it")
+                }
+        }
+    }
 }
