@@ -34,7 +34,10 @@ fun SuggestionDropDownOneMenu(
             onDismissRequest = onDismissRequest
         ) {
             DropdownMenuItem(
-                onClick = onMenuClick
+                onClick = {
+                    onDismissRequest()
+                    onMenuClick()
+                }
             ) {
                 Text(
                     text = text,
