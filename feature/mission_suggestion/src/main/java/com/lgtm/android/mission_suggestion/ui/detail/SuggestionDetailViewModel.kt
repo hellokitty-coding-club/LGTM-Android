@@ -10,6 +10,7 @@ import com.lgtm.android.common_ui.model.SuggestionUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
 import com.lgtm.android.common_ui.util.UiState
 import com.lgtm.domain.entity.response.SuggestionLikeVO
+import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.SuggestionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SuggestionDetailViewModel @Inject constructor(
-    private val suggestionRepository: SuggestionRepository
+    private val suggestionRepository: SuggestionRepository,
+    private val authRepository: AuthRepository
 ): BaseViewModel() {
 
     /* 미션 제안 상세 내용 */
@@ -94,6 +96,42 @@ class SuggestionDetailViewModel @Inject constructor(
                     Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "deleteSuggestion: $it")
                 }
+        }
+    }
+
+    /* 미션 제안 신고 기능 */
+    fun getReportMessage() =
+        "안녕하세요 고객님, LGTM 서비스 이용에 불편을 드려 죄송합니다. 보내주신 내용은 빠른 시일 내로 운영팀에서 처리하겠습니다.\n" +
+                "처리 결과는 발신된 이메일 주소로 전달될 예정입니다. 감사합니다.\n\n" +
+                "[신고 유형을 선택해주세요]\n" +
+                "1. 성적, 폭력적 또는 혐오스러운 내용\n" +
+                "2. 욕설 혹은 유해한 내용\n" +
+                "3. 기타 부적절한 내용\n" +
+                "4. 기타 서비스 이용 불편사항\n" +
+                "응답 : \n" +
+                "\n\n\n" +
+                "[신고 내용]\n" +
+                "불편을 겪으신 내용을 적어주세요. 필요시 사진을 첨부해주셔도 좋습니다.\n" +
+                "응답 : \n" +
+                "\n\n\n" +
+                "-------------------------------------------------\n" +
+                "아래 내용은 운영진에게 전달되는 정보니 수정하지 말아주세요:)\n\n" +
+                "[신고 정보]\n" +
+                "1. 신고자 ID : ${getUserId()}\n" +
+                "2. 미션 제안 제목 : ${getMissionTitle()}\n" +
+                "3. 미션 제안 본문 : ${getMissionDescription()} \n"
+
+    private fun getUserId() = authRepository.getMemberId()
+
+    private fun getMissionTitle(): String {
+        detailState.value.apply {
+            return if (this is UiState.Success) this.data.title else ""
+        }
+    }
+
+    private fun getMissionDescription(): String {
+        detailState.value.apply {
+            return if (this is UiState.Success) this.data.description else ""
         }
     }
 }

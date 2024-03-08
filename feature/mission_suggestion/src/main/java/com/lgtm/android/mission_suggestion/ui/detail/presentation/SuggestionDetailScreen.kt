@@ -41,7 +41,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun SuggestionDetailScreen(
     viewModel: SuggestionDetailViewModel = hiltViewModel(),
-    onBackButtonClick: () -> Unit
+    onBackButtonClick: () -> Unit,
+    onReportSuggestionClick: () -> Unit
 ) {
     val suggestionDetailState by viewModel.detailState.collectAsStateWithLifecycle()
     val likeSuggestionState by viewModel.likeSuggestionState.collectAsStateWithLifecycle()
@@ -72,7 +73,7 @@ fun SuggestionDetailScreen(
                         bottomSheetState.show()
                     }
                 },
-                onReportSuggestion = { /* TODO: 신고 진행 */ },
+                onReportSuggestion = onReportSuggestionClick,
                 onBackButtonClick = onBackButtonClick,
             )
             SuggestionLikeSection(
