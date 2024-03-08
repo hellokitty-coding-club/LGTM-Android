@@ -18,12 +18,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lgtm.android.common_ui.R
 import com.lgtm.android.common_ui.theme.LGTMTheme
+import com.lgtm.android.common_ui.util.throttleClickable
 
 @Composable
 fun LikeButton(
+    modifier: Modifier = Modifier,
     likeNum: String,
     isLiked: Boolean,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -41,6 +43,10 @@ fun LikeButton(
                 horizontal = 6.dp,
                 vertical = 9.dp
             )
+            .throttleClickable(
+                enabled = true,
+                onClick = onClick
+            )
     ) {
         
         Text(
@@ -53,7 +59,7 @@ fun LikeButton(
 
         Image(
             modifier = Modifier.padding(start = 2.dp),
-            imageVector = ImageVector.vectorResource(id = R.drawable.ic_like_selected),
+            imageVector = if (isLiked) ImageVector.vectorResource(id = R.drawable.ic_like_selected) else ImageVector.vectorResource(id = R.drawable.ic_like_unselected),
             contentDescription = null
         )
     }
@@ -65,7 +71,8 @@ fun LikeButtonPreview() {
     LGTMTheme {
         LikeButton(
             likeNum = "22",
-            isLiked = true
+            isLiked = true,
+            onClick = {}
         )
     }
 }
