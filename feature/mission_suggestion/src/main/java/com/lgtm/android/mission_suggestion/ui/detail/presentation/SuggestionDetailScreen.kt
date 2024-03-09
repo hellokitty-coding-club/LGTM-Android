@@ -34,7 +34,6 @@ import com.lgtm.android.common_ui.model.SuggestionUI
 import com.lgtm.android.common_ui.theme.LGTMTheme
 import com.lgtm.android.common_ui.util.UiState
 import com.lgtm.android.mission_suggestion.ui.detail.SuggestionDetailViewModel
-import com.lgtm.domain.entity.response.SuggestionLikeVO
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -44,52 +43,58 @@ fun SuggestionDetailScreen(
     onBackButtonClick: () -> Unit,
     onReportSuggestionClick: () -> Unit
 ) {
-    val suggestionDetailState by viewModel.detailState.collectAsStateWithLifecycle()
-    val likeSuggestionState by viewModel.likeSuggestionState.collectAsStateWithLifecycle()
-
+    val suggestionDetailState: UiState<SuggestionUI> by viewModel.detailState.collectAsStateWithLifecycle()
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val coroutineScope = rememberCoroutineScope()
 
-    LgtmConfirmationDialog(
-        bottomSheetState = bottomSheetState,
-        dialogTitle = stringResource(id = R.string.want_to_delete_suggestion),
-        dialogDescription = stringResource(id = R.string.cannot_cancel_the_deletion),
-        onClickConfirm = {
-            viewModel.deleteSuggestion()
-            onBackButtonClick()
-        },
-        confirmBtnBackground = ConfirmButtonBackgroundColor.GRAY
-    ) {
-        Column(
-            modifier = Modifier
-                .background(LGTMTheme.colors.gray_3),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            SuggestionDetailContent(
-                modifier = Modifier.weight(1f),
-                suggestionDetailState = suggestionDetailState,
-                onDeleteSuggestion = {
-                    coroutineScope.launch {
-                        bottomSheetState.show()
-                    }
+    when(suggestionDetailState) {
+        is UiState.Init -> { /* no-op */ }
+        is UiState.Success -> {
+            val suggestionDetailState = suggestionDetailState as UiState.Success<SuggestionUI>
+            LgtmConfirmationDialog(
+                bottomSheetState = bottomSheetState,
+                dialogTitle = stringResource(id = R.string.want_to_delete_suggestion),
+                dialogDescription = stringResource(id = R.string.cannot_cancel_the_deletion),
+                onClickConfirm = {
+                    viewModel.deleteSuggestion()
+                    onBackButtonClick()
                 },
-                onReportSuggestion = onReportSuggestionClick,
-                onBackButtonClick = onBackButtonClick,
-            )
-            SuggestionLikeSection(
-                modifier = Modifier.padding(vertical = 5.dp),
-                likeSuggestionState = likeSuggestionState,
-                onLikeButtonClick = viewModel::likeSuggestion,
-                onLikeButtonCancel = viewModel::cancelLikeSuggestion
-            )
+                confirmBtnBackground = ConfirmButtonBackgroundColor.GRAY
+            ) {
+                Column(
+                    modifier = Modifier
+                        .background(LGTMTheme.colors.gray_3),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    SuggestionDetailContent(
+                        modifier = Modifier.weight(1f),
+                        suggestionDetail = suggestionDetailState.data,
+                        onDeleteSuggestion = {
+                            coroutineScope.launch {
+                                bottomSheetState.show()
+                            }
+                        },
+                        onReportSuggestion = onReportSuggestionClick,
+                        onBackButtonClick = onBackButtonClick,
+                    )
+                    SuggestionLikeSection(
+                        modifier = Modifier.padding(vertical = 5.dp),
+                        likeNum = suggestionDetailState.data.likeNum,
+                        isLiked = suggestionDetailState.data.isLiked,
+                        onLikeButtonClick = viewModel::likeSuggestion,
+                        onLikeButtonCancel = viewModel::cancelLikeSuggestion
+                    )
+                }
+            }
         }
+        is UiState.Failure -> { /* no-op */ }
     }
 }
 
 @Composable
 fun SuggestionDetailContent(
     modifier: Modifier = Modifier,
-    suggestionDetailState: UiState<SuggestionUI>,
+    suggestionDetail: SuggestionUI,
     onDeleteSuggestion: () -> Unit,
     onReportSuggestion: () -> Unit,
     onBackButtonClick: () -> Unit
@@ -105,58 +110,53 @@ fun SuggestionDetailContent(
                 )
             )
     ) {
-        when (suggestionDetailState) {
-            is UiState.Init -> { /* no-op */ }
-            is UiState.Success -> {
-                SuggestionDetailTopBar(
-                    onBackButtonClick = onBackButtonClick,
-                    isMySuggestion = suggestionDetailState.data.isMyPost,
-                    onDeleteSuggestion = onDeleteSuggestion,
-                    onReportSuggestion = onReportSuggestion
-                )
+        SuggestionDetailTopBar(
+            onBackButtonClick = onBackButtonClick,
+            isMySuggestion = suggestionDetail.isMyPost,
+            onDeleteSuggestion = onDeleteSuggestion,
+            onReportSuggestion = onReportSuggestion
+        )
 
-                Text(
-                    modifier = Modifier.padding(horizontal = 20.dp),
-                    text = suggestionDetailState.data.title,
-                    style = LGTMTheme.typography.heading3B,
-                    color = LGTMTheme.colors.black
-                )
+        Text(
+            modifier = Modifier.padding(horizontal = 20.dp),
+            text = suggestionDetail.title,
+            style = LGTMTheme.typography.heading3B,
+            color = LGTMTheme.colors.black
+        )
 
-                DateTimeText(
-                    date = suggestionDetailState.data.date,
-                    time = suggestionDetailState.data.time,
-                    modifier = Modifier.padding(
-                        vertical = 11.dp,
-                        horizontal = 20.dp
-                    )
-                )
+        DateTimeText(
+            date = suggestionDetail.date,
+            time = suggestionDetail.time,
+            modifier = Modifier.padding(
+                vertical = 11.dp,
+                horizontal = 20.dp
+            )
+        )
 
-                Divider(
-                    modifier = Modifier.padding(horizontal = 20.dp),
-                    color = LGTMTheme.colors.gray_2,
-                    thickness = 1.dp
-                )
+        Divider(
+            modifier = Modifier.padding(horizontal = 20.dp),
+            color = LGTMTheme.colors.gray_2,
+            thickness = 1.dp
+        )
 
-                Text(
-                    modifier = Modifier.padding(
-                        top = 12.dp,
-                        start = 20.dp,
-                        end = 20.dp
-                    ),
-                    text = suggestionDetailState.data.description,
-                    style = LGTMTheme.typography.body2,
-                    color = LGTMTheme.colors.black
-                )
-            }
-            else -> { /* no-op */ }
-        }
+        Text(
+            modifier = Modifier.padding(
+                top = 12.dp,
+                start = 20.dp,
+                end = 20.dp
+            ),
+            text = suggestionDetail.description,
+            style = LGTMTheme.typography.body2,
+            color = LGTMTheme.colors.black
+        )
     }
 }
 
 @Composable
 fun SuggestionLikeSection(
     modifier: Modifier = Modifier,
-    likeSuggestionState: UiState<SuggestionLikeVO>,
+    likeNum: String,
+    isLiked: Boolean,
     onLikeButtonClick: () -> Unit,
     onLikeButtonCancel: () -> Unit
 ) {
@@ -180,17 +180,11 @@ fun SuggestionLikeSection(
             style = LGTMTheme.typography.body1B,
             color = LGTMTheme.colors.gray_6
         )
-        when (likeSuggestionState) {
-            is UiState.Init -> { /* no-op */ }
-            is UiState.Success -> {
-                LikeButton(
-                    likeNum = likeSuggestionState.data.likeNum,
-                    isLiked = likeSuggestionState.data.isLiked,
-                    onClick = if (likeSuggestionState.data.isLiked) onLikeButtonCancel else onLikeButtonClick
-                )
-            }
-            else -> { /* no-op */ }
-        }
+        LikeButton(
+            likeNum = likeNum,
+            isLiked = isLiked,
+            onClick = if (isLiked) onLikeButtonCancel else onLikeButtonClick
+        )
     }
 }
 

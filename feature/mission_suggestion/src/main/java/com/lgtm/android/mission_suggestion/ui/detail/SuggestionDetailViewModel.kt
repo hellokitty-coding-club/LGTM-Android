@@ -9,7 +9,6 @@ import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.SuggestionUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
 import com.lgtm.android.common_ui.util.UiState
-import com.lgtm.domain.entity.response.SuggestionLikeVO
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.SuggestionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,23 +24,16 @@ class SuggestionDetailViewModel @Inject constructor(
 ): BaseViewModel() {
 
     /* 미션 제안 상세 내용 */
-    private val _detailState: MutableStateFlow<UiState<SuggestionUI>> = MutableStateFlow(
-        UiState.Init)
+    private val _detailState: MutableStateFlow<UiState<SuggestionUI>> = MutableStateFlow(UiState.Init)
     val detailState: StateFlow<UiState<SuggestionUI>>
         get() = _detailState
-
-    private val _likeSuggestionState: MutableStateFlow<UiState<SuggestionLikeVO>> = MutableStateFlow(UiState.Init)
-    val likeSuggestionState: StateFlow<UiState<SuggestionLikeVO>>
-        get() = _likeSuggestionState
 
     fun fetchDetail(id: Int) {
         viewModelScope.launch(lgtmErrorHandler) {
             _detailState.value = UiState.Init
-
             suggestionRepository.getSuggestionDetail(id)
                 .onSuccess {
                     _detailState.value = UiState.Success(data = it.toUiModel())
-                    _likeSuggestionState.value = UiState.Success(data = createSuggestionLikeVO(it.isLiked, it.likeNum))
                     Log.d(TAG, "getSuggestionDetail: $it")
                 }.onFailure {
                     _detailState.value = UiState.Failure(msg = it.message)
@@ -51,8 +43,6 @@ class SuggestionDetailViewModel @Inject constructor(
         }
     }
 
-    private fun createSuggestionLikeVO(isLiked: Boolean, likeNum: String) = SuggestionLikeVO(isLiked, likeNum)
-
     /* 미션 제안 좋아요 기능 */
     private fun getSuggestionId(): Int = if (detailState.value is UiState.Success) (detailState.value as UiState.Success<SuggestionUI>).data.suggestionId else -1
 
@@ -60,10 +50,10 @@ class SuggestionDetailViewModel @Inject constructor(
         viewModelScope.launch(lgtmErrorHandler) {
             suggestionRepository.likeSuggestion(getSuggestionId())
                 .onSuccess {
-                    _likeSuggestionState.value = UiState.Success(data = it)
+                    updateLikeState(it.likeNum, it.isLiked)
                     Log.d(TAG, "likeSuggestion: $it")
                 }.onFailure {
-                    _likeSuggestionState.value = UiState.Failure(msg = it.message)
+                    _detailState.value = UiState.Failure(msg = it.message)
                     Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "likeSuggestion: $it")
                 }
@@ -74,13 +64,23 @@ class SuggestionDetailViewModel @Inject constructor(
         viewModelScope.launch(lgtmErrorHandler) {
             suggestionRepository.cancelLikeSuggestion(getSuggestionId())
                 .onSuccess {
-                    _likeSuggestionState.value = UiState.Success(data = it)
+                    updateLikeState(it.likeNum, it.isLiked)
                     Log.d(TAG, "cancelLikeSuggestion: $it")
                 }.onFailure {
-                    _likeSuggestionState.value = UiState.Failure(msg = it.message)
+                    _detailState.value = UiState.Failure(msg = it.message)
                     Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "cancelLikeSuggestion: $it")
                 }
+        }
+    }
+
+    private fun updateLikeState(likeNum: String, isLiked: Boolean) {
+        if (detailState.value is UiState.Success) {
+            val suggestion = (detailState.value as UiState.Success<SuggestionUI>).data.copy(
+                likeNum = likeNum,
+                isLiked = isLiked
+            )
+            _detailState.value = UiState.Success(data = suggestion)
         }
     }
 
