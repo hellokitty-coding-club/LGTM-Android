@@ -9,9 +9,13 @@ import com.lgtm.android.common_ui.base.BaseViewModel
 import com.lgtm.android.common_ui.model.SuggestionUI
 import com.lgtm.android.common_ui.model.mapper.toUiModel
 import com.lgtm.android.common_ui.util.UiState
+import com.lgtm.android.mission_suggestion.ui.detail.presentation.contract.SuggestionDetailInputs
+import com.lgtm.android.mission_suggestion.ui.detail.presentation.contract.SuggestionDetailOutputs
+import com.lgtm.android.mission_suggestion.ui.detail.presentation.contract.SuggestionDetailUiEffect
 import com.lgtm.domain.repository.AuthRepository
 import com.lgtm.domain.repository.SuggestionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -21,13 +25,17 @@ import javax.inject.Inject
 class SuggestionDetailViewModel @Inject constructor(
     private val suggestionRepository: SuggestionRepository,
     private val authRepository: AuthRepository
-): BaseViewModel() {
+): BaseViewModel(), SuggestionDetailInputs, SuggestionDetailOutputs {
 
-    /* 미션 제안 상세 내용 */
     private val _detailState: MutableStateFlow<UiState<SuggestionUI>> = MutableStateFlow(UiState.Init)
-    val detailState: StateFlow<UiState<SuggestionUI>>
+    override val detailState: StateFlow<UiState<SuggestionUI>>
         get() = _detailState
 
+    private val _detailUiEffect: MutableSharedFlow<SuggestionDetailUiEffect> = MutableSharedFlow(replay = 0)
+    override val detailUiEffect: MutableSharedFlow<SuggestionDetailUiEffect>
+        get() = _detailUiEffect
+
+    /* 미션 제안 상세 내용 */
     fun fetchDetail(id: Int) {
         viewModelScope.launch(lgtmErrorHandler) {
             _detailState.value = UiState.Init
@@ -44,30 +52,28 @@ class SuggestionDetailViewModel @Inject constructor(
     }
 
     /* 미션 제안 좋아요 기능 */
-    private fun getSuggestionId(): Int = if (detailState.value is UiState.Success) (detailState.value as UiState.Success<SuggestionUI>).data.suggestionId else -1
+    private fun getSuggestionId(): Int = if (detailState.value is UiState.Success) (detailState.value as UiState.Success).data.suggestionId else -1
 
-    fun likeSuggestion() {
+    override fun likeSuggestion() {
         viewModelScope.launch(lgtmErrorHandler) {
             suggestionRepository.likeSuggestion(getSuggestionId())
                 .onSuccess {
                     updateLikeState(it.likeNum, it.isLiked)
                     Log.d(TAG, "likeSuggestion: $it")
                 }.onFailure {
-                    _detailState.value = UiState.Failure(msg = it.message)
                     Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "likeSuggestion: $it")
                 }
         }
     }
 
-    fun cancelLikeSuggestion() {
+    override fun cancelLikeSuggestion() {
         viewModelScope.launch(lgtmErrorHandler) {
             suggestionRepository.cancelLikeSuggestion(getSuggestionId())
                 .onSuccess {
                     updateLikeState(it.likeNum, it.isLiked)
                     Log.d(TAG, "cancelLikeSuggestion: $it")
                 }.onFailure {
-                    _detailState.value = UiState.Failure(msg = it.message)
                     Firebase.crashlytics.recordException(it)
                     Log.e(TAG, "cancelLikeSuggestion: $it")
                 }
@@ -76,7 +82,7 @@ class SuggestionDetailViewModel @Inject constructor(
 
     private fun updateLikeState(likeNum: String, isLiked: Boolean) {
         if (detailState.value is UiState.Success) {
-            val suggestion = (detailState.value as UiState.Success<SuggestionUI>).data.copy(
+            val suggestion = (detailState.value as UiState.Success).data.copy(
                 likeNum = likeNum,
                 isLiked = isLiked
             )
@@ -86,10 +92,11 @@ class SuggestionDetailViewModel @Inject constructor(
 
     /* 미션 제안 삭제 기능 */
 
-    fun deleteSuggestion() {
+    override fun deleteSuggestion() {
         viewModelScope.launch(lgtmErrorHandler) {
             suggestionRepository.deleteSuggestion(getSuggestionId())
                 .onSuccess {
+                    goBack()
                     Log.d(TAG, "deletedSuggestion: $it")
                 }
                 .onFailure {
@@ -132,6 +139,19 @@ class SuggestionDetailViewModel @Inject constructor(
     private fun getMissionDescription(): String {
         detailState.value.apply {
             return if (this is UiState.Success) this.data.description else ""
+        }
+    }
+
+    override fun reportSuggestion() {
+        viewModelScope.launch(lgtmErrorHandler) {
+            _detailUiEffect.emit(SuggestionDetailUiEffect.SendEmail(msg = getReportMessage()))
+        }
+    }
+
+    /* 뒤로가기 input 처리 */
+    override fun goBack() {
+        viewModelScope.launch(lgtmErrorHandler) {
+            _detailUiEffect.emit(SuggestionDetailUiEffect.GoBack)
         }
     }
 }

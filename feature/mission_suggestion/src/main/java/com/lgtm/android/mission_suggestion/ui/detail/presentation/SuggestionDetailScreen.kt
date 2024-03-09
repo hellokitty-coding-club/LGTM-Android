@@ -39,9 +39,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SuggestionDetailScreen(
-    viewModel: SuggestionDetailViewModel = hiltViewModel(),
-    onBackButtonClick: () -> Unit,
-    onReportSuggestionClick: () -> Unit
+    viewModel: SuggestionDetailViewModel = hiltViewModel()
 ) {
     val suggestionDetailState: UiState<SuggestionUI> by viewModel.detailState.collectAsStateWithLifecycle()
     val bottomSheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
@@ -50,14 +48,13 @@ fun SuggestionDetailScreen(
     when(suggestionDetailState) {
         is UiState.Init -> { /* no-op */ }
         is UiState.Success -> {
-            val suggestionDetailState = suggestionDetailState as UiState.Success<SuggestionUI>
+            val suggestionDetailState = suggestionDetailState as UiState.Success
             LgtmConfirmationDialog(
                 bottomSheetState = bottomSheetState,
                 dialogTitle = stringResource(id = R.string.want_to_delete_suggestion),
                 dialogDescription = stringResource(id = R.string.cannot_cancel_the_deletion),
                 onClickConfirm = {
                     viewModel.deleteSuggestion()
-                    onBackButtonClick()
                 },
                 confirmBtnBackground = ConfirmButtonBackgroundColor.GRAY
             ) {
@@ -74,8 +71,8 @@ fun SuggestionDetailScreen(
                                 bottomSheetState.show()
                             }
                         },
-                        onReportSuggestion = onReportSuggestionClick,
-                        onBackButtonClick = onBackButtonClick,
+                        onReportSuggestion = viewModel::reportSuggestion,
+                        onBackButtonClick = viewModel::goBack,
                     )
                     SuggestionLikeSection(
                         modifier = Modifier.padding(vertical = 5.dp),
