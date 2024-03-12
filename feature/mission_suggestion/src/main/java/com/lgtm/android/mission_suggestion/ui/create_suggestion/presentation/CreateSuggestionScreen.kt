@@ -18,7 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Text
 import androidx.compose.material.rememberModalBottomSheetState
@@ -63,31 +62,12 @@ fun CreateSuggestionScreen(
     val suggestionContentTextData by viewModel.suggestionContentTextData.collectAsStateWithLifecycle()
     val isSuggestionValid by viewModel.isSuggestionValid.collectAsStateWithLifecycle()
 
-    ModalBottomSheetLayout(
-        sheetState = bottomSheetState,
-        sheetShape = RoundedCornerShape(
-            topStart = 20.dp,
-            topEnd = 20.dp
-        ),
-        scrimColor = LGTMTheme.colors.transparent_black,
-        sheetContent = {
-            LgtmConfirmationDialog(
-                dialogTitle = stringResource(id = R.string.want_to_stop_creating_suggestion),
-                dialogDescription = stringResource(id = R.string.content_will_not_be_saved),
-                onClickCancel = {
-                    coroutineScope.launch {
-                        bottomSheetState.hide()
-                    }
-                },
-                onClickConfirm = {
-                    coroutineScope.launch {
-                        bottomSheetState.hide()
-                        onBackButtonClick()
-                    }
-                },
-                confirmBtnBackground = ConfirmButtonBackgroundColor.GRAY
-            )
-        }
+    LgtmConfirmationDialog(
+        bottomSheetState = bottomSheetState,
+        dialogTitle = stringResource(id = R.string.want_to_stop_creating_suggestion),
+        dialogDescription = stringResource(id = R.string.content_will_not_be_saved),
+        onClickConfirm = onBackButtonClick,
+        confirmBtnBackground = ConfirmButtonBackgroundColor.GRAY
     ) {
         ConstraintLayout(
             modifier = Modifier

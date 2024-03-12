@@ -154,6 +154,10 @@
     
     <!-- 미션 제안 디테일  -->
     <string name="want_this_mission">저도 이 미션 원해요!</string>
+    <string name="delete_suggestion">삭제하기</string>
+    <string name="report_suggestion">신고하기</string>
+    <string name="want_to_delete_suggestion">게시글을 삭제하시겠어요?</string>
+    <string name="cannot_cancel_the_deletion">삭제 후에는 되돌릴 수 없어요.</string>
 
     <!-- 미션 제안 생성  -->
     <string name="mission_suggestion_title">제목</string>
